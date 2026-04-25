@@ -1,0 +1,32 @@
+[
+  {
+    "id": "9fc612fc-2a5f-4f93-8367-8055857ffe2f",
+    "name": "최수라한",
+    "email": "ksurahan@gmail.com",
+    "phone": "01032074515",
+    "company": "히옵 마케팅",
+    "inquiry": "",
+    "status": "new",
+    "createdAt": "2026-04-25T13:00:48.985Z"
+  },
+  {
+    "id": "72009da7-f2c7-4371-9598-c86bfcb1c81f",
+    "name": "김히옵",
+    "email": "hiop@test.kr",
+    "phone": "010-9999-8888",
+    "company": "히옵컨설팅",
+    "inquiry": "",
+    "status": "new",
+    "createdAt": "2026-04-25T12:49:14.349Z"
+  },
+  {
+    "id": "e81c9925-b0a8-465b-a65e-d7eb80be412e",
+    "name": "김테스트",
+    "email": "test@hiop.kr",
+    "phone": "010-1234-5678",
+    "company": "히옵 테스트",
+    "inquiry": "",
+    "status": "new",
+    "createdAt": "2026-04-25T12:38:17.597Z"
+  }
+]
