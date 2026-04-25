@@ -9,8 +9,10 @@ const hashData = (data) => {
   return crypto.createHash('sha256').update(data.toString().trim().toLowerCase()).digest('hex');
 };
 
-// Helper: leads file path
-const LEADS_FILE = path.join(process.cwd(), 'data', 'leads.json');
+// Helper: leads file path (/tmp is writable on Vercel serverless)
+const LEADS_FILE = process.env.NODE_ENV === 'production'
+  ? '/tmp/leads.json'
+  : path.join(process.cwd(), 'data', 'leads.json');
 
 // Helper: ensure data dir & file exist
 const ensureLeadsFile = () => {

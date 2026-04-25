@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const LEADS_FILE = path.join(process.cwd(), 'data', 'leads.json');
+const LEADS_FILE = process.env.NODE_ENV === 'production'
+  ? '/tmp/leads.json'
+  : path.join(process.cwd(), 'data', 'leads.json');
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'hiop2025';
 
 const readLeads = () => {
