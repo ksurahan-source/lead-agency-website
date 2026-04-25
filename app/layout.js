@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   // Replace with your actual GTM Container ID
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-XXXXXXX';
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-P74PV945';
 
   return (
     <html lang="en">

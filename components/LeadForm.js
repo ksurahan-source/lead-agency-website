@@ -43,14 +43,27 @@ export default function LeadForm() {
       setSubmittedData({ ...formData });
       setStatus('success');
 
-      // GTM dataLayer push — GA4 & Meta Pixel 이벤트 트리거
+      // GTM dataLayer push — GA4 & 향상된 전환 (Enhanced Conversions)
       if (typeof window !== 'undefined' && window.dataLayer) {
+        // 한국 전화번호 E.164 포맷 변환 (010-xxxx-xxxx → +8210xxxxxxxx)
+        const digits = formData.phone.replace(/[^0-9]/g, '');
+        const phoneE164 = '+82' + (digits.startsWith('0') ? digits.slice(1) : digits);
+
+        // 한국 이름: 첫 글자 성, 나머지 이름
+        const lastName  = formData.name.slice(0, 1);
+        const firstName = formData.name.slice(1);
+
         window.dataLayer.push({
           event: 'generate_lead',
           event_id: data.eventId,
-          lead_name:    formData.name,
-          lead_email:   formData.email,
-          lead_phone:   formData.phone,
+          // 향상된 전환 표준 필드 (GTM이 SHA-256 해싱 처리)
+          user_data: {
+            email:        formData.email.trim().toLowerCase(),
+            phone_number: phoneE164,
+            first_name:   firstName,
+            last_name:    lastName,
+          },
+          // 추가 lead 데이터
           lead_company: formData.company,
         });
       }
