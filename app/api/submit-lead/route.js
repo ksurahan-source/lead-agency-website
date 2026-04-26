@@ -1,36 +1,15 @@
 import { NextResponse } from 'next/server';
-import crypto from 'crypto';
-import fs from 'fs';
-import path from 'path';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
-// Helper: hash data for Meta CAPI
-const hashData = (data) => {
+export const runtime = 'edge';
+
+const hashData = async (data) => {
   if (!data) return undefined;
-  return crypto.createHash('sha256').update(data.toString().trim().toLowerCase()).digest('hex');
-};
-
-// Helper: leads file path (/tmp is writable on Vercel serverless)
-const LEADS_FILE = process.env.NODE_ENV === 'production'
-  ? '/tmp/leads.json'
-  : path.join(process.cwd(), 'data', 'leads.json');
-
-// Helper: ensure data dir & file exist
-const ensureLeadsFile = () => {
-  const dir = path.dirname(LEADS_FILE);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  if (!fs.existsSync(LEADS_FILE)) fs.writeFileSync(LEADS_FILE, JSON.stringify([]));
-};
-
-// Helper: read leads
-const readLeads = () => {
-  ensureLeadsFile();
-  return JSON.parse(fs.readFileSync(LEADS_FILE, 'utf-8'));
-};
-
-// Helper: write leads
-const writeLeads = (leads) => {
-  ensureLeadsFile();
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2));
+  const encoded = new TextEncoder().encode(data.toString().trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 };
 
 export async function POST(request) {
@@ -61,21 +40,14 @@ export async function POST(request) {
 
     const eventId = crypto.randomUUID();
 
-    // ── 1. 리드 저장 (JSON 파일)
-    const leads = readLeads();
-    const newLead = {
-      id: eventId,
-      name,
-      email,
-      phone,
-      company: company || '',
-      inquiry: inquiry || '',
-      status: 'new',          // new | contacted | converted | closed
-      source: source || 'hi-op', // 출처 기록 (hi-op 기본값)
-      createdAt: new Date().toISOString(),
-    };
-    leads.unshift(newLead);   // 최신순
-    writeLeads(leads);
+    // ── 1. 리드 저장 (D1)
+    const { env } = getRequestContext();
+    const DB = env.DB;
+
+    await DB.prepare(`
+      INSERT INTO leads (id, name, email, phone, company, inquiry, status, source, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, 'new', ?, datetime('now'))
+    `).bind(eventId, name, email, phone, company || '', inquiry || '', source || 'hi-op').run();
 
     console.log('[NEW LEAD]', { name, email, company });
 
@@ -95,10 +67,10 @@ export async function POST(request) {
           action_source: 'website',
           event_id: eventId,
           user_data: {
-            em: [hashData(email)],
-            ph: [hashData(phone)],
-            fn: [hashData(fn)],
-            ln: [hashData(ln)],
+            em: [await hashData(email)],
+            ph: [await hashData(phone)],
+            fn: [await hashData(fn)],
+            ln: [await hashData(ln)],
           },
           custom_data: { company_name: company },
         }],

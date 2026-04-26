@@ -1,0 +1,9 @@
+name = "lead-agency-website"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "leads-db"
+database_id = "PLACEHOLDER_REPLACE_WITH_REAL_ID"
