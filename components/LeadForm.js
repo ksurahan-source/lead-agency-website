@@ -197,7 +197,7 @@ export default function LeadForm() {
         <div
           ref={turnstileRef}
           className="cf-turnstile"
-          data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+          data-sitekey="0x4AAAAAADDiw-g8qa_PP9MP"
           data-callback="onTurnstileVerify"
           data-theme="light"
           style={{ margin: '0.5rem 0 1rem' }}
