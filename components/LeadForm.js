@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
+import Script from 'next/script';
 
 export default function LeadForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,12 @@ export default function LeadForm() {
   const [submittedData, setSubmittedData] = useState({});
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
+
+  const handleTurnstileVerify = useCallback((token) => {
+    setTurnstileToken(token);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,11 +35,17 @@ export default function LeadForm() {
       window.dataLayer.push({ event: 'form_attempt' });
     }
 
+    if (!turnstileToken) {
+      setStatus('error');
+      setErrorMessage('보안 확인을 완료해 주세요.');
+      return;
+    }
+
     try {
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const data = await response.json();
@@ -69,6 +82,10 @@ export default function LeadForm() {
       }
 
       setFormData({ name: '', email: '', phone: '', company: '', inquiry: '' });
+      setTurnstileToken('');
+      if (window.turnstile && turnstileRef.current) {
+        window.turnstile.reset(turnstileRef.current);
+      }
 
     } catch (error) {
       setStatus('error');
@@ -122,6 +139,13 @@ export default function LeadForm() {
 
   return (
     <div className="glass-form">
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          window.onTurnstileVerify = handleTurnstileVerify;
+        }}
+      />
       <h3>무료 상담 신청</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -168,6 +192,16 @@ export default function LeadForm() {
             value={formData.inquiry} onChange={handleChange}
           />
         </div>
+
+        {/* Cloudflare Turnstile 보안 확인 */}
+        <div
+          ref={turnstileRef}
+          className="cf-turnstile"
+          data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+          data-callback="onTurnstileVerify"
+          data-theme="light"
+          style={{ margin: '0.5rem 0 1rem' }}
+        />
 
         {status === 'error' && (
           <p className="form-error" style={{ marginBottom: '1rem' }}>{errorMessage}</p>

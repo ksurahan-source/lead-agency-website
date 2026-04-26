@@ -36,10 +36,27 @@ const writeLeads = (leads) => {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, inquiry, source } = body;
+    const { name, email, phone, company, inquiry, source, turnstileToken } = body;
 
     if (!name || !email || !phone) {
       return NextResponse.json({ message: '필수 항목이 누락되었습니다.' }, { status: 400 });
+    }
+
+    // ── Turnstile 검증
+    const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
+    if (TURNSTILE_SECRET) {
+      if (!turnstileToken) {
+        return NextResponse.json({ message: '보안 확인을 완료해 주세요.' }, { status: 400 });
+      }
+      const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: TURNSTILE_SECRET, response: turnstileToken }),
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        return NextResponse.json({ message: '보안 확인에 실패했습니다. 다시 시도해 주세요.' }, { status: 400 });
+      }
     }
 
     const eventId = crypto.randomUUID();
