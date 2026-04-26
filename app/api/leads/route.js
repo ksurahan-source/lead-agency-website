@@ -15,7 +15,7 @@ const getEnv = () => {
 // GET /api/leads — 리드 목록 조회
 export async function GET(request) {
   const env = getEnv();
-  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+  const ADMIN_PASSWORD = (env.ADMIN_PASSWORD || 'hiop2025').trim();
 
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
@@ -34,7 +34,7 @@ export async function GET(request) {
 // PATCH /api/leads — 리드 상태 업데이트
 export async function PATCH(request) {
   const env = getEnv();
-  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+  const ADMIN_PASSWORD = (env.ADMIN_PASSWORD || 'hiop2025').trim();
 
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
@@ -60,7 +60,7 @@ export async function PATCH(request) {
 // DELETE /api/leads — 리드 삭제
 export async function DELETE(request) {
   const env = getEnv();
-  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+  const ADMIN_PASSWORD = (env.ADMIN_PASSWORD || 'hiop2025').trim();
 
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
