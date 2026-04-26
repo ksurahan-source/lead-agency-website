@@ -56,6 +56,26 @@ export default function LeadForm() {
       setSubmittedData({ ...formData });
       setStatus('success');
 
+      // Meta Pixel — 수동 고급 매칭 + CAPI 중복 제거
+      if (typeof window !== 'undefined' && window.fbq) {
+        const phoneDigits = formData.phone.replace(/[^0-9]/g, '');
+        // 한국 이름: 첫 글자 성(ln), 나머지 이름(fn)
+        const ln = formData.name.slice(0, 1);
+        const fn = formData.name.slice(1);
+
+        // 수동 고급 매칭: 사용자 데이터가 생긴 시점에 init 재호출 (Meta가 SHA-256 해싱 처리)
+        window.fbq('init', '907001489050252', {
+          em: formData.email.trim().toLowerCase(),
+          ph: '82' + (phoneDigits.startsWith('0') ? phoneDigits.slice(1) : phoneDigits),
+          fn,
+          ln,
+        });
+        // Lead 이벤트 — CAPI와 동일한 eventID로 중복 제거
+        window.fbq('track', 'Lead', {
+          content_name: formData.company || 'general',
+        }, { eventID: data.eventId });
+      }
+
       // GTM dataLayer push — GA4 & 향상된 전환 (Enhanced Conversions)
       if (typeof window !== 'undefined' && window.dataLayer) {
         // 한국 전화번호 E.164 포맷 변환 (010-xxxx-xxxx → +8210xxxxxxxx)

@@ -7,3 +7,8 @@ pages_build_output_dir = ".vercel/output/static"
 binding = "DB"
 database_name = "leads-db"
 database_id = "b4f91404-552b-4505-a9e9-52701d44bd78"
+
+# ── 아래 변수들은 Cloudflare Pages 대시보드 > Settings > Environment variables 에서 설정
+# META_PIXEL_ID       = "your-pixel-id"          (서버 런타임 변수)
+# META_ACCESS_TOKEN   = "your-capi-token"        (민감정보 → Secret으로 설정)
+# TURNSTILE_SECRET_KEY = "your-turnstile-secret" (민감정보 → Secret으로 설정)
