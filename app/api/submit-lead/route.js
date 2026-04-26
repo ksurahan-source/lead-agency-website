@@ -12,6 +12,15 @@ const hashData = async (data) => {
     .join('');
 };
 
+// ── env 헬퍼: Edge Runtime에서는 getRequestContext().env 에서 읽어야 함
+const getEnv = () => {
+  try {
+    return getRequestContext().env;
+  } catch {
+    return process.env; // local npm run dev fallback
+  }
+};
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -21,8 +30,10 @@ export async function POST(request) {
       return NextResponse.json({ message: '필수 항목이 누락되었습니다.' }, { status: 400 });
     }
 
-    // ── Turnstile 검증
-    const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
+    const env = getEnv();
+
+    // ── Turnstile 검증 (함수 내부에서 env 읽기)
+    const TURNSTILE_SECRET = env.TURNSTILE_SECRET_KEY;
     if (TURNSTILE_SECRET) {
       if (!turnstileToken) {
         return NextResponse.json({ message: '보안 확인을 완료해 주세요.' }, { status: 400 });
@@ -41,19 +52,19 @@ export async function POST(request) {
     const eventId = crypto.randomUUID();
 
     // ── 1. 리드 저장 (D1)
-    const { env } = getRequestContext();
     const DB = env.DB;
-
-    await DB.prepare(`
-      INSERT INTO leads (id, name, email, phone, company, inquiry, status, source, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, 'new', ?, datetime('now'))
-    `).bind(eventId, name, email, phone, company || '', inquiry || '', source || 'hi-op').run();
+    if (DB) {
+      await DB.prepare(`
+        INSERT INTO leads (id, name, email, phone, company, inquiry, status, source, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, 'new', ?, datetime('now'))
+      `).bind(eventId, name, email, phone, company || '', inquiry || '', source || 'hi-op').run();
+    }
 
     console.log('[NEW LEAD]', { name, email, company });
 
-    // ── 2. Meta CAPI
-    const PIXEL_ID = process.env.META_PIXEL_ID;
-    const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+    // ── 2. Meta CAPI (함수 내부에서 env 읽기)
+    const PIXEL_ID = env.META_PIXEL_ID;
+    const ACCESS_TOKEN = env.META_ACCESS_TOKEN;
 
     if (PIXEL_ID && ACCESS_TOKEN) {
       const nameParts = name.split(' ');

@@ -3,10 +3,20 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'hiop2025';
+// ── env 헬퍼: Edge Runtime에서는 getRequestContext().env 에서 읽어야 함
+const getEnv = () => {
+  try {
+    return getRequestContext().env;
+  } catch {
+    return process.env; // local fallback
+  }
+};
 
 // GET /api/leads — 리드 목록 조회
 export async function GET(request) {
+  const env = getEnv();
+  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
 
@@ -14,7 +24,6 @@ export async function GET(request) {
     return NextResponse.json({ message: '인증 실패' }, { status: 401 });
   }
 
-  const { env } = getRequestContext();
   const { results } = await env.DB.prepare(
     'SELECT * FROM leads ORDER BY created_at DESC'
   ).all();
@@ -24,6 +33,9 @@ export async function GET(request) {
 
 // PATCH /api/leads — 리드 상태 업데이트
 export async function PATCH(request) {
+  const env = getEnv();
+  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
 
@@ -32,7 +44,6 @@ export async function PATCH(request) {
   }
 
   const { id, status } = await request.json();
-  const { env } = getRequestContext();
 
   const result = await env.DB.prepare(
     "UPDATE leads SET status = ?, updated_at = datetime('now') WHERE id = ?"
@@ -48,6 +59,9 @@ export async function PATCH(request) {
 
 // DELETE /api/leads — 리드 삭제
 export async function DELETE(request) {
+  const env = getEnv();
+  const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'hiop2025';
+
   const { searchParams } = new URL(request.url);
   const pw = searchParams.get('pw');
   const id = searchParams.get('id');
@@ -56,7 +70,6 @@ export async function DELETE(request) {
     return NextResponse.json({ message: '인증 실패' }, { status: 401 });
   }
 
-  const { env } = getRequestContext();
   await env.DB.prepare('DELETE FROM leads WHERE id = ?').bind(id).run();
 
   return NextResponse.json({ success: true });
