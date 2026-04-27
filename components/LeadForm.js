@@ -144,6 +144,7 @@ export default function LeadForm() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-kakao"
+            onClick={() => window.fbq?.('track', 'Contact')}
           >
             <svg width="20" height="20" viewBox="0 0 48 48" fill="none" style={{ flexShrink: 0 }}>
               <ellipse cx="24" cy="22" rx="22" ry="18" fill="#3A1D1D" fillOpacity="0.15"/>

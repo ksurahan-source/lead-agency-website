@@ -1,4 +1,5 @@
 import LeadForm from '@/components/LeadForm';
+import PixelScrollTracker from '@/components/PixelScrollTracker';
 
 export const metadata = {
   title: '히옵(HI-OP) | Meta 광고 전문 컨설팅',
@@ -8,6 +9,8 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+      <PixelScrollTracker />
+
       {/* ── HERO ── */}
       <section className="hero">
         <div className="hero-blob blob-tl" />
