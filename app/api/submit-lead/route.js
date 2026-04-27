@@ -85,6 +85,8 @@ export async function POST(request) {
           },
           custom_data: { company_name: company },
         }],
+        // 테스트 시에만 사용 — 프로덕션에서는 META_TEST_EVENT_CODE 환경변수를 제거하세요
+        ...(env.META_TEST_EVENT_CODE && { test_event_code: env.META_TEST_EVENT_CODE }),
       };
 
       try {
