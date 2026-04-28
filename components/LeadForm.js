@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import Script from 'next/script';
 
-export default function LeadForm() {
+export default function LeadForm({ source = 'hi-op' }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,7 +45,7 @@ export default function LeadForm() {
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, turnstileToken }),
+        body: JSON.stringify({ ...formData, turnstileToken, source }),
       });
 
       const data = await response.json();
