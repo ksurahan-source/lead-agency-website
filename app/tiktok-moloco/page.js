@@ -168,17 +168,47 @@ export default function TikTokMolocoPage() {
         </div>
       </section>
 
-      {/* MASSIVE TIKTOK SEO ENCYCLOPEDIA */}
-      <section style={{ padding: '10rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)', color: '#121212' }}>
+      {/* SUCCESS CASES SECTION */}
+      <section style={{ padding: '8rem 2rem', background: '#fff' }}>
+        <div className="wrap">
+          <h2 className="font-display" style={{ fontSize: '3.5rem', marginBottom: '4rem' }}>SUCCESS CASES</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
+            
+            <div className="brutalist-card" style={{ borderLeft: '15px solid #00f2fe' }}>
+              <div style={{ background: '#00f2fe', color: '#111', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>MOBILE GAMING</div>
+              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>OO RPG 게임: 몰로코 RTB 최적화로 CPI 60% 절감</h3>
+              <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600 }}>
+                상황: 신작 런칭 후 매체 효율 저하로 인해 신규 유저 획득 비용(CPI)이 목표 대비 2배 이상 높았던 상황.<br/><br/>
+                솔루션: 몰로코의 머신러닝 엔진에 '튜토리얼 완료' 데이터를 실시간 피드백. 진성 유저가 많이 분포된 지면을 실시간으로 분석하여 입찰가 최적화.<br/><br/>
+                결과: 캠페인 운영 2주 만에 CPI를 60% 낮추는 데 성공하였으며, LTV가 높은 고액 결제 유저 비율이 25% 상승함.
+              </p>
+            </div>
+
+            <div className="brutalist-card" style={{ borderLeft: '15px solid #000' }}>
+              <div style={{ background: '#000', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>GLOBAL SOCIAL APP</div>
+              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>XX 글로벌 앱: 틱톡 알고리즘 해킹으로 북미 시장 안착</h3>
+              <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600 }}>
+                상황: 북미 시장 진출을 위해 틱톡 광고를 집행했으나, 문화적 차이로 인해 영상 시청 완료율이 5% 미만이었던 상황.<br/><br/>
+                솔루션: 현지 크리에이터와의 협업 및 '트랜지션' 기법을 활용한 후킹 소재 20종 제작. 알고리즘이 선호하는 시그널(공유, 재시청)을 유도하는 참여형 광고 설계.<br/><br/>
+                결과: 시청 완료율이 35%로 폭증하며 알고리즘 추천 지면에 대량 노출. 결과적으로 북미 지역 다운로드 순위 10위권 진입 성공.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* MASSIVE TIKTOK SEO ENCYCLOPEDIA V2 */}
+      <section style={{ padding: '10rem 2rem', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #00f2fe', display: 'inline-block' }}>
-            THE NEXT-GEN ADVERTISING HANDBOOK
+            THE NEXT-GEN ADS PERFORMANCE MASTERCLASS
           </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.15rem', lineHeight: '2.2', textAlign: 'justify' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
             
             <article>
-              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 심리학적 기제와 마케팅 적용</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 핵심 시그널 해독</h3>
               <p>
                 틱톡은 기존 소셜 미디어와는 완전히 다른 문법을 가진 '엔터테인먼트 플랫폼'입니다. 지인 기반의 네트워크가 아닌, 오직 유저의 '관심사'와 '반응'만을 기반으로 콘텐츠를 추천하는 FYP(For You Page) 알고리즘은 마케팅 관점에서 거대한 기회를 제공합니다. 
               </p>
@@ -188,7 +218,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
               <p>
                 빅테크 매체 외에도 강력한 성과를 내는 플랫폼이 있습니다. 바로 몰로코(Moloco)입니다. 몰로코의 강점은 전 세계 수백만 개의 앱 지면을 대상으로 실시간 입찰(RTB)을 수행하는 독자적인 머신러닝 엔진에 있습니다. 
               </p>
@@ -198,7 +228,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
               <p>
                 틱톡의 슬로건인 "Don't make ads, make TikToks"는 숏폼 광고의 본질을 관통합니다. 유저들은 광고임을 인지하는 순간 스크롤을 넘깁니다. 히옵은 '광고 같지 않은 광고'를 만들기 위해 크리에이티브 엔지니어링을 수행합니다.
               </p>
@@ -208,7 +238,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
               <p>
                 애플의 개인정보 보호 강화 이후 모바일 앱 마케팅의 성과 측정은 미로처럼 복잡해졌습니다. 이제는 단순한 트래킹 링크가 아닌, MMP(AppsFlyer, Airbridge 등)와 애플의 SKAdNetwork(SKAN) 체계에 대한 깊은 이해가 필수적입니다.
               </p>
@@ -218,7 +248,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
               <p>
                 틱톡과 몰로코의 공통점은 글로벌 확장성이 뛰어나다는 점입니다. 히옵은 국내 성과에 안주하지 않고 북미, 동남아, 일본 등 글로벌 시장 진출을 원하는 브랜드에게 최적의 솔루션을 제공합니다. 
               </p>
