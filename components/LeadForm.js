@@ -38,7 +38,7 @@ export default function LeadForm({ source = 'hi-op' }) {
 
     if (!turnstileToken) {
       setStatus('error');
-      setErrorMessage('보안 확인을 완료해 주세요.');
+      setErrorMessage('보안 확인(Turnstile)을 완료해 주세요.');
       return;
     }
 
@@ -51,7 +51,7 @@ export default function LeadForm({ source = 'hi-op' }) {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.message || '오류가 발생했습니다.');
+      if (!response.ok) throw new Error(data.message || '제출 중 오류가 발생했습니다.');
 
       setSubmittedData({ ...formData });
       setStatus('success');
@@ -113,15 +113,17 @@ export default function LeadForm({ source = 'hi-op' }) {
         className="brutalist-card" 
         style={{ background: 'var(--hiop-orange)', textAlign: 'center' }}
       >
-        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🤘</div>
-        <h3 className="font-syne" style={{ fontSize: '2rem', marginBottom: '1rem' }}>SUCCESS!</h3>
-        <p style={{ fontWeight: 700, marginBottom: '2rem' }}>상담 신청이 완료되었습니다. 24시간 내로 담당자가 연락드립니다.</p>
+        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎉</div>
+        <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>신청 완료!</h3>
+        <p style={{ fontWeight: 800, marginBottom: '2rem', fontSize: '1.1rem' }}>성공적으로 접수되었습니다.<br/>24시간 내로 담당자가 연락드립니다.</p>
         
-        <div style={{ background: '#000', color: '#fff', padding: '1.5rem', textAlign: 'left', marginBottom: '2rem' }}>
-          {[{ label: 'NAME', value: submittedData.name }, { label: 'EMAIL', value: submittedData.email }, { label: 'PHONE', value: submittedData.phone }].map(r => (
-            <div key={r.label} style={{ marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontWeight: 800, fontSize: '0.8rem', color: 'var(--hiop-orange)' }}>{r.label}</span>
-              <span style={{ fontWeight: 600 }}>{r.value}</span>
+        <div style={{ background: '#000', color: '#fff', padding: '1.5rem', textAlign: 'left', marginBottom: '2rem', border: '3px solid #000' }}>
+          {[{ label: '성함',    value: submittedData.name }, 
+            { label: '이메일',  value: submittedData.email }, 
+            { label: '연락처',  value: submittedData.phone }].map(r => (
+            <div key={r.label} style={{ marginBottom: '0.6rem', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--hiop-orange)' }}>{r.label}</span>
+              <span style={{ fontWeight: 700 }}>{r.value}</span>
             </div>
           ))}
         </div>
@@ -131,9 +133,9 @@ export default function LeadForm({ source = 'hi-op' }) {
           target="_blank"
           rel="noopener noreferrer"
           className="btn-brutal"
-          style={{ width: '100%', background: '#FEE500', color: '#000', border: '3px solid #000', boxShadow: '6px 6px 0 #000' }}
+          style={{ width: '100%', background: '#FEE500', color: '#000', border: '4px solid #000', boxShadow: '8px 8px 0 #000' }}
         >
-          KAKAOTALK CHAT
+          카카오톡 실시간 문의
         </a>
       </motion.div>
     );
@@ -148,28 +150,28 @@ export default function LeadForm({ source = 'hi-op' }) {
           window.onTurnstileVerify = handleTurnstileVerify;
         }}
       />
-      <h3 className="font-syne" style={{ fontSize: '2rem', marginBottom: '2rem' }}>GET IN TOUCH</h3>
+      <h3 style={{ fontSize: '2.2rem', marginBottom: '2.5rem' }}>무료 진단 신청</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label-brutal">NAME *</label>
+          <label className="form-label-brutal">성함 *</label>
           <input
             name="name" type="text"
-            className="form-input-brutal" placeholder="HONG GILDONG"
+            className="form-input-brutal" placeholder="홍길동"
             required value={formData.name} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">EMAIL *</label>
+          <label className="form-label-brutal">이메일 *</label>
           <input
             name="email" type="email"
-            className="form-input-brutal" placeholder="YOU@COMPANY.COM"
+            className="form-input-brutal" placeholder="example@company.com"
             required value={formData.email} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">PHONE *</label>
+          <label className="form-label-brutal">연락처 *</label>
           <input
             name="phone" type="tel"
             className="form-input-brutal" placeholder="010-0000-0000"
@@ -178,20 +180,20 @@ export default function LeadForm({ source = 'hi-op' }) {
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">COMPANY</label>
+          <label className="form-label-brutal">회사명 / 브랜드명</label>
           <input
             name="company" type="text"
-            className="form-input-brutal" placeholder="BRAND NAME"
+            className="form-input-brutal" placeholder="하이옵 마케팅"
             value={formData.company} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">MESSAGE</label>
+          <label className="form-label-brutal">문의 내용</label>
           <textarea
             name="inquiry"
-            className="form-input-brutal" placeholder="Tell us about your goals..."
-            style={{ minHeight: '120px' }}
+            className="form-input-brutal" placeholder="현재 고민 중인 매체나 목표를 자유롭게 적어주세요."
+            style={{ minHeight: '140px' }}
             value={formData.inquiry} onChange={handleChange}
           />
         </div>
@@ -202,11 +204,11 @@ export default function LeadForm({ source = 'hi-op' }) {
           data-sitekey="0x4AAAAAADDiw-g8qa_PP9MP"
           data-callback="onTurnstileVerify"
           data-theme="light"
-          style={{ margin: '1rem 0' }}
+          style={{ margin: '1.5rem 0' }}
         />
 
         {status === 'error' && (
-          <div style={{ background: '#ff000020', padding: '1rem', border: '2px solid #ff0000', marginBottom: '1.5rem', fontWeight: 700 }}>
+          <div style={{ background: '#ff000015', padding: '1.2rem', border: '3px solid #ff0000', marginBottom: '2rem', fontWeight: 800, color: '#d00' }}>
             {errorMessage}
           </div>
         )}
@@ -217,7 +219,7 @@ export default function LeadForm({ source = 'hi-op' }) {
           style={{ width: '100%' }}
           disabled={status === 'submitting'}
         >
-          {status === 'submitting' ? 'SENDING...' : 'SUBMIT REQUEST →'}
+          {status === 'submitting' ? '제출 중...' : '무료 진단 신청하기 →'}
         </button>
       </form>
     </div>

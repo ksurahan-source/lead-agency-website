@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=Syne:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@400;700;900&family=Syne:wght@800&display=swap');
+
+/* Pretendard CDN */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
 :root {
   --bg-light: #F4F4F0;
@@ -17,7 +20,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   background: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.4;
@@ -25,11 +28,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Typography (Brutalist) ── */
+/* ── Typography (Brutalist Korean) ── */
 .font-display {
-  font-family: 'Anton', sans-serif;
+  font-family: 'Black Han Sans', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .font-syne {
@@ -37,10 +39,10 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 400; /* Black Han Sans is already very thick */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 /* ── Utility ── */
@@ -51,9 +53,6 @@ h1, h2, h3, h4 {
   padding: 0 2rem;
 }
 
-.border-b-dark { border-bottom: 2px solid var(--border-dark); }
-.border-b-light { border-bottom: 2px solid var(--border-light); }
-
 /* ── Marquee ── */
 .marquee-container {
   overflow: hidden;
@@ -61,18 +60,17 @@ h1, h2, h3, h4 {
   width: 100%;
   background: var(--hiop-orange);
   color: var(--text-dark);
-  padding: 1rem 0;
-  border-top: 2px solid var(--border-dark);
-  border-bottom: 2px solid var(--border-dark);
+  padding: 1.2rem 0;
+  border-top: 3px solid var(--border-dark);
+  border-bottom: 3px solid var(--border-dark);
   display: flex;
 }
 
 .marquee-content {
   display: inline-block;
   animation: marquee 20s linear infinite;
-  font-family: 'Anton', sans-serif;
-  font-size: 2.5rem;
-  padding-left: 100%;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 2.2rem;
 }
 
 @keyframes marquee {
@@ -83,21 +81,16 @@ h1, h2, h3, h4 {
 /* ── Brutalist Cards ── */
 .brutalist-card {
   background: var(--bg-light);
-  border: 3px solid var(--border-dark);
+  border: 4px solid var(--border-dark);
   padding: 2.5rem;
   transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 8px 8px 0 var(--border-dark);
+  box-shadow: 10px 10px 0 var(--border-dark);
 }
 .brutalist-card:hover {
   transform: translate(-4px, -4px);
-  box-shadow: 12px 12px 0 var(--border-dark);
-}
-.brutalist-card.dark {
-  background: var(--bg-dark);
-  color: var(--text-light);
-  border-color: var(--border-dark);
+  box-shadow: 14px 14px 0 var(--border-dark);
 }
 
 /* ── Buttons ── */
@@ -108,43 +101,37 @@ h1, h2, h3, h4 {
   padding: 1.2rem 2.5rem;
   background: var(--bg-dark);
   color: var(--text-light);
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  border: 3px solid var(--border-dark);
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 1.4rem;
+  border: 4px solid var(--border-dark);
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 6px 6px 0 var(--hiop-orange);
+  box-shadow: 8px 8px 0 var(--hiop-orange);
 }
 .btn-brutal:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--hiop-orange);
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--hiop-orange);
 }
 
 .btn-brutal.primary {
   background: var(--hiop-orange);
   color: var(--text-dark);
-  box-shadow: 6px 6px 0 var(--bg-dark);
-}
-.btn-brutal.primary:hover {
   box-shadow: 8px 8px 0 var(--bg-dark);
 }
 
-/* ── Custom Sections ── */
+/* ── Massive Text ── */
 .massive-text {
-  font-size: clamp(4rem, 12vw, 15rem);
-  text-transform: uppercase;
-  font-family: 'Anton', sans-serif;
-  line-height: 0.85;
+  font-size: clamp(3.5rem, 11vw, 14rem);
+  font-family: 'Black Han Sans', sans-serif;
+  line-height: 0.9;
   color: var(--text-dark);
   margin: 0;
   padding: 0;
 }
 
 .massive-text-stroke {
-  -webkit-text-stroke: 2px var(--border-dark);
+  -webkit-text-stroke: 3px var(--border-dark);
   color: transparent;
 }
 
@@ -152,11 +139,11 @@ h1, h2, h3, h4 {
 .form-input-brutal {
   width: 100%;
   background: var(--bg-light);
-  border: 3px solid var(--border-dark);
+  border: 4px solid var(--border-dark);
   padding: 1.2rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-dark);
   outline: none;
   transition: all 0.2s;
@@ -164,14 +151,12 @@ h1, h2, h3, h4 {
 }
 .form-input-brutal:focus {
   background: #fff;
-  box-shadow: 6px 6px 0 var(--hiop-orange);
+  box-shadow: 8px 8px 0 var(--hiop-orange);
 }
 .form-label-brutal {
   display: block;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-  text-transform: uppercase;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
   color: var(--text-dark);
 }
@@ -180,17 +165,13 @@ h1, h2, h3, h4 {
 .grid-half {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 3px solid var(--border-dark);
+  border-top: 4px solid var(--border-dark);
 }
 .grid-half > div {
   padding: 4rem 2rem;
 }
 .grid-half > div:first-child {
-  border-right: 3px solid var(--border-dark);
-}
-@media (max-width: 900px) {
-  .grid-half { grid-template-columns: 1fr; }
-  .grid-half > div:first-child { border-right: none; border-bottom: 3px solid var(--border-dark); }
+  border-right: 4px solid var(--border-dark);
 }
 
 .split-section {
@@ -199,6 +180,6 @@ h1, h2, h3, h4 {
 }
 @media (min-width: 900px) {
   .split-section { flex-direction: row; }
-  .split-left { width: 50%; border-right: 3px solid var(--border-dark); }
+  .split-left { width: 50%; border-right: 4px solid var(--border-dark); }
   .split-right { width: 50%; }
 }
