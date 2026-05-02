@@ -285,6 +285,16 @@
             "type": "TEMPLATE",
             "key": "limit",
             "value": "1"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "gtm.timer"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "checkValidation",
+            "value": "true"
           }
         ]
       },
@@ -304,6 +314,16 @@
             "type": "TEMPLATE",
             "key": "limit",
             "value": "1"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "gtm.timer"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "checkValidation",
+            "value": "true"
           }
         ]
       },
@@ -323,6 +343,16 @@
             "type": "TEMPLATE",
             "key": "limit",
             "value": "1"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "gtm.timer"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "checkValidation",
+            "value": "true"
           }
         ]
       },
