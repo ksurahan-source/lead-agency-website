@@ -20,8 +20,6 @@
       { "accountId": "0", "containerId": "0", "type": "PAGE_PATH",              "name": "Page Path"              },
       { "accountId": "0", "containerId": "0", "type": "SCROLL_DEPTH_THRESHOLD", "name": "Scroll Depth Threshold" },
       { "accountId": "0", "containerId": "0", "type": "SCROLL_DEPTH_UNITS",     "name": "Scroll Depth Units"     },
-      { "accountId": "0", "containerId": "0", "type": "TIMER_INTERVAL",         "name": "Timer Interval"         },
-      { "accountId": "0", "containerId": "0", "type": "TIMER_EVENT_NUMBER",     "name": "Timer Event Number"     },
       { "accountId": "0", "containerId": "0", "type": "CLICK_URL",              "name": "Click URL"              },
       { "accountId": "0", "containerId": "0", "type": "CLICK_ELEMENT",          "name": "Click Element"          }
     ],
@@ -32,9 +30,9 @@
         "name": "dlv - email",
         "type": "v",
         "parameter": [
-          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                },
-          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"            },
-          { "type": "TEMPLATE", "key": "name",             "value": "user_data.email"  }
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"               },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"           },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.email" }
         ]
       },
       {
@@ -42,9 +40,9 @@
         "name": "dlv - phone_number",
         "type": "v",
         "parameter": [
-          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                       },
-          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                   },
-          { "type": "TEMPLATE", "key": "name",             "value": "user_data.phone_number"  }
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                      },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                  },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.phone_number" }
         ]
       },
       {
@@ -52,9 +50,9 @@
         "name": "dlv - first_name",
         "type": "v",
         "parameter": [
-          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                      },
-          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                  },
-          { "type": "TEMPLATE", "key": "name",             "value": "user_data.first_name"   }
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                     },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                 },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.first_name"  }
         ]
       },
       {
@@ -62,9 +60,9 @@
         "name": "dlv - last_name",
         "type": "v",
         "parameter": [
-          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                     },
-          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                 },
-          { "type": "TEMPLATE", "key": "name",             "value": "user_data.last_name"   }
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                    },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.last_name"  }
         ]
       },
       {
@@ -72,40 +70,13 @@
         "name": "dlv - event_id",
         "type": "v",
         "parameter": [
-          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"         },
-          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"     },
-          { "type": "TEMPLATE", "key": "name",             "value": "event_id"  }
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"        },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"    },
+          { "type": "TEMPLATE", "key": "name",             "value": "event_id" }
         ]
       },
       {
         "accountId": "0", "containerId": "0", "variableId": "6",
-        "name": "Lookup - Timer Value",
-        "type": "smm",
-        "parameter": [
-          { "type": "TEMPLATE", "key": "input", "value": "{{Timer Interval}}" },
-          {
-            "type": "LIST",
-            "key": "map",
-            "list": [
-              { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "key",   "value": "180000" },
-                { "type": "TEMPLATE", "key": "value", "value": "100"    }
-              ]},
-              { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "key",   "value": "420000" },
-                { "type": "TEMPLATE", "key": "value", "value": "1000"   }
-              ]},
-              { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "key",   "value": "1200000" },
-                { "type": "TEMPLATE", "key": "value", "value": "10000"   }
-              ]}
-            ]
-          },
-          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }
-        ]
-      },
-      {
-        "accountId": "0", "containerId": "0", "variableId": "7",
         "name": "Lookup - Scroll Value",
         "type": "smm",
         "parameter": [
@@ -183,7 +154,7 @@
           {
             "type": "MATCH_REGEX",
             "parameter": [
-              { "type": "TEMPLATE", "key": "arg0", "value": "{{Page Path}}"                    },
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{Page Path}}"              },
               { "type": "TEMPLATE", "key": "arg1", "value": "/(meta|google|tiktok-moloco)" }
             ]
           }
@@ -197,8 +168,8 @@
           {
             "type": "EQUALS",
             "parameter": [
-              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}"      },
-              { "type": "TEMPLATE", "key": "arg1", "value": "generate_lead"   }
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}"    },
+              { "type": "TEMPLATE", "key": "arg1", "value": "generate_lead" }
             ]
           }
         ]
@@ -215,8 +186,8 @@
           {
             "type": "CONTAINS",
             "parameter": [
-              { "type": "TEMPLATE", "key": "arg0", "value": "{{Click URL}}"    },
-              { "type": "TEMPLATE", "key": "arg1", "value": "open.kakao.com"   }
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{Click URL}}"  },
+              { "type": "TEMPLATE", "key": "arg1", "value": "open.kakao.com" }
             ]
           }
         ]
@@ -237,7 +208,7 @@
       },
       {
         "accountId": "0", "containerId": "0", "tagId": "2",
-        "name": "GA4 Event - 체류시간 (3분=100원 / 7분=1,000원 / 20분=10,000원)",
+        "name": "GA4 Event - 체류시간 3분 (100원)",
         "type": "ga4e",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
@@ -246,17 +217,77 @@
             "type": "LIST", "key": "eventParameters",
             "list": [
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "value"                    },
-                { "type": "TEMPLATE", "key": "value", "value": "{{Lookup - Timer Value}}" }
+                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
+                { "type": "TEMPLATE", "key": "value", "value": "100"      }
               ]},
               { "type": "MAP", "map": [
                 { "type": "TEMPLATE", "key": "name",  "value": "currency" },
                 { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "duration_min" },
+                { "type": "TEMPLATE", "key": "value", "value": "3"            }
               ]}
             ]
           }
         ],
-        "firingTriggerId": ["2", "3", "4"],
+        "firingTriggerId": ["2"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "8",
+        "name": "GA4 Event - 체류시간 7분 (1,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
+                { "type": "TEMPLATE", "key": "value", "value": "1000"     }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "duration_min" },
+                { "type": "TEMPLATE", "key": "value", "value": "7"            }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "9",
+        "name": "GA4 Event - 체류시간 20분 (10,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
+                { "type": "TEMPLATE", "key": "value", "value": "10000"    }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "duration_min" },
+                { "type": "TEMPLATE", "key": "value", "value": "20"           }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["4"],
         "tagFiringOption": "ONCE_PER_EVENT"
       },
       {
@@ -278,8 +309,8 @@
                 { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "scroll_threshold"             },
-                { "type": "TEMPLATE", "key": "value", "value": "{{Scroll Depth Threshold}}"   }
+                { "type": "TEMPLATE", "key": "name",  "value": "scroll_threshold"           },
+                { "type": "TEMPLATE", "key": "value", "value": "{{Scroll Depth Threshold}}" }
               ]},
               { "type": "MAP", "map": [
                 { "type": "TEMPLATE", "key": "name",  "value": "page_path"      },
@@ -302,32 +333,32 @@
             "type": "LIST", "key": "eventParameters",
             "list": [
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
-                { "type": "TEMPLATE", "key": "value", "value": "300000"   }
+                { "type": "TEMPLATE", "key": "name",  "value": "value"   },
+                { "type": "TEMPLATE", "key": "value", "value": "300000"  }
               ]},
               { "type": "MAP", "map": [
                 { "type": "TEMPLATE", "key": "name",  "value": "currency" },
                 { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "transaction_id"       },
-                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - event_id}}"   }
+                { "type": "TEMPLATE", "key": "name",  "value": "transaction_id"     },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - event_id}}" }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "email"                },
-                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - email}}"      }
+                { "type": "TEMPLATE", "key": "name",  "value": "email"             },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - email}}"   }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "phone_number"               },
-                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - phone_number}}"     }
+                { "type": "TEMPLATE", "key": "name",  "value": "phone_number"              },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - phone_number}}"    }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "first_name"               },
-                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - first_name}}"     }
+                { "type": "TEMPLATE", "key": "name",  "value": "first_name"             },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - first_name}}"   }
               ]},
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "last_name"               },
-                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - last_name}}"     }
+                { "type": "TEMPLATE", "key": "name",  "value": "last_name"             },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - last_name}}"   }
               ]}
             ]
           }
@@ -346,8 +377,8 @@
             "type": "LIST", "key": "eventParameters",
             "list": [
               { "type": "MAP", "map": [
-                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
-                { "type": "TEMPLATE", "key": "value", "value": "50000"    }
+                { "type": "TEMPLATE", "key": "name",  "value": "value"   },
+                { "type": "TEMPLATE", "key": "value", "value": "50000"   }
               ]},
               { "type": "MAP", "map": [
                 { "type": "TEMPLATE", "key": "name",  "value": "currency" },
