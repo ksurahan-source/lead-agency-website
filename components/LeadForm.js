@@ -15,12 +15,6 @@ export default function LeadForm({ source = 'hi-op' }) {
   const [submittedData, setSubmittedData] = useState({});
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const turnstileRef = useRef(null);
-
-  const handleTurnstileVerify = useCallback((token) => {
-    setTurnstileToken(token);
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,17 +30,11 @@ export default function LeadForm({ source = 'hi-op' }) {
       window.dataLayer.push({ event: 'form_attempt' });
     }
 
-    if (!turnstileToken) {
-      setStatus('error');
-      setErrorMessage('보안 확인(Turnstile)을 완료해 주세요.');
-      return;
-    }
-
     try {
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, turnstileToken, source }),
+        body: JSON.stringify({ ...formData, source }),
       });
 
       const data = await response.json();
@@ -94,10 +82,6 @@ export default function LeadForm({ source = 'hi-op' }) {
       }
 
       setFormData({ name: '', email: '', phone: '', company: '', inquiry: '' });
-      setTurnstileToken('');
-      if (window.turnstile && turnstileRef.current) {
-        window.turnstile.reset(turnstileRef.current);
-      }
 
     } catch (error) {
       setStatus('error');
@@ -143,13 +127,6 @@ export default function LeadForm({ source = 'hi-op' }) {
 
   return (
     <div className="brutalist-card">
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="lazyOnload"
-        onLoad={() => {
-          window.onTurnstileVerify = handleTurnstileVerify;
-        }}
-      />
       <h3 style={{ fontSize: '2.2rem', marginBottom: '2.5rem' }}>무료 진단 신청</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -198,14 +175,6 @@ export default function LeadForm({ source = 'hi-op' }) {
           />
         </div>
 
-        <div
-          ref={turnstileRef}
-          className="cf-turnstile"
-          data-sitekey="0x4AAAAAADDiw-g8qa_PP9MP"
-          data-callback="onTurnstileVerify"
-          data-theme="light"
-          style={{ margin: '1.5rem 0' }}
-        />
 
         {status === 'error' && (
           <div style={{ background: '#ff000015', padding: '1.2rem', border: '3px solid #ff0000', marginBottom: '2rem', fontWeight: 800, color: '#d00' }}>
