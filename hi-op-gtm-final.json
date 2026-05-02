@@ -1,0 +1,367 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-05-02 00:00:00",
+  "containerVersion": {
+    "path": "accounts/0/containers/0/versions/0",
+    "accountId": "0",
+    "containerId": "0",
+    "containerVersionId": "0",
+    "container": {
+      "path": "accounts/0/containers/0",
+      "accountId": "0",
+      "containerId": "0",
+      "name": "히옵 HI-OP",
+      "publicId": "GTM-P74PV945",
+      "usageContext": ["WEB"]
+    },
+
+    "builtInVariable": [
+      { "accountId": "0", "containerId": "0", "type": "PAGE_URL",               "name": "Page URL"               },
+      { "accountId": "0", "containerId": "0", "type": "PAGE_PATH",              "name": "Page Path"              },
+      { "accountId": "0", "containerId": "0", "type": "SCROLL_DEPTH_THRESHOLD", "name": "Scroll Depth Threshold" },
+      { "accountId": "0", "containerId": "0", "type": "SCROLL_DEPTH_UNITS",     "name": "Scroll Depth Units"     },
+      { "accountId": "0", "containerId": "0", "type": "TIMER_INTERVAL",         "name": "Timer Interval"         },
+      { "accountId": "0", "containerId": "0", "type": "TIMER_EVENT_NUMBER",     "name": "Timer Event Number"     },
+      { "accountId": "0", "containerId": "0", "type": "CLICK_URL",              "name": "Click URL"              },
+      { "accountId": "0", "containerId": "0", "type": "CLICK_ELEMENT",          "name": "Click Element"          }
+    ],
+
+    "variable": [
+      {
+        "accountId": "0", "containerId": "0", "variableId": "1",
+        "name": "dlv - email",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"            },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.email"  }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "2",
+        "name": "dlv - phone_number",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                       },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                   },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.phone_number"  }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "3",
+        "name": "dlv - first_name",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                      },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                  },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.first_name"   }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "4",
+        "name": "dlv - last_name",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"                     },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"                 },
+          { "type": "TEMPLATE", "key": "name",             "value": "user_data.last_name"   }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "5",
+        "name": "dlv - event_id",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER",  "key": "dataLayerVersion", "value": "2"         },
+          { "type": "BOOLEAN",  "key": "setDefaultValue",  "value": "false"     },
+          { "type": "TEMPLATE", "key": "name",             "value": "event_id"  }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "6",
+        "name": "Lookup - Timer Value",
+        "type": "smm",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "input", "value": "{{Timer Interval}}" },
+          {
+            "type": "LIST",
+            "key": "map",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "180000" },
+                { "type": "TEMPLATE", "key": "value", "value": "100"    }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "420000" },
+                { "type": "TEMPLATE", "key": "value", "value": "1000"   }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "1200000" },
+                { "type": "TEMPLATE", "key": "value", "value": "10000"   }
+              ]}
+            ]
+          },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "variableId": "7",
+        "name": "Lookup - Scroll Value",
+        "type": "smm",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "input", "value": "{{Scroll Depth Threshold}}" },
+          {
+            "type": "LIST",
+            "key": "map",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "25"   },
+                { "type": "TEMPLATE", "key": "value", "value": "100"  }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "50"   },
+                { "type": "TEMPLATE", "key": "value", "value": "500"  }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "75"   },
+                { "type": "TEMPLATE", "key": "value", "value": "1500" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key",   "value": "90"   },
+                { "type": "TEMPLATE", "key": "value", "value": "5000" }
+              ]}
+            ]
+          },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }
+        ]
+      }
+    ],
+
+    "trigger": [
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "1",
+        "name": "All Pages - Pageview",
+        "type": "PAGEVIEW"
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "2",
+        "name": "Timer - 3분 체류",
+        "type": "TIMER",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "interval", "value": "180000" },
+          { "type": "TEMPLATE", "key": "limit",    "value": "1"      }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "3",
+        "name": "Timer - 7분 체류",
+        "type": "TIMER",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "interval", "value": "420000" },
+          { "type": "TEMPLATE", "key": "limit",    "value": "1"      }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "4",
+        "name": "Timer - 20분 체류",
+        "type": "TIMER",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "interval", "value": "1200000" },
+          { "type": "TEMPLATE", "key": "limit",    "value": "1"       }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "5",
+        "name": "Scroll Depth - 서비스 페이지 (25/50/75/90%)",
+        "type": "SCROLL_DEPTH",
+        "parameter": [
+          { "type": "BOOLEAN",  "key": "verticalThresholdsPercent", "value": "true"        },
+          { "type": "TEMPLATE", "key": "verticalThresholds",        "value": "25,50,75,90" },
+          { "type": "BOOLEAN",  "key": "horizontalThresholdNone",   "value": "true"        }
+        ],
+        "filter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{Page Path}}"                    },
+              { "type": "TEMPLATE", "key": "arg1", "value": "/(meta|google|tiktok-moloco)" }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "6",
+        "name": "CE - generate_lead",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}"      },
+              { "type": "TEMPLATE", "key": "arg1", "value": "generate_lead"   }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0", "containerId": "0", "triggerId": "7",
+        "name": "Click - 카카오 오픈채팅",
+        "type": "LINK_CLICK",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "waitForTags",     "value": "true" },
+          { "type": "BOOLEAN", "key": "checkValidation", "value": "true" }
+        ],
+        "filter": [
+          {
+            "type": "CONTAINS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{Click URL}}"    },
+              { "type": "TEMPLATE", "key": "arg1", "value": "open.kakao.com"   }
+            ]
+          }
+        ]
+      }
+    ],
+
+    "tag": [
+      {
+        "accountId": "0", "containerId": "0", "tagId": "1",
+        "name": "GA4 Config - 페이지뷰",
+        "type": "gaawc",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          { "type": "BOOLEAN",  "key": "sendPageView",  "value": "true"          }
+        ],
+        "firingTriggerId": ["1"],
+        "tagFiringOption": "ONCE_PER_LOAD"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "2",
+        "name": "GA4 Event - 체류시간 (3분=100원 / 7분=1,000원 / 20분=10,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"                    },
+                { "type": "TEMPLATE", "key": "value", "value": "{{Lookup - Timer Value}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["2", "3", "4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "3",
+        "name": "GA4 Event - 스크롤 깊이 서비스 페이지 (25%=100원 / 50%=500원 / 75%=1,500원 / 90%=5,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "scroll_depth"  },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"                     },
+                { "type": "TEMPLATE", "key": "value", "value": "{{Lookup - Scroll Value}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "scroll_threshold"             },
+                { "type": "TEMPLATE", "key": "value", "value": "{{Scroll Depth Threshold}}"   }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "page_path"      },
+                { "type": "TEMPLATE", "key": "value", "value": "{{Page Path}}"  }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["5"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "4",
+        "name": "GA4 Event - 리드 완료 (300,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "generate_lead" },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
+                { "type": "TEMPLATE", "key": "value", "value": "300000"   }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "transaction_id"       },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - event_id}}"   }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "email"                },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - email}}"      }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "phone_number"               },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - phone_number}}"     }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "first_name"               },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - first_name}}"     }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "last_name"               },
+                { "type": "TEMPLATE", "key": "value", "value": "{{dlv - last_name}}"     }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["6"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0", "containerId": "0", "tagId": "5",
+        "name": "GA4 Event - 카카오 문의 (50,000원)",
+        "type": "ga4e",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName",     "value": "kakao_chat_click" },
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F"    },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "value"    },
+                { "type": "TEMPLATE", "key": "value", "value": "50000"    }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name",  "value": "currency" },
+                { "type": "TEMPLATE", "key": "value", "value": "KRW"      }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["7"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+
+    "customTemplate": [],
+    "folder": []
+  }
+}
