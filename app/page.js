@@ -107,8 +107,19 @@ export default function PortalPage() {
         </div>
       </section>
       
-      <footer style={{ padding: '3rem', borderTop: '4px solid var(--border-dark)', textAlign: 'center', fontWeight: 800, fontSize: '1.4rem' }}>
-        © 2025 HI-OP DIGITAL. ALL RIGHTS RESERVED.
+      <footer style={{ padding: '4rem 2rem', borderTop: '4px solid var(--border-dark)', textAlign: 'center' }}>
+        <div style={{ marginBottom: '2rem' }}>
+          <a
+            href="https://open.kakao.com/o/srdaF2si"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-brutal"
+            style={{ background: '#FEE500', color: '#000', fontSize: '1.2rem' }}
+          >
+            카카오톡 1:1 채팅 문의하기
+          </a>
+        </div>
+        <p style={{ fontWeight: 800, fontSize: '1.2rem' }}>© 2025 HI-OP DIGITAL. ALL RIGHTS RESERVED.</p>
       </footer>
     </main>
   );

@@ -108,8 +108,19 @@ export default function GooglePage() {
         </div>
       </section>
 
-      <footer style={{ padding: '4rem 2rem', textAlign: 'center', borderTop: '4px solid var(--border-dark)', fontWeight: 800, fontSize: '1.2rem' }}>
-        © 2025 HI-OP / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.
+      <footer style={{ padding: '5rem 2rem', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
+        <div style={{ marginBottom: '2.5rem' }}>
+          <a
+            href="https://open.kakao.com/o/srdaF2si"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-brutal"
+            style={{ background: '#FEE500', color: '#000', fontSize: '1.2rem' }}
+          >
+            카카오톡 1:1 채팅 문의하기
+          </a>
+        </div>
+        <p style={{ fontWeight: 800, fontSize: '1.2rem' }}>© 2025 HI-OP / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.</p>
       </footer>
     </main>
   );

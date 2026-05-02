@@ -129,7 +129,7 @@ export default function LeadForm({ source = 'hi-op' }) {
         </div>
 
         <a
-          href="https://open.kakao.com/o/sYX283ri"
+          href="https://open.kakao.com/o/srdaF2si"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-brutal"
