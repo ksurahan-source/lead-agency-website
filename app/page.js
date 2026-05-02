@@ -10,6 +10,10 @@ export default function PortalPage() {
 
   useEffect(() => {
     setMounted(true);
+    // Check for mobile device and redirect to /m
+    if (typeof window !== 'undefined' && /Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      window.location.href = '/m';
+    }
   }, []);
 
   if (!mounted) return null;

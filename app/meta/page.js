@@ -1,11 +1,18 @@
 'use client';
 
+import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 
 export default function MetaPage() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && /Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      window.location.href = '/m/meta';
+    }
+  }, []);
+
   return (
     <main className="bg-light min-h-screen">
       <PixelScrollTracker />
