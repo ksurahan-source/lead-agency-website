@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import Script from 'next/script';
+import { motion } from 'framer-motion';
 
 export default function LeadForm({ source = 'hi-op' }) {
   const [formData, setFormData] = useState({
@@ -52,51 +53,42 @@ export default function LeadForm({ source = 'hi-op' }) {
 
       if (!response.ok) throw new Error(data.message || '오류가 발생했습니다.');
 
-      // 제출 데이터 저장 (성공 화면 표시용)
       setSubmittedData({ ...formData });
       setStatus('success');
 
-      // Meta Pixel — 수동 고급 매칭 + CAPI 중복 제거
+      // Meta Pixel
       if (typeof window !== 'undefined' && window.fbq) {
         const phoneDigits = formData.phone.replace(/[^0-9]/g, '');
-        // 한국 이름: 첫 글자 성(ln), 나머지 이름(fn)
         const ln = formData.name.slice(0, 1);
         const fn = formData.name.slice(1);
 
-        // 수동 고급 매칭: 사용자 데이터가 생긴 시점에 init 재호출 (Meta가 SHA-256 해싱 처리)
         window.fbq('init', '907001489050252', {
           em: formData.email.trim().toLowerCase(),
           ph: '82' + (phoneDigits.startsWith('0') ? phoneDigits.slice(1) : phoneDigits),
           fn,
           ln,
         });
-        // Lead 이벤트 — CAPI와 동일한 eventID로 중복 제거
         window.fbq('track', 'Lead', {
           content_name: formData.company || 'general',
         }, { eventID: data.eventId });
       }
 
-      // GTM dataLayer push — GA4 & 향상된 전환 (Enhanced Conversions)
+      // GTM dataLayer push
       if (typeof window !== 'undefined' && window.dataLayer) {
-        // 한국 전화번호 E.164 포맷 변환 (010-xxxx-xxxx → +8210xxxxxxxx)
         const digits = formData.phone.replace(/[^0-9]/g, '');
         const phoneE164 = '+82' + (digits.startsWith('0') ? digits.slice(1) : digits);
-
-        // 한국 이름: 첫 글자 성, 나머지 이름
         const lastName  = formData.name.slice(0, 1);
         const firstName = formData.name.slice(1);
 
         window.dataLayer.push({
           event: 'generate_lead',
           event_id: data.eventId,
-          // 향상된 전환 표준 필드 (GTM이 SHA-256 해싱 처리)
           user_data: {
             email:        formData.email.trim().toLowerCase(),
             phone_number: phoneE164,
             first_name:   firstName,
             last_name:    lastName,
           },
-          // 추가 lead 데이터
           lead_company: formData.company,
         });
       }
@@ -115,51 +107,40 @@ export default function LeadForm({ source = 'hi-op' }) {
 
   if (status === 'success') {
     return (
-      <div className="glass-form">
-        <div className="success-box">
-          <div className="success-icon">🎉</div>
-          <h3>상담 신청이 완료되었습니다!</h3>
-          <p style={{ margin: '0.5rem 0 1.5rem' }}>
-            24시간 내로 담당자가 연락드릴 예정입니다.
-          </p>
-
-          {/* 제출 데이터 표시 — GTM/CAPI 데이터 레이어 확인용 */}
-          <div className="success-summary">
-            {[
-              { label: '이름',    value: submittedData.name },
-              { label: '이메일',  value: submittedData.email },
-              { label: '연락처',  value: submittedData.phone },
-              { label: '회사명',  value: submittedData.company || '-' },
-            ].map(row => (
-              <div key={row.label} className="success-row">
-                <span className="success-row-label">{row.label}</span>
-                <span className="success-row-value">{row.value}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* 카카오 오픈채팅 버튼 */}
-          <a
-            href="https://open.kakao.com/o/sYX283ri"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-kakao"
-            onClick={() => window.fbq?.('track', 'Contact')}
-          >
-            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" style={{ flexShrink: 0 }}>
-              <ellipse cx="24" cy="22" rx="22" ry="18" fill="#3A1D1D" fillOpacity="0.15"/>
-              <path d="M24 6C13.507 6 5 13.164 5 22c0 5.523 3.395 10.368 8.583 13.318L11.5 42l8.29-4.634C20.988 37.776 22.476 38 24 38c10.493 0 19-7.164 19-16S34.493 6 24 6Z" fill="#FEE500"/>
-              <path d="M16 20.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5v5c0 .828-.672 1.5-1.5 1.5S16 26.328 16 25.5v-5ZM24 19h-2.5v8H24c2.21 0 4-1.79 4-4s-1.79-4-4-4Zm0 6h-1v-4h1c1.105 0 2 .895 2 2s-.895 2-2 2ZM30 19c-.828 0-1.5.672-1.5 1.5V27h5c.828 0 1.5-.672 1.5-1.5S34.328 24 33.5 24H30v-3.5c0-.828-.672-1.5-1.5-1.5Z" fill="#3C1E1E"/>
-            </svg>
-            카카오 오픈채팅으로 바로 문의하기
-          </a>
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="brutalist-card" 
+        style={{ background: 'var(--hiop-orange)', textAlign: 'center' }}
+      >
+        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🤘</div>
+        <h3 className="font-syne" style={{ fontSize: '2rem', marginBottom: '1rem' }}>SUCCESS!</h3>
+        <p style={{ fontWeight: 700, marginBottom: '2rem' }}>상담 신청이 완료되었습니다. 24시간 내로 담당자가 연락드립니다.</p>
+        
+        <div style={{ background: '#000', color: '#fff', padding: '1.5rem', textAlign: 'left', marginBottom: '2rem' }}>
+          {[{ label: 'NAME', value: submittedData.name }, { label: 'EMAIL', value: submittedData.email }, { label: 'PHONE', value: submittedData.phone }].map(r => (
+            <div key={r.label} style={{ marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ fontWeight: 800, fontSize: '0.8rem', color: 'var(--hiop-orange)' }}>{r.label}</span>
+              <span style={{ fontWeight: 600 }}>{r.value}</span>
+            </div>
+          ))}
         </div>
-      </div>
+
+        <a
+          href="https://open.kakao.com/o/sYX283ri"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-brutal"
+          style={{ width: '100%', background: '#FEE500', color: '#000', border: '3px solid #000', boxShadow: '6px 6px 0 #000' }}
+        >
+          KAKAOTALK CHAT
+        </a>
+      </motion.div>
     );
   }
 
   return (
-    <div className="glass-form">
+    <div className="brutalist-card">
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="lazyOnload"
@@ -167,73 +148,76 @@ export default function LeadForm({ source = 'hi-op' }) {
           window.onTurnstileVerify = handleTurnstileVerify;
         }}
       />
-      <h3>무료 상담 신청</h3>
+      <h3 className="font-syne" style={{ fontSize: '2rem', marginBottom: '2rem' }}>GET IN TOUCH</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label" htmlFor="name">이름 *</label>
+          <label className="form-label-brutal">NAME *</label>
           <input
-            id="name" name="name" type="text"
-            className="form-input" placeholder="홍길동"
+            name="name" type="text"
+            className="form-input-brutal" placeholder="HONG GILDONG"
             required value={formData.name} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="email">이메일 *</label>
+          <label className="form-label-brutal">EMAIL *</label>
           <input
-            id="email" name="email" type="email"
-            className="form-input" placeholder="example@company.com"
+            name="email" type="email"
+            className="form-input-brutal" placeholder="YOU@COMPANY.COM"
             required value={formData.email} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="phone">연락처 *</label>
+          <label className="form-label-brutal">PHONE *</label>
           <input
-            id="phone" name="phone" type="tel"
-            className="form-input" placeholder="010-0000-0000"
+            name="phone" type="tel"
+            className="form-input-brutal" placeholder="010-0000-0000"
             required value={formData.phone} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="company">회사명 / 브랜드명</label>
+          <label className="form-label-brutal">COMPANY</label>
           <input
-            id="company" name="company" type="text"
-            className="form-input" placeholder="히옵 컨설팅"
+            name="company" type="text"
+            className="form-input-brutal" placeholder="BRAND NAME"
             value={formData.company} onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="inquiry">문의 내용</label>
+          <label className="form-label-brutal">MESSAGE</label>
           <textarea
-            id="inquiry" name="inquiry"
-            className="form-input" placeholder="현재 픽셀/CAPI 상황, 월 광고 예산, 궁금한 점 등을 자유롭게 적어주세요."
+            name="inquiry"
+            className="form-input-brutal" placeholder="Tell us about your goals..."
+            style={{ minHeight: '120px' }}
             value={formData.inquiry} onChange={handleChange}
           />
         </div>
 
-        {/* Cloudflare Turnstile 보안 확인 */}
         <div
           ref={turnstileRef}
           className="cf-turnstile"
           data-sitekey="0x4AAAAAADDiw-g8qa_PP9MP"
           data-callback="onTurnstileVerify"
           data-theme="light"
-          style={{ margin: '0.5rem 0 1rem' }}
+          style={{ margin: '1rem 0' }}
         />
 
         {status === 'error' && (
-          <p className="form-error" style={{ marginBottom: '1rem' }}>{errorMessage}</p>
+          <div style={{ background: '#ff000020', padding: '1rem', border: '2px solid #ff0000', marginBottom: '1.5rem', fontWeight: 700 }}>
+            {errorMessage}
+          </div>
         )}
 
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn-brutal primary"
+          style={{ width: '100%' }}
           disabled={status === 'submitting'}
         >
-          {status === 'submitting' ? '제출 중...' : '무료 상담 신청하기 →'}
+          {status === 'submitting' ? 'SENDING...' : 'SUBMIT REQUEST →'}
         </button>
       </form>
     </div>
