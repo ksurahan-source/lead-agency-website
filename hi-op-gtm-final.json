@@ -461,6 +461,11 @@
         "parameter": [
           {
             "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
+          {
+            "type": "TEMPLATE",
             "key": "eventName",
             "value": "stay_duration"
           },
@@ -528,6 +533,11 @@
         "name": "GA4 Event - 체류시간 7분 (1,000원)",
         "type": "gaawe",
         "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
@@ -599,6 +609,11 @@
         "parameter": [
           {
             "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
+          {
+            "type": "TEMPLATE",
             "key": "eventName",
             "value": "stay_duration"
           },
@@ -666,6 +681,11 @@
         "name": "GA4 Event - 스크롤 깊이 서비스 페이지 (25%=100원 / 50%=500원 / 75%=1,500원 / 90%=5,000원)",
         "type": "gaawe",
         "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
@@ -750,6 +770,11 @@
         "name": "GA4 Event - 리드 완료 (300,000원)",
         "type": "gaawe",
         "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
@@ -879,6 +904,11 @@
         "name": "GA4 Event - 카카오 문의 (50,000원)",
         "type": "gaawe",
         "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-ZSRNLEWD1F"
+          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
