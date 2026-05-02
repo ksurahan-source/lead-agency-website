@@ -47,6 +47,62 @@ export default function MetaPage() {
         </div>
       </section>
 
+      {/* Inquiries Section */}
+      <section style={{ padding: '6rem 2rem', background: 'var(--hiop-blue)', color: '#fff', overflow: 'hidden' }}>
+        <div className="wrap">
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: '#fff' }}>문의가</h2>
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: 'rgba(255,255,255,0.3)' }}>증명하는 성과</h2>
+          
+          <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+            {[
+              { b: 'OO 성형외과', m: '문의 324% 상승' },
+              { b: 'XX 패션 브랜드', m: 'ROAS 580% 달성' },
+              { b: 'YY 뷰티 몰', m: 'CPA 45% 절감' },
+              { b: 'ZZ 교육 플랫폼', m: '리드 단가 60% 하락' },
+              { b: 'AA 건강식품', m: '첫 달 매출 2억 달성' },
+              { b: 'BB 가구 브랜드', m: '전환 수 4배 증가' }
+            ].map((stat, i) => (
+              <div key={i} style={{ border: '3px solid #fff', padding: '1.5rem', background: 'rgba(255,255,255,0.1)' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', marginBottom: '0.5rem' }}>{stat.b}</div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Black Han Sans, sans-serif' }}>{stat.m}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div style={{ marginTop: '3rem', textAlign: 'right' }}>
+            <p className="font-syne" style={{ fontSize: '2rem', fontWeight: 800 }}>AND 1,200+ MORE INQUIRIES</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Engineering Focus Section */}
+      <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
+        <div className="split-left" style={{ padding: '6rem 2rem' }}>
+          <p style={{ fontWeight: 800, color: 'var(--hiop-blue)', marginBottom: '1rem' }}>ENGINEERING SPIRIT</p>
+          <h2 style={{ fontSize: '4rem', marginBottom: '2rem' }}>우리는 광고를<br/>'집행'하지 않고<br/>'설계'합니다.</h2>
+          <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444' }}>
+            대부분의 대행사는 '어떤 소재를 쓸까'만 고민합니다. <br/>
+            히옵은 '어떻게 데이터를 머신러닝에 학습시킬까'를 먼저 고민합니다.
+          </p>
+        </div>
+        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>01. 데이터 파이프라인 구축</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>CAPI와 GTM을 통해 쿠키리스 시대에도 완벽한 전환 데이터를 매체에 피딩합니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>02. 머신러닝 최적화 구조</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>매체 알고리즘이 가장 효율적으로 작동할 수 있도록 계정 구조를 테크니컬하게 튜닝합니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>03. 실시간 성과 대시보드</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>투명한 성과 보고를 위해 실시간으로 업데이트되는 자체 퍼포먼스 대시보드를 공유합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
         <div className="split-left" style={{ background: 'var(--hiop-blue)', color: '#fff', padding: '5rem 2rem' }}>

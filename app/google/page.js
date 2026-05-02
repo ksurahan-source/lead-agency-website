@@ -46,6 +46,62 @@ export default function GooglePage() {
         </div>
       </section>
 
+      {/* Inquiries Section */}
+      <section style={{ padding: '6rem 2rem', background: '#EA4335', color: '#fff', overflow: 'hidden' }}>
+        <div className="wrap">
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: '#fff' }}>문의가</h2>
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: 'rgba(255,255,255,0.3)' }}>증명하는 성과</h2>
+          
+          <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+            {[
+              { b: 'OO 법률사무소', m: 'DB 단가 40% 절감' },
+              { b: 'XX IT 솔루션', m: '검색 노출량 5배 증가' },
+              { b: 'YY 가전 브랜드', m: 'PMax ROAS 420%' },
+              { b: 'ZZ 스타트업', m: '가입 유저 1만명 돌파' },
+              { b: 'AA 어학원', m: '상담 전환율 2.5배 상승' },
+              { b: 'BB 코스메틱', m: '유튜브 광고 효율 200%' }
+            ].map((stat, i) => (
+              <div key={i} style={{ border: '3px solid #fff', padding: '1.5rem', background: 'rgba(255,255,255,0.1)' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', marginBottom: '0.5rem' }}>{stat.b}</div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Black Han Sans, sans-serif' }}>{stat.m}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div style={{ marginTop: '3rem', textAlign: 'right' }}>
+            <p className="font-syne" style={{ fontSize: '2rem', fontWeight: 800 }}>AND 1,200+ MORE INQUIRIES</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Engineering Focus Section */}
+      <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
+        <div className="split-left" style={{ padding: '6rem 2rem' }}>
+          <p style={{ fontWeight: 800, color: '#EA4335', marginBottom: '1rem' }}>INTENT ENGINEERING</p>
+          <h2 style={{ fontSize: '4rem', marginBottom: '2rem' }}>구글 광고는<br/>키워드가 아니라<br/>'데이터' 싸움입니다.</h2>
+          <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444' }}>
+            단순히 높은 입찰가를 쓰는 것이 정답이 아닙니다. <br/>
+            사용자의 검색 의도를 데이터화하고 머신러닝이 이를 학습하게 만드는 것이 핵심입니다.
+          </p>
+        </div>
+        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>01. 향상된 전환(EC) 구축</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>고객 정보를 해싱하여 매체에 직접 전달함으로써 누락된 전환 신호를 완벽하게 복구합니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>02. PMax 자산 최적화</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>실적 최대화 캠페인의 시그널 데이터를 정교하게 설계하여 저효율 예산 낭비를 차단합니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>03. GA4 오디언스 연동</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>GA4의 고급 사용자 행동 데이터를 구글 광고 오디언스로 직접 연동하여 고가치 타겟팅을 수행합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
         <div className="split-left" style={{ background: '#EA4335', color: '#fff', padding: '5rem 2rem' }}>

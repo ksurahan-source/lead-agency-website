@@ -46,6 +46,62 @@ export default function TikTokMolocoPage() {
         </div>
       </section>
 
+      {/* Inquiries Section */}
+      <section style={{ padding: '6rem 2rem', background: '#00f2fe', color: '#111', overflow: 'hidden' }}>
+        <div className="wrap">
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: '#111' }}>문의가</h2>
+          <h2 className="massive-text" style={{ fontSize: '7vw', color: 'rgba(0,0,0,0.2)' }}>증명하는 성과</h2>
+          
+          <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+            {[
+              { b: 'OO 모바일 게임', m: 'CPI 60% 절감' },
+              { b: 'XX 이커머스', m: '신규 가입 300% 증가' },
+              { b: 'YY 라이프스타일', m: '숏폼 조회수 100만 돌파' },
+              { b: 'ZZ 글로벌 앱', m: '몰로코 ROAS 350%' },
+              { b: 'AA 데이팅 서비스', m: '진성 유저 획득비 50% 하락' },
+              { b: 'BB 웹툰 플랫폼', m: '결제 전환 4.5배 상승' }
+            ].map((stat, i) => (
+              <div key={i} style={{ border: '3px solid #111', padding: '1.5rem', background: 'rgba(255,255,255,0.4)' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(0,0,0,0.6)', marginBottom: '0.5rem' }}>{stat.b}</div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Black Han Sans, sans-serif' }}>{stat.m}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div style={{ marginTop: '3rem', textAlign: 'right' }}>
+            <p className="font-syne" style={{ fontSize: '2rem', fontWeight: 800 }}>AND 1,200+ MORE INQUIRIES</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Algorithm Focus Section */}
+      <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
+        <div className="split-left" style={{ padding: '6rem 2rem' }}>
+          <p style={{ fontWeight: 800, color: '#00f2fe', marginBottom: '1rem' }}>ALGORITHM HACKING</p>
+          <h2 style={{ fontSize: '4rem', marginBottom: '2rem' }}>숏폼의 성공은<br/>기획이 아니라<br/>'알고리즘' 이해입니다.</h2>
+          <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444' }}>
+            예쁘고 멋진 영상이 반드시 성과를 내지는 않습니다. <br/>
+            알고리즘이 '반응할 수밖에 없는' 장치들을 소재 곳곳에 심어두는 것이 히옵의 전략입니다.
+          </p>
+        </div>
+        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>01. Retention-driven 기획</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>초반 3초의 이탈률을 최소화하여 알고리즘이 '좋은 콘텐츠'로 인식하게 만드는 기법을 적용합니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>02. 몰로코 RTB 머신러닝 학습</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>글로벌 수준의 RTB 머신러닝 데이터를 활용하여, 가장 구매 확률이 높은 진성 유저를 정밀하게 찾아냅니다.</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>03. MMP 포스트백 최적화</h3>
+              <p style={{ color: '#555', fontWeight: 600 }}>앱 내부의 핵심 이벤트를 매체 알고리즘에 실시간 피드백하여 타겟팅의 정밀도를 지속적으로 높입니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
         <div className="split-left" style={{ background: '#00f2fe', color: '#111', padding: '5rem 2rem' }}>
