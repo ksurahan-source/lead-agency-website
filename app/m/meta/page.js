@@ -81,16 +81,13 @@ export default function MobileMetaPage() {
         <LeadForm source="meta-mobile" />
       </section>
 
-      {/* SEO Section - Compressed for Mobile */}
+      {/* MOBILE SEO HANDBOOK */}
       <section style={{ padding: '3rem 1.2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
-        <h3 className="font-display" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>META ADS DEEP DIVE</h3>
-        <div style={{ fontSize: '0.95rem', lineHeight: '1.6', color: '#555', fontWeight: 600 }}>
-          <p style={{ marginBottom: '1rem' }}>
-            현대 메타 광고의 핵심은 픽셀을 넘어선 CAPI(전환 API) 설계에 있습니다. 히옵은 브라우저의 제약을 우회하여 데이터를 서버에서 서버로 직접 전송하는 기술적 인프라를 구축합니다.
-          </p>
-          <p>
-            이를 통해 매칭률(EMQ)을 극대화하고 머신러닝이 더 정확한 잠재 고객을 찾아낼 수 있도록 돕습니다. 단순한 소재 제작을 넘어선 엔지니어링 기반의 성과 최적화, 그것이 히옵의 약속입니다.
-          </p>
+        <h3 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>META ADS HANDBOOK</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', fontSize: '0.95rem', lineHeight: '1.8', color: '#444', fontWeight: 600 }}>
+          <p>현대 메타 광고의 성공은 픽셀을 넘어선 CAPI(전환 API) 설계에 있습니다. 히옵은 브라우저 제약을 우회하여 데이터를 서버에서 직접 전송하는 기술 인프라를 구축합니다.</p>
+          <p>이를 통해 매칭률(EMQ)을 극대화하고 머신러닝이 더 정확한 잠재 고객을 찾아낼 수 있도록 돕습니다. 단순 소재 제작을 넘어선 엔지니어링 기반의 성과 최적화가 핵심입니다.</p>
+          <p>특히 릴스(Reels)와 같은 숏폼 지면에서는 첫 3초의 후킹과 알고리즘 반응도가 성패를 가릅니다. 히옵은 데이터 기반의 소재 기획으로 타겟의 이탈을 막고 전환을 이끌어냅니다.</p>
         </div>
       </section>
 

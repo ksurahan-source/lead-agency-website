@@ -80,6 +80,16 @@ export default function MobileTikTokPage() {
         <LeadForm source="tiktok-mobile" />
       </section>
 
+      {/* MOBILE SEO HANDBOOK */}
+      <section style={{ padding: '3rem 1.2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+        <h3 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>NEXT-GEN ADS HANDBOOK</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', fontSize: '0.95rem', lineHeight: '1.8', color: '#444', fontWeight: 600 }}>
+          <p>틱톡 마케팅은 기획이 아닌 알고리즘의 이해에서 시작됩니다. 히옵은 유저의 관심을 끄는 숏폼 문법과 데이터 분석을 결합하여 폭발적인 도달을 만들어냅니다.</p>
+          <p>몰로코(Moloco)의 강력한 머신러닝 엔진을 활용해 진성 유저를 획득하고, MMP 데이터 매핑을 통해 앱 성장 시나리오를 완성합니다.</p>
+          <p>크리에이티브 엔지니어링과 RTB 최적화 기술력을 바탕으로, 차세대 플랫폼에서의 비즈니스 성공을 숫자로 증명합니다.</p>
+        </div>
+      </section>
+
       <footer style={{ padding: '3rem 1.2rem', textAlign: 'center', background: '#fff', borderTop: '2px solid #ddd' }}>
         <div style={{ marginBottom: '2rem' }}>
           <a href="https://open.kakao.com/o/srdaF2si" className="btn-brutal" style={{ width: '100%', background: '#FEE500', color: '#000' }}>

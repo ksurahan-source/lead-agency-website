@@ -81,6 +81,16 @@ export default function MobileGooglePage() {
         <LeadForm source="google-mobile" />
       </section>
 
+      {/* MOBILE SEO HANDBOOK */}
+      <section style={{ padding: '3rem 1.2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+        <h3 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>GOOGLE ADS HANDBOOK</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', fontSize: '0.95rem', lineHeight: '1.8', color: '#444', fontWeight: 600 }}>
+          <p>구글 광고의 핵심은 사용자의 검색 의도(Intent)를 정확히 파악하고 이에 대응하는 것입니다. 히옵은 키워드 분석을 넘어 머신러닝이 최적으로 작동할 수 있는 데이터를 설계합니다.</p>
+          <p>GTM 서버사이드와 GA4 연동을 통해 데이터 정합성을 확보하고, PMax 캠페인의 효율을 테크니컬하게 튜닝하여 ROAS를 극대화합니다.</p>
+          <p>유튜브 비디오 액션 캠페인(VAC)부터 검색 광고까지, 유기적으로 연결된 구글 생태계를 하나의 매출 기계로 만드는 것이 히옵의 전문성입니다.</p>
+        </div>
+      </section>
+
       <footer style={{ padding: '3rem 1.2rem', textAlign: 'center', background: '#fff', borderTop: '2px solid #ddd' }}>
         <div style={{ marginBottom: '2rem' }}>
           <a href="https://open.kakao.com/o/srdaF2si" className="btn-brutal" style={{ width: '100%', background: '#FEE500', color: '#000' }}>

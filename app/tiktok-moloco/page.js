@@ -168,51 +168,65 @@ export default function TikTokMolocoPage() {
         </div>
       </section>
 
-      {/* SEO Deep Dive Section */}
-      <section style={{ padding: '8rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      {/* MASSIVE TIKTOK SEO ENCYCLOPEDIA */}
+      <section style={{ padding: '10rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)', color: '#121212' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3rem', marginBottom: '4rem', color: 'var(--text-dark)' }}>TECHNICAL GUIDE: TIKTOK & MOLOCO OPTIMIZATION</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #00f2fe', display: 'inline-block' }}>
+            THE NEXT-GEN ADVERTISING HANDBOOK
+          </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', fontSize: '1.1rem', lineHeight: '1.8', color: '#333' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.15rem', lineHeight: '2.2', textAlign: 'justify' }}>
+            
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>01. 틱톡 추천 알고리즘(FYP)의 메커니즘 이해</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                틱톡은 소셜 그래프(인맥)가 아닌 콘텐츠 그래프(관심사) 기반의 추천 시스템을 가지고 있습니다. 이는 신규 브랜드라도 콘텐츠의 재미와 반응도만 좋다면 폭발적인 도달을 기록할 수 있음을 의미합니다. 하지만 퍼포먼스 마케팅의 관점에서는 단순히 '재미있는 영상'만으로는 부족합니다. 
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 심리학적 기제와 마케팅 적용</h3>
+              <p>
+                틱톡은 기존 소셜 미디어와는 완전히 다른 문법을 가진 '엔터테인먼트 플랫폼'입니다. 지인 기반의 네트워크가 아닌, 오직 유저의 '관심사'와 '반응'만을 기반으로 콘텐츠를 추천하는 FYP(For You Page) 알고리즘은 마케팅 관점에서 거대한 기회를 제공합니다. 
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵은 틱톡 알고리즘이 '고성과 콘텐츠'로 인식하게 만드는 테크니컬한 장치들을 활용합니다. 시청 지속 시간(Retention), 완료율(Completion Rate), 그리고 상호작용 데이터를 분석하여 알고리즘이 더 많은 잠재 고객에게 영상을 추천하도록 유도합니다. 또한, 스파크 애즈(Spark Ads)를 전략적으로 사용하여 자연스러운 노출과 높은 전환을 동시에 달성합니다.
+              <p>
+                히옵(HI-OP)은 틱톡 알고리즘이 '고성과 콘텐츠'로 인식하게 만드는 요소를 공학적으로 분석합니다. 영상의 시청 지속 시간(Retention), 완료율(Completion Rate), 재시청률, 그리고 공유 데이터를 실시간으로 모니터링하여 어떤 크리에이티브 장치가 알고리즘의 선택을 받는지 데이터화합니다. 틱톡 마케팅은 운에 맡기는 것이 아니라, 알고리즘의 선호도를 맞추는 '최적화'의 영역입니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>02. 몰로코(Moloco)와 프로그래매틱 RTB의 위력</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                몰로코는 구글, 메타와는 또 다른 강력한 머신러닝 기반의 RTB(Real-Time Bidding) 플랫폼입니다. 특히 모바일 앱 마케팅 분야에서 몰로코의 머신러닝 엔진은 전 세계 수백만 개의 앱 지면 중 '가장 구매 확률이 높은 사용자'를 초단위로 찾아냅니다. 
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
+              <p>
+                빅테크 매체 외에도 강력한 성과를 내는 플랫폼이 있습니다. 바로 몰로코(Moloco)입니다. 몰로코의 강점은 전 세계 수백만 개의 앱 지면을 대상으로 실시간 입찰(RTB)을 수행하는 독자적인 머신러닝 엔진에 있습니다. 
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵은 몰로코의 정교한 머신러닝이 고객사의 데이터를 학습하여 CPA를 낮추고 LTV(고객 생애 가치)가 높은 유저를 획득할 수 있도록 캠페인을 설계합니다. 몰로코의 강점인 글로벌 커버리지와 투명한 성과 측정을 활용하여, 국내뿐만 아니라 글로벌 시장 진출을 노리는 브랜드에게 최적의 솔루션을 제공합니다.
-              </p>
-            </article>
-
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>03. ATT 시대의 앱 퍼포먼스 측정 (MMP 연동)</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                애플의 ATT(App Tracking Transparency) 정책 이후 앱 마케팅의 성과 측정은 매우 복잡해졌습니다. 이제는 단순한 트래킹 링크가 아니라 MMP(Mobile Measurement Partner)와 매체 간의 정교한 데이터 포스트백(Post-back) 설정이 필수적입니다.
-              </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵은 앱스플라이어(AppsFlyer), 에어브릿지(Airbridge) 등의 MMP 솔루션을 완벽하게 세팅하여 SkAdNetwork 환경에서도 누락 없는 성과를 분석합니다. 또한, 인앱 이벤트 데이터를 몰로코와 틱톡의 알고리즘에 실시간으로 전송하여 머신러닝이 진성 유저를 지속적으로 학습하도록 최적화 파이프라인을 구축합니다.
+              <p>
+                히옵은 몰로코의 머신러닝 엔진이 고객사의 비즈니스 지표를 가장 빠르게 학습할 수 있도록 '포스트백(Postback)' 설계를 수행합니다. 인앱 이벤트(구매, 가입, 특정 버튼 클릭 등) 데이터를 정교하게 매핑하여, 머신러닝이 LTV(고객 생애 가치)가 높은 유저를 초단위로 찾아내 입찰하게 만듭니다. 몰로코는 잘 길들여진 사냥개와 같아서, 마케터의 데이터 엔지니어링 역량에 따라 성과가 수십 배 차이납니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>04. 크리에이티브 엔지니어링: 숏폼의 공식</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                틱톡에서의 광고는 광고 같지 않아야(Don't make ads, make TikToks) 성공합니다. 히옵은 '크리에이티브 엔지니어링'이라는 이름으로 소재를 제작합니다. 유저의 스크롤을 멈추게 하는 3초 후킹과 실제 유저의 후기 같은 네이티브한 구성, 그리고 명확한 보상 체계를 담은 CTA까지. 
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
+              <p>
+                틱톡의 슬로건인 "Don't make ads, make TikToks"는 숏폼 광고의 본질을 관통합니다. 유저들은 광고임을 인지하는 순간 스크롤을 넘깁니다. 히옵은 '광고 같지 않은 광고'를 만들기 위해 크리에이티브 엔지니어링을 수행합니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                우리는 제작된 소재의 초단위 시청 데이터를 분석하여 어떤 지점에서 유저가 이탈하는지 파악하고, 이를 즉각적으로 수정하여 소재의 수명을 늘리고 효율을 극대화합니다. 숏폼과 머신러닝의 시너지를 극대화하는 곳, 히옵이 제안하는 차세대 퍼포먼스 마케팅의 정점입니다.
+              <p>
+                우리는 실제 유저들의 자발적 참여(User Generated Content) 스타일을 차용하고, 틱톡 내에서 유행하는 챌린지나 트렌드를 즉각적으로 광고 소재에 이식합니다. 하지만 단순히 재미에 그치지 않고, 영상 곳곳에 브랜드 메시지와 구매 동기를 자극하는 장치들을 교묘하게 배치합니다. 데이터 분석을 통해 이탈이 가장 많이 발생하는 초수를 파악하고, 해당 지점에 반전 요소나 텍스트 오버레이를 추가하여 시청 지속 시간을 늘립니다.
               </p>
             </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
+              <p>
+                애플의 개인정보 보호 강화 이후 모바일 앱 마케팅의 성과 측정은 미로처럼 복잡해졌습니다. 이제는 단순한 트래킹 링크가 아닌, MMP(AppsFlyer, Airbridge 등)와 애플의 SKAdNetwork(SKAN) 체계에 대한 깊은 이해가 필수적입니다.
+              </p>
+              <p>
+                히옵은 복잡한 데이터 유실 환경에서도 비즈니스의 진정한 성과를 측정할 수 있는 시스템을 구축합니다. 매체 데이터와 MMP 데이터, 그리고 실제 서버 매출 데이터를 교차 검증하는 'MMM(마케팅 믹스 모델링)' 기법을 도입하여, 각 매체의 기여도를 과학적으로 산출합니다. 안 보이는 것을 보이게 하는 것, 그것이 히옵의 앱 마케팅 기술력입니다.
+              </p>
+            </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
+              <p>
+                틱톡과 몰로코의 공통점은 글로벌 확장성이 뛰어나다는 점입니다. 히옵은 국내 성과에 안주하지 않고 북미, 동남아, 일본 등 글로벌 시장 진출을 원하는 브랜드에게 최적의 솔루션을 제공합니다. 
+              </p>
+              <p>
+                각 국가별 유저들의 특성을 고려한 크리에이티브 로컬라이제이션과 글로벌 매체 운영 노하우를 바탕으로, 전 세계 어디에서나 통하는 퍼포먼스 마케팅 시스템을 구축합니다. 히옵과 함께라면 세계 시장은 더 이상 낯선 곳이 아닙니다. 데이터라는 공용어를 통해 전 세계 잠재 고객의 마음을 사로잡으십시오.
+              </p>
+            </article>
+
           </div>
         </div>
       </section>

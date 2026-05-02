@@ -169,51 +169,65 @@ export default function MetaPage() {
         </div>
       </section>
 
-      {/* SEO Deep Dive Section */}
-      <section style={{ padding: '8rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      {/* MASSIVE META SEO ENCYCLOPEDIA */}
+      <section style={{ padding: '10rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)', color: '#121212' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3rem', marginBottom: '4rem', color: 'var(--text-dark)' }}>TECHNICAL GUIDE: META ADS OPTIMIZATION</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid var(--hiop-blue)', display: 'inline-block' }}>
+            THE ULTIMATE META ADS HANDBOOK
+          </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', fontSize: '1.1rem', lineHeight: '1.8', color: '#333' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.15rem', lineHeight: '2.2', textAlign: 'justify' }}>
+            
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>01. 메타 픽셀(Pixel)과 전환 API(CAPI)의 조화</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                과거의 메타 광고는 브라우저 기반의 '픽셀' 스크립트만으로도 충분한 성과 측정이 가능했습니다. 하지만 최근 브라우저의 쿠키 차단 정책과 iOS의 앱 추적 투명성(ATT) 정책으로 인해 픽셀 데이터의 누락률은 30%에서 많게는 50%까지 치솟고 있습니다. 이러한 상황에서 등장한 것이 바로 전환 API(Conversions API)입니다.
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 01: 메타 광고의 새로운 질서 - 픽셀에서 CAPI로</h3>
+              <p>
+                메타(Meta) 광고 생태계는 지난 몇 년간 유례없는 기술적 격변기를 거쳤습니다. 애플의 iOS 14.5 업데이트로 도입된 앱 추적 투명성(ATT) 정책은 브라우저 기반의 서드파티 쿠키 추적을 무력화시켰고, 이는 곧 전통적인 '메타 픽셀(Meta Pixel)'의 한계로 이어졌습니다. 픽셀 데이터의 누락은 머신러닝의 학습 데이터 부족으로 직결되며, 이는 곧 광고 효율 하락과 ROAS 저하라는 결과를 초래했습니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                CAPI는 웹사이트 서버에서 메타의 서버로 직접 데이터를 전송함으로써 브라우저의 제약을 우회합니다. 단순히 누락된 전환을 복구하는 것뿐만 아니라, 고객의 이메일, 전화번호 등의 해시 데이터를 함께 전송하여 매칭률(Event Match Quality)을 획기적으로 높입니다. 히옵은 픽셀과 CAPI를 동시에 활용하는 하이브리드 설계를 통해 업계 최고 수준의 데이터 정합성을 확보합니다.
+              <p>
+                이에 대한 메타의 기술적 해답이 바로 전환 API(Conversions API, CAPI)입니다. CAPI는 브라우저를 거치지 않고 웹사이트 서버에서 메타 서버로 직접 데이터를 전송하는 방식입니다. 이는 광고 차단기나 브라우저의 쿠키 제한 설정과 상관없이 정확한 전환 데이터를 전송할 수 있게 해줍니다. 히옵(HI-OP)은 서버 사이드 트래킹(Server-side GTM) 기술을 통해 업계 최고 수준의 CAPI 연동 솔루션을 제공합니다. 단순히 전환을 기록하는 것을 넘어, 고객의 이메일, 전화번호 등의 해시 데이터를 함께 전송하여 매칭률(Event Match Quality)을 극대화합니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>02. 머신러닝을 춤추게 하는 계정 구조(ASC)</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                메타의 알고리즘은 이제 인간 마케터보다 더 정교하게 타겟팅을 수행합니다. 따라서 마케터의 역할은 세세한 타겟팅 설정에서 벗어나 머신러닝이 가장 효율적으로 작동할 수 있는 '구조'를 만드는 것으로 바뀌어야 합니다. 히옵은 어드밴티지+ 쇼핑 캠페인(ASC)과 브로드 타겟팅(Broad Targeting)을 적극 활용합니다.
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 02: 어드밴티지+ 쇼핑 캠페인(ASC)과 자동화의 미학</h3>
+              <p>
+                마케터가 수동으로 타겟을 설정하던 시대는 저물고 있습니다. 메타의 인공지능은 이제 수십억 개의 시그널을 실시간으로 분석하여 가장 전환 가능성이 높은 사용자를 인간보다 더 잘 찾아냅니다. 이러한 자동화의 정점이 바로 어드밴티지+ 쇼핑 캠페인(ASC)입니다. ASC는 머신러닝을 기반으로 타겟팅, 입찰, 소재 배분을 자동화하여 효율을 극대화하는 캠페인 구조입니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                불필요한 타겟 쪼개기를 지양하고 데이터를 한곳으로 모으는 '통합 학습' 환경을 구축할 때, 메타의 머신러닝은 비로소 진가를 발휘합니다. 우리는 학습 제한(Learning Limited) 상태를 빠르게 탈출시켜 안정적인 성과 궤도에 진입시키는 노하우를 보유하고 있습니다.
-              </p>
-            </article>
-
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>03. 릴스(Reels)와 숏폼 콘텐츠의 퍼포먼스화</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                이제 메타 생태계에서 릴스는 가장 강력한 노출 지면입니다. 하지만 단순히 예쁜 영상만으로는 전환을 이끌어낼 수 없습니다. 퍼포먼스 관점의 릴스 소재는 첫 3초의 '후크(Hook)'와 중간의 '신뢰 구축', 그리고 마지막의 '강력한 행동 유도(CTA)'가 조화를 이루어야 합니다. 
-              </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵은 수많은 테스트를 통해 검증된 릴스 기획 템플릿을 바탕으로 소재를 제작합니다. 유저가 광고임을 인지하더라도 끝까지 시청하게 만드는 콘텐츠 경쟁력이 곧 광고 성과로 이어집니다.
+              <p>
+                하지만 모든 자동화가 정답은 아닙니다. AI가 올바른 판단을 내릴 수 있도록 질 좋은 데이터를 공급하고, 창의적인 소재를 기획하는 것은 여전히 인간의 몫입니다. 히옵은 ASC를 단순히 실행하는 것이 아니라, 기존 고객 제외 리스트 관리, 고가치 오디언스 시그널 주입, 그리고 소재별 성과 분석을 통해 자동화의 효율을 엔지니어링 관점에서 튜닝합니다. 우리는 알고리즘을 맹신하지 않고, 알고리즘이 최고의 성과를 낼 수 있는 '판'을 짭니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>04. 지속 가능한 성장을 위한 성과 분석</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                광고 관리자 상의 수치만으로는 비즈니스의 전체적인 건강 상태를 파악하기 어렵습니다. 히옵은 메타의 기여도(Attribution) 설정에 따른 성과뿐만 아니라, 전체 매출 대비 광고비 비중(MER, Marketing Efficiency Ratio)을 함께 분석합니다. 
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 03: 릴스(Reels)와 숏폼 콘텐츠의 퍼포먼스 마케팅 기획</h3>
+              <p>
+                현재 메타 플랫폼(페이스북, 인스타그램)에서 가장 체류 시간이 길고 노출량이 많은 지면은 단연 릴스입니다. 릴스는 일반적인 피드 광고와는 완전히 다른 문법을 가집니다. 사용자는 매우 빠른 속도로 화면을 넘기며, 첫 3초 이내에 관심을 끌지 못하는 콘텐츠는 즉시 외면받습니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                우리는 매주 정교한 분석 리포트를 통해 어떤 캠페인이 실제로 비즈니스의 성장을 견인하고 있는지, 어떤 소재가 피로도를 느끼고 있는지 진단하고 즉각적인 액션 플랜을 제안합니다. 데이터 엔지니어링과 크리에이티브의 완벽한 조화, 히옵이 약속하는 메타 광고의 미래입니다.
+              <p>
+                히옵의 크리에이티브 팀은 데이터 분석을 기반으로 릴스 소재를 기획합니다. 영상의 초반 3초 이탈률을 분석하여 어떤 '후킹(Hook)' 장치가 효과적인지 찾아냅니다. 또한, 광고처럼 보이지 않는 네이티브한 구성, 유행하는 사운드와 트렌드의 적절한 활용, 그리고 명확한 행동 유도(CTA)를 통해 릴스 지면에서의 전환율을 극대화합니다. 소재의 수명이 짧아진 만큼, 우리는 지속 가능한 소재 생산 시스템을 구축하여 성과의 연속성을 보장합니다.
               </p>
             </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 04: 계정 구조의 단순화와 통합 학습(Consolidation)</h3>
+              <p>
+                과거에는 관심사 타겟팅, 맞춤 타겟팅 등을 세밀하게 쪼개어 수십 개의 광고 세트를 운영하는 것이 유능한 마케터의 덕목이었습니다. 하지만 현대의 머신러닝 환경에서는 이러한 '세분화'가 독이 됩니다. 각 광고 세트별로 데이터가 쪼개지면 머신러닝이 충분한 전환 데이터를 확보하지 못해 '학습 제한(Learning Limited)' 상태에 빠지기 때문입니다.
+              </p>
+              <p>
+                히옵은 계정 구조의 단순화(Consolidation)를 최우선 가치로 둡니다. 데이터를 한곳으로 모아 머신러닝이 가장 빠르게 최적화 지점을 찾을 수 있도록 돕습니다. 브로드 타겟팅(Broad Targeting)을 적극 활용하여 알고리즘이 스스로 고객을 찾게 만들고, 마케터는 데이터 분석과 소재 기획에 집중합니다. 이러한 구조적 혁신이 메타 광고의 성공 방정식을 바꿉니다.
+              </p>
+            </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 05: 데이터 매칭률(EMQ)과 실질적인 성과 측정</h3>
+              <p>
+                매체에서 리포트하는 성과가 실제 비즈니스 매출과 일치하지 않는 경우는 흔합니다. 이는 기여도(Attribution) 윈도우의 차이와 데이터 누락 때문입니다. 히옵은 이벤트 매치 퀄리티(Event Match Quality, EMQ)를 6.0점 이상의 높은 수준으로 관리합니다. 
+              </p>
+              <p>
+                우리는 메타의 픽셀 데이터와 서버 데이터를 대조 검증하고, 오프라인 전환 데이터를 연동하여 온라인 광고가 오프라인 비즈니스에 미치는 영향까지 파악합니다. 또한, 브랜드 검색 증가량이나 전체 매출 기여도(MER) 분석을 통해 메타 광고가 브랜드의 전체 성장에 얼마나 기여하고 있는지 다각도로 분석합니다. 숫자로 증명되지 않는 마케팅은 하지 않습니다. 히옵과 함께 진짜 성과를 경험하십시오.
+              </p>
+            </article>
+
           </div>
         </div>
       </section>

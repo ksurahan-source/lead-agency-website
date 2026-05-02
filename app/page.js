@@ -111,57 +111,80 @@ export default function PortalPage() {
         </div>
       </section>
       
-      {/* SEO Deep Dive Section */}
-      <section style={{ padding: '8rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      {/* MASSIVE SEO ENCYCLOPEDIA SECTION */}
+      <section style={{ padding: '10rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)', color: '#121212' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3rem', marginBottom: '4rem', color: 'var(--text-dark)' }}>DEEP DIVE: DIGITAL PERFORMANCE ENGINEERING</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid var(--hiop-orange)', display: 'inline-block' }}>
+            HI-OP DIGITAL MARKETING HANDBOOK 2025
+          </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', fontSize: '1.1rem', lineHeight: '1.8', color: '#333' }}>
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>01. 현대 디지털 마케팅의 패러다임 변화</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                디지털 광고 시장은 이제 단순히 '노출'을 사는 시대를 지나 '데이터'를 설계하는 시대로 진입했습니다. 과거에는 좋은 소재와 적절한 타겟팅 설정만으로도 충분한 성과를 거둘 수 있었으나, 개인정보 보호 정책의 강화(iOS 14+ 업데이트 등)와 쿠키리스(Cookieless) 환경의 도래는 기존의 마케팅 방식을 완전히 무너뜨렸습니다. 이제는 매체에 전달되는 데이터의 질과 양이 곧 광고의 성과를 결정합니다.
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.15rem', lineHeight: '2.2', textAlign: 'justify' }}>
+            
+            <article id="ch1">
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 01: 디지털 마케팅의 패러다임 시프트와 엔지니어링의 대두</h3>
+              <p>
+                현대 디지털 마케팅 시장은 지난 10년 동안 그 어떤 산업보다도 급격한 변화를 겪어왔습니다. 과거의 마케팅이 단순히 '누구에게 보여줄 것인가'라는 타겟팅의 문제였다면, 현재의 마케팅은 '어떤 데이터를 어떻게 수집하여 매체에 학습시킬 것인가'라는 엔지니어링의 문제로 변모했습니다. 특히 애플의 iOS 14.5 업데이트로 시작된 앱 추적 투명성(ATT) 정책과 구글의 서드파티 쿠키 중단 계획은 기존의 마케팅 문법을 완전히 파괴했습니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵(HI-OP)은 이러한 변화의 중심에서 '마케팅 엔지니어링'을 제안합니다. 우리는 광고를 단순히 집행하는 것이 아니라, 매체의 머신러닝 알고리즘이 가장 효율적으로 학습할 수 있는 환경을 구축합니다. 이는 테크니컬한 추적 인프라(GTM, CAPI, SDK 등)의 완벽한 설계로부터 시작됩니다.
+              <p>
+                이러한 기술적 장벽 앞에서 단순히 광고 소재를 제작하고 입찰가를 조정하는 전통적인 방식의 대행사들은 성과의 한계에 부딪혔습니다. 히옵(HI-OP)은 이러한 시장의 문제를 해결하기 위해 탄생한 '퍼포먼스 엔지니어링 그룹'입니다. 우리는 마케팅을 예술이 아닌 과학으로 정의하며, 모든 의사결정의 근거를 정제된 데이터에서 찾습니다.
               </p>
-            </article>
-
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>02. 왜 데이터 기반의 ROAS 최적화인가?</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                많은 브랜드들이 광고비 대비 매출액(ROAS)을 고민하지만, 그 근본 원인에 대해서는 간과하곤 합니다. ROAS는 결과일 뿐, 그 과정을 만드는 것은 머신러닝의 '학습 효율'입니다. 메타(Meta), 구글(Google), 틱톡(TikTok)과 같은 글로벌 플랫폼들의 알고리즘은 우리가 제공하는 데이터를 바탕으로 '구매 가능성이 높은 사용자'를 찾아냅니다. 
-              </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                만약 매체에 전달되는 데이터가 부정확하거나 누락이 많다면, 알고리즘은 잘못된 방향으로 학습하게 되고 이는 결국 광고비 낭비로 이어집니다. 히옵은 데이터 정합성을 99% 이상으로 끌어올려 알고리즘이 단 한 명의 잠재 고객도 놓치지 않도록 설계합니다. 이것이 우리가 제안하는 진정한 의미의 퍼포먼스 마케팅입니다.
+              <p>
+                데이터 엔지니어링 기반의 마케팅은 단순히 트래킹 코드를 심는 것을 넘어섭니다. 이는 비즈니스의 전체 퍼널(Funnel)을 데이터화하고, 각 단계에서 발생하는 사용자 행동을 매체의 머신러닝 알고리즘이 이해할 수 있는 언어로 번역하는 과정입니다. 히옵은 서버 사이드 트래킹(Server-side GTM), 전환 API(CAPI), 그리고 고도화된 MMP 데이터 매핑을 통해 쿠키리스 시대에도 완벽한 성과 측정을 보장합니다.
               </p>
             </article>
 
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>03. HI-OP의 세 가지 핵심 기둥</h3>
-              <p style={{ marginBottom: '1rem', fontWeight: 800 }}>첫째, 테크니컬 인프라의 완성.</p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                서버 사이드 트래킹(Server-side GTM)과 전환 API(CAPI)를 통해 브라우저 차단과 상관없는 견고한 데이터 파이프라인을 구축합니다. 이는 광고 성과 측정의 누락을 막고 매칭률을 극대화하는 기초가 됩니다.
+            <article id="ch2">
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 02: ROAS 최적화의 기술적 메커니즘과 알고리즘 학습</h3>
+              <p>
+                광고주들이 가장 많이 묻는 질문 중 하나는 "어떻게 하면 ROAS를 높일 수 있는가?"입니다. 히옵의 답변은 명확합니다. "알고리즘을 올바르게 학습시켜야 합니다." 현재 메타(Meta), 구글(Google), 틱톡(TikTok)의 광고 엔진은 고도의 인공지능 머신러닝을 기반으로 작동합니다. 이 인공지능은 우리가 제공하는 '전환 데이터'를 먹고 자랍니다. 
               </p>
-              <p style={{ marginBottom: '1rem', fontWeight: 800 }}>둘째, 알고리즘 맞춤형 계정 설계.</p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                복잡한 계정 구조를 지양하고 매체의 머신러닝이 데이터를 가장 빠르게 통합 학습할 수 있는 단순하고 강력한 구조(Broad Targeting, Advantage+ 등)를 설계합니다.
+              <p>
+                만약 우리가 제공하는 데이터의 품질이 낮거나, 실제 구매가 발생했음에도 불구하고 기술적 오류로 인해 누락된다면 알고리즘은 잘못된 방향으로 최적화됩니다. 이는 결국 구매 의사가 없는 사용자에게 광고비가 낭비되는 결과로 이어집니다. 히옵은 데이터 정합성을 확보하여 단 한 건의 전환 데이터도 놓치지 않도록 설계합니다. 
               </p>
-              <p style={{ marginBottom: '1rem', fontWeight: 800 }}>셋째, 데이터 기반의 소재 기획.</p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                단순히 예쁜 디자인이 아니라, 클릭률(CTR)과 전환율(CVR) 데이터를 분석하여 유저의 행동을 이끌어내는 '장치'가 심어진 소재를 제작합니다. 특히 숏폼 광고의 경우 초기 3초 체류율을 극대화하는 기법을 적용합니다.
+              <p>
+                또한, 우리는 '통합 학습(Unified Learning)' 전략을 취합니다. 복잡하게 쪼개진 캠페인 구조는 머신러닝이 데이터를 분산 학습하게 만들어 성과 안착을 방해합니다. 히옵은 매체의 알고리즘이 가장 빠르게 데이터를 통합하여 최적의 오디언스를 찾아낼 수 있도록 심플하고 강력한 계정 구조를 설계합니다. 이것이 바로 우리가 제안하는 '알고리즘 중심의 퍼포먼스 마케팅'입니다.
               </p>
             </article>
 
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>04. 검색 엔진 최적화와 브랜드 신뢰도</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                성공적인 퍼포먼스 마케팅은 강력한 검색 엔진 최적화(SEO)와 결합될 때 폭발적인 시너지를 냅니다. 유료 광고를 통해 유입된 고객이 브랜드의 전문성을 확인할 수 있는 깊이 있는 콘텐츠를 마주할 때 비로소 신뢰가 쌓이고 전환이 일어납니다. 히옵은 이러한 마케팅의 전 과정을 하나의 유기적인 시스템으로 보고 관리합니다.
+            <article id="ch3">
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 03: 풀퍼널(Full-Funnel) 전략과 고객 생애 가치(LTV)의 극대화</h3>
+              <p>
+                성공적인 비즈니스는 단발성 구매에 그치지 않습니다. 히옵은 고객의 첫 유입부터 재구매, 그리고 충성 고객이 되기까지의 모든 여정을 설계합니다. 인지 단계에서는 잠재 고객의 시선을 사로잡는 강력한 후킹 소재와 브랜딩 캠페인을, 고려 단계에서는 신뢰를 구축할 수 있는 정보성 콘텐츠와 리타겟팅을, 그리고 마지막 전환 단계에서는 강력한 구매 동기를 부여하는 액션 캠페인을 전개합니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                우리는 고객사의 비즈니스를 우리 자신의 것처럼 생각합니다. 한정된 예산 내에서 최대의 효율을 뽑아내기 위해 끊임없이 테스트하고 데이터에서 정답을 찾습니다. 디지털 광고의 복잡함에 지치셨다면, 이제 엔지니어링 기반의 히옵과 함께 지속 가능한 성장을 경험해 보십시오.
+              <p>
+                이 과정에서 중요한 것은 단순히 유입을 늘리는 것이 아니라, '진성 유저'를 획득하는 것입니다. 히옵은 구매 데이터와 사용자 행동 패턴을 분석하여 고객 생애 가치(LTV)가 높은 오디언스 세그먼트를 발굴합니다. 이를 통해 신규 고객 획득 비용(CAC)을 낮추고, 장기적인 비즈니스 성장을 견인합니다.
+              </p>
+              <p>
+                데이터는 거짓말을 하지 않습니다. 하지만 데이터를 읽는 눈은 마케터의 역량에 달려 있습니다. 히옵은 정량적인 수치 뒤에 숨겨진 정성적인 유저의 심리를 읽어내어, 가장 효과적인 메시지를 가장 적절한 시점에 전달합니다. 우리의 풀퍼널 전략은 단순히 광고를 넘어서 비즈니스의 성장 엔진이 됩니다.
               </p>
             </article>
+
+            <article id="ch4">
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 04: 미래 마케팅의 핵심 - 투명성과 실시간 데이터 사이언스</h3>
+              <p>
+                히옵이 다른 대행사와 차별화되는 가장 큰 지점은 바로 '투명성'입니다. 우리는 블랙박스 같은 광고 운영을 거부합니다. 모든 성과는 실시간으로 업데이트되는 대시보드를 통해 고객사에게 투명하게 공유됩니다. 어떤 소재가 효율적인지, 어떤 매체에서 성과가 나고 있는지 마케터와 광고주가 동일한 데이터를 보고 논의합니다.
+              </p>
+              <p>
+                또한 우리는 AI 기술을 적극적으로 활용합니다. 광고 문안 작성, 이미지 생성, 그리고 입찰가 자동 조정에 이르기까지 최신 AI 툴들을 활용하여 인간의 한계를 넘어선 효율을 추구합니다. 하지만 AI를 제어하고 최종적인 전략을 수립하는 것은 여전히 인간의 몫입니다. 히옵의 전문가들은 AI가 생성한 방대한 옵션 중 비즈니스 목표에 가장 부합하는 최선의 선택을 내립니다.
+              </p>
+              <p>
+                디지털 광고는 매분 매초가 전쟁터입니다. 히옵은 이 전쟁터에서 고객사의 승리를 보장하는 가장 강력한 무기가 되어드릴 것입니다. 기술적 우위, 데이터 기반의 전략, 그리고 멈추지 않는 도전 정신. 히옵과 함께라면 당신의 비즈니스는 한계를 넘어 성장할 수 있습니다.
+              </p>
+            </article>
+
+            <article id="ch5">
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 05: 히옵 마케팅의 철학과 실행 원칙</h3>
+              <p>
+                우리의 철학은 단순합니다. "고객사의 성장이 곧 우리의 성장이다." 히옵은 단순한 대행사가 아닌 비즈니스 파트너로서 함께 고민합니다. 우리는 안주하지 않습니다. 매일같이 쏟아지는 새로운 광고 기술과 매체의 업데이트를 누구보다 빠르게 학습하고 현업에 적용합니다. 
+              </p>
+              <p>
+                실행에 있어서는 '속도'와 '정확도'를 중시합니다. 가설을 세우고, 테스트하고, 데이터를 확인하고, 다시 개선하는 PDCA(Plan-Do-Check-Act) 사이클을 극한의 속도로 돌립니다. 이 과정을 통해 우리는 비즈니스에 가장 최적화된 '승리의 공식'을 찾아냅니다. 
+              </p>
+              <p>
+                지금 이 순간에도 경쟁자들은 데이터를 쌓고 학습하고 있습니다. 더 늦기 전에 히옵의 엔지니어링 기반 마케팅 솔루션을 경험해 보십시오. 우리는 당신의 브랜드를 세상에 알리는 것을 넘어, 숫자로 증명되는 실질적인 비즈니스의 성공을 만들어냅니다.
+              </p>
+            </article>
+
           </div>
         </div>
       </section>

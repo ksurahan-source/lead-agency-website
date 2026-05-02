@@ -168,51 +168,65 @@ export default function GooglePage() {
         </div>
       </section>
 
-      {/* SEO Deep Dive Section */}
-      <section style={{ padding: '8rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      {/* MASSIVE GOOGLE SEO ENCYCLOPEDIA */}
+      <section style={{ padding: '10rem 2rem', background: '#fff', borderTop: '4px solid var(--border-dark)', color: '#121212' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3rem', marginBottom: '4rem', color: 'var(--text-dark)' }}>TECHNICAL GUIDE: GOOGLE ADS OPTIMIZATION</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #EA4335', display: 'inline-block' }}>
+            THE GOOGLE ADS MASTER GUIDE 2025
+          </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', fontSize: '1.1rem', lineHeight: '1.8', color: '#333' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.15rem', lineHeight: '2.2', textAlign: 'justify' }}>
+            
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>01. 검색 의도(Search Intent)의 과학적 분석</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                구글 검색 광고의 본질은 사용자의 '의도'에 답하는 것입니다. 하지만 단순히 키워드에 입찰하는 것만으로는 부족합니다. 사용자가 검색한 키워드가 정보 수집형(Informational)인지, 비교형(Commercial)인지, 아니면 즉각적인 구매형(Transactional)인지에 따라 광고 소재와 랜딩 페이지의 구성이 완전히 달라져야 합니다.
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 01: 검색 의도(Search Intent)의 다차원적 분석과 키워드 전략</h3>
+              <p>
+                구글 광고의 핵심은 '키워드'가 아니라 그 뒤에 숨겨진 '의도(Intent)'입니다. 사용자가 "마케팅 대행사"라고 검색했을 때, 그들이 단순히 정보를 찾는 중인지(Informational), 대행사를 비교 분석 중인지(Commercial), 아니면 즉시 계약을 원하는지(Transactional)를 구분하는 것이 승부의 시작입니다. 
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                히옵은 방대한 검색 데이터를 기반으로 고객사의 키워드 포트폴리오를 재구성합니다. 저효율 키워드를 과감히 제거하고, 높은 전환 가능성을 가진 '롱테일 키워드'를 발굴하여 광고비 효율을 극대화합니다. 또한, 구글의 스마트 입찰(Smart Bidding) 기능이 가장 정교하게 작동할 수 있도록 초기 학습 데이터를 정제하는 과정을 거칩니다.
+              <p>
+                히옵(HI-OP)은 구글의 방대한 검색 시그널을 다차원적으로 분석합니다. 단순히 조회수가 높은 키워드에 높은 입찰가를 쓰는 방식은 광고비 낭비만 초래합니다. 우리는 실제 전환 데이터를 기반으로 '구매 결정 단계'에 있는 유저들이 주로 사용하는 키워드 포트폴리오를 구성합니다. 또한, 일치 검색(Exact Match)과 구문 검색(Phrase Match)의 정교한 조합, 그리고 제외 키워드(Negative Keywords)의 실시간 관리를 통해 타겟팅의 순도를 극한으로 끌어올립니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>02. 실적 최대화(PMax) 캠페인의 테크니컬 튜닝</h3>
-              <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                PMax(Performance Max)는 구글의 모든 지면을 아우르는 강력한 AI 기반 캠페인이지만, 동시에 '블랙박스'와 같아서 통제가 어렵다는 단점이 있습니다. 히옵은 PMax를 단순히 '켜두는' 것이 아니라 테크니컬하게 튜닝합니다. 
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 02: 실적 최대화(PMax) 캠페인의 블랙박스 해킹</h3>
+              <p>
+                PMax(Performance Max)는 구글의 가장 강력한 무기이자, 동시에 마케터들을 당혹스럽게 만드는 시스템입니다. 검색, 유튜브, 디스플레이, 지메일 등 모든 지면을 AI가 알아서 운영해주지만, 세부 데이터를 확인하기 어렵기 때문입니다. 히옵은 PMax의 '블랙박스'를 데이터로 해킹합니다.
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                우리는 자산 그룹(Asset Groups)의 시그널 데이터를 정교하게 설계하고, 고효율 오디언스 시그널을 주입하여 머신러닝이 엉뚱한 곳에 예산을 쓰지 않도록 방어합니다. 또한, 유튜브 영상 소재와 디스플레이 이미지를 데이터 기반으로 교체하여 지속적인 성과 우상향을 이끌어냅니다.
-              </p>
-            </article>
-
-            <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>03. GTM 서버사이드와 향상된 전환(Enhanced Conversions)</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                구글 광고 성과의 절반은 '측정'에서 옵니다. 최근 쿠키 차단 환경에서 일반적인 자바스크립트 태그만으로는 전환 데이터의 상당 부분이 유실됩니다. 히옵은 구글 태그 매니저(GTM) 서버사이드 설계를 통해 이 문제를 해결합니다.
-              </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                서버사이드 GTM은 브라우저의 간섭 없이 서버 대 서버로 데이터를 전송하여 전환 누락을 최소화합니다. 여기에 더해 '향상된 전환(EC)' 기능을 활성화하여, 로그인을 하지 않은 사용자의 전환까지 매칭할 수 있도록 시스템을 구축합니다. 이는 구글 머신러닝이 더 풍부한 데이터를 학습하게 하여 실질적인 tCPA 하락과 ROAS 상승으로 이어집니다.
+              <p>
+                우리는 자산 그룹(Asset Groups)의 시그널 오디언스를 정교하게 설계하여 머신러닝이 엉뚱한 곳에서 헤매지 않도록 방향을 제시합니다. 또한, 브랜드 키워드 보호 전략과 스크립트 기반의 지면 제외 관리를 통해 PMax가 가장 고효율의 전환을 가져올 수 있도록 가이드를 제공합니다. AI가 주도하는 캠페인일수록, 그 AI를 길들이는 마케터의 엔지니어링 역량이 성과를 결정합니다.
               </p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontFamily: 'Black Han Sans, sans-serif' }}>04. 유튜브 풀퍼널 마케팅과 브랜드 임팩트</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                유튜브는 단순히 영상을 보여주는 지면이 아니라, 구매 결정을 내리는 '검색 엔진'이자 '소셜 플랫폼'입니다. 히옵은 인지 단계의 범퍼 광고(Bumper Ads)부터 전환 단계의 비디오 액션 캠페인(VAC)까지 유기적으로 연결된 풀퍼널 전략을 수립합니다.
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 03: 유튜브 풀퍼널 마케팅과 비디오 액션 캠페인(VAC)</h3>
+              <p>
+                유튜브는 이제 단순한 영상 플랫폼을 넘어, 전 세계에서 두 번째로 큰 검색 엔진입니다. 히옵은 유튜브를 인지(Awareness)의 수단으로만 쓰지 않습니다. 우리는 비디오 액션 캠페인(VAC)을 통해 영상 시청이 실제 웹사이트 전환으로 이어지도록 설계합니다. 
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                우리는 광고 시청 데이터와 웹사이트 방문 데이터를 교차 분석하여, 특정 영상을 시청한 사용자가 검색 광고를 통해 유입될 때 더 높은 전환율을 보이도록 시나리오를 설계합니다. 구글의 거대한 생태계를 하나의 유기적인 판매 기계로 만드는 것, 그것이 히옵의 구글 광고 엔지니어링입니다.
+              <p>
+                영상의 초반 5초 이내에 유저의 문제를 건드리는 'Pain Point' 소구와, 구글 오디언스 데이터를 활용한 정밀 타겟팅을 결합합니다. 특히 유튜브 광고 이후 구글 검색 광고로 이어지는 유기적인 검색 시너지 효과를 분석하여, 전체 마케팅 퍼널의 효율을 극대화합니다. 유튜브는 보는 매체가 아니라, 사는 매체입니다.
               </p>
             </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 04: GTM 서버사이드와 GA4의 데이터 거버넌스</h3>
+              <p>
+                구글 광고 성과의 절반은 구글 태그 매니저(GTM)와 구글 애널리틱스 4(GA4)에서 옵니다. 최근 쿠키 차단 환경에서 일반적인 클라이언트 사이드 태그는 데이터 누락이 심각합니다. 히옵은 GTM 서버사이드 설계를 통해 브라우저 차단과 상관없는 견고한 데이터 수집 환경을 구축합니다.
+              </p>
+              <p>
+                GA4의 이벤트 모델링을 통해 유저의 복잡한 전환 경로를 추적하고, '향상된 전환(Enhanced Conversions)' 기능을 활성화하여 광고 클릭 후 발생하는 오프라인 성과까지 매칭합니다. 데이터가 깨끗해야 알고리즘이 똑똑해집니다. 히옵은 고객사의 데이터 거버넌스를 최신 기술로 재정립합니다.
+              </p>
+            </article>
+
+            <article>
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontFamily: 'Black Han Sans, sans-serif' }}>CHAPTER 05: 스마트 입찰(tROAS/tCPA)의 최적화와 예산 관리</h3>
+              <p>
+                입찰가는 이제 사람이 정하지 않습니다. 구글의 스마트 입찰 시스템이 매 경매(Auction)마다 유저의 실시간 시그널을 분석하여 입찰가를 결정합니다. 히옵의 역할은 이 시스템이 '정확한 목표'를 가질 수 있게 세팅하는 것입니다. 
+              </p>
+              <p>
+                우리는 비즈니스의 마진 구조를 분석하여 목표 ROAS(tROAS) 또는 목표 CPA(tCPA)를 산출하고, 시기별/시즌별 예산 유동성을 관리하여 머신러닝의 학습 데이터가 끊기지 않도록 관리합니다. 단순히 광고비를 쓰는 대행사가 아닌, 고객사의 예산을 가장 효율적인 투자처에 배분하는 자산 관리자의 관점에서 구글 광고를 운영합니다.
+              </p>
+            </article>
+
           </div>
         </div>
       </section>

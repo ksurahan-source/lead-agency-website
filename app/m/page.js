@@ -78,6 +78,38 @@ export default function MobilePortal() {
         </a>
       </div>
 
+      {/* SEO Section */}
+      <section style={{ padding: '3rem 1.2rem', background: '#fff', borderTop: '3px solid var(--border-dark)' }}>
+        <h2 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>디지털 마케팅 핸드북 2025</h2>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', fontSize: '1rem', lineHeight: '1.8', color: '#333' }}>
+          <article>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 900 }}>01. 데이터 엔지니어링의 중요성</h3>
+            <p>쿠키리스 시대에 가장 중요한 것은 정확한 데이터 수집입니다. 히옵은 CAPI와 서버사이드 트래킹을 통해 누락 없는 성과 측정을 보장합니다.</p>
+          </article>
+          
+          <article>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 900 }}>02. 머신러닝 학습 최적화</h3>
+            <p>매체의 AI가 가장 잘 작동할 수 있도록 최적의 계정 구조를 설계합니다. 단순한 타겟팅이 아닌 데이터 피딩 전략이 승부를 가릅니다.</p>
+          </article>
+
+          <article>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 900 }}>03. 풀퍼널 마케팅 전략</h3>
+            <p>인지부터 구매까지, 유기적으로 연결된 캠페인 설계를 통해 고객 생애 가치(LTV)를 극대화합니다.</p>
+          </article>
+
+          <article>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 900 }}>04. 실시간 성과 대시보드</h3>
+            <p>투명한 데이터 공유를 통해 광고주와 마케터가 동일한 지표를 보고 최선의 결정을 내릴 수 있는 환경을 제공합니다.</p>
+          </article>
+
+          <article>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 900 }}>05. 히옵의 성과 증명</h3>
+            <p>우리는 숫자로 말합니다. 업종별 성공 공식을 바탕으로 귀사의 비즈니스에 최적화된 ROAS 상승 시나리오를 제안합니다.</p>
+          </article>
+        </div>
+      </section>
+
       <footer style={{ padding: '3rem 1.2rem', textAlign: 'center', fontWeight: 800, fontSize: '0.9rem', color: '#999' }}>
         © 2025 HI-OP DIGITAL. MOBILE VER.
       </footer>
