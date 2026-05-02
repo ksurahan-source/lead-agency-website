@@ -272,93 +272,6 @@
       {
         "accountId": "0",
         "containerId": "0",
-        "triggerId": "2",
-        "name": "Timer - 3분 체류",
-        "type": "TIMER",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "interval",
-            "value": "180000"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "limit",
-            "value": "1"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "eventName",
-            "value": "gtm.timer"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "true"
-          }
-        ]
-      },
-      {
-        "accountId": "0",
-        "containerId": "0",
-        "triggerId": "3",
-        "name": "Timer - 7분 체류",
-        "type": "TIMER",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "interval",
-            "value": "420000"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "limit",
-            "value": "1"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "eventName",
-            "value": "gtm.timer"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "true"
-          }
-        ]
-      },
-      {
-        "accountId": "0",
-        "containerId": "0",
-        "triggerId": "4",
-        "name": "Timer - 20분 체류",
-        "type": "TIMER",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "interval",
-            "value": "1200000"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "limit",
-            "value": "1"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "eventName",
-            "value": "gtm.timer"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "true"
-          }
-        ]
-      },
-      {
-        "accountId": "0",
-        "containerId": "0",
         "triggerId": "5",
         "name": "Scroll Depth - 서비스 페이지 (25/50/75/90%)",
         "type": "SCROLL_DEPTH",
@@ -452,6 +365,78 @@
                 "type": "TEMPLATE",
                 "key": "arg1",
                 "value": "open.kakao.com"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "2",
+        "name": "CE - 체류 3분",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "stay_3min"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "3",
+        "name": "CE - 체류 7분",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "stay_7min"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "4",
+        "name": "CE - 체류 20분",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "stay_20min"
               }
             ]
           }
@@ -985,6 +970,29 @@
           "7"
         ],
         "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "10",
+        "name": "Custom HTML - 체류시간 이벤트 타이머",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  var dl = window.dataLayer = window.dataLayer || [];\n  setTimeout(function(){ dl.push({'event':'stay_3min'}); }, 180000);\n  setTimeout(function(){ dl.push({'event':'stay_7min'}); }, 420000);\n  setTimeout(function(){ dl.push({'event':'stay_20min'}); }, 1200000);\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "1"
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD"
       }
     ],
     "customTemplate": [],
