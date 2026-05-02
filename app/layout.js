@@ -3,8 +3,11 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata = {
-  title: 'Premium Agency | Transform Your Business',
-  description: 'We help visionary companies scale with cutting-edge design and technology.',
+  title: 'HI-OP | High Impact Performance Agency',
+  description: '우리는 광고를 집행하지 않고 설계합니다. 데이터 엔지니어링 기반 퍼포먼스 마케팅 에이전시 히옵.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {

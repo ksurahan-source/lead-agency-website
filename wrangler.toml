@@ -1,7 +1,7 @@
 name = "lead-agency-website"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = ".cf-pages"
 
 [[d1_databases]]
 binding = "DB"

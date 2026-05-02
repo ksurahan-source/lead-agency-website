@@ -1,283 +1,181 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
-
-const STATUS_OPTIONS = [
-  { value: 'new',       label: '신규',     color: '#7c3aed' },
-  { value: 'contacted', label: '연락완료', color: '#2563eb' },
-  { value: 'converted', label: '전환완료', color: '#16a34a' },
-  { value: 'closed',    label: '종료',     color: '#6b7280' },
-];
-
-const statusInfo = (val) => STATUS_OPTIONS.find(s => s.value === val) || STATUS_OPTIONS[0];
-
-const fmt = (iso) => {
-  if (!iso) return '-';
-  const d = new Date(iso);
-  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-};
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export default function AdminPage() {
-  const pwInputRef          = useRef(null);
-  const [pw, setPw]         = useState('');
-  const [authed, setAuthed] = useState(false);
-  const [leads, setLeads]   = useState([]);
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [leads, setLeads] = useState([]);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError]   = useState('');
-  const [selected, setSelected] = useState(null);
-  const [filterStatus, setFilterStatus] = useState('all');
 
-  // Auto-login via URL: /admin?pw=hiop2025
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlPw = params.get('pw');
-    if (urlPw) fetchLeads(urlPw);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const fetchLeads = useCallback(async (password) => {
+  const handleLogin = async (e) => {
+    if (e) e.preventDefault();
     setLoading(true);
     setError('');
+
     try {
-      const res = await fetch(`/api/leads?pw=${encodeURIComponent(password)}`);
-      if (res.status === 401) {
-        setError('비밀번호가 올바르지 않습니다.');
-        setAuthed(false);
-        setLoading(false);
-        return;
+      const res = await fetch(`/api/admin/leads?pw=${password}`);
+      if (res.ok) {
+        const data = await res.json();
+        setLeads(data);
+        setIsLoggedIn(true);
+        localStorage.setItem('admin_pw', password);
+      } else {
+        setError('비밀번호가 틀렸습니다.');
       }
-      const data = await res.json();
-      setLeads(data.leads || []);
-      setAuthed(true);
-      setPw(password); // store for future API calls
-    } catch {
-      setError('서버 오류가 발생했습니다.');
+    } catch (err) {
+      setError('서버 연결 오류');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
+  };
+
+  useEffect(() => {
+    const savedPw = localStorage.getItem('admin_pw');
+    if (savedPw) {
+      setPassword(savedPw);
+      // 이전에 저장된 비번이 있으면 자동 시도
+      const autoLogin = async () => {
+        const res = await fetch(`/api/admin/leads?pw=${savedPw}`);
+        if (res.ok) {
+          const data = await res.json();
+          setLeads(data);
+          setIsLoggedIn(true);
+        }
+      };
+      autoLogin();
+    }
   }, []);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Read directly from DOM — works regardless of how value was set
-    const inputVal = pwInputRef.current?.value || '';
-    fetchLeads(inputVal);
-  };
-
-  const updateStatus = async (id, status) => {
-    await fetch(`/api/leads?pw=${encodeURIComponent(pw)}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, status }),
-    });
-    setLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
-    if (selected?.id === id) setSelected(prev => ({ ...prev, status }));
-  };
-
-  const deleteLead = async (id) => {
-    if (!confirm('이 리드를 삭제하시겠습니까?')) return;
-    await fetch(`/api/leads?pw=${encodeURIComponent(pw)}&id=${id}`, { method: 'DELETE' });
-    setLeads(prev => prev.filter(l => l.id !== id));
-    if (selected?.id === id) setSelected(null);
-  };
-
-  const filtered = filterStatus === 'all' ? leads : leads.filter(l => l.status === filterStatus);
-
-  const stats = STATUS_OPTIONS.map(s => ({
-    ...s,
-    count: leads.filter(l => l.status === s.value).length,
-  }));
-
-  // ── Login Screen
-  if (!authed) {
+  if (!isLoggedIn) {
     return (
-      <div className="admin-login">
-        <div className="admin-login-box">
-          <div className="admin-logo">HI-OP</div>
-          <h1 className="admin-login-title">관리자 로그인</h1>
-          <p className="admin-login-sub">리드 관리 대시보드</p>
-          <form onSubmit={handleLogin}>
-            <div className="admin-field">
-              <label htmlFor="admin-pw">비밀번호</label>
-              <input
-                id="admin-pw"
-                name="admin-pw"
+      <div className="min-h-screen bg-[#F0F0F0] flex items-center justify-center p-4">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="bg-white border-[4px] border-black p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-md w-full"
+        >
+          <h1 className="text-4xl font-black mb-6 uppercase italic tracking-tighter">HI-OP ADMIN</h1>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm font-bold uppercase mb-1">Access Key</label>
+              <input 
                 type="password"
-                ref={pwInputRef}
-                defaultValue=""
-                placeholder="관리자 비밀번호 입력"
-                className="admin-input"
-                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border-[3px] border-black p-3 font-bold focus:outline-none focus:bg-yellow-100"
+                placeholder="****"
               />
             </div>
-            {error && <p className="admin-error">{error}</p>}
-            <button type="submit" className="admin-btn-primary" disabled={loading}>
-              {loading ? '확인 중...' : '로그인'}
+            {error && <p className="text-red-600 font-bold text-sm">{error}</p>}
+            <button 
+              type="submit"
+              disabled={loading}
+              className="w-full bg-black text-white font-black py-4 uppercase hover:bg-yellow-400 hover:text-black transition-colors border-[3px] border-black"
+            >
+              {loading ? 'Authenticating...' : 'Enter Admin'}
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
-
-  // ── Dashboard
   return (
-    <div className="admin-wrap">
-      {/* Sidebar */}
-      <aside className="admin-sidebar">
-        <div className="sidebar-logo">HI-OP</div>
-        <p className="sidebar-label">대시보드</p>
-        <nav className="sidebar-nav">
-          <button className="sidebar-link active">📋 리드 관리</button>
-        </nav>
-        <div className="sidebar-footer">
-          <button className="sidebar-logout" onClick={() => { setAuthed(false); setPw(''); setLeads([]); }}>
-            로그아웃
+    <div className="min-h-screen bg-[#F0F0F0] p-4 md:p-8 font-sans">
+      <div className="max-w-7xl mx-auto">
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
+          <div>
+            <h1 className="text-6xl font-black tracking-tighter italic uppercase underline decoration-yellow-400">LEAD CONTROL</h1>
+            <p className="font-bold text-xl mt-2">HI-OP Digital Agency Performance Dashboard</p>
+          </div>
+          <button 
+            onClick={() => {
+              localStorage.removeItem('admin_pw');
+              window.location.reload();
+            }}
+            className="bg-white border-[3px] border-black px-6 py-2 font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+          >
+            Logout
           </button>
-        </div>
-      </aside>
+        </header>
 
-      {/* Main */}
-      <main className="admin-main">
-        <div className="admin-header">
-          <h1>리드 관리</h1>
-          <button className="admin-refresh" onClick={() => fetchLeads(pw)}>↻ 새로고침</button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <StatCard title="Total Leads" value={leads.length} color="bg-blue-400" />
+          <StatCard title="Facebook/Meta" value={leads.filter(l => l.source === 'meta').length} color="bg-pink-400" />
+          <StatCard title="Google/TikTok" value={leads.filter(l => l.source !== 'meta').length} color="bg-green-400" />
         </div>
 
-        {/* Stats */}
-        <div className="admin-stats">
-          <div className="stat-card total">
-            <p className="stat-num">{leads.length}</p>
-            <p className="stat-label">전체 리드</p>
-          </div>
-          {stats.map(s => (
-            <div key={s.value} className="stat-card" style={{ borderColor: s.color + '55' }}>
-              <p className="stat-num" style={{ color: s.color }}>{s.count}</p>
-              <p className="stat-label">{s.label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Filter */}
-        <div className="admin-filters">
-          {['all', ...STATUS_OPTIONS.map(s => s.value)].map(v => (
-            <button
-              key={v}
-              className={`filter-btn ${filterStatus === v ? 'active' : ''}`}
-              onClick={() => setFilterStatus(v)}
-            >
-              {v === 'all' ? '전체' : statusInfo(v).label}
-            </button>
-          ))}
-        </div>
-
-        {/* Table + Detail */}
-        <div className="admin-content">
-          {/* Lead List */}
-          <div className={`lead-list ${selected ? 'split' : ''}`}>
-            {loading ? (
-              <div className="admin-empty">불러오는 중...</div>
-            ) : filtered.length === 0 ? (
-              <div className="admin-empty">리드가 없습니다.</div>
-            ) : (
-              <table className="lead-table">
-                <thead>
-                  <tr>
-                    <th>이름</th>
-                    <th>연락처</th>
-                    <th>회사</th>
-                    <th>출처</th>
-                    <th>상태</th>
-                    <th>신청일시</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map(lead => (
-                    <tr
-                      key={lead.id}
-                      className={`lead-row ${selected?.id === lead.id ? 'selected' : ''}`}
-                      onClick={() => setSelected(lead)}
-                    >
-                      <td className="lead-name">{lead.name}</td>
-                      <td className="lead-phone">{lead.phone}</td>
-                      <td>{lead.company || '-'}</td>
-                      <td>
-                        <span style={{
-                          background: lead.source === 'chart-leaders' ? 'rgba(16,185,129,0.1)' : 'rgba(124,58,237,0.1)',
-                          color: lead.source === 'chart-leaders' ? '#10b981' : '#7c3aed',
-                          padding: '0.2rem 0.5rem',
-                          borderRadius: '4px',
-                          fontSize: '0.75rem',
-                          fontWeight: 'bold'
-                        }}>
-                          {lead.source === 'chart-leaders' ? 'Chart Leaders' : 'HI-OP'}
-                        </span>
-                      </td>
-                      <td>
-                        <select
-                          className="status-select"
-                          value={lead.status}
-                          style={{ color: statusInfo(lead.status).color }}
-                          onClick={e => e.stopPropagation()}
-                          onChange={e => updateStatus(lead.id, e.target.value)}
-                        >
-                          {STATUS_OPTIONS.map(o => (
-                            <option key={o.value} value={o.value}>{o.label}</option>
-                          ))}
-                        </select>
-                      </td>
-                      <td className="lead-date">{fmt(lead.createdAt)}</td>
-                      <td>
-                        <button
-                          className="btn-del"
-                          onClick={e => { e.stopPropagation(); deleteLead(lead.id); }}
-                        >✕</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </div>
-
-          {/* Detail Panel */}
-          {selected && (
-            <div className="lead-detail">
-              <div className="detail-header">
-                <h3>{selected.name}</h3>
-                <button className="detail-close" onClick={() => setSelected(null)}>✕</button>
-              </div>
-              <div className="detail-body">
-                <div className="detail-row"><span>이메일</span><a href={`mailto:${selected.email}`}>{selected.email}</a></div>
-                <div className="detail-row"><span>연락처</span><a href={`tel:${selected.phone}`}>{selected.phone}</a></div>
-                <div className="detail-row"><span>회사명</span><p>{selected.company || '-'}</p></div>
-                <div className="detail-row"><span>출처</span><p>{selected.source === 'chart-leaders' ? 'Chart Leaders' : 'HI-OP'}</p></div>
-                <div className="detail-row"><span>신청일시</span><p>{fmt(selected.createdAt)}</p></div>
-                <div className="detail-row"><span>최근 업데이트</span><p>{fmt(selected.updatedAt)}</p></div>
-                <div className="detail-row"><span>상태</span>
-                  <select
-                    className="status-select"
-                    value={selected.status}
-                    style={{ color: statusInfo(selected.status).color }}
-                    onChange={e => updateStatus(selected.id, e.target.value)}
-                  >
-                    {STATUS_OPTIONS.map(o => (
-                      <option key={o.value} value={o.value}>{o.label}</option>
-                    ))}
-                  </select>
-                </div>
-                {selected.inquiry && (
-                  <div className="detail-inquiry">
-                    <span>문의 내용</span>
-                    <p>{selected.inquiry}</p>
-                  </div>
-                )}
-              </div>
+        <div className="bg-white border-[4px] border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-black text-white uppercase text-sm">
+                <th className="p-4 border-r border-white">Date</th>
+                <th className="p-4 border-r border-white">Name</th>
+                <th className="p-4 border-r border-white">Source</th>
+                <th className="p-4 border-r border-white">Company</th>
+                <th className="p-4 border-r border-white">Contact</th>
+                <th className="p-4">Message</th>
+              </tr>
+            </thead>
+            <tbody className="font-bold">
+              {leads.map((lead, idx) => (
+                <tr key={lead.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+                  <td className="p-4 border-b-[3px] border-r-[3px] border-black text-xs">
+                    {new Date(lead.created_at).toLocaleString('ko-KR')}
+                  </td>
+                  <td className="p-4 border-b-[3px] border-r-[3px] border-black text-lg">
+                    {lead.name}
+                  </td>
+                  <td className="p-4 border-b-[3px] border-r-[3px] border-black">
+                    <SourceBadge source={lead.source} />
+                  </td>
+                  <td className="p-4 border-b-[3px] border-r-[3px] border-black italic">
+                    {lead.company}
+                  </td>
+                  <td className="p-4 border-b-[3px] border-r-[3px] border-black text-sm">
+                    {lead.email}<br/>{lead.phone}
+                  </td>
+                  <td className="p-4 border-b-[3px] border-black text-sm max-w-xs truncate" title={lead.inquiry}>
+                    {lead.inquiry}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {leads.length === 0 && (
+            <div className="p-20 text-center font-black text-4xl uppercase opacity-20 italic">
+              No Leads Captured Yet
             </div>
           )}
         </div>
-      </main>
+      </div>
     </div>
+  );
+}
+
+function StatCard({ title, value, color }) {
+  return (
+    <div className={`${color} border-[4px] border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]`}>
+      <h3 className="text-sm font-black uppercase mb-2">{title}</h3>
+      <p className="text-6xl font-black tracking-tighter">{value}</p>
+    </div>
+  );
+}
+
+function SourceBadge({ source }) {
+  const colors = {
+    meta: 'bg-pink-400',
+    google: 'bg-green-400',
+    'tiktok-moloco': 'bg-yellow-400',
+    'hi-op': 'bg-gray-400'
+  };
+
+  return (
+    <span className={`${colors[source] || 'bg-gray-300'} border-[2px] border-black px-3 py-1 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}>
+      {source}
+    </span>
   );
 }
