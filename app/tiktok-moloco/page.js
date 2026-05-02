@@ -18,9 +18,9 @@ export default function TikTokMolocoPage() {
 
       {/* Hero */}
       <section style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="wrap" style={{ padding: '6rem 2rem' }}>
+        <div className="wrap" style={{ padding: 'clamp(3rem, 10vw, 6rem) 1.2rem' }}>
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
+            initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
@@ -28,31 +28,28 @@ export default function TikTokMolocoPage() {
             <h1 className="massive-text">알고리즘</h1>
           </motion.div>
           
-          <div className="grid-half" style={{ border: 'none', marginTop: '4rem' }}>
-            <div style={{ padding: 0 }}>
-              <p style={{ fontSize: '2rem', fontWeight: 800, lineHeight: 1.2 }}>
+          <div className="grid-half" style={{ border: 'none', marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
+            <div style={{ padding: '2rem 0' }}>
+              <p style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>
                 강력한 알고리즘과<br />크리에이티브로<br /><span style={{ color: '#00f2fe' }}>시장</span>을 장악합니다.
               </p>
             </div>
-            <div style={{ padding: 0 }}>
-              <p style={{ fontSize: '1.2rem', color: '#444', maxWidth: '450px', fontWeight: 600 }}>
+            <div style={{ padding: '0 0 2rem' }}>
+              <p style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#444', maxWidth: '450px', fontWeight: 600 }}>
                 틱톡 숏폼 기획부터 몰로코 머신러닝 최적화까지, 차세대 퍼포먼스 광고의 모든 것을 히옵이 설계합니다.
               </p>
-              <div style={{ marginTop: '2.5rem' }}>
-                <ArrowDown size={56} strokeWidth={3} />
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Inquiries Section */}
-      <section style={{ padding: '6rem 2rem', background: '#00f2fe', color: '#111', overflow: 'hidden' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: '#00f2fe', color: '#111', overflow: 'hidden' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ fontSize: '7vw', color: '#111' }}>문의가</h2>
-          <h2 className="massive-text" style={{ fontSize: '7vw', color: 'rgba(0,0,0,0.2)' }}>증명하는 성과</h2>
+          <h2 className="massive-text" style={{ color: '#111' }}>문의가</h2>
+          <h2 className="massive-text" style={{ color: 'rgba(0,0,0,0.2)' }}>증명하는 성과</h2>
           
-          <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
             {[
               { b: 'OO 모바일 게임', m: 'CPI 60% 절감' },
               { b: 'XX 이커머스', m: '신규 가입 300% 증가' },

@@ -23,9 +23,9 @@ export default function PortalPage() {
       </nav>
 
       {/* Hero Section */}
-      <section style={{ padding: '4rem 2rem 2rem', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ padding: 'clamp(2rem, 8vw, 4rem) 1.2rem', position: 'relative', overflow: 'hidden' }}>
         <motion.h1 
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="massive-text"
@@ -33,7 +33,7 @@ export default function PortalPage() {
           데이터 기반
         </motion.h1>
         <motion.h1 
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="massive-text massive-text-stroke"
@@ -46,7 +46,7 @@ export default function PortalPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            style={{ maxWidth: '600px', fontSize: '1.6rem', fontWeight: 700, textAlign: 'right' }}
+            style={{ maxWidth: '600px', fontSize: 'clamp(1.1rem, 4vw, 1.6rem)', fontWeight: 700, textAlign: 'right', lineHeight: 1.4 }}
           >
             히옵(HI-OP)은 가장 최신 기술을 적용한 디지털 광고를 설계하여 고객에게 <span style={{ color: 'var(--hiop-orange)' }}>최대의 ROAS</span>를 가져다 주는 것을 목표로 합니다.
           </motion.p>

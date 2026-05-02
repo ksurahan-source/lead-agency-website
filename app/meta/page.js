@@ -18,9 +18,9 @@ export default function MetaPage() {
 
       {/* Hero */}
       <section style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="wrap" style={{ padding: '6rem 2rem' }}>
+        <div className="wrap" style={{ padding: 'clamp(3rem, 10vw, 6rem) 1.2rem' }}>
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
+            initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
@@ -28,32 +28,29 @@ export default function MetaPage() {
             <h1 className="massive-text">퍼포먼스</h1>
           </motion.div>
           
-          <div className="grid-half" style={{ border: 'none', marginTop: '4rem' }}>
-            <div style={{ padding: 0 }}>
-              <p style={{ fontSize: '2rem', fontWeight: 800, lineHeight: 1.2 }}>
+          <div className="grid-half" style={{ border: 'none', marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
+            <div style={{ padding: '2rem 0' }}>
+              <p style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>
                 트래킹 인프라부터<br />다시 설계하여<br /><span style={{ color: 'var(--hiop-blue)' }}>ROAS</span>를 증명합니다.
               </p>
             </div>
-            <div style={{ padding: 0 }}>
-              <p style={{ fontSize: '1.2rem', color: '#444', maxWidth: '450px', fontWeight: 600 }}>
+            <div style={{ padding: '0 0 2rem' }}>
+              <p style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#444', maxWidth: '450px', fontWeight: 600 }}>
                 픽셀 · CAPI · 계정 구조 · 소재 전략까지<br />
                 데이터 기반의 완벽한 Meta 광고 솔루션을 제공합니다.
               </p>
-              <div style={{ marginTop: '2.5rem' }}>
-                <ArrowDown size={56} strokeWidth={3} />
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Inquiries Section */}
-      <section style={{ padding: '6rem 2rem', background: 'var(--hiop-blue)', color: '#fff', overflow: 'hidden' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: 'var(--hiop-blue)', color: '#fff', overflow: 'hidden' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ fontSize: '7vw', color: '#fff' }}>문의가</h2>
-          <h2 className="massive-text" style={{ fontSize: '7vw', color: 'rgba(255,255,255,0.3)' }}>증명하는 성과</h2>
+          <h2 className="massive-text" style={{ color: '#fff' }}>문의가</h2>
+          <h2 className="massive-text" style={{ color: 'rgba(255,255,255,0.3)' }}>증명하는 성과</h2>
           
-          <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
             {[
               { b: 'OO 성형외과', m: '문의 324% 상승' },
               { b: 'XX 패션 브랜드', m: 'ROAS 580% 달성' },
