@@ -209,7 +209,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "2",
         "name": "GA4 Event - 체류시간 3분 (100원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
@@ -237,7 +237,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "8",
         "name": "GA4 Event - 체류시간 7분 (1,000원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
@@ -265,7 +265,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "9",
         "name": "GA4 Event - 체류시간 20분 (10,000원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "stay_duration" },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
@@ -293,7 +293,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "3",
         "name": "GA4 Event - 스크롤 깊이 서비스 페이지 (25%=100원 / 50%=500원 / 75%=1,500원 / 90%=5,000원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "scroll_depth"  },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
@@ -325,7 +325,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "4",
         "name": "GA4 Event - 리드 완료 (300,000원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "generate_lead" },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F" },
@@ -369,7 +369,7 @@
       {
         "accountId": "0", "containerId": "0", "tagId": "5",
         "name": "GA4 Event - 카카오 문의 (50,000원)",
-        "type": "ga4e",
+        "type": "gaawe",
         "parameter": [
           { "type": "TEMPLATE", "key": "eventName",     "value": "kakao_chat_click" },
           { "type": "TEMPLATE", "key": "measurementId", "value": "G-ZSRNLEWD1F"    },
