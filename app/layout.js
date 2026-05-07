@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-P74PV945';
   // Server component이므로 NEXT_PUBLIC_ 없이도 접근 가능
-  const pixelId = process.env.META_PIXEL_ID || '1715625702927911';
+  const pixelId = '1715625702927911';
 
   return (
     <html lang="en">

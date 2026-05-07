@@ -46,7 +46,7 @@ export async function POST(request) {
     console.log('[NEW LEAD]', { name, email, company });
 
     // ── 2. Meta CAPI (함수 내부에서 env 읽기)
-    const PIXEL_ID = env.META_PIXEL_ID;
+    const PIXEL_ID = '1715625702927911';
     const ACCESS_TOKEN = env.META_ACCESS_TOKEN;
 
     if (PIXEL_ID && ACCESS_TOKEN) {
