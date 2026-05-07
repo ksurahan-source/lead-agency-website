@@ -47,7 +47,7 @@ export async function POST(request) {
 
     // ── 2. Meta CAPI (함수 내부에서 env 읽기)
     const PIXEL_ID = '1715625702927911';
-    const ACCESS_TOKEN = env.META_ACCESS_TOKEN;
+    const ACCESS_TOKEN = 'EAASW8xJXY4gBRZAchAScwjhAZBPyzZB9aQRQuPsoPyM5iZB8aSEtz9srdjUNJrZAVPC98qhoZC72bTGgElIx9tc8B8Xg2swqaSUBssaYykj5iT0WHSjFgu0Y3wUfdVusYXWB0OtbiGqUlbDEZAntQ5V3WMHHhADF7fFkZA62oCTwQISt14zIF1S9fqu2wUoVNAZDZD';
 
     if (PIXEL_ID && ACCESS_TOKEN) {
       const nameParts = name.split(' ');
