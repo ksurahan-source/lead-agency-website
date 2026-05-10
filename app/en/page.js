@@ -33,7 +33,9 @@ export default function EnPage() {
 
       {/* Nav */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #111' }}>
-        <div className="font-display" style={{ fontSize: '2.5rem', lineHeight: 1 }}>HI-OB</div>
+        <a href="/en" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img src="/logo/hi-ob_horizontal_dark.svg" alt="HI-OB" style={{ height: '2.2rem', width: 'auto', display: 'block' }} />
+        </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <span className="font-syne" style={{ fontWeight: 800, fontSize: '0.9rem' }}>PERFORMANCE MARKETING</span>
           <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"
