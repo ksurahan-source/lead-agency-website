@@ -43,7 +43,7 @@ export default function TermsPage() {
         <div className="font-display" style={{ fontSize: '2rem' }}>HI-OP / TERMS</div>
       </nav>
       <div className="wrap" style={{ marginTop: '5rem', maxWidth: '900px' }}>
-        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif' }}>{c.title}</h1>
+        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{c.title}</h1>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
           {c.sections.map((s, i) => (
             <section key={i}>

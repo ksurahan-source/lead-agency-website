@@ -67,7 +67,7 @@ export default function TikTokMolocoPage() {
             ].map((stat, i) => (
               <div key={i} style={{ border: '3px solid #111', padding: '1.5rem', background: 'rgba(255,255,255,0.4)' }}>
                 <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(0,0,0,0.6)', marginBottom: '0.5rem' }}>{stat.b}</div>
-                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Black Han Sans, sans-serif' }}>{stat.m}</div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{stat.m}</div>
               </div>
             ))}
           </div>
@@ -208,7 +208,7 @@ export default function TikTokMolocoPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
             
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 핵심 시그널 해독</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 핵심 시그널 해독</h3>
               <p>
                 틱톡은 기존 소셜 미디어와는 완전히 다른 문법을 가진 '엔터테인먼트 플랫폼'입니다. 지인 기반의 네트워크가 아닌, 오직 유저의 '관심사'와 '반응'만을 기반으로 콘텐츠를 추천하는 FYP(For You Page) 알고리즘은 마케팅 관점에서 거대한 기회를 제공합니다. 
               </p>
@@ -218,7 +218,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
               <p>
                 빅테크 매체 외에도 강력한 성과를 내는 플랫폼이 있습니다. 바로 몰로코(Moloco)입니다. 몰로코의 강점은 전 세계 수백만 개의 앱 지면을 대상으로 실시간 입찰(RTB)을 수행하는 독자적인 머신러닝 엔진에 있습니다. 
               </p>
@@ -228,7 +228,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
               <p>
                 틱톡의 슬로건인 "Don't make ads, make TikToks"는 숏폼 광고의 본질을 관통합니다. 유저들은 광고임을 인지하는 순간 스크롤을 넘깁니다. 히옵은 '광고 같지 않은 광고'를 만들기 위해 크리에이티브 엔지니어링을 수행합니다.
               </p>
@@ -238,7 +238,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
               <p>
                 애플의 개인정보 보호 강화 이후 모바일 앱 마케팅의 성과 측정은 미로처럼 복잡해졌습니다. 이제는 단순한 트래킹 링크가 아닌, MMP(AppsFlyer, Airbridge 등)와 애플의 SKAdNetwork(SKAN) 체계에 대한 깊은 이해가 필수적입니다.
               </p>
@@ -248,7 +248,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
               <p>
                 틱톡과 몰로코의 공통점은 글로벌 확장성이 뛰어나다는 점입니다. 히옵은 국내 성과에 안주하지 않고 북미, 동남아, 일본 등 글로벌 시장 진출을 원하는 브랜드에게 최적의 솔루션을 제공합니다. 
               </p>
