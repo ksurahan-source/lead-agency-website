@@ -7,7 +7,7 @@ const t = {
   ko: {
     title: '무료 진단 신청',
     name: '성함 *', namePlaceholder: '홍길동',
-    email: '이메일 *', emailPlaceholder: 'example@company.com',
+    email: '이메일 *', emailPlaceholder: 'example@naver.com',
     phone: '연락처 *', phonePlaceholder: '010-0000-0000',
     company: '회사명 / 브랜드명', companyPlaceholder: '하이옵 마케팅',
     inquiry: '문의 내용', inquiryPlaceholder: '현재 고민 중인 매체나 목표를 자유롭게 적어주세요.',
@@ -184,6 +184,27 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
             style={{ minHeight: '140px' }} value={formData.inquiry} onChange={handleChange} />
         </div>
 
+        <div className="form-group" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              required
+              style={{ width: '20px', height: '20px', marginTop: '4px', cursor: 'pointer' }}
+            />
+            <span style={{ fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.4 }}>
+              {lang === 'ko' ? (
+                <>
+                  <Link href="/privacy" target="_blank" style={{ color: 'var(--hiop-orange)', textDecoration: 'underline' }}>개인정보 수집 및 이용</Link>에 동의합니다. (필수)
+                </>
+              ) : (
+                <>
+                  I agree to the <Link href="/privacy" target="_blank" style={{ color: 'var(--hiop-orange)', textDecoration: 'underline' }}>collection and use of personal information</Link>. (Required)
+                </>
+              )}
+            </span>
+          </label>
+        </div>
+
         {status === 'error' && (
           <div style={{ background: '#ff000015', padding: '1.2rem', border: '3px solid #ff0000', marginBottom: '2rem', fontWeight: 800, color: '#d00' }}>
             {errorMessage}
@@ -198,3 +219,5 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
     </div>
   );
 }
+
+import Link from 'next/link';

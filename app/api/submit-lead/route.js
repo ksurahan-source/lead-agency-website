@@ -59,6 +59,7 @@ export async function POST(request) {
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
           action_source: 'website',
+          event_source_url: 'https://hi-ob.com',
           event_id: eventId,
           user_data: {
             em: [await hashData(email)],
@@ -68,8 +69,6 @@ export async function POST(request) {
           },
           custom_data: { company_name: company },
         }],
-        // 테스트 시에만 사용 — 프로덕션에서는 제거하세요
-        test_event_code: 'TEST26790',
       };
 
       try {
