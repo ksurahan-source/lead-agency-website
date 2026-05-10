@@ -16,7 +16,7 @@ export default function BlogPost1() {
       <article className="wrap" style={{ padding: '8rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
         <header style={{ marginBottom: '6rem' }}>
           <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiop-orange)', marginBottom: '2rem' }}>퍼포먼스 마케팅 | 2025.05.10</div>
-          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif' }}>
+          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>
             한국 마케팅 시장의 침몰: 왜 당신의 메타 광고는 돈만 낭비하는가?
           </h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiop-blue)', paddingLeft: '2rem' }}>

@@ -209,7 +209,7 @@ export default function MetaPage() {
             {c.stats.map((stat, i) => (
               <div key={i} style={{ border: '3px solid #fff', padding: '1.5rem', background: 'rgba(255,255,255,0.1)' }}>
                 <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', marginBottom: '0.5rem' }}>{stat.b}</div>
-                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Black Han Sans, sans-serif' }}>{stat.m}</div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{stat.m}</div>
               </div>
             ))}
           </div>
@@ -328,31 +328,31 @@ export default function MetaPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>{c.ch1Title}</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch1Title}</h3>
               <p>{c.ch1p1}</p>
               <p>{c.ch1p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>{c.ch2Title}</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch2Title}</h3>
               <p>{c.ch2p1}</p>
               <p>{c.ch2p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>{c.ch3Title}</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch3Title}</h3>
               <p>{c.ch3p1}</p>
               <p>{c.ch3p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>{c.ch4Title}</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch4Title}</h3>
               <p>{c.ch4p1}</p>
               <p>{c.ch4p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Black Han Sans, sans-serif', color: '#fff' }}>{c.ch5Title}</h3>
+              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch5Title}</h3>
               <p>{c.ch5p1}</p>
               <p>{c.ch5p2}</p>
             </article>

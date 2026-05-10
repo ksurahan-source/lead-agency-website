@@ -16,7 +16,7 @@ export default function BlogPost2() {
       <article className="wrap" style={{ padding: '8rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
         <header style={{ marginBottom: '6rem' }}>
           <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiop-orange)', marginBottom: '2rem' }}>구글 광고 | 2025.05.09</div>
-          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif' }}>
+          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>
             구글 광고의 함정: 스마트 캠페인이 당신의 예산을 갉아먹고 있다
           </h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiop-green)', paddingLeft: '2rem' }}>

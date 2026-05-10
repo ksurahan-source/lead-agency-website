@@ -63,7 +63,7 @@ export default function PrivacyPage() {
       </nav>
 
       <div className="wrap" style={{ marginTop: '5rem', maxWidth: '900px' }}>
-        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif' }}>{c.title}</h1>
+        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{c.title}</h1>
         <p style={{ fontSize: '1.2rem', marginBottom: '4rem', fontWeight: 600, lineHeight: 1.8 }}>{c.intro}</p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
