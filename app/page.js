@@ -128,7 +128,7 @@ export default function HomePage() {
       {/* 네비게이션 */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #121212', position: 'sticky', top: 0, backgroundColor: '#fcfaf7', zIndex: 100 }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img src="/logo/hiop_horizontal_dark.svg" alt="히옵" style={{ height: '2.2rem', width: 'auto', display: 'block' }} />
+          <img src="/logo/hiop_horizontal_dark.svg" alt="히옵" style={{ height: '2.2rem', width: 'auto', maxWidth: '160px', display: 'block' }} />
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>데이터 엔지니어링 마케팅</div>
