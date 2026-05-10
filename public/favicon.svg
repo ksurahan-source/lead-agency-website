@@ -1,4 +1,16 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" fill="#FF4500"/>
-  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#000000" style="font-family: sans-serif; font-weight: 900; font-size: 14px; letter-spacing: -1px;">HI-OB</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- 투명 배경 — 파비콘/앱 아이콘용 -->
+
+  <clipPath id="left">
+    <rect x="0" y="0" width="62" height="100"/>
+  </clipPath>
+
+  <!-- TAM -->
+  <circle cx="62" cy="50" r="44" fill="none" stroke="#FF3C3C" stroke-width="1.5" opacity="0.5" clip-path="url(#left)"/>
+  <!-- SAM -->
+  <circle cx="62" cy="50" r="29" fill="none" stroke="#888888" stroke-width="2" opacity="0.65" clip-path="url(#left)"/>
+  <!-- SOM -->
+  <circle cx="62" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="3" clip-path="url(#left)"/>
+  <!-- 중심 -->
+  <circle cx="62" cy="50" r="5" fill="#FF3C3C"/>
 </svg>
