@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F2F2EE"/>
+
+  <clipPath id="left">
+    <rect x="0" y="0" width="222" height="400"/>
+  </clipPath>
+
+  <!-- TAM -->
+  <circle cx="222" cy="200" r="170" fill="none" stroke="#FF3C3C" stroke-width="2.5" opacity="0.38" clip-path="url(#left)"/>
+  <!-- SAM -->
+  <circle cx="222" cy="200" r="110" fill="none" stroke="#555555" stroke-width="3" opacity="0.38" clip-path="url(#left)"/>
+  <!-- SOM -->
+  <circle cx="222" cy="200" r="56"  fill="none" stroke="#111111" stroke-width="5" clip-path="url(#left)"/>
+  <!-- 중심점 -->
+  <circle cx="222" cy="200" r="13" fill="#FF3C3C"/>
+
+  <text x="388" y="78"  text-anchor="end" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="12" font-weight="700" fill="#FF3C3C" opacity="0.45" letter-spacing="1">전체 시장</text>
+  <text x="388" y="154" text-anchor="end" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="12" font-weight="700" fill="#555555" opacity="0.6" letter-spacing="1">서비스 시장</text>
+  <text x="388" y="196" text-anchor="end" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="12" font-weight="700" fill="#111111" letter-spacing="1">점유 목표</text>
+  <text x="388" y="216" text-anchor="end" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="11" fill="#FF3C3C" letter-spacing="1">히옵 ●</text>
+
+  <line x1="230" y1="75"  x2="346" y2="75"  stroke="#FF3C3C" stroke-width="0.4" opacity="0.3"/>
+  <line x1="230" y1="151" x2="346" y2="151" stroke="#555"    stroke-width="0.4" opacity="0.3"/>
+  <line x1="230" y1="193" x2="346" y2="193" stroke="#111"    stroke-width="0.4" opacity="0.25"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <rect width="800" height="200" fill="#F2F2EE"/>
+
+  <clipPath id="left">
+    <rect x="0" y="0" width="122" height="200"/>
+  </clipPath>
+
+  <!-- TAM -->
+  <circle cx="122" cy="100" r="88" fill="none" stroke="#FF3C3C" stroke-width="2" opacity="0.35" clip-path="url(#left)"/>
+  <!-- SAM -->
+  <circle cx="122" cy="100" r="58" fill="none" stroke="#555555" stroke-width="2.5" opacity="0.4" clip-path="url(#left)"/>
+  <!-- SOM -->
+  <circle cx="122" cy="100" r="30" fill="none" stroke="#111111" stroke-width="4" clip-path="url(#left)"/>
+  <!-- 중심 -->
+  <circle cx="122" cy="100" r="8" fill="#FF3C3C"/>
+
+  <!-- Wordmark -->
+  <text x="148" y="122" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="80" font-weight="900" fill="#111111" letter-spacing="-3">hi</text>
+  <text x="264" y="122" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="80" font-weight="900" fill="#FF3C3C" letter-spacing="-3">-ob</text>
+
+  <text x="150" y="148" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#FF3C3C" letter-spacing="4">히옵</text>
+  <rect x="150" y="158" width="350" height="0.5" fill="#CCCCCC"/>
+  <text x="150" y="174" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" fill="#AAAAAA" letter-spacing="3.5">PERFORMANCE MARKETING</text>
+</svg>
