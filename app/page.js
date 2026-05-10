@@ -127,7 +127,9 @@ export default function HomePage() {
     <main className="bg-[#fcfaf7] min-h-screen text-[#121212]">
       {/* 네비게이션 */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #121212', position: 'sticky', top: 0, backgroundColor: '#fcfaf7', zIndex: 100 }}>
-        <div className="font-display" style={{ fontSize: '2.5rem', lineHeight: 1, fontWeight: 900 }}>HI-OP</div>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img src="/logo/히옵_horizontal_dark.svg" alt="히옵" style={{ height: '2.2rem', width: 'auto', display: 'block' }} />
+        </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <div className="font-syne" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.1em' }}>PERFORMANCE ENGINEERING</div>
           <Link href="/en" style={{ fontWeight: 600, fontSize: '0.9rem', color: 'inherit', textDecoration: 'none', opacity: 0.5 }}>EN</Link>
