@@ -24,7 +24,11 @@ const getEnv = () => {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, inquiry, source } = body;
+    const { name, email, phone, company, inquiry, source, fbc, fbp, eventSourceUrl } = body;
+
+    const clientIp = request.headers.get('CF-Connecting-IP')
+      || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const userAgent = request.headers.get('user-agent');
 
     if (!name || !email || !phone) {
       return NextResponse.json({ message: '필수 항목이 누락되었습니다.' }, { status: 400 });
@@ -59,13 +63,17 @@ export async function POST(request) {
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
           action_source: 'website',
-          event_source_url: 'https://hi-ob.com',
+          event_source_url: eventSourceUrl || 'https://hi-ob.com',
           event_id: eventId,
           user_data: {
             em: [await hashData(email)],
             ph: [await hashData(phone)],
             fn: [await hashData(fn)],
             ln: [await hashData(ln)],
+            ...(fbc && { fbc }),
+            ...(fbp && { fbp }),
+            ...(clientIp && { client_ip_address: clientIp }),
+            ...(userAgent && { client_user_agent: userAgent }),
           },
           custom_data: { company_name: company },
         }],
