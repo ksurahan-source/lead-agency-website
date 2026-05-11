@@ -1,4 +1,5 @@
 import { GoogleTagManager } from '@next/third-parties/google';
+import localFont from 'next/font/local';
 import { Syne } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
@@ -8,6 +9,14 @@ const syne = Syne({
   weight: ['800'],
   variable: '--font-syne',
   display: 'swap',
+});
+
+const pretendard = localFont({
+  src: '../public/fonts/pretendard/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+  display: 'swap',
+  weight: '45 920',
+  preload: false,
 });
 
 export const metadata = {
@@ -31,7 +40,7 @@ export default function RootLayout({ children }) {
   const pixelId = '1715625702927911';
 
   return (
-    <html lang="ko" className={syne.variable}>
+    <html lang="ko" className={`${syne.variable} ${pretendard.variable}`}>
       <head>
         <GoogleTagManager gtmId={gtmId} />
       </head>
@@ -50,15 +59,9 @@ export default function RootLayout({ children }) {
               fbq('init', '${pixelId}');
               fbq('track', 'PageView');
             `}</Script>
-            <noscript>
-              <img
-                height="1"
-                width="1"
-                style={{ display: 'none' }}
-                src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
-                alt=""
-              />
-            </noscript>
+            <noscript dangerouslySetInnerHTML={{ __html:
+              `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1" alt="" />`
+            }} />
           </>
         )}
       </body>

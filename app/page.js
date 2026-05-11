@@ -248,10 +248,10 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
             {[
-              { step: '01', title: '통증 인식', desc: '현재 ROAS가 왜 안 오르는지 무료 진단으로 먼저 확인합니다. 숫자로 문제를 보여줍니다.' },
-              { step: '02', title: '증거 제시', desc: '같은 버티컬, 같은 규모 클라이언트의 수치를 구체적으로 공유합니다.' },
-              { step: '03', title: '리스크 제거', desc: '데이터 인프라 구축 → 성과 확인 후 대행 운영. 단계별로 진입해 부담을 낮춥니다.' },
-              { step: '04', title: '행동 유도', desc: '지금 사라지는 전환 데이터를 복구하면 현재 광고비에서 즉시 매출이 올라갑니다.' },
+              { step: '01', title: '통증 인식', desc: 'ROAS가 개선되지 않는 원인을 무료 진단으로 먼저 파악합니다. 문제를 데이터로 직접 보여드립니다.' },
+              { step: '02', title: '증거 제시', desc: '동일 업종, 유사 규모 클라이언트의 실제 수치를 구체적으로 제시합니다.' },
+              { step: '03', title: '리스크 제거', desc: '데이터 인프라 구축 후 성과를 확인하고 대행 운영으로 전환합니다. 단계를 나눠 초기 부담을 최소화합니다.' },
+              { step: '04', title: '행동 유도', desc: '손실되고 있는 전환 데이터를 복구하면, 동일한 광고비로 즉시 매출 상승 효과를 확인하실 수 있습니다.' },
             ].map((p, i) => (
               <div key={i} style={{ padding: '2rem', border: '2px solid rgba(255,255,255,0.2)' }}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: 'var(--hiop-orange)', marginBottom: '1rem' }}>{p.step}</div>

@@ -64,7 +64,6 @@ export default function LogoKr({ height = '2.4rem' }) {
           <ellipse cx="0" cy="26" rx="50" ry="36" fill="white"/>
           <ellipse cx="0" cy="32" rx="28" ry="22" fill="black"/>
         </mask>
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap');`}</style>
       </defs>
 
       {/* 심볼 */}
@@ -85,7 +84,7 @@ export default function LogoKr({ height = '2.4rem' }) {
 
       {/* 워드마크 */}
       <text x="186" y="116"
-        fontFamily="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"
+        fontFamily="'Pretendard Variable','Apple SD Gothic Neo',sans-serif"
         fontSize="92" fontWeight="900" letterSpacing="-4">
         <tspan fill="#0D0D0D">히</tspan>
         <tspan fill="url(#kr-gOB)">옵</tspan>
