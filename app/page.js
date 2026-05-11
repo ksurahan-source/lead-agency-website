@@ -127,8 +127,9 @@ export default function HomePage() {
     <main className="bg-[#fcfaf7] min-h-screen text-[#121212]">
       {/* 네비게이션 */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #121212', position: 'sticky', top: 0, backgroundColor: '#fcfaf7', zIndex: 100 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img src="/logo/04_logo_kr_horizontal_light.svg" alt="히옵" style={{ height: '2.4rem', width: 'auto', display: 'block' }} />
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
+          <img src="/logo/hiop_mark.svg" alt="" aria-hidden="true" style={{ height: '2rem', width: '2rem', display: 'block' }} />
+          <span style={{ fontWeight: 900, fontSize: '1.3rem', letterSpacing: '-0.03em', color: '#121212' }}>히<span style={{ color: '#FF3C3C' }}>옵</span></span>
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>데이터 엔지니어링 마케팅</div>
