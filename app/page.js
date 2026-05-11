@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Zap, Target, MousePointer2, Video, BarChart3, Package, BookOpen, Download } from 'lucide-react';
 import Footer from '../components/Footer';
 import LeadForm from '../components/LeadForm';
+import LogoKr from '../components/LogoKr';
 
 const serviceCategories = [
   {
@@ -127,9 +128,8 @@ export default function HomePage() {
     <main className="bg-[#fcfaf7] min-h-screen text-[#121212]">
       {/* 네비게이션 */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #121212', position: 'sticky', top: 0, backgroundColor: '#fcfaf7', zIndex: 100 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
-          <img src="/logo/hiop_mark.svg" alt="" aria-hidden="true" style={{ height: '2rem', width: '2rem', display: 'block' }} />
-          <span style={{ fontWeight: 900, fontSize: '1.3rem', letterSpacing: '-0.03em', color: '#121212' }}>히<span style={{ color: '#FF3C3C' }}>옵</span></span>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <LogoKr height="2.4rem" />
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>데이터 엔지니어링 마케팅</div>
