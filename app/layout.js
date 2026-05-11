@@ -2,16 +2,20 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import './globals.css';
 
+const PRETENDARD_HREF =
+  'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css';
+const SYNE_HREF =
+  'https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap';
+
 export const metadata = {
   title: {
     default: '히옵 | 퍼포먼스 마케팅 — 메타·구글 광고 대행',
     template: '%s | 히옵',
   },
-  description: '우리는 광고를 집행하지 않고 설계합니다. 메타 CAPI, GA4, GTM 기반 데이터 엔지니어링으로 ROAS를 극대화하는 퍼포먼스 마케팅 에이전시 히옵.',
+  description:
+    '우리는 광고를 집행하지 않고 설계합니다. 메타 CAPI, GA4, GTM 기반 데이터 엔지니어링으로 ROAS를 극대화하는 퍼포먼스 마케팅 에이전시 히옵.',
   metadataBase: new URL('https://hi-ob.com'),
-  icons: {
-    icon: '/favicon.svg',
-  },
+  icons: { icon: '/favicon.svg' },
   openGraph: {
     siteName: '히옵 | 퍼포먼스 마케팅',
     locale: 'ko_KR',
@@ -26,30 +30,27 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
-        {/* Pretendard: 한국어 최적화 dynamic subset — 가변 전체 폰트 대비 ~80% 경량 */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* LCP 폰트 preload — 첫 렌더 텍스트(h1)가 Pretendard 900이므로 우선 로드 */}
-        <link
-          rel="preload"
-          as="style"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
-        />
+
+        {/* 비차단 폰트 로드: media=print 로 첫 paint 차단 회피 → load 후 media=all 로 적용 */}
+        <link rel="stylesheet" href={PRETENDARD_HREF} media="print" data-font="pretendard" />
+        <link rel="stylesheet" href={SYNE_HREF} media="print" data-font="syne" />
+        <Script id="font-media-swap" strategy="beforeInteractive">{`
+          (function(){function s(){document.querySelectorAll('link[data-font][media="print"]').forEach(function(l){l.media='all'})}if(document.readyState!=='loading'){requestAnimationFrame(s)}else{document.addEventListener('DOMContentLoaded',s)}})();
+        `}</Script>
+        <noscript>
+          <link rel="stylesheet" href={PRETENDARD_HREF} />
+          <link rel="stylesheet" href={SYNE_HREF} />
+        </noscript>
+
+        <GoogleTagManager gtmId={gtmId} />
       </head>
-      <GoogleTagManager gtmId={gtmId} />
       <body>
         {children}
 
-        {/* Meta Pixel 베이스코드 — CAPI와 event_id로 중복 제거 */}
+        {/* Meta Pixel — 폼 제출에서 fbq 호출하므로 afterInteractive 유지 */}
         {pixelId && (
           <>
             <Script id="meta-pixel" strategy="afterInteractive">{`
@@ -63,7 +64,9 @@ export default function RootLayout({ children }) {
             `}</Script>
             <noscript>
               <img
-                height="1" width="1" style={{ display: 'none' }}
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
                 src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
                 alt=""
               />

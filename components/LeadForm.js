@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const t = {
   ko: {
@@ -219,5 +220,3 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
     </div>
   );
 }
-
-import Link from 'next/link';
