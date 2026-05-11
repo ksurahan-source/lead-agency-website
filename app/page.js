@@ -212,6 +212,81 @@ export default function HomePage() {
         </section>
       ))}
 
+      {/* 고객 후기 */}
+      <section style={{ padding: '8rem 2rem', background: '#121212', color: '#fcfaf7', borderBottom: '4px solid #121212' }}>
+        <div className="wrap">
+          <div style={{ marginBottom: '5rem' }}>
+            <div style={{ fontSize: '0.85rem', fontWeight: 900, letterSpacing: '0.12em', color: 'var(--hiop-orange)', marginBottom: '1.5rem' }}>SOCIAL PROOF</div>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontWeight: 900, lineHeight: 1.05 }}>
+              숫자가 증명합니다
+            </h2>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '0', border: '4px solid rgba(255,255,255,0.15)' }}>
+            {[
+              {
+                quote: '데이터 구조를 바꾸니 ROAS가 바뀌었습니다. 픽셀 설정이 구매 완료가 아닌 장바구니 추가로 잡혀있었고, CAPI 연동 3주 만에 구매 전환 데이터가 40% 이상 늘었습니다.',
+                result: 'ROAS 2.0 → 3.4',
+                name: '김민준',
+                role: '마케팅 팀장',
+                co: '라이프스타일 이커머스',
+                spend: '월 광고비 3,500만원',
+              },
+              {
+                quote: '구글 PMax만 돌렸는데 계속 정체됐어요. GA4 전자상거래 추적부터 다시 깔고 검색 캠페인을 분리해줬습니다. 이제 PMax + 검색 투트랙으로 안정적으로 돌아갑니다.',
+                result: '구글 ROAS 2.1 → 4.6',
+                name: '이수연',
+                role: '대표이사',
+                co: '뷰티 D2C 쇼핑몰',
+                spend: '월 광고비 2,800만원',
+              },
+              {
+                quote: '실제 구매의 38%가 추적이 안 되고 있었습니다. 서버사이드 트래킹 구축 후 메타 픽셀 매칭 점수가 5.4→7.9로 올랐고, 같은 예산으로 구매가 300건→470건이 됐습니다.',
+                result: '전환수 +57%',
+                name: '박성호',
+                role: '이커머스 사업부장',
+                co: '패션 브랜드',
+                spend: '월 광고비 6,000만원',
+              },
+              {
+                quote: '이전 대행사는 항상 소재가 문제라고 했어요. 히옵은 첫 미팅부터 어느 채널 어느 세그먼트의 LTV가 높은지 보여줬습니다. 광고비 20% 줄이고 매출은 15% 늘었습니다.',
+                result: 'CAC -20% / 매출 +15%',
+                name: '정유진',
+                role: 'CMO',
+                co: 'SaaS 스타트업',
+                spend: '월 광고비 1,200만원',
+              },
+            ].map((t, i) => (
+              <div key={i} style={{ padding: '3rem 2.5rem', borderRight: i % 2 === 0 ? '4px solid rgba(255,255,255,0.15)' : 'none', borderBottom: i < 2 ? '4px solid rgba(255,255,255,0.15)' : 'none' }}>
+                <div style={{ fontSize: '2.8rem', fontWeight: 900, color: 'var(--hiop-orange)', fontFamily: 'monospace', marginBottom: '1.5rem' }}>{t.result}</div>
+                <p style={{ fontSize: '1.05rem', fontWeight: 600, lineHeight: 1.7, color: 'rgba(255,255,255,0.75)', marginBottom: '2.5rem' }}>"{t.quote}"</p>
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '1.5rem' }}>
+                  <div style={{ fontWeight: 900, fontSize: '1rem' }}>{t.name}</div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginTop: '0.2rem' }}>{t.role} · {t.co}</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--hiop-orange)', marginTop: '0.3rem' }}>{t.spend}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 검증단계 설득 블록 */}
+          <div style={{ marginTop: '6rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
+            {[
+              { step: '01', title: '통증 인식', desc: '현재 ROAS가 왜 안 오르는지 무료 진단으로 먼저 확인합니다. 숫자로 문제를 보여줍니다.' },
+              { step: '02', title: '증거 제시', desc: '같은 버티컬, 같은 규모 클라이언트의 수치를 구체적으로 공유합니다.' },
+              { step: '03', title: '리스크 제거', desc: '데이터 인프라 구축 → 성과 확인 후 대행 운영. 단계별로 진입해 부담을 낮춥니다.' },
+              { step: '04', title: '행동 유도', desc: '지금 사라지는 전환 데이터를 복구하면 현재 광고비에서 즉시 매출이 올라갑니다.' },
+            ].map((p, i) => (
+              <div key={i} style={{ padding: '2rem', border: '2px solid rgba(255,255,255,0.2)' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: 'var(--hiop-orange)', marginBottom: '1rem' }}>{p.step}</div>
+                <div style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.8rem' }}>{p.title}</div>
+                <p style={{ fontSize: '0.95rem', fontWeight: 600, lineHeight: 1.6, color: 'rgba(255,255,255,0.6)' }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 리드 폼 */}
       <section id="contact" style={{ padding: '8rem 2rem', background: '#fff', borderBottom: '4px solid #121212' }}>
         <div className="wrap" style={{ maxWidth: '800px', margin: '0 auto' }}>
