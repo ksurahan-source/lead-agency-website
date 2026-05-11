@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@400;700;900&family=Syne:wght@800&display=swap');
-
-/* Pretendard CDN */
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+/* 폰트는 layout.js의 <link> 태그로 비차단 로드 — @import 제거 */
 
 :root {
   --bg-light: #F4F4F0;

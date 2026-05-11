@@ -25,6 +25,21 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="ko">
+      <head>
+        {/* 폰트 서버 preconnect — DNS/TLS 병렬 처리 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        {/* 비차단 폰트 로드 (<link>는 병렬, CSS @import는 직렬) */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+        />
+      </head>
       <GoogleTagManager gtmId={gtmId} />
       <body>
         {children}

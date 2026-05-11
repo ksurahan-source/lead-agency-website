@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Zap, Target, MousePointer2, Video, BarChart3, Package, BookOpen, Download } from 'lucide-react';
@@ -120,10 +120,6 @@ const serviceCategories = [
 ];
 
 export default function HomePage() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
-  if (!mounted) return null;
-
   return (
     <main className="bg-[#fcfaf7] min-h-screen text-[#121212]">
       {/* 네비게이션 */}
@@ -145,6 +141,9 @@ export default function HomePage() {
               광고를 돌리지 말고<br />
               <span style={{ color: 'var(--hiop-orange)' }}>엔지니어링</span> 하세요.
             </h1>
+            <p style={{ marginTop: '1.5rem', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 700, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
+              퍼포먼스 마케팅 · 메타 CAPI · 데이터 트래킹 · 이커머스 광고 대행
+            </p>
           </motion.div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '4rem' }}>
