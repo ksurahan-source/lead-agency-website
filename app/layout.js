@@ -1,11 +1,14 @@
 import { GoogleTagManager } from '@next/third-parties/google';
+import { Syne } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
-const PRETENDARD_HREF =
-  'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css';
-const SYNE_HREF =
-  'https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap';
+const syne = Syne({
+  subsets: ['latin'],
+  weight: ['800'],
+  variable: '--font-syne',
+  display: 'swap',
+});
 
 export const metadata = {
   title: {
@@ -28,23 +31,8 @@ export default function RootLayout({ children }) {
   const pixelId = '1715625702927911';
 
   return (
-    <html lang="ko">
+    <html lang="ko" className={syne.variable}>
       <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* 비차단 폰트 로드: media=print 로 첫 paint 차단 회피 → load 후 media=all 로 적용 */}
-        <link rel="stylesheet" href={PRETENDARD_HREF} media="print" data-font="pretendard" />
-        <link rel="stylesheet" href={SYNE_HREF} media="print" data-font="syne" />
-        <Script id="font-media-swap" strategy="beforeInteractive">{`
-          (function(){function s(){document.querySelectorAll('link[data-font][media="print"]').forEach(function(l){l.media='all'})}if(document.readyState!=='loading'){requestAnimationFrame(s)}else{document.addEventListener('DOMContentLoaded',s)}})();
-        `}</Script>
-        <noscript>
-          <link rel="stylesheet" href={PRETENDARD_HREF} />
-          <link rel="stylesheet" href={SYNE_HREF} />
-        </noscript>
-
         <GoogleTagManager gtmId={gtmId} />
       </head>
       <body>
