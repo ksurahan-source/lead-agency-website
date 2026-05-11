@@ -57,10 +57,22 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
     }
 
     try {
+      const getCookie = (name) => {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      };
+
+      const fbc = getCookie('_fbc') || (() => {
+        const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+        return fbclid ? `fb.1.${Date.now()}.${fbclid}` : null;
+      })();
+      const fbp = getCookie('_fbp') || null;
+      const eventSourceUrl = window.location.href;
+
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source }),
+        body: JSON.stringify({ ...formData, source, fbc, fbp, eventSourceUrl }),
       });
 
       const data = await response.json();
