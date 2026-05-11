@@ -26,18 +26,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
-        {/* 폰트 서버 preconnect — DNS/TLS 병렬 처리 */}
+        {/* Pretendard: 한국어 최적화 dynamic subset — 가변 전체 폰트 대비 ~80% 경량 */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        {/* 비차단 폰트 로드 (<link>는 병렬, CSS @import는 직렬) */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
         />
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
         />
       </head>
       <GoogleTagManager gtmId={gtmId} />
