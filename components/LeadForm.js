@@ -83,16 +83,6 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
       setStatus('success');
 
       if (typeof window !== 'undefined' && window.fbq) {
-        const phoneDigits = formData.phone.replace(/[^0-9]/g, '');
-        const ln = formData.name.slice(0, 1);
-        const fn = formData.name.slice(1);
-
-        window.fbq('init', '1715625702927911', {
-          em: formData.email.trim().toLowerCase(),
-          ph: '82' + (phoneDigits.startsWith('0') ? phoneDigits.slice(1) : phoneDigits),
-          fn,
-          ln,
-        });
         window.fbq('track', 'Lead', {
           content_name: formData.company || 'general',
         }, { eventID: data.eventId });
