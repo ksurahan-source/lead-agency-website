@@ -537,6 +537,30 @@
             "value": "fbc"
           }
         ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "19",
+        "name": "dlv - external_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "external_id"
+          }
+        ]
       }
     ],
     "trigger": [
@@ -1395,6 +1419,21 @@
                     "type": "TEMPLATE",
                     "key": "value",
                     "value": "{{dlv - fbc}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "external_id"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{dlv - external_id}}"
                   }
                 ]
               }

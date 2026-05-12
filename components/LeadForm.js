@@ -52,13 +52,24 @@ const getCookie = (name) => {
     ?.slice(name.length + 1);
 };
 
+const hashData = async (value) => {
+  if (!value || typeof crypto === 'undefined' || !crypto.subtle) return undefined;
+  const encoded = new TextEncoder().encode(value.toString().trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(byte => byte.toString(16).padStart(2, '0'))
+    .join('');
+};
+
 const getFbc = () => {
   const cookie = getCookie('_fbc');
   if (cookie) return cookie;
   if (typeof window === 'undefined') return undefined;
   const fbclid = new URLSearchParams(window.location.search).get('fbclid');
   if (!fbclid) return undefined;
-  return `fb.1.${Date.now()}.${fbclid}`;
+  const fbc = `fb.1.${Date.now()}.${fbclid}`;
+  document.cookie = `_fbc=${encodeURIComponent(fbc)}; Max-Age=7776000; Path=/; SameSite=Lax; Secure`;
+  return fbc;
 };
 
 export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
@@ -85,15 +96,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
     }
 
     try {
-      const getCookie = (name) => {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : null;
-      };
-
-      const fbc = getCookie('_fbc') || (() => {
-        const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-        return fbclid ? `fb.1.${Date.now()}.${fbclid}` : null;
-      })();
+      const fbc = getFbc();
       const fbp = getCookie('_fbp') || null;
       const eventSourceUrl = window.location.href;
 
@@ -103,9 +106,9 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
         body: JSON.stringify({
           ...formData,
           source,
-          pageUrl: window.location.href,
-          fbc: getFbc(),
-          fbp: getCookie('_fbp'),
+          pageUrl: eventSourceUrl,
+          fbc,
+          fbp,
         }),
       });
 
@@ -125,6 +128,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
       if (typeof window !== 'undefined' && window.dataLayer) {
         const phoneNumber = normalizePhoneForKorea(formData.phone);
         const { firstName, lastName } = splitKoreanName(formData.name);
+        const externalId = await hashData(formData.email);
 
         window.dataLayer.push({
           event: 'generate_lead',
@@ -138,16 +142,15 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           content_name: formData.company || 'general',
           lead_company: formData.company || '',
           lead_source: source,
-          fbp: getCookie('_fbp'),
-          fbc: getFbc(),
-          external_id: formData.email.trim().toLowerCase(),
+          fbp,
+          fbc,
+          external_id: externalId,
           user_data: {
             email:        formData.email.trim().toLowerCase(),
             phone_number: phoneNumber,
             first_name:   firstName,
             last_name:    lastName,
           },
-          lead_company: formData.company,
         });
       }
 
