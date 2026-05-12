@@ -129,6 +129,12 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
         const phoneNumber = normalizePhoneForKorea(formData.phone);
         const { firstName, lastName } = splitKoreanName(formData.name);
         const externalId = await hashData(formData.email);
+        const emailAddress = formData.email.trim().toLowerCase();
+        const hashedPhoneNumber = await hashData(phoneNumber);
+        const hashedFirstName = await hashData(firstName);
+        const hashedLastName = await hashData(lastName);
+        const contentName = formData.company || 'general';
+        const leadCompany = formData.company || '';
 
         window.dataLayer.push({
           event: 'generate_lead',
@@ -139,17 +145,37 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           page_location: window.location.href,
           page_referrer: document.referrer,
           page_title: document.title,
-          content_name: formData.company || 'general',
-          lead_company: formData.company || '',
+          content_name: contentName,
+          lead_company: leadCompany,
           lead_source: source,
+          value: 300000,
+          currency: 'KRW',
           fbp,
           fbc,
           external_id: externalId,
+          'x-fb-ud-em': externalId,
+          'x-fb-ud-ph': hashedPhoneNumber,
+          'x-fb-ud-fn': hashedFirstName,
+          'x-fb-ud-ln': hashedLastName,
+          'x-fb-ud-external_id': externalId,
+          'x-fb-ck-fbp': fbp,
+          'x-fb-ck-fbc': fbc,
+          'x-fb-cd-content_name': contentName,
+          custom_properties: JSON.stringify({
+            lead_company: leadCompany,
+            lead_source: source,
+            page_title: document.title,
+          }),
           user_data: {
-            email:        formData.email.trim().toLowerCase(),
+            email: emailAddress,
+            email_address: emailAddress,
             phone_number: phoneNumber,
-            first_name:   firstName,
-            last_name:    lastName,
+            first_name: firstName,
+            last_name: lastName,
+            address: {
+              first_name: firstName,
+              last_name: lastName,
+            },
           },
         });
       }
