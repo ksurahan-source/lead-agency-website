@@ -1,19 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap } from 'lucide-react';
 
 export default function MobilePortal() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
     <main className="bg-light min-h-screen pb-20">
       {/* Mobile Header */}
