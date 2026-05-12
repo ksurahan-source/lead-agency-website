@@ -4,8 +4,17 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const WHATSAPP = 'https://wa.me/60167471566';
-const EMAIL = 'mailto:hiob4515@gmail.com';
+const EMAIL_USER = 'hiob4515';
+const EMAIL_DOMAIN = 'gmail.com';
 const PHONE = '+60 16 747 1566';
+
+const EmailAddress = () => (
+  <>
+    <span>{EMAIL_USER}</span>
+    <span aria-hidden="true">@</span>
+    <span>{EMAIL_DOMAIN}</span>
+  </>
+);
 
 const services = [
   { label: '01 / ALL-IN-ONE', title: 'Starter\nPackage', desc: 'Website + Reels creative + 6-day ad campaign. Everything you need to start generating leads — in one week.' },
@@ -23,6 +32,16 @@ const stats = [
 ];
 
 export default function EnPage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return null;
+
+  const openEmail = (event) => {
+    event.preventDefault();
+    window.location.href = ['mailto:', EMAIL_USER, '@', EMAIL_DOMAIN].join('');
+  };
+
+
   return (
     <main style={{ background: '#f5f0e8', minHeight: '100vh', fontFamily: 'var(--font-syne, sans-serif)' }}>
 
@@ -67,7 +86,7 @@ export default function EnPage() {
             style={{ background: '#25D366', color: '#fff', fontWeight: 900, fontSize: '1.1rem', padding: '1.2rem 2.5rem', textDecoration: 'none', border: '3px solid #111', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             💬 WhatsApp: {PHONE}
           </a>
-          <a href={EMAIL}
+          <a href="#email" onClick={openEmail}
             style={{ background: '#fff', color: '#111', fontWeight: 900, fontSize: '1.1rem', padding: '1.2rem 2.5rem', textDecoration: 'none', border: '3px solid #111', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             ✉️ Email Us
           </a>
@@ -165,9 +184,9 @@ export default function EnPage() {
               style={{ background: '#25D366', color: '#fff', fontWeight: 900, fontSize: '1.2rem', padding: '1.4rem 3rem', textDecoration: 'none', border: '3px solid #111', width: '100%', maxWidth: '500px', textAlign: 'center', display: 'block' }}>
               💬 WhatsApp: {PHONE}
             </a>
-            <a href={EMAIL}
+            <a href="#email" onClick={openEmail}
               style={{ background: '#fff', color: '#111', fontWeight: 900, fontSize: '1.1rem', padding: '1.2rem 3rem', textDecoration: 'none', border: '3px solid #111', width: '100%', maxWidth: '500px', textAlign: 'center', display: 'block' }}>
-              <span suppressHydrationWarning>✉️ hiob4515@gmail.com</span>
+              <span>✉️ <EmailAddress /></span>
             </a>
           </div>
         </div>
@@ -182,7 +201,7 @@ export default function EnPage() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'right' }}>
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', fontWeight: 700, textDecoration: 'none' }}>WhatsApp: {PHONE}</a>
-            <a href={EMAIL} style={{ color: '#f5f0e8', fontWeight: 700, textDecoration: 'none' }} suppressHydrationWarning>hiob4515@gmail.com</a>
+            <a href="#email" onClick={openEmail} style={{ color: '#f5f0e8', fontWeight: 700, textDecoration: 'none' }}><EmailAddress /></a>
           </div>
         </div>
         <div style={{ marginTop: '3rem', borderTop: '1px solid #333', paddingTop: '2rem', fontSize: '0.85rem', opacity: 0.4, fontWeight: 700 }}>

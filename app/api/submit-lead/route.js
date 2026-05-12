@@ -95,6 +95,7 @@ export async function POST(request) {
         client_user_agent: request.headers.get('user-agent') || undefined,
         fbp: getCookie(cookieHeader, '_fbp') || clientFbp,
         fbc: getCookie(cookieHeader, '_fbc') || clientFbc,
+        external_id: email ? await hashData(email.trim().toLowerCase()) : undefined,
       };
 
       const testEventCode = env.META_TEST_EVENT_CODE;

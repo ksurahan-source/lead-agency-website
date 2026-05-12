@@ -52,6 +52,15 @@ const getCookie = (name) => {
     ?.slice(name.length + 1);
 };
 
+const getFbc = () => {
+  const cookie = getCookie('_fbc');
+  if (cookie) return cookie;
+  if (typeof window === 'undefined') return undefined;
+  const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+  if (!fbclid) return undefined;
+  return `fb.1.${Date.now()}.${fbclid}`;
+};
+
 export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
   const s = t[lang] || t.ko;
   const [formData, setFormData] = useState({
@@ -95,8 +104,8 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           ...formData,
           source,
           pageUrl: window.location.href,
-          fbc,
-          fbp,
+          fbc: getFbc(),
+          fbp: getCookie('_fbp'),
         }),
       });
 
@@ -130,7 +139,8 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           lead_company: formData.company || '',
           lead_source: source,
           fbp: getCookie('_fbp'),
-          fbc: getCookie('_fbc'),
+          fbc: getFbc(),
+          external_id: formData.email.trim().toLowerCase(),
           user_data: {
             email:        formData.email.trim().toLowerCase(),
             phone_number: phoneNumber,
