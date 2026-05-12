@@ -58,7 +58,10 @@ export async function POST(request) {
       const fn = nameParts[0] || '';
       const ln = nameParts.slice(1).join(' ');
 
+      const testEventCode = env.META_TEST_EVENT_CODE;
+
       const capiPayload = {
+        ...(testEventCode && { test_event_code: testEventCode }),
         data: [{
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
