@@ -33,6 +33,25 @@ const t = {
   },
 };
 
+const normalizePhoneForKorea = (phone) => {
+  const digits = phone.replace(/[^0-9]/g, '');
+  return '82' + (digits.startsWith('0') ? digits.slice(1) : digits);
+};
+
+const splitKoreanName = (name) => ({
+  lastName: name.trim().slice(0, 1),
+  firstName: name.trim().slice(1),
+});
+
+const getCookie = (name) => {
+  if (typeof document === 'undefined') return undefined;
+  return document.cookie
+    .split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith(`${name}=`))
+    ?.slice(name.length + 1);
+};
+
 export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
   const s = t[lang] || t.ko;
   const [formData, setFormData] = useState({
@@ -72,7 +91,13 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source, fbc, fbp, eventSourceUrl }),
+        body: JSON.stringify({
+          ...formData,
+          source,
+          pageUrl: window.location.href,
+          fbc,
+          fbp,
+        }),
       });
 
       const data = await response.json();
@@ -89,17 +114,26 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
       }
 
       if (typeof window !== 'undefined' && window.dataLayer) {
-        const digits = formData.phone.replace(/[^0-9]/g, '');
-        const phoneE164 = '+82' + (digits.startsWith('0') ? digits.slice(1) : digits);
-        const lastName  = formData.name.slice(0, 1);
-        const firstName = formData.name.slice(1);
+        const phoneNumber = normalizePhoneForKorea(formData.phone);
+        const { firstName, lastName } = splitKoreanName(formData.name);
 
         window.dataLayer.push({
           event: 'generate_lead',
           event_id: data.eventId,
+          event_name: 'Lead',
+          action_source: 'website',
+          event_source_url: window.location.href,
+          page_location: window.location.href,
+          page_referrer: document.referrer,
+          page_title: document.title,
+          content_name: formData.company || 'general',
+          lead_company: formData.company || '',
+          lead_source: source,
+          fbp: getCookie('_fbp'),
+          fbc: getCookie('_fbc'),
           user_data: {
             email:        formData.email.trim().toLowerCase(),
-            phone_number: phoneE164,
+            phone_number: phoneNumber,
             first_name:   firstName,
             last_name:    lastName,
           },

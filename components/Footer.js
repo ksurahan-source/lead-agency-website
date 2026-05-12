@@ -39,7 +39,7 @@ export default function Footer({ lang = 'ko' }) {
 
         <div style={{ borderTop: '2px solid #eee', paddingTop: '3rem', fontSize: '0.9rem', color: '#666', lineHeight: 1.8 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', fontWeight: 600 }}>
-            <span>{isKo ? '이메일' : 'Email'}: hiob4515@gmail.com</span>
+            <span suppressHydrationWarning>{isKo ? '이메일' : 'Email'}: hiob4515@gmail.com</span>
             <span>{isKo ? '호스팅' : 'Hosting'}: Cloudflare</span>
           </div>
           <p style={{ marginTop: '2rem', fontWeight: 800, color: '#111' }}>

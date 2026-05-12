@@ -9,7 +9,9 @@ database_name = "leads-db"
 database_id = "b4f91404-552b-4505-a9e9-52701d44bd78"
 
 # ── 아래 변수들은 Cloudflare Pages 대시보드 > Settings > Environment variables 에서 설정
-# META_PIXEL_ID        = "your-pixel-id"          (서버 런타임 변수)
-# META_ACCESS_TOKEN    = "your-capi-token"        (민감정보 → Secret으로 설정)
-# TURNSTILE_SECRET_KEY = "your-turnstile-secret"  (민감정보 → Secret으로 설정)
-# META_TEST_EVENT_CODE = "TEST85569"              (테스트 시에만 설정, 프로덕션은 비워둘 것)
+# META_PIXEL_ID       = "your-pixel-id"          (서버 런타임 변수)
+# META_ACCESS_TOKEN   = "your-capi-token"        (민감정보 → Secret으로 설정)
+# META_CAPI_MODE      = "gtm_server"             (기본값, direct로 설정할 때만 앱 서버가 Meta API 직접 호출)
+# META_GRAPH_API_VERSION = "v25.0"               (선택, 기본값 v25.0)
+# NEXT_PUBLIC_GTM_SERVER_URL = "https://sgtm.example.com" (선택, GTM 서버 컨테이너 URL)
+# TURNSTILE_SECRET_KEY = "your-turnstile-secret" (민감정보 → Secret으로 설정)

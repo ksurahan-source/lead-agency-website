@@ -167,7 +167,7 @@ export default function EnPage() {
             </a>
             <a href={EMAIL}
               style={{ background: '#fff', color: '#111', fontWeight: 900, fontSize: '1.1rem', padding: '1.2rem 3rem', textDecoration: 'none', border: '3px solid #111', width: '100%', maxWidth: '500px', textAlign: 'center', display: 'block' }}>
-              ✉️ hiob4515@gmail.com
+              <span suppressHydrationWarning>✉️ hiob4515@gmail.com</span>
             </a>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function EnPage() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'right' }}>
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', fontWeight: 700, textDecoration: 'none' }}>WhatsApp: {PHONE}</a>
-            <a href={EMAIL} style={{ color: '#f5f0e8', fontWeight: 700, textDecoration: 'none' }}>hiob4515@gmail.com</a>
+            <a href={EMAIL} style={{ color: '#f5f0e8', fontWeight: 700, textDecoration: 'none' }} suppressHydrationWarning>hiob4515@gmail.com</a>
           </div>
         </div>
         <div style={{ marginTop: '3rem', borderTop: '1px solid #333', paddingTop: '2rem', fontSize: '0.85rem', opacity: 0.4, fontWeight: 700 }}>

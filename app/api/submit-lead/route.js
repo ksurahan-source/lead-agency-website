@@ -21,14 +21,39 @@ const getEnv = () => {
   }
 };
 
+const normalizePhoneForKorea = (phone) => {
+  const digits = phone.replace(/[^0-9]/g, '');
+  return '82' + (digits.startsWith('0') ? digits.slice(1) : digits);
+};
+
+const splitKoreanName = (name) => ({
+  lastName: name.trim().slice(0, 1),
+  firstName: name.trim().slice(1),
+});
+
+const getCookie = (cookieHeader, name) => {
+  const value = cookieHeader
+    ?.split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith(`${name}=`))
+    ?.slice(name.length + 1);
+  return value ? decodeURIComponent(value) : undefined;
+};
+
+const getEventSourceUrl = (request, pageUrl) => {
+  try {
+    const url = new URL(pageUrl || request.headers.get('referer') || request.url);
+    if (url.protocol === 'http:' || url.protocol === 'https:') {
+      return url.href;
+    }
+  } catch {}
+  return 'https://hi-ob.com';
+};
+
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, inquiry, source, fbc, fbp, eventSourceUrl } = body;
-
-    const clientIp = request.headers.get('CF-Connecting-IP')
-      || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-    const userAgent = request.headers.get('user-agent');
+    const { name, email, phone, company, inquiry, source, pageUrl, fbc: clientFbc, fbp: clientFbp } = body;
 
     if (!name || !email || !phone) {
       return NextResponse.json({ message: '필수 항목이 누락되었습니다.' }, { status: 400 });
@@ -50,13 +75,27 @@ export async function POST(request) {
     console.log('[NEW LEAD]', { name, email, company });
 
     // ── 2. Meta CAPI (함수 내부에서 env 읽기)
-    const PIXEL_ID = '1715625702927911';
-    const ACCESS_TOKEN = 'EAASW8xJXY4gBRZAchAScwjhAZBPyzZB9aQRQuPsoPyM5iZB8aSEtz9srdjUNJrZAVPC98qhoZC72bTGgElIx9tc8B8Xg2swqaSUBssaYykj5iT0WHSjFgu0Y3wUfdVusYXWB0OtbiGqUlbDEZAntQ5V3WMHHhADF7fFkZA62oCTwQISt14zIF1S9fqu2wUoVNAZDZD';
+    const PIXEL_ID = env.META_PIXEL_ID || '1715625702927911';
+    const ACCESS_TOKEN = env.META_ACCESS_TOKEN;
+    const CAPI_MODE = env.META_CAPI_MODE || 'gtm_server';
+    const GRAPH_API_VERSION = env.META_GRAPH_API_VERSION || 'v25.0';
+    let capiStatus = CAPI_MODE === 'direct' ? 'not_configured' : 'delegated_to_gtm_server';
 
-    if (PIXEL_ID && ACCESS_TOKEN) {
-      const nameParts = name.split(' ');
-      const fn = nameParts[0] || '';
-      const ln = nameParts.slice(1).join(' ');
+    if (CAPI_MODE === 'direct' && PIXEL_ID && ACCESS_TOKEN) {
+      const { firstName, lastName } = splitKoreanName(name);
+      const cookieHeader = request.headers.get('cookie');
+      const userData = {
+        em: [await hashData(email)],
+        ph: [await hashData(normalizePhoneForKorea(phone))],
+        fn: [await hashData(firstName)],
+        ln: [await hashData(lastName)],
+        client_ip_address:
+          request.headers.get('cf-connecting-ip') ||
+          request.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
+        client_user_agent: request.headers.get('user-agent') || undefined,
+        fbp: getCookie(cookieHeader, '_fbp') || clientFbp,
+        fbc: getCookie(cookieHeader, '_fbc') || clientFbc,
+      };
 
       const testEventCode = env.META_TEST_EVENT_CODE;
 
@@ -66,34 +105,36 @@ export async function POST(request) {
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
           action_source: 'website',
-          event_source_url: eventSourceUrl || 'https://hi-ob.com',
+          event_source_url: getEventSourceUrl(request, pageUrl),
           event_id: eventId,
-          user_data: {
-            em: [await hashData(email)],
-            ph: [await hashData(phone)],
-            fn: [await hashData(fn)],
-            ln: [await hashData(ln)],
-            ...(fbc && { fbc }),
-            ...(fbp && { fbp }),
-            ...(clientIp && { client_ip_address: clientIp }),
-            ...(userAgent && { client_user_agent: userAgent }),
-          },
+          user_data: Object.fromEntries(
+            Object.entries(userData).filter(([, value]) => value !== undefined)
+          ),
           custom_data: { company_name: company },
         }],
       };
 
       try {
-        await fetch(`https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`, {
+        const capiResponse = await fetch(`https://graph.facebook.com/${GRAPH_API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(capiPayload),
         });
+        const capiBody = await capiResponse.json().catch(() => ({}));
+        capiStatus = capiResponse.ok ? 'sent' : 'failed';
+        if (!capiResponse.ok) {
+          console.error('[CAPI Error]', {
+            status: capiResponse.status,
+            error: capiBody.error,
+          });
+        }
       } catch (err) {
+        capiStatus = 'failed';
         console.error('[CAPI Error]', err);
       }
     }
 
-    return NextResponse.json({ success: true, eventId });
+    return NextResponse.json({ success: true, eventId, capiStatus });
 
   } catch (error) {
     console.error('[API Error]', error);
