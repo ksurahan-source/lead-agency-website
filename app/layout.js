@@ -1,6 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Syne } from 'next/font/google';
 import Script from 'next/script';
+import TrackingBridge from '@/components/TrackingBridge';
 import './globals.css';
 
 const syne = Syne({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         <GoogleTagManager gtmId={gtmId} />
       </head>
       <body>
+        <TrackingBridge />
         {children}
 
         {/* Meta Pixel — 폼 제출에서 fbq 호출하므로 afterInteractive 유지 */}

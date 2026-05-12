@@ -62,6 +62,31 @@
           }
         ],
         "fingerprint": "1778608183078"
+      },
+      {
+        "accountId": "6351881812",
+        "containerId": "252195781",
+        "triggerId": "7",
+        "name": "Meta CAPI - Contact",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "Contact"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1778612707786"
       }
     ],
     "builtInVariable": [
@@ -186,7 +211,7 @@
         "fingerprint": "1778606541661"
       }
     ],
-    "name": "HI-OB Meta CAPI Lead v2",
+    "name": "HI-OB Meta CAPI Lead and Contact v2",
     "tag": [
       {
         "accountId": "6351881812",
@@ -223,11 +248,54 @@
           {
             "type": "BOOLEAN",
             "key": "enableEventEnhancement",
-            "value": "false"
+            "value": "true"
           }
         ],
         "firingTriggerId": [
           "6"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "6351881812",
+        "containerId": "252195781",
+        "tagId": "2",
+        "name": "Meta CAPI - Contact",
+        "type": "cvt_NCN6S",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "pixelId",
+            "value": "1715625702927911"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "apiAccessToken",
+            "value": "PASTE_META_ACCESS_TOKEN_HERE"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "testEventCode",
+            "value": ""
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "actionSource",
+            "value": "website"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "extendCookies",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableEventEnhancement",
+            "value": "true"
+          }
+        ],
+        "firingTriggerId": [
+          "7"
         ],
         "tagFiringOption": "ONCE_PER_EVENT"
       }
