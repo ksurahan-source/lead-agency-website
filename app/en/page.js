@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -24,10 +23,6 @@ const stats = [
 ];
 
 export default function EnPage() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
-  if (!mounted) return null;
-
   return (
     <main style={{ background: '#f5f0e8', minHeight: '100vh', fontFamily: 'var(--font-syne, sans-serif)' }}>
 
