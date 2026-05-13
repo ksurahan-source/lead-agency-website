@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import {
+  FBP_COOKIE_NAME,
+  getCookieFromString,
+  resolveFbc,
+} from '@/lib/metaAttribution';
 
 export const runtime = 'edge';
 
@@ -31,15 +36,6 @@ const splitKoreanName = (name) => ({
   firstName: name.trim().slice(1),
 });
 
-const getCookie = (cookieHeader, name) => {
-  const value = cookieHeader
-    ?.split(';')
-    .map(cookie => cookie.trim())
-    .find(cookie => cookie.startsWith(`${name}=`))
-    ?.slice(name.length + 1);
-  return value ? decodeURIComponent(value) : undefined;
-};
-
 const getEventSourceUrl = (request, pageUrl) => {
   try {
     const url = new URL(pageUrl || request.headers.get('referer') || request.url);
@@ -53,7 +49,18 @@ const getEventSourceUrl = (request, pageUrl) => {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, inquiry, source, pageUrl, fbc: clientFbc, fbp: clientFbp } = body;
+    const {
+      name,
+      email,
+      phone,
+      company,
+      inquiry,
+      source,
+      pageUrl,
+      fbc: clientFbc,
+      fbp: clientFbp,
+      fbclid,
+    } = body;
 
     if (!name || !email || !phone) {
       return NextResponse.json({ message: '필수 항목이 누락되었습니다.' }, { status: 400 });
@@ -65,12 +72,15 @@ export async function POST(request) {
 
     // ── 1. 리드 저장 (D1)
     const DB = env.DB;
-    if (DB) {
-      await DB.prepare(`
-        INSERT INTO leads (id, name, email, phone, company, inquiry, status, source, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, 'new', ?, datetime('now'))
-      `).bind(eventId, name, email, phone, company || '', inquiry || '', source || 'hi-op').run();
+    if (!DB) {
+      console.error('[Lead DB Error]', 'DB binding is not configured');
+      return NextResponse.json({ message: '리드 저장소가 설정되지 않았습니다.' }, { status: 503 });
     }
+
+    await DB.prepare(`
+      INSERT INTO leads (id, name, email, phone, company, inquiry, status, source, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, 'new', ?, datetime('now'))
+    `).bind(eventId, name, email, phone, company || '', inquiry || '', source || 'hi-op').run();
 
     console.log('[NEW LEAD]', { name, email, company });
 
@@ -84,6 +94,14 @@ export async function POST(request) {
     if (CAPI_MODE === 'direct' && PIXEL_ID && ACCESS_TOKEN) {
       const { firstName, lastName } = splitKoreanName(name);
       const cookieHeader = request.headers.get('cookie');
+      const referer = request.headers.get('referer');
+      const fbc = resolveFbc({
+        cookieHeader,
+        bodyFbc: clientFbc,
+        bodyFbclid: fbclid,
+        pageUrl,
+        referer,
+      });
       const userData = {
         em: [await hashData(email)],
         ph: [await hashData(normalizePhoneForKorea(phone))],
@@ -93,8 +111,8 @@ export async function POST(request) {
           request.headers.get('cf-connecting-ip') ||
           request.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
         client_user_agent: request.headers.get('user-agent') || undefined,
-        fbp: getCookie(cookieHeader, '_fbp') || clientFbp,
-        fbc: getCookie(cookieHeader, '_fbc') || clientFbc,
+        fbp: getCookieFromString(cookieHeader, FBP_COOKIE_NAME) || clientFbp,
+        fbc,
         external_id: email ? await hashData(email.trim().toLowerCase()) : undefined,
       };
 

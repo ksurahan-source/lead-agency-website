@@ -9,6 +9,7 @@ database_name = "leads-db"
 database_id = "b4f91404-552b-4505-a9e9-52701d44bd78"
 
 # ── 아래 변수들은 Cloudflare Pages 대시보드 > Settings > Environment variables 에서 설정
+# ADMIN_PASSWORD     = "change-this-admin-password" (관리자 페이지 접속 비밀번호)
 # META_PIXEL_ID       = "your-pixel-id"          (서버 런타임 변수)
 # META_ACCESS_TOKEN   = "your-capi-token"        (민감정보 → Secret으로 설정)
 # META_CAPI_MODE      = "gtm_server"             (기본값, direct로 설정할 때만 앱 서버가 Meta API 직접 호출)

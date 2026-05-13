@@ -3,6 +3,19 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+const fetchLeads = async (pw) => {
+  const res = await fetch(`/api/leads?pw=${encodeURIComponent(pw)}`, {
+    cache: 'no-store',
+  });
+  const data = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    throw new Error(data.message || '리드 목록을 불러오지 못했습니다.');
+  }
+
+  return Array.isArray(data.leads) ? data.leads : [];
+};
+
 export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,17 +29,11 @@ export default function AdminPage() {
     setError('');
 
     try {
-      const res = await fetch(`/api/admin/leads?pw=${password}`);
-      if (res.ok) {
-        const data = await res.json();
-        setLeads(data);
-        setIsLoggedIn(true);
-        localStorage.setItem('admin_pw', password);
-      } else {
-        setError('비밀번호가 틀렸습니다.');
-      }
+      setLeads(await fetchLeads(password));
+      setIsLoggedIn(true);
+      localStorage.setItem('admin_pw', password);
     } catch (err) {
-      setError('서버 연결 오류');
+      setError(err.message || '서버 연결 오류');
     } finally {
       setLoading(false);
     }
@@ -38,11 +45,11 @@ export default function AdminPage() {
       setPassword(savedPw);
       // 이전에 저장된 비번이 있으면 자동 시도
       const autoLogin = async () => {
-        const res = await fetch(`/api/admin/leads?pw=${savedPw}`);
-        if (res.ok) {
-          const data = await res.json();
-          setLeads(data);
+        try {
+          setLeads(await fetchLeads(savedPw));
           setIsLoggedIn(true);
+        } catch {
+          localStorage.removeItem('admin_pw');
         }
       };
       autoLogin();
@@ -92,6 +99,23 @@ export default function AdminPage() {
             <p className="font-bold text-xl mt-2">HI-OP Digital Agency Performance Dashboard</p>
           </div>
           <button 
+            onClick={async () => {
+              setLoading(true);
+              setError('');
+              try {
+                setLeads(await fetchLeads(password));
+              } catch (err) {
+                setError(err.message || '새로고침 실패');
+              } finally {
+                setLoading(false);
+              }
+            }}
+            disabled={loading}
+            className="bg-yellow-400 border-[3px] border-black px-6 py-2 font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all disabled:opacity-50"
+          >
+            {loading ? 'Loading...' : 'Refresh'}
+          </button>
+          <button
             onClick={() => {
               localStorage.removeItem('admin_pw');
               window.location.reload();
@@ -101,6 +125,12 @@ export default function AdminPage() {
             Logout
           </button>
         </header>
+
+        {error && (
+          <div className="mb-8 bg-red-100 border-[4px] border-red-700 p-4 font-black text-red-800">
+            {error}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <StatCard title="Total Leads" value={leads.length} color="bg-blue-400" />

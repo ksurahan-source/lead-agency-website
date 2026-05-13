@@ -38,7 +38,7 @@
   <mask id="mSs"><ellipse cx="0" cy="-12" rx="78" ry="32" fill="white"/><ellipse cx="0" cy="-6"  rx="50" ry="22" fill="black"/></mask>
   <mask id="mMt"><ellipse cx="0" cy="14"  rx="50" ry="36" fill="white"/><ellipse cx="0" cy="20"  rx="28" ry="22" fill="black"/></mask>
   <mask id="mMs"><ellipse cx="0" cy="26"  rx="50" ry="36" fill="white"/><ellipse cx="0" cy="32"  rx="28" ry="22" fill="black"/></mask></defs>
-<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap');</style>
+
 
   <!-- 심볼: 상단 중앙, scale(0.667) -->
   <g transform="translate(150,80) scale(0.667)">

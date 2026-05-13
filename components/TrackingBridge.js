@@ -1,39 +1,25 @@
 'use client';
 
 import { useEffect } from 'react';
+import { captureMetaAttribution } from '@/lib/browserMetaAttribution';
 
-const getCookie = (name) => {
-  if (typeof document === 'undefined') return undefined;
-  return document.cookie
-    .split(';')
-    .map(cookie => cookie.trim())
-    .find(cookie => cookie.startsWith(`${name}=`))
-    ?.slice(name.length + 1);
+const getPageContext = () => {
+  const { fbp, fbc, fbclid } = captureMetaAttribution();
+
+  return {
+    action_source: 'website',
+    event_source_url: window.location.href,
+    page_location: window.location.href,
+    page_referrer: document.referrer,
+    page_title: document.title,
+    page_path: window.location.pathname,
+    fbp,
+    fbc,
+    fbclid,
+    'x-fb-ck-fbp': fbp,
+    'x-fb-ck-fbc': fbc,
+  };
 };
-
-const ensureFbc = () => {
-  const existing = getCookie('_fbc');
-  if (existing) return existing;
-  if (typeof window === 'undefined') return undefined;
-
-  const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-  if (!fbclid) return undefined;
-
-  const fbc = `fb.1.${Date.now()}.${fbclid}`;
-  document.cookie = `_fbc=${encodeURIComponent(fbc)}; Max-Age=7776000; Path=/; SameSite=Lax; Secure`;
-  return fbc;
-};
-
-const getPageContext = () => ({
-  action_source: 'website',
-  event_source_url: window.location.href,
-  page_location: window.location.href,
-  page_referrer: document.referrer,
-  page_title: document.title,
-  page_path: window.location.pathname,
-  fbp: getCookie('_fbp'),
-  fbc: ensureFbc(),
-});
 
 const pushEvent = (event, extra = {}) => {
   window.dataLayer = window.dataLayer || [];
@@ -44,6 +30,31 @@ const pushEvent = (event, extra = {}) => {
     ...getPageContext(),
     ...extra,
   });
+};
+
+const scheduleIdle = (callback) => {
+  if ('requestIdleCallback' in window) {
+    return {
+      type: 'idle',
+      id: window.requestIdleCallback(callback, { timeout: 2500 }),
+    };
+  }
+
+  return {
+    type: 'timeout',
+    id: window.setTimeout(callback, 1200),
+  };
+};
+
+const cancelIdle = (handle) => {
+  if (!handle) return;
+
+  if (handle.type === 'idle') {
+    window.cancelIdleCallback(handle.id);
+    return;
+  }
+
+  window.clearTimeout(handle.id);
 };
 
 const trackViewContent = (eventId, extra = {}) => {
@@ -59,11 +70,27 @@ export default function TrackingBridge() {
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
+    const pageViewEventId = crypto.randomUUID();
+
     pushEvent('hiob_page_view', {
+      event_id: pageViewEventId,
       event_name: 'PageView',
       value: 1,
       content_name: document.title,
       custom_properties: JSON.stringify({ signal_type: 'page_view' }),
+    });
+
+    const serverPageViewHandle = scheduleIdle(() => {
+      fetch('/api/track-view', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          eventSourceUrl: window.location.href,
+          ...captureMetaAttribution(),
+          eventId: pageViewEventId,
+        }),
+      }).catch(() => {});
     });
 
     const scrollSignals = [
@@ -185,6 +212,7 @@ export default function TrackingBridge() {
     handleScrollDepth();
 
     return () => {
+      cancelIdle(serverPageViewHandle);
       timers.forEach(timer => window.clearTimeout(timer));
       document.removeEventListener('click', handleKakaoClick);
       window.removeEventListener('scroll', handleScrollDepth);

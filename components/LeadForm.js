@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { captureMetaAttribution } from '@/lib/browserMetaAttribution';
 
 const t = {
   ko: {
@@ -43,15 +43,6 @@ const splitKoreanName = (name) => ({
   firstName: name.trim().slice(1),
 });
 
-const getCookie = (name) => {
-  if (typeof document === 'undefined') return undefined;
-  return document.cookie
-    .split(';')
-    .map(cookie => cookie.trim())
-    .find(cookie => cookie.startsWith(`${name}=`))
-    ?.slice(name.length + 1);
-};
-
 const hashData = async (value) => {
   if (!value || typeof crypto === 'undefined' || !crypto.subtle) return undefined;
   const encoded = new TextEncoder().encode(value.toString().trim().toLowerCase());
@@ -59,17 +50,6 @@ const hashData = async (value) => {
   return Array.from(new Uint8Array(hashBuffer))
     .map(byte => byte.toString(16).padStart(2, '0'))
     .join('');
-};
-
-const getFbc = () => {
-  const cookie = getCookie('_fbc');
-  if (cookie) return cookie;
-  if (typeof window === 'undefined') return undefined;
-  const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-  if (!fbclid) return undefined;
-  const fbc = `fb.1.${Date.now()}.${fbclid}`;
-  document.cookie = `_fbc=${encodeURIComponent(fbc)}; Max-Age=7776000; Path=/; SameSite=Lax; Secure`;
-  return fbc;
 };
 
 export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
@@ -96,8 +76,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
     }
 
     try {
-      const fbc = getFbc();
-      const fbp = getCookie('_fbp') || null;
+      const { fbc, fbp, fbclid } = captureMetaAttribution();
       const eventSourceUrl = window.location.href;
 
       const response = await fetch('/api/submit-lead', {
@@ -109,6 +88,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           pageUrl: eventSourceUrl,
           fbc,
           fbp,
+          fbclid,
         }),
       });
 
@@ -152,6 +132,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
           currency: 'KRW',
           fbp,
           fbc,
+          fbclid,
           external_id: externalId,
           'x-fb-ud-em': externalId,
           'x-fb-ud-ph': hashedPhoneNumber,
@@ -170,6 +151,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
             email: emailAddress,
             email_address: emailAddress,
             phone_number: phoneNumber,
+            external_id: externalId,
             first_name: firstName,
             last_name: lastName,
             address: {
@@ -190,9 +172,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
 
   if (status === 'success') {
     return (
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
+      <div
         className="brutalist-card"
         style={{ background: 'var(--hiop-orange)', textAlign: 'center' }}
       >
@@ -222,7 +202,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
         >
           {s.kakao}
         </a>
-      </motion.div>
+      </div>
     );
   }
 

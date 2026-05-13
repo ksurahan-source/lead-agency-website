@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { resolveFbc } from '@/lib/metaAttribution';
 
 export const runtime = 'edge';
 
@@ -14,11 +15,24 @@ const getEnv = () => {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { eventSourceUrl, fbc, fbp, eventId } = body;
+    const {
+      eventSourceUrl,
+      fbc: clientFbc,
+      fbp,
+      fbclid,
+      eventId,
+    } = body;
 
     const clientIp = request.headers.get('CF-Connecting-IP')
       || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
     const userAgent = request.headers.get('user-agent');
+    const fbc = resolveFbc({
+      cookieHeader: request.headers.get('cookie'),
+      bodyFbc: clientFbc,
+      bodyFbclid: fbclid,
+      pageUrl: eventSourceUrl,
+      referer: request.headers.get('referer'),
+    });
 
     const env = getEnv();
     const PIXEL_ID = env.META_PIXEL_ID || '1715625702927911';
