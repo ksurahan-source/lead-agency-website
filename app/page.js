@@ -20,32 +20,32 @@ const serviceCategories = [
       {
         id: '1-1',
         icon: <Zap size={24} />,
-        label: '트러블슈팅',
-        title: '계정 및 세팅 진단',
-        desc: '광고 계정 비활성화, 세팅 오류 등 꽉 막힌 광고의 원인을 찾아 숨통을 틔워드립니다.',
+        label: '응급 진단',
+        title: '광고비 누수 진단',
+        desc: '분명 집행했는데 결과가 비는 계정, 세팅 오류, 학습 꼬임을 먼저 잡아냅니다.',
         price: '5만원부터',
         href: 'https://open.kakao.com/o/srdaF2si',
-        highlight: '계정 정지? 세팅 오류? 즉시 해결',
+        highlight: '분명 집행했는데 결과 0?',
       },
       {
         id: '1-2',
         icon: <Target size={24} />,
         label: '데이터 엔지니어링',
-        title: '트래킹 완벽화',
-        desc: 'CAPI, 서버사이드 트래킹, GA4 통합 설치로 누락되는 데이터를 완벽히 복구합니다.',
+        title: '전환 추적 복구',
+        desc: 'Pixel, CAPI, GTM, GA4를 연결해 누락·중복·매칭 품질 문제를 복구합니다.',
         price: '영구적 데이터 자산',
         href: '/tracking',
-        highlight: '유실 데이터 40% 이상 복구',
+        highlight: '데이터가 없으면 광고는 길을 잃어요',
       },
       {
         id: '1-3',
         icon: <MousePointer2 size={24} />,
         label: '웹사이트 제작',
-        title: '리드수집용 웹사이트',
-        desc: '전환에 최적화된 랜딩페이지 설계. 흩어지는 트래픽을 진짜 고객으로 바꿉니다.',
+        title: '리드수집 랜딩',
+        desc: '웃기게 찌르고, 진지하게 설득하는 문제 해결형 랜딩페이지를 설계합니다.',
         price: 'DB 수집 극대화',
         href: '/lead-gen',
-        highlight: '문의량이 폭발하는 고전환 설계',
+        highlight: '광고 설명 말고 문제 장면부터',
       },
     ],
   },
@@ -57,22 +57,22 @@ const serviceCategories = [
       {
         id: '2-1',
         icon: <Video size={24} />,
-        label: '다이내믹 소재',
-        title: '영상 카탈로그',
-        desc: '제품 피드와 영상을 결합하여 메타 머신러닝이 알아서 최적의 소재를 송출합니다.',
+        label: '밈형 소재',
+        title: '숏폼/영상 카탈로그',
+        desc: '제품 피드와 숏폼을 엮어, 알고리즘이 이해할 수 있는 소재 실험판을 만듭니다.',
         price: 'ROAS 한계 돌파',
         href: '/video-catalog',
-        highlight: '릴스 지면 자동 최적화 솔루션',
+        highlight: '좋은 손님 찾는 소재 지도',
       },
       {
         id: '2-2',
         icon: <BarChart3 size={24} />,
         label: '마케팅 대행',
-        title: '이커머스 퍼포먼스 대행',
-        desc: '데이터 기반의 정교한 타겟팅. 전문가가 내부 마케팅 팀장이 되어드립니다.',
+        title: '퍼포먼스 운영 대행',
+        desc: '예쁜 보고서보다 원인을 먼저 봅니다. 데이터 품질, 소재, 예산을 같은 화면에서 운영합니다.',
         price: '월 15만원 / 15%',
         href: '/ecom-agency',
-        highlight: '오직 4~6개사 한정 집중 운영',
+        highlight: '보고서 말고 원인표',
       },
     ],
   },
@@ -85,11 +85,11 @@ const serviceCategories = [
         id: '3-1',
         icon: <Package size={24} />,
         label: '스타터 패키지',
-        title: '50만원 시작 패키지',
-        desc: '웹사이트 구축 + 릴스 제작 + 6일 광고 집행. 히옵의 실력을 직접 확인하세요.',
+        title: '50만원 진단 시작 패키지',
+        desc: '랜딩, 숏폼, 6일 집행을 작게 묶어 데이터가 잡히는지 먼저 확인합니다.',
         price: '500,000원',
         href: '/package-1m',
-        highlight: '초기 대표님을 위한 맞춤형 시작',
+        highlight: '크게 태우기 전에 새는 곳부터',
       },
     ],
   },
@@ -102,21 +102,21 @@ const serviceCategories = [
         id: '4-1',
         icon: <BookOpen size={24} />,
         label: '블로그',
-        title: '마케팅 인사이트',
-        desc: '현업 최전선의 실무 기술 공유. 당장 숫자를 바꿀 수 있는 팁을 전해드립니다.',
+        title: '광고비 누수 노트',
+        desc: 'CAPI, GA4, 광고 학습, 소재 실험을 대표님도 이해되게 짧고 세게 풀어드립니다.',
         price: '무료 공개',
         href: '/blog',
-        highlight: '탑티어 마케터의 세팅 시크릿',
+        highlight: '픽셀만 달면 끝? 아닙니다',
       },
       {
         id: '4-2',
         icon: <Download size={24} />,
         label: '무료 가이드',
-        title: '이커머스 트래킹 가이드',
-        desc: '개발 지식 없어도 이해하는 이커머스 추적 체계 구축 가이드북.',
+        title: '전환 추적 체크리스트',
+        desc: '개발 지식이 없어도 어디서 데이터가 새는지 점검할 수 있는 실무형 가이드입니다.',
         price: 'PDF 무료 배포',
         href: '/ecom-guide',
-        highlight: '매출 누락 방지 핵심 리포트',
+        highlight: '전환 0의 범인을 찾는 표',
       },
     ],
   },
@@ -130,7 +130,7 @@ export default function HomePage() {
           <LogoKr height="2.4rem" />
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>데이터 엔지니어링 마케팅</div>
+          <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>광고비 증발 방지위원회</div>
           <Link href="/en" style={{ fontWeight: 600, fontSize: '0.9rem', color: 'inherit', textDecoration: 'none', opacity: 0.5 }}>EN</Link>
         </div>
       </nav>
@@ -139,7 +139,7 @@ export default function HomePage() {
 
       <div className="marquee-container" style={{ borderBottom: '4px solid #121212' }}>
         <div className="marquee-content" style={{ padding: '0.5rem 0' }}>
-          데이터 엔지니어링 • CAPI 구축 • 퍼포먼스 마케팅 • 릴스 영상 제작 • 데이터 트래킹 완벽화 • 데이터 엔지니어링 • CAPI 구축 • 퍼포먼스 마케팅 • 릴스 영상 제작 • 데이터 트래킹 완벽화 •
+          전환 0? • 데이터 어디감? • CAPI 복구 • GA4 정합성 • 밈형 숏폼 광고 • 광고비 누수 진단 • 전환 0? • 데이터 어디감? • CAPI 복구 • GA4 정합성 • 밈형 숏폼 광고 • 광고비 누수 진단 •
         </div>
       </div>
 
@@ -202,7 +202,7 @@ export default function HomePage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '0', border: '4px solid rgba(255,255,255,0.15)' }}>
             {[
               {
-                quote: '데이터 구조를 바꾸니 ROAS가 바뀌었습니다. 픽셀 설정이 구매 완료가 아닌 장바구니 추가로 잡혀있었고, CAPI 연동 3주 만에 구매 전환 데이터가 40% 이상 늘었습니다.',
+                quote: '광고 소재 탓만 했는데, 알고 보니 구매 이벤트가 엉뚱하게 잡히고 있었습니다. 히옵이 CAPI와 GA4 기준을 맞춘 뒤에야 광고가 제대로 학습하기 시작했어요.',
                 result: 'ROAS 2.0 → 3.4',
                 name: '김민준',
                 role: '마케팅 팀장',
@@ -210,7 +210,7 @@ export default function HomePage() {
                 spend: '월 광고비 3,500만원',
               },
               {
-                quote: '구글 PMax만 돌렸는데 계속 정체됐어요. GA4 전자상거래 추적부터 다시 깔고 검색 캠페인을 분리해줬습니다. 이제 PMax + 검색 투트랙으로 안정적으로 돌아갑니다.',
+                quote: '분명 문의가 있는데 광고관리자에는 0으로 보였어요. "데이터 어디감?" 상태였는데, 전환 정의와 태그를 다시 잡으니 보고서가 현실을 따라오기 시작했습니다.',
                 result: '구글 ROAS 2.1 → 4.6',
                 name: '이수연',
                 role: '대표이사',
@@ -218,7 +218,7 @@ export default function HomePage() {
                 spend: '월 광고비 2,800만원',
               },
               {
-                quote: '실제 구매의 38%가 추적이 안 되고 있었습니다. 서버사이드 트래킹 구축 후 메타 픽셀 매칭 점수가 5.4→7.9로 올랐고, 같은 예산으로 구매가 300건→470건이 됐습니다.',
+                quote: '같은 예산인데 학습이 계속 흔들렸습니다. 서버 이벤트와 브라우저 이벤트를 event_id 기준으로 맞추고 나니 누락과 중복이 동시에 줄었습니다.',
                 result: '전환수 +57%',
                 name: '박성호',
                 role: '이커머스 사업부장',
@@ -226,7 +226,7 @@ export default function HomePage() {
                 spend: '월 광고비 6,000만원',
               },
               {
-                quote: '이전 대행사는 항상 소재가 문제라고 했어요. 히옵은 첫 미팅부터 어느 채널 어느 세그먼트의 LTV가 높은지 보여줬습니다. 광고비 20% 줄이고 매출은 15% 늘었습니다.',
+                quote: '보고서는 많았는데 원인이 안 보였습니다. 히옵은 첫 미팅부터 새는 데이터, 먹히는 소재, 줄여야 할 예산을 한 장으로 보여줬습니다.',
                 result: 'CAC -20% / 매출 +15%',
                 name: '정유진',
                 role: 'CMO',
@@ -248,10 +248,10 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
             {[
-              { step: '01', title: '통증 인식', desc: '현재 ROAS가 왜 안 오르는지 무료 진단으로 먼저 확인합니다. 숫자로 문제를 보여줍니다.' },
-              { step: '02', title: '증거 제시', desc: '같은 버티컬, 같은 규모 클라이언트의 수치를 구체적으로 공유합니다.' },
-              { step: '03', title: '리스크 제거', desc: '데이터 인프라 구축 → 성과 확인 후 대행 운영. 단계별로 진입해 부담을 낮춥니다.' },
-              { step: '04', title: '행동 유도', desc: '지금 사라지는 전환 데이터를 복구하면 현재 광고비에서 즉시 매출이 올라갑니다.' },
+              { step: '01', title: '전환 0 캡처', desc: '광고관리자, GA4, CRM 숫자가 서로 어디서 어긋나는지 먼저 잡습니다.' },
+              { step: '02', title: '누수 범인 표시', desc: '누락 이벤트, 중복 전송, 매칭 품질, 전환 정의 문제를 빨간 표시로 정리합니다.' },
+              { step: '03', title: '복구 우선순위', desc: 'CAPI, GTM, GA4, 랜딩, 소재 중 무엇부터 손대야 하는지 순서를 정합니다.' },
+              { step: '04', title: '학습 재시작', desc: '광고가 다시 좋은 손님을 찾도록 데이터와 메시지를 같이 맞춥니다.' },
             ].map((p, i) => (
               <div key={i} style={{ padding: '2rem', border: '2px solid rgba(255,255,255,0.2)' }}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: 'var(--hiop-orange)', marginBottom: '1rem' }}>{p.step}</div>
@@ -266,8 +266,8 @@ export default function HomePage() {
       <section id="contact" style={{ padding: '8rem 2rem', background: '#fff', borderBottom: '4px solid #121212' }}>
         <div className="wrap" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1.5rem' }}>내 광고의 숨통을 틔우세요.</h2>
-            <p style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.6 }}>증상만 말씀해 주시면, 전문가가 가장 확실한 돌파구를 제시합니다.</p>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1.5rem' }}>우리 광고, 어디서 새는지 볼까요?</h2>
+            <p style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.6 }}>증상만 말씀해 주세요. 히옵이 데이터, 랜딩, 소재 중 범인을 먼저 찾아드립니다.</p>
           </div>
           <LeadForm source="home_overhaul_v2" lang="ko" />
         </div>

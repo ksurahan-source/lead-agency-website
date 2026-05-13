@@ -7,27 +7,27 @@ import LeadForm from '../../components/LeadForm';
 
 const points = [
   {
-    t: '전환 API (CAPI) 구축',
-    d: '브라우저 쿠키 차단을 우회하는 서버 간 전송 방식으로, 아이폰 사용자의 전환 데이터까지 99% 이상 복원합니다.',
+    t: '전환 0 원인 진단',
+    d: '광고관리자, GA4, CRM 숫자가 서로 다르게 말하는 지점을 찾아 누락과 중복을 분리합니다.',
   },
   {
-    t: 'GA4 고도화 세팅',
-    d: '단순 방문자 수가 아닌, 실제 구매 여정 전반을 추적하는 맞춤 이벤트와 전자상거래 추적 체계를 구축합니다.',
+    t: 'CAPI + event_id 복구',
+    d: '브라우저 이벤트와 서버 이벤트를 같은 기준으로 맞춰 광고 알고리즘이 배울 수 있는 신호를 보강합니다.',
   },
   {
-    t: 'GTM 통합 관리',
-    d: '모든 추적 코드를 한 곳에서 체계적으로 관리해 사이트 속도 저하 없이 데이터를 수집합니다.',
+    t: 'GA4/GTM 정합성 정리',
+    d: '문의, 구매, 가입 이벤트 정의를 다시 잡고 채널마다 다른 기준을 하나의 운영 기준으로 정리합니다.',
   },
   {
-    t: '데이터 정합성 감사',
-    d: '광고 관리자 수치와 실제 매출이 일치하지 않는 원인을 찾아 완벽하게 교정합니다.',
+    t: '매칭 품질 체크리스트',
+    d: 'fbp/fbc, event_id, user_data, EMQ 상태를 확인해 광고가 좋은 손님을 찾을 재료를 채웁니다.',
   },
 ];
 
 const whys = [
-  { num: '68%', label: 'iOS 14.5 이후 국내 메타 광고 평균 데이터 누락률' },
-  { num: '3배', label: '전환 API 적용 후 광고 알고리즘 학습 속도 향상' },
-  { num: '100%', label: '히옵의 데이터 정합성 보장 목표' },
+  { num: '0', label: '집행은 했는데 광고관리자 전환이 비어 있는 상태' },
+  { num: '5.4→8.5', label: '목표로 삼는 Meta 이벤트 매칭 품질 개선 방향' },
+  { num: '1장', label: '누락, 중복, 기준 불일치를 한 장으로 정리한 진단표' },
 ];
 
 export default function TrackingPage() {
@@ -42,11 +42,11 @@ export default function TrackingPage() {
 
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>추적</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">완벽화</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>전환 0?</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">데이터 어디감?</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
-            전환 API, GA4, GTM을 통합 구축해 쿠키 차단 시대에도<br />
-            데이터 공백 없는 광고 운영을 가능하게 합니다.
+            Pixel, CAPI, GTM, GA4가 서로 다른 말을 하는 순간<br />
+            광고는 좋은 손님을 못 찾습니다. 히옵이 새는 곳부터 표시합니다.
           </p>
         </div>
       </section>
@@ -66,7 +66,7 @@ export default function TrackingPage() {
 
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>히옵이 세팅하는 것들</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>히옵이 빨간 표시하는 것들</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {points.map((p, i) => (
               <div key={i} className="brutalist-card">
@@ -80,9 +80,9 @@ export default function TrackingPage() {
 
       <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
         <p style={{ fontSize: '1.2rem', fontWeight: 700, color: '#aaa', marginBottom: '1rem' }}>서비스 금액</p>
-        <h2 style={{ fontSize: 'clamp(3rem, 6vw, 4rem)', fontWeight: 900, marginBottom: '3rem' }}>50만원~</h2>
+        <h2 style={{ fontSize: 'clamp(3rem, 6vw, 4rem)', fontWeight: 900, marginBottom: '3rem' }}>무료 진단 후 50만원~</h2>
         <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem' }}>
-          추적 무료 진단 신청하기 →
+          데이터 누수 진단 신청하기 →
         </a>
       </section>
 
