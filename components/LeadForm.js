@@ -105,6 +105,9 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
     try {
       const { fbc, fbp, fbclid } = captureMetaAttribution();
       const eventSourceUrl = window.location.href;
+      const contentName = formData.company || 'general';
+      const eventValue = 300000;
+      const eventCurrency = 'KRW';
 
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
@@ -128,7 +131,9 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
 
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
-          content_name: formData.company || 'general',
+          content_name: contentName,
+          value: eventValue,
+          currency: eventCurrency,
         }, { eventID: data.eventId });
       }
 
@@ -140,7 +145,6 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
         const hashedPhoneNumber = await hashData(phoneNumber);
         const hashedFirstName = await hashData(firstName);
         const hashedLastName = await hashData(lastName);
-        const contentName = formData.company || 'general';
         const leadCompany = formData.company || '';
 
         window.dataLayer.push({
@@ -155,8 +159,8 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
           content_name: contentName,
           lead_company: leadCompany,
           lead_source: source,
-          value: 300000,
-          currency: 'KRW',
+          value: eventValue,
+          currency: eventCurrency,
           fbp,
           fbc,
           fbclid,

@@ -34,7 +34,7 @@ const structuredData = {
         'Ecommerce Performance Marketing',
         'Short-form Creative Performance',
       ],
-      slogan: '결과가 안 잡히면 광고가 좋은 손님을 못 찾아요.',
+      slogan: '광고 성과를 데이터 인프라부터 다시 설계합니다.',
     },
   ],
 };

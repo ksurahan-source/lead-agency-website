@@ -21,6 +21,10 @@ export async function POST(request) {
       fbp,
       fbclid,
       eventId,
+      eventName = 'PageView',
+      contentName,
+      value,
+      currency = 'KRW',
     } = body;
 
     const clientIp = request.headers.get('CF-Connecting-IP')
@@ -48,7 +52,7 @@ export async function POST(request) {
     const capiPayload = {
       ...(testEventCode && { test_event_code: testEventCode }),
       data: [{
-        event_name: 'ViewContent',
+        event_name: eventName,
         event_time: Math.floor(Date.now() / 1000),
         action_source: 'website',
         event_source_url: eventSourceUrl || 'https://hi-ob.com',
@@ -59,16 +63,33 @@ export async function POST(request) {
           ...(clientIp && { client_ip_address: clientIp }),
           ...(userAgent && { client_user_agent: userAgent }),
         },
+        custom_data: Object.fromEntries(
+          Object.entries({
+            content_name: contentName,
+            value,
+            currency,
+          }).filter(([, entryValue]) => entryValue !== undefined)
+        ),
       }],
     };
 
-    await fetch(`https://graph.facebook.com/${GRAPH_API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`, {
+    const capiResponse = await fetch(`https://graph.facebook.com/${GRAPH_API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(capiPayload),
     });
+    const capiBody = await capiResponse.json().catch(() => ({}));
 
-    return NextResponse.json({ success: true });
+    if (!capiResponse.ok) {
+      console.error('[track-view CAPI Error]', {
+        status: capiResponse.status,
+        error: capiBody.error,
+      });
+
+      return NextResponse.json({ success: false, capiStatus: 'failed' }, { status: 502 });
+    }
+
+    return NextResponse.json({ success: true, capiStatus: 'sent' });
   } catch (error) {
     console.error('[track-view CAPI Error]', error);
     return NextResponse.json({ success: false }, { status: 500 });

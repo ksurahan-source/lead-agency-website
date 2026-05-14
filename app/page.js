@@ -1,279 +1,383 @@
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { ArrowUpRight, Zap, Target, MousePointer2, Video, BarChart3, Package, BookOpen, Download } from 'lucide-react';
-import Footer from '../components/Footer';
-import LogoKr from '../components/LogoKr';
-import HeroAnimated from '../components/HeroAnimated';
+import {
+  ArrowRight,
+  BarChart3,
+  Boxes,
+  Check,
+  ClipboardList,
+  Database,
+  Factory,
+  Film,
+  LineChart,
+  MessageSquareText,
+  PackageCheck,
+  Radar,
+  SearchCheck,
+  Sparkles,
+  TestTube2,
+  Truck,
+  Zap,
+} from 'lucide-react';
+import CreativeVelocityForm from '@/components/CreativeVelocityForm';
 
-const LeadForm = dynamic(() => import('../components/LeadForm'), {
-  loading: () => (
-    <div className="brutalist-card" style={{ minHeight: '600px' }} aria-hidden="true" />
-  ),
-});
+const pipeline = [
+  'Raw Material',
+  'Angle Extraction',
+  'AI Expansion',
+  'Creative Testing',
+  'Winner Scaling',
+];
 
-const serviceCategories = [
+const problemStats = [
+  ['₩30M-₩50M', '광고비가 자주 막히는 구간'],
+  ['7-14일', '새 소재 테스트까지 걸리는 내부 리드타임'],
+  ['CAC ↑', '승자 소재 피로 이후 반복되는 비용 상승'],
+];
+
+const rawMaterials = [
+  ['생산 과정', Factory],
+  ['포장 과정', PackageCheck],
+  ['고객 리뷰', MessageSquareText],
+  ['CS 질문', ClipboardList],
+  ['대표 인터뷰', Sparkles],
+  ['제품 비교 실험', TestTube2],
+  ['사용 장면', Film],
+  ['배송/창고/직원 루틴', Truck],
+];
+
+const outputs = [
+  'Hook variations',
+  'UGC-style scripts',
+  'Short-form ads',
+  'Catalog videos',
+  'Meta creatives',
+  'Google creative assets',
+  'Retargeting angles',
+];
+
+const pillars = [
   {
-    id: 'setup',
-    title: '세팅 및 구축',
-    subtitle: '한 번의 작업으로 끝내는 단기 프로젝트',
-    services: [
-      {
-        id: '1-1',
-        icon: <Zap size={24} />,
-        label: '응급 진단',
-        title: '광고비 누수 진단',
-        desc: '분명 집행했는데 결과가 비는 계정, 세팅 오류, 학습 꼬임을 먼저 잡아냅니다.',
-        price: '5만원부터',
-        href: 'https://open.kakao.com/o/srdaF2si',
-        highlight: '분명 집행했는데 결과 0?',
-      },
-      {
-        id: '1-2',
-        icon: <Target size={24} />,
-        label: '데이터 엔지니어링',
-        title: '전환 추적 복구',
-        desc: 'Pixel, CAPI, GTM, GA4를 연결해 누락·중복·매칭 품질 문제를 복구합니다.',
-        price: '영구적 데이터 자산',
-        href: '/tracking',
-        highlight: '데이터가 없으면 광고는 길을 잃어요',
-      },
-      {
-        id: '1-3',
-        icon: <MousePointer2 size={24} />,
-        label: '웹사이트 제작',
-        title: '리드수집 랜딩',
-        desc: '웃기게 찌르고, 진지하게 설득하는 문제 해결형 랜딩페이지를 설계합니다.',
-        price: 'DB 수집 극대화',
-        href: '/lead-gen',
-        highlight: '광고 설명 말고 문제 장면부터',
-      },
-    ],
+    icon: Database,
+    title: 'Data Infrastructure',
+    summary: '추적 기준이 흔들리면 테스트 결과도 흔들립니다. 알고리즘이 학습할 수 있는 전환 데이터 기준을 먼저 정리합니다.',
+    items: ['Meta CAPI', 'GA4/GTM setup', 'Event quality improvement', 'Dynamic conversion value', 'Funnel tracking'],
   },
   {
-    id: 'operation',
-    title: '운영 및 대행',
-    subtitle: '지속적인 성장을 위한 장기 프로젝트',
-    services: [
-      {
-        id: '2-1',
-        icon: <Video size={24} />,
-        label: '밈형 소재',
-        title: '숏폼/영상 카탈로그',
-        desc: '제품 피드와 숏폼을 엮어, 알고리즘이 이해할 수 있는 소재 실험판을 만듭니다.',
-        price: 'ROAS 한계 돌파',
-        href: '/video-catalog',
-        highlight: '좋은 손님 찾는 소재 지도',
-      },
-      {
-        id: '2-2',
-        icon: <BarChart3 size={24} />,
-        label: '마케팅 대행',
-        title: '퍼포먼스 운영 대행',
-        desc: '예쁜 보고서보다 원인을 먼저 봅니다. 데이터 품질, 소재, 예산을 같은 화면에서 운영합니다.',
-        price: '월 15만원 / 15%',
-        href: '/ecom-agency',
-        highlight: '보고서 말고 원인표',
-      },
-    ],
+    icon: Boxes,
+    title: 'Raw Material Engine',
+    summary: '브랜드 내부에 이미 존재하는 장면, 말, 반박, 증거를 성과형 광고 원재료로 분류하고 확장합니다.',
+    items: ['Internal footage guide', 'Founder/product message extraction', 'Review and objection mining', 'AI-assisted script expansion', 'UGC-style ad variations'],
   },
   {
-    id: 'package',
-    title: '특별 패키지',
-    subtitle: '가장 빠르고 확실한 시작',
-    services: [
-      {
-        id: '3-1',
-        icon: <Package size={24} />,
-        label: '스타터 패키지',
-        title: '50만원 진단 시작 패키지',
-        desc: '랜딩, 숏폼, 6일 집행을 작게 묶어 데이터가 잡히는지 먼저 확인합니다.',
-        price: '500,000원',
-        href: '/package-1m',
-        highlight: '크게 태우기 전에 새는 곳부터',
-      },
-    ],
-  },
-  {
-    id: 'content',
-    title: '인사이트 및 가이드',
-    subtitle: '전문가의 노하우 공유',
-    services: [
-      {
-        id: '4-1',
-        icon: <BookOpen size={24} />,
-        label: '블로그',
-        title: '광고비 누수 노트',
-        desc: 'CAPI, GA4, 광고 학습, 소재 실험을 대표님도 이해되게 짧고 세게 풀어드립니다.',
-        price: '무료 공개',
-        href: '/blog',
-        highlight: '픽셀만 달면 끝? 아닙니다',
-      },
-      {
-        id: '4-2',
-        icon: <Download size={24} />,
-        label: '무료 가이드',
-        title: '전환 추적 체크리스트',
-        desc: '개발 지식이 없어도 어디서 데이터가 새는지 점검할 수 있는 실무형 가이드입니다.',
-        price: 'PDF 무료 배포',
-        href: '/ecom-guide',
-        highlight: '전환 0의 범인을 찾는 표',
-      },
-    ],
+    icon: Radar,
+    title: 'Performance Testing System',
+    summary: '많이 만드는 것에서 끝나지 않습니다. 어떤 소재가 이기는지 찾고, 이긴 소재를 변형해 예산 확장으로 연결합니다.',
+    items: ['Hook testing', 'Angle testing', 'Format testing', 'Winner detection', 'Budget scaling', 'CAC defense'],
   },
 ];
 
+const offers = [
+  {
+    kicker: 'Offer 01',
+    title: 'Creative Velocity Sprint',
+    forWho: '빠른 소재 테스트가 필요한 브랜드',
+    deliverables: ['Raw material audit', '30 ad creative concepts', '10-30 short-form assets', 'Hook/angle testing plan', 'Winner report'],
+    cta: 'Sprint 진단 받기',
+  },
+  {
+    kicker: 'Offer 02',
+    title: 'Video Catalog Intelligence',
+    forWho: 'SKU가 많고 제품별 소재 테스트가 필요한 이커머스',
+    deliverables: ['AI video catalog assets', 'Supplementary feed structure', 'Meta catalog video setup', 'Product-level creative testing'],
+    cta: 'Catalog 구조 보기',
+  },
+  {
+    kicker: 'Offer 03',
+    title: 'Scale OS',
+    forWho: '월 ₩10M-₩50M+ 집행 브랜드',
+    deliverables: ['Data infrastructure', 'Creative pipeline', 'Meta/Google campaign structure', 'Weekly testing rhythm', 'Scaling framework'],
+    cta: 'Scale OS 상담하기',
+  },
+];
+
+const navItems = [
+  ['Problem', '#problem'],
+  ['Engine', '#engine'],
+  ['OS', '#os'],
+  ['Offers', '#offers'],
+];
+
+export const metadata = {
+  title: 'HI-OP Creative Velocity OS | 성과형 광고 소재 운영체제',
+  description:
+    'HI-OP은 DTC 브랜드 내부의 광고 원재료를 성과형 소재로 변환하고 Meta/Google 알고리즘 학습 속도를 높이는 Creative Velocity OS를 구축합니다.',
+};
+
+function SectionLabel({ children }) {
+  return <div className="cv-label">{children}</div>;
+}
+
+function SectionHeader({ eyebrow, title, body }) {
+  return (
+    <div className="cv-section-head">
+      <SectionLabel>{eyebrow}</SectionLabel>
+      <h2>{title}</h2>
+      {body && <p>{body}</p>}
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
-    <main className="bg-[#fcfaf7] min-h-screen text-[#121212]">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #121212', position: 'sticky', top: 0, backgroundColor: '#fcfaf7', zIndex: 100 }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <LogoKr height="2.4rem" />
+    <main className="home-dark">
+      <nav className="cv-nav">
+        <Link href="/" className="cv-brand" aria-label="HI-OP home">
+          <span className="cv-brand-mark">HI</span>
+          <span>
+            HI-OP
+            <small>Creative Velocity OS</small>
+          </span>
         </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <div style={{ fontWeight: 900, fontSize: '0.9rem', letterSpacing: '0.05em' }}>광고비 증발 방지위원회</div>
-          <Link href="/en" style={{ fontWeight: 600, fontSize: '0.9rem', color: 'inherit', textDecoration: 'none', opacity: 0.5 }}>EN</Link>
+        <div className="cv-nav-links" aria-label="홈페이지 섹션 이동">
+          {navItems.map(([label, href]) => (
+            <a key={href} href={href}>{label}</a>
+          ))}
         </div>
+        <a className="cv-nav-cta" href="#diagnosis">무료 진단 신청</a>
       </nav>
 
-      <HeroAnimated />
-
-      <div className="marquee-container" style={{ borderBottom: '4px solid #121212' }}>
-        <div className="marquee-content" style={{ padding: '0.5rem 0' }}>
-          전환 0? • 데이터 어디감? • CAPI 복구 • GA4 정합성 • 밈형 숏폼 광고 • 광고비 누수 진단 • 전환 0? • 데이터 어디감? • CAPI 복구 • GA4 정합성 • 밈형 숏폼 광고 • 광고비 누수 진단 •
+      <section className="cv-hero">
+        <div className="cv-hero-copy">
+          <SectionLabel>For DTC brands spending ₩10M-₩50M+ / month</SectionLabel>
+          <h1>광고 성과는 더 이상 타게팅으로 결정되지 않습니다.</h1>
+          <p className="cv-hero-sub">
+            HI-OP은 브랜드 내부의 원재료를 성과형 광고 소재로 변환하고, Meta/Google 알고리즘이 학습할 수 있는
+            <strong> Creative Velocity System</strong>을 구축합니다.
+          </p>
+          <p className="cv-hero-proof">
+            ROAS는 이미 검증됐는데 스케일이 멈췄다면, 문제는 광고 설정이 아닐 가능성이 큽니다. 알고리즘에 먹일 소재 공급량과 테스트 속도가 부족한 것입니다.
+          </p>
+          <div className="cv-actions">
+            <a className="cv-button primary" href="#diagnosis">
+              광고 구조 진단 받기 <ArrowRight size={18} />
+            </a>
+            <a className="cv-button secondary" href="#os">
+              Creative Velocity OS 보기
+            </a>
+          </div>
         </div>
-      </div>
 
-      {serviceCategories.map((cat, idx) => (
-        <section key={cat.id} style={{ borderBottom: '4px solid #121212' }}>
-          <div style={{ padding: '4rem 2rem', borderBottom: '4px solid #121212', backgroundColor: idx % 2 === 0 ? '#fff' : '#fcfaf7' }}>
-            <div className="wrap">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem', flexWrap: 'wrap' }}>
-                <div>
-                  <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontWeight: 900, lineHeight: 1 }}>{cat.title}</h2>
-                  <p style={{ fontSize: '1.1rem', fontWeight: 700, marginTop: '1rem', opacity: 0.6 }}>{cat.subtitle}</p>
-                </div>
-                <div style={{ padding: '0.5rem 1rem', border: '3px solid #121212', fontWeight: 900, fontSize: '0.9rem' }}>{idx + 1}</div>
+        <div className="cv-dashboard" aria-label="Creative Velocity OS dashboard visual">
+          <div className="cv-window-bar">
+            <span />
+            <span />
+            <span />
+            <strong>Creative Velocity Pipeline</strong>
+          </div>
+          <div className="cv-pipeline">
+            {pipeline.map((step, index) => (
+              <div className="cv-pipeline-step" key={step}>
+                <small>{String(index + 1).padStart(2, '0')}</small>
+                <b>{step}</b>
               </div>
+            ))}
+          </div>
+          <div className="cv-live-grid">
+            <div>
+              <small>Input Queue</small>
+              <strong>128</strong>
+              <span>reviews, footage, CS, demo clips</span>
+            </div>
+            <div>
+              <small>Weekly Tests</small>
+              <strong>32</strong>
+              <span>hooks, angles, formats</span>
+            </div>
+            <div>
+              <small>Winner Signal</small>
+              <strong>4.8x</strong>
+              <span>creative variants ready to scale</span>
             </div>
           </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
-            {cat.services.map((s) => (
-              <Link key={s.id} href={s.href} style={{ textDecoration: 'none', color: 'inherit', borderRight: '4px solid #121212' }}>
-                <div className="brutalist-card" style={{ border: 'none', boxShadow: 'none', height: '100%', borderRadius: 0 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
-                    <div style={{ padding: '0.8rem', border: '2px solid currentColor', display: 'inline-flex' }}>
-                      {s.icon}
-                    </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '0.75rem', fontWeight: 900, opacity: 0.5 }}>{s.label}</div>
-                      <div style={{ fontSize: '1rem', fontWeight: 900, marginTop: '0.3rem' }}>{s.price}</div>
-                    </div>
-                  </div>
-
-                  <h3 style={{ fontSize: '2.2rem', fontWeight: 900, marginBottom: '1.2rem', lineHeight: 1.1 }}>{s.title}</h3>
-
-                  <div style={{ marginBottom: '2rem' }}>
-                    <div style={{ display: 'inline-block', padding: '0.2rem 0.6rem', backgroundColor: 'var(--hiop-orange)', color: '#121212', fontWeight: 900, fontSize: '0.8rem', marginBottom: '0.8rem' }}>
-                      {s.highlight}
-                    </div>
-                    <p style={{ fontSize: '1.05rem', fontWeight: 600, lineHeight: 1.6, opacity: 0.8 }}>{s.desc}</p>
-                  </div>
-
-                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 900, fontSize: '0.95rem' }}>
-                    자세히 보기 <ArrowUpRight size={18} strokeWidth={3} />
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="cv-signal-panel">
+            <div>
+              <small>Algorithm Feed Status</small>
+              <strong>Learning velocity increasing</strong>
+            </div>
+            <div className="cv-bars" aria-hidden="true">
+              {[34, 58, 42, 76, 63, 88, 70, 96].map((height) => (
+                <span key={height} style={{ height: `${height}%` }} />
+              ))}
+            </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      <section style={{ padding: '8rem 2rem', background: '#121212', color: '#fcfaf7', borderBottom: '4px solid #121212' }}>
-        <div className="wrap">
-          <div style={{ marginBottom: '5rem' }}>
-            <div style={{ fontSize: '0.85rem', fontWeight: 900, letterSpacing: '0.12em', color: 'var(--hiop-orange)', marginBottom: '1.5rem' }}>SOCIAL PROOF</div>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', fontWeight: 900, lineHeight: 1.05 }}>
-              숫자가 증명합니다
-            </h2>
+      <section id="problem" className="cv-section cv-problem">
+        <SectionHeader
+          eyebrow="The real scaling blocker"
+          title="광고비를 더 쓰지 못하는 진짜 이유"
+          body="이미 ROAS는 검증됐고, 제품 USP도 충분하고, 대표가 하고 싶은 말도 많습니다. 하지만 소재 테스트 속도가 광고비 증가 속도를 따라가지 못하면 광고비는 3천만-5천만 원 구간에서 막힙니다."
+        />
+        <div className="cv-problem-grid">
+          <div className="cv-problem-copy">
+            <p>
+              문제는 광고 운영이 아닙니다.
+              <br />
+              <strong>알고리즘에 먹일 소재 공급량입니다.</strong>
+            </p>
+            <ul>
+              <li>새 소재가 늦어 테스트가 멈춥니다.</li>
+              <li>승자 소재가 피로해지면 CAC가 다시 올라갑니다.</li>
+              <li>내부 마케팅 팀은 촬영, 편집, 카피, 운영을 동시에 감당합니다.</li>
+              <li>광고비를 늘려도 알고리즘은 새로운 학습 신호를 충분히 받지 못합니다.</li>
+            </ul>
           </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '0', border: '4px solid rgba(255,255,255,0.15)' }}>
-            {[
-              {
-                quote: '광고 소재 탓만 했는데, 알고 보니 구매 이벤트가 엉뚱하게 잡히고 있었습니다. 히옵이 CAPI와 GA4 기준을 맞춘 뒤에야 광고가 제대로 학습하기 시작했어요.',
-                result: 'ROAS 2.0 → 3.4',
-                name: '김민준',
-                role: '마케팅 팀장',
-                co: '라이프스타일 이커머스',
-                spend: '월 광고비 3,500만원',
-              },
-              {
-                quote: '분명 문의가 있는데 광고관리자에는 0으로 보였어요. "데이터 어디감?" 상태였는데, 전환 정의와 태그를 다시 잡으니 보고서가 현실을 따라오기 시작했습니다.',
-                result: '구글 ROAS 2.1 → 4.6',
-                name: '이수연',
-                role: '대표이사',
-                co: '뷰티 D2C 쇼핑몰',
-                spend: '월 광고비 2,800만원',
-              },
-              {
-                quote: '같은 예산인데 학습이 계속 흔들렸습니다. 서버 이벤트와 브라우저 이벤트를 event_id 기준으로 맞추고 나니 누락과 중복이 동시에 줄었습니다.',
-                result: '전환수 +57%',
-                name: '박성호',
-                role: '이커머스 사업부장',
-                co: '패션 브랜드',
-                spend: '월 광고비 6,000만원',
-              },
-              {
-                quote: '보고서는 많았는데 원인이 안 보였습니다. 히옵은 첫 미팅부터 새는 데이터, 먹히는 소재, 줄여야 할 예산을 한 장으로 보여줬습니다.',
-                result: 'CAC -20% / 매출 +15%',
-                name: '정유진',
-                role: 'CMO',
-                co: 'SaaS 스타트업',
-                spend: '월 광고비 1,200만원',
-              },
-            ].map((t, i) => (
-              <div key={i} style={{ padding: '3rem 2.5rem', borderRight: i % 2 === 0 ? '4px solid rgba(255,255,255,0.15)' : 'none', borderBottom: i < 2 ? '4px solid rgba(255,255,255,0.15)' : 'none' }}>
-                <div style={{ fontSize: '2.8rem', fontWeight: 900, color: 'var(--hiop-orange)', fontFamily: 'monospace', marginBottom: '1.5rem' }}>{t.result}</div>
-                <p style={{ fontSize: '1.05rem', fontWeight: 600, lineHeight: 1.7, color: 'rgba(255,255,255,0.75)', marginBottom: '2.5rem' }}>&ldquo;{t.quote}&rdquo;</p>
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '1.5rem' }}>
-                  <div style={{ fontWeight: 900, fontSize: '1rem' }}>{t.name}</div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginTop: '0.2rem' }}>{t.role} · {t.co}</div>
-                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--hiop-orange)', marginTop: '0.3rem' }}>{t.spend}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: '6rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
-            {[
-              { step: '01', title: '전환 0 캡처', desc: '광고관리자, GA4, CRM 숫자가 서로 어디서 어긋나는지 먼저 잡습니다.' },
-              { step: '02', title: '누수 범인 표시', desc: '누락 이벤트, 중복 전송, 매칭 품질, 전환 정의 문제를 빨간 표시로 정리합니다.' },
-              { step: '03', title: '복구 우선순위', desc: 'CAPI, GTM, GA4, 랜딩, 소재 중 무엇부터 손대야 하는지 순서를 정합니다.' },
-              { step: '04', title: '학습 재시작', desc: '광고가 다시 좋은 손님을 찾도록 데이터와 메시지를 같이 맞춥니다.' },
-            ].map((p, i) => (
-              <div key={i} style={{ padding: '2rem', border: '2px solid rgba(255,255,255,0.2)' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: 'var(--hiop-orange)', marginBottom: '1rem' }}>{p.step}</div>
-                <div style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.8rem' }}>{p.title}</div>
-                <p style={{ fontSize: '0.95rem', fontWeight: 600, lineHeight: 1.6, color: 'rgba(255,255,255,0.6)' }}>{p.desc}</p>
+          <div className="cv-stat-stack">
+            {problemStats.map(([value, label]) => (
+              <div key={label} className="cv-stat">
+                <strong>{value}</strong>
+                <span>{label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contact" style={{ padding: '8rem 2rem', background: '#fff', borderBottom: '4px solid #121212' }}>
-        <div className="wrap" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1.5rem' }}>광고비 누수 지점을 진단해드립니다</h2>
-            <p style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.6 }}>현재 증상을 남겨주시면 데이터, 랜딩, 소재 흐름을 검토해 우선 개선 지점을 정리해드립니다.</p>
+      <section id="engine" className="cv-section">
+        <SectionHeader
+          eyebrow="Raw Material Engine"
+          title="브랜드 내부를 광고 원재료 공장으로 바꿉니다."
+          body="HI-OP은 외부에서 억지로 아이디어를 만들지 않습니다. 브랜드 안에 이미 쌓여 있는 장면, 말, 질문, 반박, 증거를 꺼내 성과형 소재로 변환합니다."
+        />
+        <div className="cv-engine-grid">
+          <div className="cv-engine-column">
+            <h3>광고 원재료</h3>
+            <div className="cv-material-grid">
+              {rawMaterials.map(([label, Icon]) => (
+                <div key={label} className="cv-material">
+                  <Icon size={19} />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <LeadForm source="home_overhaul_v2" lang="ko" />
+          <div className="cv-transform" aria-hidden="true">
+            <Zap size={30} />
+            <span>Extract<br />Expand<br />Test</span>
+          </div>
+          <div className="cv-engine-column">
+            <h3>Performance Creative Assets</h3>
+            <div className="cv-output-list">
+              {outputs.map((item) => (
+                <div key={item}>
+                  <Check size={17} />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <Footer />
+      <section id="os" className="cv-section cv-os">
+        <SectionHeader
+          eyebrow="Operating system"
+          title="HI-OP Creative Velocity OS"
+          body="데이터 인프라가 학습 기준을 만들고, Raw Material Engine이 소재 공급량을 만들고, Performance Testing System이 승자를 찾아 확장합니다."
+        />
+        <div className="cv-pillars">
+          {pillars.map(({ icon: Icon, title, summary, items }) => (
+            <article key={title} className="cv-pillar">
+              <div className="cv-pillar-icon"><Icon size={24} /></div>
+              <h3>{title}</h3>
+              <p>{summary}</p>
+              <ul>
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="cv-section cv-case">
+        <div className="cv-case-copy">
+          <SectionLabel>Case pattern</SectionLabel>
+          <h2>월 5,400만 원 광고비에서 스케일이 막힌 브랜드의 공통점</h2>
+          <p>
+            이 브랜드는 제품 메시지도 많고, 하고 싶은 말도 많았습니다. 문제는 광고 아이디어가 없는 것이 아니라,
+            그 메시지를 빠르게 소재화하고 테스트하는 시스템이 없다는 점이었습니다.
+          </p>
+          <strong>스케일이 막힌 브랜드는 보통 아이디어가 부족한 것이 아닙니다. 아이디어를 광고 소재로 변환하는 속도가 부족합니다.</strong>
+        </div>
+        <div className="cv-case-board">
+          {[
+            ['Current ad spend', '₩54M / month'],
+            ['Problem', 'Creative testing bottleneck'],
+            ['Available asset', 'factory footage, product story, product demo, customer objections'],
+            ['Solution', 'Raw Material Engine + Video Catalog + Creative Testing'],
+            ['Goal', 'Increase creative testing volume and find scalable winners'],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <small>{label}</small>
+              <span>{value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="offers" className="cv-section">
+        <SectionHeader
+          eyebrow="Offers"
+          title="소재 병목을 푸는 3가지 진입 구조"
+          body="브랜드 상황에 따라 빠른 테스트, SKU 기반 영상 카탈로그, 또는 월 운영형 Scale OS로 시작할 수 있습니다."
+        />
+        <div className="cv-offers">
+          {offers.map((offer) => (
+            <article key={offer.title} className="cv-offer">
+              <span>{offer.kicker}</span>
+              <h3>{offer.title}</h3>
+              <p>{offer.forWho}</p>
+              <ul>
+                {offer.deliverables.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <a href="#diagnosis">{offer.cta} <ArrowRight size={16} /></a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="diagnosis" className="cv-section cv-final">
+        <div className="cv-final-copy">
+          <SectionLabel>Free Creative Velocity Diagnosis</SectionLabel>
+          <h2>광고비를 더 쓰기 전에, 소재 병목부터 진단하세요.</h2>
+          <p>
+            지금 필요한 것은 더 많은 광고 세팅이 아니라, 알고리즘이 계속 학습할 수 있는 소재 공급 시스템입니다.
+            월 ₩10M 이상 광고를 집행 중인 DTC/ecommerce 브랜드를 우선 진단합니다.
+          </p>
+          <div className="cv-final-points">
+            <span><SearchCheck size={18} />소재 병목 진단</span>
+            <span><BarChart3 size={18} />광고 구조 확인</span>
+            <span><LineChart size={18} />Winner Scaling 방향 제안</span>
+          </div>
+        </div>
+        <CreativeVelocityForm />
+      </section>
+
+      <footer className="cv-footer">
+        <div>
+          <strong>HI-OP</strong>
+          <span>Creative Velocity OS for DTC performance teams.</span>
+        </div>
+        <div>
+          <Link href="/privacy">개인정보 처리방침</Link>
+          <Link href="/terms">이용약관</Link>
+        </div>
+      </footer>
     </main>
   );
 }

@@ -32,6 +32,11 @@ const pushEvent = (event, extra = {}) => {
   });
 };
 
+const getOrCreatePageViewEventId = () => {
+  window.__hiobPageViewEventId = window.__hiobPageViewEventId || crypto.randomUUID();
+  return window.__hiobPageViewEventId;
+};
+
 const scheduleIdle = (callback) => {
   if ('requestIdleCallback' in window) {
     return {
@@ -70,13 +75,15 @@ export default function TrackingBridge() {
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
-    const pageViewEventId = crypto.randomUUID();
+    const pageViewEventId = getOrCreatePageViewEventId();
 
     pushEvent('hiob_page_view', {
       event_id: pageViewEventId,
       event_name: 'PageView',
       value: 1,
+      currency: 'KRW',
       content_name: document.title,
+      'x-fb-cd-content_name': document.title,
       custom_properties: JSON.stringify({ signal_type: 'page_view' }),
     });
 
@@ -89,6 +96,10 @@ export default function TrackingBridge() {
           eventSourceUrl: window.location.href,
           ...captureMetaAttribution(),
           eventId: pageViewEventId,
+          eventName: 'PageView',
+          contentName: document.title,
+          value: 1,
+          currency: 'KRW',
         }),
       }).catch(() => {});
     });

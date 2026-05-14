@@ -14,11 +14,11 @@ const syne = Syne({
 
 export const metadata = {
   title: {
-    default: '히옵 | 광고비 새는 곳을 잡는 퍼포먼스 마케팅',
+    default: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
     template: '%s | 히옵',
   },
   description:
-    '전환 0, ROAS 실종, GA4 숫자 불일치. 히옵은 Meta CAPI, Google Ads, GA4, GTM, 리드 랜딩을 진단해 광고비가 새는 지점을 바로 잡습니다.',
+    '히옵은 Meta CAPI, Pixel, GA4, GTM, 랜딩 전환 흐름을 정리해 광고 성과를 안정적으로 측정하고 개선하는 퍼포먼스 마케팅 파트너입니다.',
   metadataBase: new URL('https://hi-ob.com'),
   icons: { icon: '/favicon.svg' },
   openGraph: {
@@ -26,14 +26,14 @@ export const metadata = {
     locale: 'ko_KR',
     type: 'website',
     url: 'https://hi-ob.com',
-    title: '히옵 | 광고비 새는 곳을 잡는 퍼포먼스 마케팅',
+    title: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
     description:
-      '결과가 안 잡히면 광고가 좋은 손님을 못 찾아요. Pixel, CAPI, GA4, GTM, 랜딩부터 진단합니다.',
+      'Meta CAPI, Pixel, GA4, GTM, 랜딩 전환 흐름을 하나의 기준으로 정리해 광고 성과 개선 기반을 구축합니다.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '히옵 | 광고비 새는 곳을 잡는 퍼포먼스 마케팅',
-    description: '전환 0? 데이터 어디감? 히옵이 광고비 새는 곳부터 표시합니다.',
+    title: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
+    description: '전환 데이터, 광고 계정, 랜딩, 소재 흐름을 함께 점검하고 실행 우선순위를 제안합니다.',
   },
 };
 

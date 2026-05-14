@@ -27,6 +27,11 @@ const initGtm = (gtmId) => {
   appendScript('hiob-gtm', `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`);
 };
 
+const getOrCreatePageViewEventId = () => {
+  window.__hiobPageViewEventId = window.__hiobPageViewEventId || crypto.randomUUID();
+  return window.__hiobPageViewEventId;
+};
+
 const initMetaPixel = (pixelId) => {
   if (!pixelId || window.__hiobMetaPixelLoaded) return;
 
@@ -51,7 +56,7 @@ const initMetaPixel = (pixelId) => {
 
   appendScript('hiob-meta-pixel', 'https://connect.facebook.net/en_US/fbevents.js');
   window.fbq('init', pixelId);
-  window.fbq('track', 'PageView');
+  window.fbq('track', 'PageView', {}, { eventID: getOrCreatePageViewEventId() });
 };
 
 export default function DeferredAnalytics({ gtmId, pixelId }) {

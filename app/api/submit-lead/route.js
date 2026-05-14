@@ -87,14 +87,19 @@ export async function POST(request) {
     // ── 2. Meta CAPI (함수 내부에서 env 읽기)
     const PIXEL_ID = env.META_PIXEL_ID || '1715625702927911';
     const ACCESS_TOKEN = env.META_ACCESS_TOKEN;
-    const CAPI_MODE = env.META_CAPI_MODE || 'gtm_server';
+    const CAPI_MODE = (env.META_CAPI_MODE || 'direct').toLowerCase();
     const GRAPH_API_VERSION = env.META_GRAPH_API_VERSION || 'v25.0';
-    let capiStatus = CAPI_MODE === 'direct' ? 'not_configured' : 'delegated_to_gtm_server';
+    let capiStatus = ACCESS_TOKEN ? 'not_sent' : 'not_configured';
 
-    if (CAPI_MODE === 'direct' && PIXEL_ID && ACCESS_TOKEN) {
+    if (CAPI_MODE === 'gtm_server') {
+      capiStatus = 'delegated_to_gtm_server';
+    }
+
+    if ((CAPI_MODE === 'direct' || CAPI_MODE === 'both') && PIXEL_ID && ACCESS_TOKEN) {
       const { firstName, lastName } = splitKoreanName(name);
       const cookieHeader = request.headers.get('cookie');
       const referer = request.headers.get('referer');
+      const contentName = company || 'general';
       const fbc = resolveFbc({
         cookieHeader,
         bodyFbc: clientFbc,
@@ -129,7 +134,15 @@ export async function POST(request) {
           user_data: Object.fromEntries(
             Object.entries(userData).filter(([, value]) => value !== undefined)
           ),
-          custom_data: { company_name: company },
+          custom_data: Object.fromEntries(
+            Object.entries({
+              content_name: contentName,
+              value: 300000,
+              currency: 'KRW',
+              company_name: company || undefined,
+              lead_source: source || 'hi-op',
+            }).filter(([, value]) => value !== undefined)
+          ),
         }],
       };
 
