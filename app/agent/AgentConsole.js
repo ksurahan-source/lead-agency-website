@@ -51,7 +51,7 @@ export default function AgentConsole() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      const data = await response.json();
+      const data = await readJsonResponse(response);
 
       if (!response.ok) {
         throw new Error(data.message || '생성에 실패했습니다.');
@@ -198,14 +198,22 @@ export default function AgentConsole() {
 
 async function recordCanvasVideo(canvas, job) {
   const context = canvas.getContext('2d');
+  if (!context) {
+    throw new Error('현재 브라우저에서 영상 캔버스를 열 수 없습니다.');
+  }
+  if (typeof canvas.captureStream !== 'function' || typeof MediaRecorder === 'undefined') {
+    throw new Error('현재 브라우저가 영상 녹화를 지원하지 않습니다. Chrome 또는 최신 Safari에서 다시 시도해주세요.');
+  }
+
   const stream = canvas.captureStream(30);
   const chunks = [];
+  const canCheckMimeType = typeof MediaRecorder.isTypeSupported === 'function';
   const mimeType = [
     'video/webm;codecs=vp9',
     'video/webm;codecs=vp8',
     'video/webm',
     'video/mp4',
-  ].find((type) => MediaRecorder.isTypeSupported(type));
+  ].find((type) => !canCheckMimeType || MediaRecorder.isTypeSupported(type));
 
   if (!mimeType) {
     throw new Error('현재 브라우저가 영상 녹화를 지원하지 않습니다. Chrome 또는 최신 Safari에서 다시 시도해주세요.');
@@ -232,6 +240,17 @@ async function recordCanvasVideo(canvas, job) {
   recorder.stop();
 
   return done;
+}
+
+async function readJsonResponse(response) {
+  const contentType = response.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    return response.json();
+  }
+
+  const message = response.ok ? '응답 형식을 확인할 수 없습니다.' : '로그인이 만료되었거나 서버 응답이 올바르지 않습니다.';
+  return { message };
 }
 
 async function animateScenes(context, canvas, scenes, totalDuration) {
