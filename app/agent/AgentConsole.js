@@ -1,12 +1,14 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  Clipboard,
   Download,
   Film,
   Loader2,
   LogOut,
   Play,
+  RefreshCcw,
   WandSparkles,
 } from 'lucide-react';
 import styles from './page.module.css';
@@ -23,6 +25,23 @@ const DEFAULT_BRIEF = {
   duration: '18',
 };
 
+const STYLE_OPTIONS = ['ugc', 'influencer', 'pov', 'testimonial', 'native', 'shortform'];
+
+const LOADING_STEPS = [
+  '상위 퍼포먼스 광고 패턴 분석 중...',
+  'UGC 구조 조합 중...',
+  '후킹 문장 생성 중...',
+  '전환형 CTA 최적화 중...',
+  'Meta/Reels 비율로 렌더링 중...',
+];
+
+const EXPECTED_RESULTS = [
+  'Hook 5종',
+  'CTA 3종',
+  'UGC 구조 자동 조합',
+  'Meta/Reels 최적화 비율 적용',
+];
+
 export default function AgentConsole() {
   const canvasRef = useRef(null);
   const [form, setForm] = useState(DEFAULT_BRIEF);
@@ -30,7 +49,22 @@ export default function AgentConsole() {
   const [videoOutput, setVideoOutput] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isRendering, setIsRendering] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
+  const [copyStatus, setCopyStatus] = useState('');
   const [error, setError] = useState('');
+  const isBusy = isGenerating || isRendering;
+
+  useEffect(() => {
+    if (!isBusy) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      setLoadingStep((current) => (current + 1) % LOADING_STEPS.length);
+    }, 1100);
+
+    return () => window.clearInterval(timer);
+  }, [isBusy]);
 
   const updateField = (event) => {
     setForm((current) => ({
@@ -41,15 +75,21 @@ export default function AgentConsole() {
 
   async function generateStoryboard(event) {
     event.preventDefault();
+    await runGeneration(form);
+  }
+
+  async function runGeneration(nextForm) {
     setError('');
+    setCopyStatus('');
     setVideoOutput(null);
+    setLoadingStep(0);
     setIsGenerating(true);
 
     try {
       const response = await fetch('/api/agent/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(nextForm),
       });
       const data = await readJsonResponse(response);
 
@@ -66,10 +106,31 @@ export default function AgentConsole() {
     }
   }
 
+  async function regenerateWithNextStyle() {
+    const currentIndex = STYLE_OPTIONS.indexOf(form.style);
+    const nextStyle = STYLE_OPTIONS[(currentIndex + 1) % STYLE_OPTIONS.length];
+    const nextForm = { ...form, style: nextStyle };
+    setForm(nextForm);
+    await runGeneration(nextForm);
+  }
+
+  async function copyScript() {
+    if (!job) return;
+    const script = job.fullScript || job.scenes.map((scene) => scene.voiceover).join('\n');
+
+    try {
+      await navigator.clipboard.writeText(script);
+      setCopyStatus('스크립트 복사 완료');
+    } catch {
+      setCopyStatus('브라우저 권한 때문에 복사에 실패했습니다.');
+    }
+  }
+
   async function renderVideo(nextJob = job) {
     if (!nextJob || !canvasRef.current) return;
     setIsRendering(true);
     setVideoOutput(null);
+    setLoadingStep(0);
 
     try {
       const output = await recordCanvasVideo(canvasRef.current, nextJob);
@@ -89,8 +150,8 @@ export default function AgentConsole() {
             <WandSparkles size={18} />
             Private HI-OB Engine
           </p>
-          <h1>광고 영상 생성 콘솔</h1>
-          <p>고객 설정값을 넣으면 5씬 숏폼 스토리보드와 즉시 다운로드 가능한 영상을 생성합니다.</p>
+          <h1>성과형 광고 소재 엔진</h1>
+          <p>영상 제작이 아니라 광고 소재 병목을 줄이고, Hook/CTA/UGC 구조를 성과형으로 조합합니다.</p>
         </div>
         <form action="/api/agent/logout" method="post">
           <button className={styles.logoutButton} type="submit">
@@ -104,7 +165,7 @@ export default function AgentConsole() {
         <form className={styles.controlPanel} onSubmit={generateStoryboard}>
           <div className={styles.panelTitle}>
             <Film size={19} />
-            생성 설정
+            크리에이티브 설계
           </div>
 
           <label>
@@ -116,11 +177,11 @@ export default function AgentConsole() {
             <input name="product" value={form.product} onChange={updateField} required />
           </label>
           <label>
-            타깃
+            전환 타깃
             <textarea name="audience" value={form.audience} onChange={updateField} required />
           </label>
           <label>
-            핵심 문제
+            구매/전환 마찰
             <textarea name="painPoint" value={form.painPoint} onChange={updateField} required />
           </label>
           <label>
@@ -128,7 +189,7 @@ export default function AgentConsole() {
             <textarea name="offer" value={form.offer} onChange={updateField} required />
           </label>
           <label>
-            증거/후킹 근거
+            검증 포인트
             <textarea name="proof" value={form.proof} onChange={updateField} />
           </label>
           <div className={styles.formRow}>
@@ -149,46 +210,89 @@ export default function AgentConsole() {
             </label>
           </div>
           <label>
-            CTA
+            전환 행동
             <input name="cta" value={form.cta} onChange={updateField} required />
           </label>
 
           {error ? <p className={styles.error}>{error}</p> : null}
 
-          <button className={styles.generateButton} type="submit" disabled={isGenerating || isRendering}>
-            {isGenerating || isRendering ? <Loader2 size={18} className={styles.spin} /> : <Play size={18} />}
-            {isGenerating ? '스토리보드 생성 중' : isRendering ? '영상 렌더링 중' : '영상 생성'}
+          <button className={styles.generateButton} type="submit" disabled={isBusy}>
+            {isBusy ? <Loader2 size={18} className={styles.spin} /> : <Play size={18} />}
+            {isGenerating ? '성과 구조 생성 중' : isRendering ? '광고 소재 렌더링 중' : '크리에이티브 설계 실행'}
           </button>
         </form>
 
         <div className={styles.previewPanel}>
           <canvas ref={canvasRef} className={styles.canvas} width="1080" height="1920" />
 
+          {isBusy ? (
+            <div className={styles.loadingOverlay}>
+              <Loader2 size={22} className={styles.spin} />
+              <strong>{LOADING_STEPS[loadingStep]}</strong>
+              <span>광고비를 태우는 영상 말고, 전환을 만드는 구조로 조합하고 있습니다.</span>
+            </div>
+          ) : null}
+
           <div className={styles.outputActions}>
             <button type="button" onClick={() => renderVideo()} disabled={!job || isRendering}>
               <Play size={17} />
-              다시 렌더
+              소재 다시 렌더
             </button>
             {videoOutput ? (
-              <a href={videoOutput.url} download={`hiob-agent-${job?.id || 'video'}.${videoOutput.extension}`}>
-                <Download size={17} />
-                영상 다운로드
-              </a>
+              <>
+                <a href={videoOutput.url} download={`hiob-meta-ad-${job?.id || 'video'}.${videoOutput.extension}`}>
+                  <Download size={17} />
+                  Meta 광고용 다운로드
+                </a>
+                <a href={videoOutput.url} download={`hiob-reels-${job?.id || 'video'}.${videoOutput.extension}`}>
+                  <Download size={17} />
+                  릴스 업로드용 저장
+                </a>
+              </>
+            ) : null}
+            {job ? (
+              <>
+                <button type="button" onClick={copyScript}>
+                  <Clipboard size={17} />
+                  스크립트 복사
+                </button>
+                <button type="button" onClick={regenerateWithNextStyle} disabled={isBusy}>
+                  <RefreshCcw size={17} />
+                  다른 스타일로 재생성
+                </button>
+              </>
             ) : null}
           </div>
 
           {job ? (
-            <div className={styles.storyboard}>
-              {job.scenes.map((scene, index) => (
-                <article key={scene.title}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{scene.text}</strong>
-                  <p>{scene.voiceover}</p>
-                </article>
-              ))}
-            </div>
+            <>
+              <div className={styles.resultHeader}>
+                <span>생성 완료</span>
+                <h2>전환을 만드는 광고 구조가 준비됐습니다.</h2>
+                <p>Hook, 문제 제기, 증거, 오퍼, CTA까지 성과형 쇼츠 흐름으로 조합했습니다.</p>
+                {copyStatus ? <em>{copyStatus}</em> : null}
+              </div>
+              <div className={styles.storyboard}>
+                {job.scenes.map((scene, index) => (
+                  <article key={scene.title}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <strong>{scene.text}</strong>
+                    <p>{scene.voiceover}</p>
+                  </article>
+                ))}
+              </div>
+            </>
           ) : (
-            <div className={styles.emptyState}>설정값을 확인한 뒤 영상 생성 버튼을 누르세요.</div>
+            <div className={styles.emptyState}>
+              <span>예상 생성 결과</span>
+              <h2>광고비를 태우는 영상 말고, 전환을 만드는 영상을 생성하세요.</h2>
+              <p>클릭률과 체류시간을 고려한 퍼포먼스 쇼츠가 자동 생성됩니다.</p>
+              <ul>
+                {EXPECTED_RESULTS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </section>
