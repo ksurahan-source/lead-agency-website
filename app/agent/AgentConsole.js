@@ -36,10 +36,10 @@ const LOADING_STEPS = [
 ];
 
 const EXPECTED_RESULTS = [
-  'Hook 5종',
-  'CTA 3종',
-  'UGC 구조 자동 조합',
-  'Meta/Reels 최적화 비율 적용',
+  'Hook Score 5종',
+  'Thumbstop 예측',
+  '시장 감정 라벨',
+  'Winner 후보 비교',
 ];
 
 export default function AgentConsole() {
@@ -116,11 +116,11 @@ export default function AgentConsole() {
 
   async function copyScript() {
     if (!job) return;
-    const script = job.fullScript || job.scenes.map((scene) => scene.voiceover).join('\n');
+    const script = formatWinnerScript(job);
 
     try {
       await navigator.clipboard.writeText(script);
-      setCopyStatus('스크립트 복사 완료');
+      setCopyStatus('Winner 테스트 시트 복사 완료');
     } catch {
       setCopyStatus('브라우저 권한 때문에 복사에 실패했습니다.');
     }
@@ -254,11 +254,11 @@ export default function AgentConsole() {
               <>
                 <button type="button" onClick={copyScript}>
                   <Clipboard size={17} />
-                  스크립트 복사
+                  Winner 스크립트 복사
                 </button>
                 <button type="button" onClick={regenerateWithNextStyle} disabled={isBusy}>
                   <RefreshCcw size={17} />
-                  다른 스타일로 재생성
+                  다른 각도로 재생성
                 </button>
               </>
             ) : null}
@@ -267,16 +267,38 @@ export default function AgentConsole() {
           {job ? (
             <>
               <div className={styles.resultHeader}>
-                <span>생성 완료</span>
-                <h2>전환을 만드는 광고 구조가 준비됐습니다.</h2>
-                <p>Hook, 문제 제기, 증거, 오퍼, CTA까지 성과형 쇼츠 흐름으로 조합했습니다.</p>
+                <span>Winner 후보 생성 완료</span>
+                <h2>시장 감정 테스트용 소재 구조가 준비됐습니다.</h2>
+                <p>Hook, Scroll Stop, Proof, Twist, CTA 흐름으로 후보를 나누고 반응 가능성을 점수화했습니다.</p>
+                <div className={styles.scoreStrip}>
+                  <strong>Creative Score {job.creativeScore}</strong>
+                  <strong>{job.winningAngle}</strong>
+                  <span>{job.winnerReason}</span>
+                </div>
                 {copyStatus ? <em>{copyStatus}</em> : null}
               </div>
               <div className={styles.storyboard}>
                 {job.scenes.map((scene, index) => (
-                  <article key={scene.title}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
+                  <article key={`${scene.stage}-${scene.title}`}>
+                    <div className={styles.sceneTopline}>
+                      <span>{scene.stage}</span>
+                      <b>HOOK {scene.hookScore}</b>
+                    </div>
                     <strong>{scene.text}</strong>
+                    <dl>
+                      <div>
+                        <dt>Thumbstop</dt>
+                        <dd>{scene.thumbstopScore}</dd>
+                      </div>
+                      <div>
+                        <dt>Emotion</dt>
+                        <dd>{scene.emotion}</dd>
+                      </div>
+                      <div>
+                        <dt>Response</dt>
+                        <dd>{scene.targetResponse}</dd>
+                      </div>
+                    </dl>
                     <p>{scene.voiceover}</p>
                   </article>
                 ))}
@@ -357,6 +379,27 @@ async function readJsonResponse(response) {
   return { message };
 }
 
+function formatWinnerScript(job) {
+  const lines = [
+    `Creative Score: ${job.creativeScore}`,
+    `Winning Angle: ${job.winningAngle}`,
+    `Winner Reason: ${job.winnerReason}`,
+    '',
+  ];
+
+  for (const scene of job.scenes) {
+    lines.push(
+      `[${scene.stage}] Hook ${scene.hookScore} / Thumbstop ${scene.thumbstopScore}`,
+      `Emotion: ${scene.emotion}`,
+      `Target Response: ${scene.targetResponse}`,
+      `Script: ${scene.voiceover}`,
+      '',
+    );
+  }
+
+  return lines.join('\n');
+}
+
 async function animateScenes(context, canvas, scenes, totalDuration) {
   const totalMs = totalDuration * 1000;
   const sceneMs = totalMs / scenes.length;
@@ -386,33 +429,119 @@ function drawScene(context, canvas, scene, index, total, progress) {
   context.fillStyle = scene.background;
   context.fillRect(0, 0, width, height);
 
-  context.fillStyle = scene.accent;
-  context.fillRect(0, 0, width, 34);
-  context.fillRect(0, height - 34, width, 34);
+  drawNoise(context, width, height, index);
+  drawPhoneFrame(context, width, height);
+  drawRecordingHeader(context, scene, index);
+  drawMetricStack(context, scene, progress);
+  drawMainCaption(context, scene, progress);
+  drawMarketSignal(context, scene);
 
+  context.fillStyle = scene.accent;
+  context.fillRect(72, height - 54, (width - 144) * ((index + progress) / total), 12);
+}
+
+function drawNoise(context, width, height, index) {
   context.globalAlpha = 0.08;
   context.fillStyle = '#ffffff';
-  context.beginPath();
-  context.arc(width * (0.3 + progress * 0.25), height * 0.28, 280, 0, Math.PI * 2);
-  context.fill();
+  for (let dot = 0; dot < 90; dot += 1) {
+    const x = (dot * 137 + index * 91) % width;
+    const y = (dot * 211 + index * 67) % height;
+    context.fillRect(x, y, 2, 2);
+  }
   context.globalAlpha = 1;
+}
 
-  context.fillStyle = scene.accent === '#ffffff' ? '#ffffff' : '#111111';
-  context.font = '900 54px Pretendard, Arial';
-  context.fillText(`HI-OB AGENT / ${String(index + 1).padStart(2, '0')}`, 72, 130);
+function drawPhoneFrame(context, width, height) {
+  roundRect(context, 46, 44, width - 92, height - 88, 46, '#050505');
+  roundRect(context, 74, 88, width - 148, height - 176, 28, '#111111');
+  context.strokeStyle = 'rgba(255,255,255,0.22)';
+  context.lineWidth = 3;
+  context.strokeRect(74, 88, width - 148, height - 176);
+}
 
-  context.fillStyle = scene.accent;
-  context.fillRect(72, 176, 180 + progress * 540, 14);
+function drawRecordingHeader(context, scene, index) {
+  context.fillStyle = '#ffffff';
+  context.font = '900 46px Pretendard, Arial';
+  context.fillText(`WINNER TEST / ${scene.stage}`, 104, 160);
 
-  context.fillStyle = scene.accent === '#ffffff' ? '#ffffff' : '#111111';
-  wrapText(context, scene.text, 72, 520, 920, 118, '900 104px Pretendard, Arial');
+  context.fillStyle = '#ff3b30';
+  context.beginPath();
+  context.arc(100, 142, 10, 0, Math.PI * 2);
+  context.fill();
 
-  context.fillStyle = scene.background === '#111111' ? '#f8f6ef' : '#333333';
-  wrapText(context, scene.voiceover, 76, 1190, 900, 58, '800 44px Pretendard, Arial');
+  roundRect(context, 104, 194, 260, 54, 10, scene.accent);
+  context.fillStyle = scene.accent === '#ffffff' ? '#111111' : '#080808';
+  context.font = '900 28px Pretendard, Arial';
+  context.fillText(`HOOK SCORE ${scene.hookScore}`, 124, 230);
 
-  context.fillStyle = scene.accent;
-  context.font = '900 42px Pretendard, Arial';
-  context.fillText(`${index + 1}/${total}`, 72, height - 98);
+  context.fillStyle = 'rgba(255,255,255,0.72)';
+  context.font = '800 26px Pretendard, Arial';
+  context.fillText(`${String(index + 1).padStart(2, '0')} / ${scene.source}`, 760, 230);
+}
+
+function drawMetricStack(context, scene, progress) {
+  const x = 104;
+  const y = 300;
+  const rows = [
+    ['THUMBSTOP', scene.thumbstopScore],
+    ['EMOTION', scene.emotion],
+    ['SIGNAL', scene.metric],
+  ];
+
+  rows.forEach(([label, value], rowIndex) => {
+    const rowY = y + rowIndex * 82;
+    roundRect(context, x, rowY, 360 + progress * 90, 58, 10, 'rgba(255,255,255,0.10)');
+    context.fillStyle = '#f8f6ef';
+    context.font = '900 22px Pretendard, Arial';
+    context.fillText(label, x + 18, rowY + 37);
+    context.fillStyle = scene.accent;
+    context.font = '900 31px Pretendard, Arial';
+    context.fillText(value, x + 190, rowY + 39);
+  });
+}
+
+function drawMainCaption(context, scene, progress) {
+  const shake = Math.sin(progress * Math.PI * 10) * 4;
+  context.fillStyle = '#f8f6ef';
+  wrapText(context, scene.text, 108 + shake, 680, 850, 104, '1000 86px Pretendard, Arial');
+
+  roundRect(context, 104, 1110, 872, 250, 22, 'rgba(0,0,0,0.58)');
+  context.fillStyle = '#ffffff';
+  wrapText(context, scene.voiceover, 132, 1184, 812, 55, '900 42px Pretendard, Arial');
+}
+
+function drawMarketSignal(context, scene) {
+  roundRect(context, 104, 1428, 872, 264, 22, 'rgba(255,255,255,0.10)');
+  context.fillStyle = '#f7c72f';
+  context.font = '1000 34px Pretendard, Arial';
+  context.fillText('MARKET RESPONSE', 136, 1494);
+
+  context.fillStyle = '#ffffff';
+  wrapText(context, scene.targetResponse, 136, 1570, 550, 48, '900 38px Pretendard, Arial');
+
+  roundRect(context, 710, 1512, 210, 82, 16, scene.accent);
+  context.fillStyle = scene.accent === '#ffffff' ? '#111111' : '#080808';
+  context.font = '1000 32px Pretendard, Arial';
+  context.fillText(scene.metric, 744, 1564);
+
+  context.fillStyle = 'rgba(255,255,255,0.62)';
+  context.font = '800 28px Pretendard, Arial';
+  context.fillText('댓글 저장 문의 비교 테스트', 136, 1640);
+}
+
+function roundRect(context, x, y, width, height, radius, fillStyle) {
+  context.fillStyle = fillStyle;
+  context.beginPath();
+  context.moveTo(x + radius, y);
+  context.lineTo(x + width - radius, y);
+  context.quadraticCurveTo(x + width, y, x + width, y + radius);
+  context.lineTo(x + width, y + height - radius);
+  context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  context.lineTo(x + radius, y + height);
+  context.quadraticCurveTo(x, y + height, x, y + height - radius);
+  context.lineTo(x, y + radius);
+  context.quadraticCurveTo(x, y, x + radius, y);
+  context.fill();
 }
 
 function wrapText(context, text, x, y, maxWidth, lineHeight, font) {
