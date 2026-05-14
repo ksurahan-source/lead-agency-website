@@ -266,8 +266,8 @@ export default function HomePage() {
       <section id="contact" style={{ padding: '8rem 2rem', background: '#fff', borderBottom: '4px solid #121212' }}>
         <div className="wrap" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1.5rem' }}>우리 광고, 어디서 새는지 볼까요?</h2>
-            <p style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.6 }}>증상만 말씀해 주세요. 히옵이 데이터, 랜딩, 소재 중 범인을 먼저 찾아드립니다.</p>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1.5rem' }}>광고비 누수 지점을 진단해드립니다</h2>
+            <p style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.6 }}>현재 증상을 남겨주시면 데이터, 랜딩, 소재 흐름을 검토해 우선 개선 지점을 정리해드립니다.</p>
           </div>
           <LeadForm source="home_overhaul_v2" lang="ko" />
         </div>

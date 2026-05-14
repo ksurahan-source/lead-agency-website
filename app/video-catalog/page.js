@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const points = [
   {
@@ -34,13 +35,23 @@ export default function VideoCatalogPage() {
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
 
+      <LeadFormTop
+        eyebrow="영상 카탈로그"
+        title="제품별 영상 소재 운영 구조를 설계합니다"
+        description="제품 피드, 베스트셀러, 장바구니 이탈 데이터를 바탕으로 계속 확장 가능한 영상 소재 구조를 설계합니다. 릴스 운영도 매출 데이터와 함께 보겠습니다."
+        bullets={['제품 피드 연동', '후킹 템플릿', '릴스 소재 확장']}
+        source="video-catalog-top"
+        formVariant="ecom"
+        accent="var(--hiop-orange)"
+      />
+
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>영상</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">카탈로그 광고</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>릴스 소재</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">계속 뽑아야 함</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
-            동적 소재 최적화로 평균 ROAS 68%, 최대 250% 향상.<br />
-            히옵이 설계하는 자동화된 영상 광고 시스템입니다.
+            하나 잘 터졌다고 끝이 아닙니다. 피로도는 오고 상품은 바뀝니다.<br />
+            히옵은 소재를 한 번 만들고 끝내지 않고, 반복 생산 가능한 구조로 설계합니다.
           </p>
         </div>
       </section>
@@ -69,7 +80,7 @@ export default function VideoCatalogPage() {
 
       <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <LeadForm source="video-catalog" lang="ko" />
+          <LeadForm source="video-catalog" lang="ko" variant="ecom" />
         </div>
       </section>
 

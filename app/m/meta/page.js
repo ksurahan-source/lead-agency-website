@@ -1,6 +1,7 @@
 'use client';
 
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, TrendingUp, BarChart3, Database } from 'lucide-react';
@@ -16,6 +17,15 @@ export default function MobileMetaPage() {
         <Link href="/m" style={{ marginRight: '1rem', color: 'inherit' }}><ArrowLeft size={24} /></Link>
         <div className="font-display" style={{ fontSize: '1.2rem' }}>HI-OP / META</div>
       </nav>
+
+      <LeadFormTop
+        eyebrow="모바일 빠른 진단"
+        title="메타 광고 흐름을 빠르게 점검해드립니다"
+        description="Pixel, CAPI, EMQ, 릴스 소재가 성과 학습에 잘 연결되는지 먼저 확인합니다."
+        bullets={['CAPI 체크', '릴스 소재', '계정 구조']}
+        source="meta-mobile-top"
+        accent="var(--hiop-blue)"
+      />
 
       {/* Hero Section - Readability Focus */}
       <section style={{ padding: '3rem 1.2rem', background: '#fff' }}>

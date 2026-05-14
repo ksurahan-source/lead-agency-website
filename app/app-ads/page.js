@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLang } from '../../hooks/useLang';
 import Footer from '../../components/Footer';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const content = {
   ko: {
@@ -43,6 +44,19 @@ export default function AppAdsPage() {
         <div className="font-display" style={{ fontSize: '2.5rem' }}>HI-OP / APP ADS</div>
         <a href="/" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none' }}>BACK TO HOME</a>
       </nav>
+      <LeadFormTop
+        eyebrow={lang === 'ko' ? '앱 광고 진단' : 'App Ads Diagnosis'}
+        title={lang === 'ko' ? '앱 설치 이후의 유저 품질까지 점검합니다' : 'We review user quality beyond app installs.'}
+        description={
+          lang === 'ko'
+            ? 'MMP, SKAN, 인앱 이벤트가 광고 알고리즘에 제대로 전달되는지 확인합니다. 설치 수뿐 아니라 구매, 구독, 핵심 행동까지 함께 보겠습니다.'
+            : 'We check whether MMP, SKAN, and in-app events are passed clearly to ad algorithms, with a focus on quality actions.'
+        }
+        bullets={lang === 'ko' ? ['MMP 포스트백', 'SKAN 4.0', '인앱 이벤트'] : ['MMP postbacks', 'SKAN 4.0', 'In-app events']}
+        source="app-ads-top"
+        lang={lang}
+        accent="var(--hiop-blue)"
+      />
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-blue)' }}>{c.hero1}</motion.h1>

@@ -1,6 +1,7 @@
 'use client';
 
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, Search, BarChart, Target } from 'lucide-react';
@@ -16,6 +17,15 @@ export default function MobileGooglePage() {
         <Link href="/m" style={{ marginRight: '1rem', color: 'inherit' }}><ArrowLeft size={24} /></Link>
         <div className="font-display" style={{ fontSize: '1.2rem' }}>HI-OP / GOOGLE</div>
       </nav>
+
+      <LeadFormTop
+        eyebrow="모바일 빠른 진단"
+        title="구글 광고 성과 흐름을 빠르게 점검합니다"
+        description="향상된 전환, GA4, PMax 시그널이 제대로 묶였는지 먼저 확인합니다."
+        bullets={['향상된 전환', 'PMax', 'GA4']}
+        source="google-mobile-top"
+        accent="#EA4335"
+      />
 
       {/* Hero Section */}
       <section style={{ padding: '3rem 1.2rem', background: '#fff' }}>

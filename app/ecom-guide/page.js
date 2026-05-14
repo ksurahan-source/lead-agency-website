@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const points = [
   {
@@ -34,13 +35,23 @@ export default function EcomGuidePage() {
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
 
+      <LeadFormTop
+        eyebrow="추적 가이드"
+        title="구매 데이터가 광고 성과로 이어지도록 정리합니다"
+        description="PG 결제, 장바구니, 구매 완료 이벤트가 서로 다른 기준으로 흩어져 있으면 ROAS가 흐려집니다. 이커머스 데이터 지도를 먼저 정리해드립니다."
+        bullets={['구매 이벤트 정리', 'PG/GA4 기준 맞춤', '자가 진단표 제공']}
+        source="ecom-guide-top"
+        formVariant="ecom"
+        accent="var(--hiop-green)"
+      />
+
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-green)' }}>이커머스</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">추적 가이드</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-green)' }}>구매 데이터</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">길 잃었음</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
-            매출 한 건도 놓치지 않는 완벽한 이커머스 데이터 추적 체계.<br />
-            히옵이 구축 방법을 직접 안내합니다.
+            매출 한 건도 놓치지 않는다는 말, 이벤트가 정확할 때만 가능합니다.<br />
+            히옵이 구매 여정의 누락, 중복, 기준 불일치를 표시합니다.
           </p>
         </div>
       </section>
@@ -69,7 +80,7 @@ export default function EcomGuidePage() {
 
       <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <LeadForm source="ecom-guide" lang="ko" />
+          <LeadForm source="ecom-guide" lang="ko" variant="ecom" />
         </div>
       </section>
 

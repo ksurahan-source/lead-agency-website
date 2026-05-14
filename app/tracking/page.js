@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const points = [
   {
@@ -40,10 +41,19 @@ export default function TrackingPage() {
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
 
+      <LeadFormTop
+        eyebrow="데이터 누수 진단"
+        title="전환 데이터 흐름을 먼저 점검해드립니다"
+        description="광고관리자 숫자가 비었거나 GA4와 CRM이 서로 다른 값을 보여준다면, 추가 집행 전에 데이터 흐름을 확인하는 것이 좋습니다. Pixel, CAPI, GTM, GA4 연결 상태를 정리해드립니다."
+        bullets={['Pixel/CAPI 점검', 'event_id 중복 확인', 'GA4 기준 정리']}
+        source="tracking-top"
+        accent="var(--hiop-orange)"
+      />
+
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>전환 0?</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">데이터 어디감?</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>전환 데이터</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">흐름 점검</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
             Pixel, CAPI, GTM, GA4가 서로 다른 말을 하는 순간<br />
             광고는 좋은 손님을 못 찾습니다. 히옵이 새는 곳부터 표시합니다.

@@ -385,6 +385,104 @@ h1, h2, h3, h4 {
   }
 }
 
+/* ── Lead-first service pages ── */
+.lead-form-top {
+  background: #fff;
+  border-bottom: 4px solid var(--border-dark);
+  padding: clamp(2rem, 5vw, 4rem) 1.2rem;
+}
+
+.lead-form-top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 470px);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: stretch;
+}
+
+.lead-form-top-copy {
+  min-width: 0;
+  border: 4px solid #000;
+  background: #f7f5ef;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lead-form-top-copy::after {
+  content: '!';
+  position: absolute;
+  right: clamp(1rem, 4vw, 2rem);
+  top: clamp(0.5rem, 3vw, 1.5rem);
+  color: var(--lead-accent);
+  font-size: clamp(5rem, 16vw, 10rem);
+  font-weight: 1000;
+  line-height: 0.8;
+  opacity: 0.18;
+}
+
+.lead-form-top-eyebrow {
+  display: inline-flex;
+  align-self: flex-start;
+  background: var(--lead-accent);
+  color: #000;
+  border: 3px solid #000;
+  padding: 0.45rem 0.75rem;
+  font-weight: 1000;
+  margin-bottom: 1rem;
+  transform: rotate(-1deg);
+}
+
+.lead-form-top h1 {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.98;
+  margin: 0;
+  letter-spacing: 0;
+  word-break: keep-all;
+  max-width: 920px;
+}
+
+.lead-form-top-description {
+  margin-top: 1.4rem;
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  font-weight: 800;
+  color: #333;
+  line-height: 1.55;
+  max-width: 720px;
+  word-break: keep-all;
+}
+
+.lead-form-top-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+.lead-form-top-bullets span {
+  border: 3px solid #000;
+  background: #fff;
+  padding: 0.55rem 0.75rem;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.lead-form-top-panel {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .lead-form-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-form-top h1 {
+    font-size: clamp(2.2rem, 12vw, 4.2rem);
+  }
+}
+
 /* ── Forms ── */
 .form-input-brutal {
   width: 100%;

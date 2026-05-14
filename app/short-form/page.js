@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLang } from '../../hooks/useLang';
 import Footer from '../../components/Footer';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const content = {
   ko: {
@@ -43,6 +44,19 @@ export default function ShortFormPage() {
         <div className="font-display" style={{ fontSize: '2.5rem' }}>HI-OP / SHORT-FORM</div>
         <a href="/" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none' }}>BACK TO HOME</a>
       </nav>
+      <LeadFormTop
+        eyebrow={lang === 'ko' ? '숏폼 광고 제작' : 'Short-form Production'}
+        title={lang === 'ko' ? '브랜드에 맞는 숏폼 소재 방향을 제안드립니다' : 'We propose short-form creative built around your brand.'}
+        description={
+          lang === 'ko'
+            ? '문제 인식형 후킹은 유지하되, 고객이 불편하지 않도록 브랜드 톤에 맞춰 소재를 설계합니다. 계속 올릴 릴스 자산의 첫 묶음부터 정리해드립니다.'
+            : 'We keep the problem-aware hook, but shape it around your brand tone so the creative can be tested and reused.'
+        }
+        bullets={lang === 'ko' ? ['밈형 후킹', '릴스/쇼츠', '성과 변주'] : ['Meme hooks', 'Reels/Shorts', 'Performance variants']}
+        source="short-form-top"
+        lang={lang}
+        accent="var(--hiop-green)"
+      />
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-green)' }}>{c.hero1}</motion.h1>

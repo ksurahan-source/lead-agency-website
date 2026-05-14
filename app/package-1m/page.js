@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const problems = [
   '비싼 돈 들여 만든 웹사이트인데 문의가 한 건도 없으시죠?',
@@ -48,6 +49,15 @@ export default function Package1MPage() {
         </Link>
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
+
+      <LeadFormTop
+        eyebrow="100만원 패키지"
+        title="첫 광고 인프라를 빠르게 갖춰드립니다"
+        description="랜딩, 릴스, 6일 테스트 집행까지 묶어 첫 데이터를 확인합니다. 현재 상황에서 어떤 메시지와 매체가 반응하는지 짧은 기간 안에 정리해드립니다."
+        bullets={['랜딩 1개', '숏폼 1편', '6일 테스트 집행']}
+        source="package-1m-top"
+        accent="var(--hiop-orange)"
+      />
 
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -174,6 +175,21 @@ export default function GooglePage() {
           <a href="#contact" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none', fontSize: '1.1rem' }}>{c.navCta}</a>
         </div>
       </nav>
+
+      <LeadFormTop
+        eyebrow={lang === 'ko' ? '구글 광고 진단' : 'Google Ads Diagnosis'}
+        title={lang === 'ko' ? '구글 광고 성과 흐름을 정밀하게 진단합니다' : 'A precise diagnosis for your Google Ads growth path.'}
+        description={
+          lang === 'ko'
+            ? '검색어, GA4, 향상된 전환, PMax 시그널이 한 방향으로 연결되는지 확인하고, 현재 계정에서 머신러닝이 배울 수 있는 데이터가 충분한지 점검합니다.'
+            : 'We check whether search intent, GA4, enhanced conversions, and PMax signals are aligned well enough for the algorithm to learn.'
+        }
+        bullets={lang === 'ko' ? ['향상된 전환', 'PMax 시그널', 'GA4 오디언스'] : ['Enhanced conversions', 'PMax signals', 'GA4 audiences']}
+        source="google-top"
+        lang={lang}
+        formVariant="lead"
+        accent="#EA4335"
+      />
 
       {/* Hero */}
       <section style={{ borderBottom: '4px solid var(--border-dark)' }}>

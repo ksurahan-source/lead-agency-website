@@ -6,26 +6,52 @@ import { captureMetaAttribution } from '@/lib/browserMetaAttribution';
 
 const t = {
   ko: {
-    title: '무료 진단 신청',
+    lead: {
+      title: '무료 진단 신청',
+      company: '회사명 / 서비스명',
+      companyPlaceholder: '하이옵 마케팅',
+      inquiry: '현재 문의 상황',
+      inquiryPlaceholder: '현재 운영 중인 매체, 월 광고비, 문의가 막히는 지점을 간단히 적어주세요.',
+      submit: '무료 진단 신청하기 →',
+    },
+    ecom: {
+      title: '이커머스 성장 진단 신청',
+      company: '브랜드명 / 스토어명',
+      companyPlaceholder: '하이옵 스토어',
+      inquiry: '현재 매출 / 광고 상황',
+      inquiryPlaceholder: '월 매출, 월 광고비, 주요 판매채널, ROAS 고민을 간단히 적어주세요.',
+      submit: '이커머스 진단 신청하기 →',
+    },
     name: '성함 *', namePlaceholder: '홍길동',
     email: '이메일 *', emailPlaceholder: 'example@naver.com',
     phone: '연락처 *', phonePlaceholder: '010-0000-0000',
-    company: '회사명 / 브랜드명', companyPlaceholder: '하이옵 마케팅',
-    inquiry: '문의 내용', inquiryPlaceholder: '현재 고민 중인 매체나 목표를 자유롭게 적어주세요.',
-    submit: '무료 진단 신청하기 →', submitting: '제출 중...',
+    submitting: '제출 중...',
     successTitle: '신청 완료!',
     successMsg: '성공적으로 접수되었습니다.\n24시간 내로 담당자가 연락드립니다.',
     labelName: '성함', labelEmail: '이메일', labelPhone: '연락처',
     kakao: '카카오톡 실시간 문의',
   },
   en: {
-    title: 'Free Diagnosis',
+    lead: {
+      title: 'Free Diagnosis',
+      company: 'Company / Service Name',
+      companyPlaceholder: 'HI-OB Marketing',
+      inquiry: 'Current lead generation situation',
+      inquiryPlaceholder: 'Tell us your channels, monthly ad spend, and where inquiries seem to stall.',
+      submit: 'Apply for Free Diagnosis →',
+    },
+    ecom: {
+      title: 'Ecommerce Growth Diagnosis',
+      company: 'Brand / Store Name',
+      companyPlaceholder: 'HI-OB Store',
+      inquiry: 'Current sales / advertising situation',
+      inquiryPlaceholder: 'Share monthly revenue, ad spend, sales channels, and your ROAS challenge.',
+      submit: 'Apply for Ecommerce Diagnosis →',
+    },
     name: 'Name *', namePlaceholder: 'John Doe',
     email: 'Email *', emailPlaceholder: 'example@company.com',
     phone: 'Phone *', phonePlaceholder: '010-0000-0000',
-    company: 'Company / Brand Name', companyPlaceholder: 'HI-OP Marketing',
-    inquiry: 'Inquiry', inquiryPlaceholder: 'Tell us about your current challenges or advertising goals.',
-    submit: 'Apply for Free Diagnosis →', submitting: 'Submitting...',
+    submitting: 'Submitting...',
     successTitle: 'Application Complete!',
     successMsg: 'Successfully submitted.\nOur team will contact you within 24 hours.',
     labelName: 'Name', labelEmail: 'Email', labelPhone: 'Phone',
@@ -52,8 +78,9 @@ const hashData = async (value) => {
     .join('');
 };
 
-export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
+export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lead' }) {
   const s = t[lang] || t.ko;
+  const formCopy = s[variant] || s.lead;
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', company: '', inquiry: '',
   });
@@ -208,7 +235,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
 
   return (
     <div className="brutalist-card">
-      <h3 style={{ fontSize: '2.2rem', marginBottom: '2.5rem' }}>{s.title}</h3>
+      <h3 style={{ fontSize: '2.2rem', marginBottom: '2.5rem' }}>{formCopy.title}</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label-brutal">{s.name}</label>
@@ -229,14 +256,14 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">{s.company}</label>
-          <input name="company" type="text" className="form-input-brutal" placeholder={s.companyPlaceholder}
+          <label className="form-label-brutal">{formCopy.company}</label>
+          <input name="company" type="text" className="form-input-brutal" placeholder={formCopy.companyPlaceholder}
             value={formData.company} onChange={handleChange} />
         </div>
 
         <div className="form-group">
-          <label className="form-label-brutal">{s.inquiry}</label>
-          <textarea name="inquiry" className="form-input-brutal" placeholder={s.inquiryPlaceholder}
+          <label className="form-label-brutal">{formCopy.inquiry}</label>
+          <textarea name="inquiry" className="form-input-brutal" placeholder={formCopy.inquiryPlaceholder}
             style={{ minHeight: '140px' }} value={formData.inquiry} onChange={handleChange} />
         </div>
 
@@ -269,7 +296,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko' }) {
 
         <button type="submit" className="btn-brutal primary" style={{ width: '100%' }}
           disabled={status === 'submitting'}>
-          {status === 'submitting' ? s.submitting : s.submit}
+          {status === 'submitting' ? s.submitting : formCopy.submit}
         </button>
       </form>
     </div>

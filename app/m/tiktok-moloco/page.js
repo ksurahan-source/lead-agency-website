@@ -1,6 +1,7 @@
 'use client';
 
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, Smartphone, Cpu, Zap } from 'lucide-react';
@@ -16,6 +17,15 @@ export default function MobileTikTokPage() {
         <Link href="/m" style={{ marginRight: '1rem', color: 'inherit' }}><ArrowLeft size={24} /></Link>
         <div className="font-display" style={{ fontSize: '1.2rem' }}>HI-OP / SHORT-FORM</div>
       </nav>
+
+      <LeadFormTop
+        eyebrow="모바일 빠른 진단"
+        title="숏폼 반응과 유저 품질을 함께 봅니다"
+        description="숏폼 후킹, MMP 포스트백, 몰로코 이벤트 학습 상태를 먼저 확인합니다."
+        bullets={['후킹 점검', 'MMP', '몰로코']}
+        source="tiktok-mobile-top"
+        accent="#00f2fe"
+      />
 
       {/* Hero Section */}
       <section style={{ padding: '3rem 1.2rem', background: '#fff' }}>

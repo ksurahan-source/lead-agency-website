@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
@@ -22,6 +23,16 @@ export default function TikTokMolocoPage() {
         <div className="font-display" style={{ fontSize: '1.8rem' }}>HI-OP / SHORT-FORM</div>
         <a href="#contact" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none', fontSize: '1.1rem' }}>무료 진단 신청 →</a>
       </nav>
+
+      <LeadFormTop
+        eyebrow="숏폼/몰로코 진단"
+        title="숏폼 성과와 앱 유저 품질을 함께 점검합니다"
+        description="틱톡, 릴스, 몰로코는 영상 반응과 전환 데이터를 함께 봐야 합니다. 첫 3초, MMP 포스트백, 인앱 이벤트가 알고리즘에 제대로 전달되는지 확인합니다."
+        bullets={['초반 3초 후킹', 'MMP 포스트백', '몰로코 학습 이벤트']}
+        source="tiktok-moloco-top"
+        formVariant="lead"
+        accent="#00f2fe"
+      />
 
       {/* Hero */}
       <section style={{ borderBottom: '4px solid var(--border-dark)' }}>

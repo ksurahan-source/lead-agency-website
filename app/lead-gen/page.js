@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const points = [
   {
@@ -34,13 +35,22 @@ export default function LeadGenPage() {
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
 
+      <LeadFormTop
+        eyebrow="랜딩 진단"
+        title="문의가 들어오는 구조로 다시 설계합니다"
+        description="현재 웹사이트와 광고 흐름을 기준으로 리드 전환이 막히는 지점을 정중하게 진단해드립니다. 버튼 위치, 메시지, 추적 이벤트까지 함께 확인합니다."
+        bullets={['첫 화면 리드폼', 'GA4/GTM 이벤트', '카카오/시트 연동']}
+        source="lead-gen-top"
+        accent="var(--hiop-orange)"
+      />
+
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>문의 받는</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">웹사이트 제작</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>리드 안 오면</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">랜딩부터 의심</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
-            예쁜 웹사이트가 아닌, 실제로 문의가 들어오는 웹사이트.<br />
-            추적 세팅까지 완벽하게 포함된 원페이지를 제작합니다.
+            클릭은 있는데 문의가 없다면, 손님이 사라진 구간이 있습니다.<br />
+            히옵은 카피, 폼, 이벤트 추적까지 한 번에 고칩니다.
           </p>
         </div>
       </section>
@@ -69,7 +79,7 @@ export default function LeadGenPage() {
 
       <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <LeadForm source="lead-gen" lang="ko" />
+          <LeadForm source="lead-gen" lang="ko" variant="lead" />
         </div>
       </section>
 

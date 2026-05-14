@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
+import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
@@ -171,6 +172,21 @@ export default function MetaPage() {
           <a href="#contact" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none', fontSize: '1.1rem' }}>{c.navCta}</a>
         </div>
       </nav>
+
+      <LeadFormTop
+        eyebrow={lang === 'ko' ? '메타 광고 진단' : 'Meta Ads Diagnosis'}
+        title={lang === 'ko' ? '메타 광고 데이터와 소재 흐름을 함께 점검합니다' : 'We review your Meta data and creative flow together.'}
+        description={
+          lang === 'ko'
+            ? 'Pixel, CAPI, EMQ, 릴스 소재가 성과 학습에 충분히 연결되어 있는지 확인합니다. 예산을 늘리기 전에 데이터 신호와 소재 방향을 먼저 정리합니다.'
+            : 'We check whether Pixel, CAPI, EMQ, and Reels creative are connected clearly enough before scaling spend.'
+        }
+        bullets={lang === 'ko' ? ['CAPI/EMQ 체크', '릴스 소재 진단', 'ASC 구조 점검'] : ['CAPI/EMQ check', 'Reels creative audit', 'ASC structure']}
+        source="meta-top"
+        lang={lang}
+        formVariant="lead"
+        accent="var(--hiop-blue)"
+      />
 
       {/* Hero */}
       <section style={{ borderBottom: '4px solid var(--border-dark)' }}>

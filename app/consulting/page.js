@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLang } from '../../hooks/useLang';
 import Footer from '../../components/Footer';
+import LeadFormTop from '../../components/LeadFormTop';
 
 const content = {
   ko: {
@@ -43,6 +44,19 @@ export default function ConsultingPage() {
         <div className="font-display" style={{ fontSize: '2.5rem' }}>HI-OP / CONSULTING</div>
         <a href="/" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none' }}>BACK TO HOME</a>
       </nav>
+      <LeadFormTop
+        eyebrow={lang === 'ko' ? '광고 전략 상담' : 'Strategy Consulting'}
+        title={lang === 'ko' ? '현재 광고 구조를 차분히 진단해드립니다' : 'A calm, structured diagnosis of your ad system.'}
+        description={
+          lang === 'ko'
+            ? '계정 구조, 트래킹, 소재, 랜딩을 함께 확인하고 지금 가장 먼저 개선해야 할 순서를 정리합니다. 상담 후 바로 실행 가능한 액션 플랜을 드립니다.'
+            : 'We review account structure, tracking, creative, and landing flow together, then provide an action plan you can execute immediately.'
+        }
+        bullets={lang === 'ko' ? ['계정 진단', '데이터 점검', '액션 플랜'] : ['Account audit', 'Data check', 'Action plan']}
+        source="consulting-top"
+        lang={lang}
+        accent="var(--hiop-orange)"
+      />
       <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>{c.hero1}</motion.h1>
