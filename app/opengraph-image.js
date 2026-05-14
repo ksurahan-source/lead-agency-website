@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'HI-OB 광고 데이터 진단';
+export const alt = 'HI-OP 소재 병목 진단';
 export const size = {
   width: 1200,
   height: 630,
@@ -37,9 +37,9 @@ export default function Image() {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: 42, fontWeight: 900, letterSpacing: 2, color: '#111827' }}>HI-OB</div>
+              <div style={{ fontSize: 42, fontWeight: 900, letterSpacing: 2, color: '#111827' }}>HI-OP</div>
               <div style={{ fontSize: 24, fontWeight: 800, color: '#E65828', marginTop: 8 }}>
-                PERFORMANCE DATA ENGINEERING
+                소재 생산·테스트 운영 시스템
               </div>
             </div>
             <div
@@ -58,7 +58,7 @@ export default function Image() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', marginTop: 28 }}>
-            <div style={{ fontSize: 92, fontWeight: 1000, lineHeight: 1.04 }}>광고 성과를</div>
+            <div style={{ fontSize: 92, fontWeight: 1000, lineHeight: 1.04 }}>소재 병목을 풀고</div>
             <div
               style={{
                 display: 'flex',
@@ -73,10 +73,10 @@ export default function Image() {
                 borderRadius: 18,
               }}
             >
-              데이터 인프라부터
+              광고비 확장까지
             </div>
             <div style={{ fontSize: 92, fontWeight: 1000, lineHeight: 1.04, marginTop: 8 }}>
-              다시 설계합니다
+              연결합니다
             </div>
           </div>
 
@@ -93,7 +93,7 @@ export default function Image() {
                 padding: '16px 24px',
               }}
             >
-              Event Coverage · Deduplication · EMQ
+              원재료 추출 · 소재 테스트 · 승자 확장
             </div>
             <div style={{ fontSize: 30, fontWeight: 900, color: '#374151' }}>Pixel · CAPI · GA4 · GTM</div>
           </div>

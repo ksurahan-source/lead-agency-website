@@ -68,7 +68,7 @@ export default function CreativeVelocityForm() {
   };
 
   const buildInquiry = () => [
-    `[Creative Velocity Diagnosis]`,
+    `[무료 소재 병목 진단]`,
     `브랜드명: ${formData.brand}`,
     `웹사이트: ${formData.website}`,
     `월 광고비: ${formData.adSpend}`,
@@ -189,8 +189,8 @@ export default function CreativeVelocityForm() {
   if (status === 'success') {
     return (
       <div className="cv-form cv-form-success">
-        <span>Diagnosis request received</span>
-        <h3>무료 Creative Velocity 진단 신청이 접수되었습니다.</h3>
+        <span>진단 신청 접수 완료</span>
+        <h3>무료 소재 병목 진단 신청이 접수되었습니다.</h3>
         <p>브랜드의 소재 병목과 광고 구조를 확인한 뒤 24시간 내 연락드리겠습니다.</p>
         <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer">
           카카오톡으로 바로 문의하기
@@ -202,8 +202,8 @@ export default function CreativeVelocityForm() {
   return (
     <form className="cv-form" onSubmit={handleSubmit}>
       <div className="cv-form-head">
-        <span>Free diagnosis</span>
-        <h3>무료 Creative Velocity 진단 신청</h3>
+        <span>무료 진단</span>
+        <h3>무료 소재 병목 진단 신청</h3>
         <p>월 광고비, 소재 제작량, 내부 촬영 가능 여부를 기준으로 소재 병목을 먼저 확인합니다.</p>
       </div>
 
@@ -214,7 +214,7 @@ export default function CreativeVelocityForm() {
         </label>
         <label className="cv-form-field">
           <span>웹사이트 *</span>
-          <input name="website" value={formData.website} onChange={handleChange} placeholder="https://brand.co.kr" required />
+          <input name="website" value={formData.website} onChange={handleChange} placeholder="브랜드 웹사이트 URL" required />
         </label>
       </div>
 
@@ -246,7 +246,7 @@ export default function CreativeVelocityForm() {
 
       <label className="cv-form-field">
         <span>이메일 *</span>
-        <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="example@brand.co.kr" required />
+        <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="담당자 이메일 주소" required />
       </label>
 
       <label className="cv-consent">
@@ -259,7 +259,7 @@ export default function CreativeVelocityForm() {
       {status === 'error' && <div className="cv-form-error">{errorMessage}</div>}
 
       <button type="submit" disabled={status === 'submitting'}>
-        {status === 'submitting' ? '제출 중...' : '무료 Creative Velocity 진단 신청'}
+        {status === 'submitting' ? '제출 중...' : '무료 소재 병목 진단 신청'}
       </button>
     </form>
   );

@@ -14,26 +14,25 @@ const syne = Syne({
 
 export const metadata = {
   title: {
-    default: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
-    template: '%s | 히옵',
+    default: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
+    template: '%s | HI-OP',
   },
   description:
-    '히옵은 Meta CAPI, Pixel, GA4, GTM, 랜딩 전환 흐름을 정리해 광고 성과를 안정적으로 측정하고 개선하는 퍼포먼스 마케팅 파트너입니다.',
+    'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
   metadataBase: new URL('https://hi-ob.com'),
   icons: { icon: '/favicon.svg' },
   openGraph: {
-    siteName: '히옵 | 퍼포먼스 마케팅',
+    siteName: 'HI-OP',
     locale: 'ko_KR',
     type: 'website',
     url: 'https://hi-ob.com',
-    title: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
-    description:
-      'Meta CAPI, Pixel, GA4, GTM, 랜딩 전환 흐름을 하나의 기준으로 정리해 광고 성과 개선 기반을 구축합니다.',
+    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
+    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '히옵 | 데이터 기반 퍼포먼스 마케팅 파트너',
-    description: '전환 데이터, 광고 계정, 랜딩, 소재 흐름을 함께 점검하고 실행 우선순위를 제안합니다.',
+    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
+    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
   },
 };
 
