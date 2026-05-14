@@ -27,7 +27,7 @@ export default function AgentConsole() {
   const canvasRef = useRef(null);
   const [form, setForm] = useState(DEFAULT_BRIEF);
   const [job, setJob] = useState(null);
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoOutput, setVideoOutput] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isRendering, setIsRendering] = useState(false);
   const [error, setError] = useState('');
@@ -42,7 +42,7 @@ export default function AgentConsole() {
   async function generateStoryboard(event) {
     event.preventDefault();
     setError('');
-    setVideoUrl('');
+    setVideoOutput(null);
     setIsGenerating(true);
 
     try {
@@ -69,11 +69,11 @@ export default function AgentConsole() {
   async function renderVideo(nextJob = job) {
     if (!nextJob || !canvasRef.current) return;
     setIsRendering(true);
-    setVideoUrl('');
+    setVideoOutput(null);
 
     try {
-      const url = await recordCanvasVideo(canvasRef.current, nextJob);
-      setVideoUrl(url);
+      const output = await recordCanvasVideo(canvasRef.current, nextJob);
+      setVideoOutput(output);
     } catch (err) {
       setError(err instanceof Error ? err.message : '영상 렌더링에 실패했습니다.');
     } finally {
@@ -90,7 +90,7 @@ export default function AgentConsole() {
             Private HI-OB Engine
           </p>
           <h1>광고 영상 생성 콘솔</h1>
-          <p>고객 설정값을 넣으면 5씬 숏폼 스토리보드와 즉시 다운로드 가능한 WebM 영상을 생성합니다.</p>
+          <p>고객 설정값을 넣으면 5씬 숏폼 스토리보드와 즉시 다운로드 가능한 영상을 생성합니다.</p>
         </div>
         <form action="/api/agent/logout" method="post">
           <button className={styles.logoutButton} type="submit">
@@ -169,8 +169,8 @@ export default function AgentConsole() {
               <Play size={17} />
               다시 렌더
             </button>
-            {videoUrl ? (
-              <a href={videoUrl} download={`hiob-agent-${job?.id || 'video'}.webm`}>
+            {videoOutput ? (
+              <a href={videoOutput.url} download={`hiob-agent-${job?.id || 'video'}.${videoOutput.extension}`}>
                 <Download size={17} />
                 영상 다운로드
               </a>
@@ -200,14 +200,31 @@ async function recordCanvasVideo(canvas, job) {
   const context = canvas.getContext('2d');
   const stream = canvas.captureStream(30);
   const chunks = [];
-  const recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+  const mimeType = [
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8',
+    'video/webm',
+    'video/mp4',
+  ].find((type) => MediaRecorder.isTypeSupported(type));
+
+  if (!mimeType) {
+    throw new Error('현재 브라우저가 영상 녹화를 지원하지 않습니다. Chrome 또는 최신 Safari에서 다시 시도해주세요.');
+  }
+
+  const recorder = new MediaRecorder(stream, { mimeType });
 
   recorder.ondataavailable = (event) => {
     if (event.data.size > 0) chunks.push(event.data);
   };
 
   const done = new Promise((resolve) => {
-    recorder.onstop = () => resolve(URL.createObjectURL(new Blob(chunks, { type: 'video/webm' })));
+    recorder.onstop = () => {
+      const blob = new Blob(chunks, { type: mimeType });
+      resolve({
+        url: URL.createObjectURL(blob),
+        extension: mimeType.includes('mp4') ? 'mp4' : 'webm',
+      });
+    };
   });
 
   recorder.start();
