@@ -1,0 +1,580 @@
+.siteShell {
+  min-height: 100vh;
+  background: #f8f6ef;
+  color: #080808;
+  font-family: 'Pretendard Variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 72px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  align-items: center;
+  gap: 24px;
+  background: rgba(248, 246, 239, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid #080808;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #080808;
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: 1000;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.logo i {
+  width: 8px;
+  height: 18px;
+  border-radius: 999px;
+  background: #f7c72f;
+  transform: rotate(10deg);
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+}
+
+.navLinks a,
+.navCta,
+.heroActions a,
+.productBody a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.navLinks a {
+  font-size: 14px;
+}
+
+.navCta,
+.primaryButton,
+.secondaryButton {
+  min-height: 44px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.navCta {
+  padding: 0 18px;
+  background: #080808;
+  color: #fff;
+}
+
+.hero {
+  width: min(1180px, calc(100% - 32px));
+  min-height: calc(100vh - 72px);
+  margin: 0 auto;
+  padding: 48px 0 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+  gap: 38px;
+  align-items: center;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #d9342b;
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.hero h1,
+.sectionHeader h2,
+.bannerRecipe h2,
+.promptIntro h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.hero h1 {
+  max-width: 620px;
+  font-size: clamp(58px, 8vw, 126px);
+  line-height: 0.9;
+  font-weight: 1000;
+}
+
+.hero h1 span {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 18px 13px;
+  background: #080808;
+  color: #fff;
+}
+
+.heroLead {
+  max-width: 580px;
+  margin: 0;
+  color: #33302b;
+  font-size: 19px;
+  line-height: 1.65;
+  font-weight: 700;
+  word-break: keep-all;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primaryButton {
+  padding: 0 20px;
+  background: #d9342b;
+  color: #fff;
+  box-shadow: 6px 6px 0 #080808;
+}
+
+.secondaryButton {
+  padding: 0 18px;
+  background: #fff;
+  border: 2px solid #080808;
+}
+
+.bannerBoard {
+  position: relative;
+  min-height: 670px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    repeating-linear-gradient(135deg, #080808 0 12px, #f7c72f 12px 24px) border-box;
+  border: 7px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 14px 14px 0 #080808;
+}
+
+.bannerTopline {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  right: 28px;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 4px solid #080808;
+}
+
+.bannerTopline span {
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.bannerTopline strong {
+  color: #d9342b;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.reactionImage {
+  position: absolute;
+  right: -34px;
+  bottom: 24px;
+  width: min(70%, 460px);
+  height: 520px;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.dashboardPanel {
+  position: absolute;
+  left: 28px;
+  bottom: 145px;
+  z-index: 3;
+  width: min(58%, 390px);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #d7d7d7;
+  border-radius: 8px;
+  box-shadow: 0 18px 45px rgba(8, 8, 8, 0.18);
+}
+
+.dashboardPanel span {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 1000;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.metricsGrid b {
+  min-height: 68px;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  word-break: keep-all;
+}
+
+.chartLine {
+  height: 64px;
+  margin-top: 18px;
+  background:
+    linear-gradient(150deg, transparent 0 18%, #2b7cff 18% 22%, transparent 22% 38%, #2b7cff 38% 42%, transparent 42% 62%, #2b7cff 62% 66%, transparent 66%),
+    repeating-linear-gradient(0deg, #e9edf5 0 1px, transparent 1px 21px);
+}
+
+.redCross {
+  position: absolute;
+  left: 140px;
+  bottom: 245px;
+  z-index: 5;
+  color: #f22626;
+  font-size: 230px;
+  line-height: 0.72;
+  font-weight: 900;
+  transform: rotate(-12deg);
+}
+
+.scribble {
+  position: absolute;
+  top: 150px;
+  right: 42px;
+  z-index: 5;
+  font-size: 22px;
+  font-weight: 1000;
+  transform: rotate(6deg);
+}
+
+.scribble::before {
+  content: "";
+  position: absolute;
+  left: -54px;
+  top: 7px;
+  width: 34px;
+  height: 24px;
+  border: 4px solid #080808;
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.stickyNote {
+  position: absolute;
+  right: 26px;
+  bottom: 28px;
+  z-index: 6;
+  width: min(46%, 300px);
+  min-height: 150px;
+  padding: 25px 20px 18px;
+  display: grid;
+  place-items: center;
+  background: #f7d94b;
+  color: #080808;
+  border-radius: 4px;
+  box-shadow: 10px 12px 22px rgba(8, 8, 8, 0.24);
+  font-size: 25px;
+  line-height: 1.25;
+  font-weight: 1000;
+  text-align: center;
+  transform: rotate(-4deg);
+}
+
+.proofStrip,
+.section,
+.bannerRecipe,
+.promptSection {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.proofStrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 28px 0 58px;
+}
+
+.proofCard,
+.productCard,
+.noteCard,
+.promptCard {
+  border: 2px solid #080808;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.proofCard {
+  min-height: 155px;
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  box-shadow: 6px 6px 0 #f7c72f;
+}
+
+.proofCard span {
+  color: #626262;
+  font-size: 12px;
+  font-weight: 1000;
+}
+
+.proofCard strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.proofCard p,
+.productBody p,
+.promptCard p {
+  margin: 0;
+  color: #37332d;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+.section {
+  padding: 28px 0 68px;
+}
+
+.sectionHeader,
+.promptIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(320px, 1fr);
+  gap: 30px;
+  align-items: end;
+  margin-bottom: 26px;
+}
+
+.sectionHeader h2,
+.bannerRecipe h2,
+.promptIntro h2 {
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: 1.02;
+  font-weight: 1000;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.productCard {
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0 #080808;
+}
+
+.productImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid #080808;
+  background: #eee;
+}
+
+.productBody {
+  min-height: 310px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #d9342b;
+  font-size: 11px;
+  font-weight: 1000;
+}
+
+.productBody h3 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.1;
+  font-weight: 1000;
+  letter-spacing: 0;
+}
+
+.cardPunch {
+  display: inline;
+  width: fit-content;
+  padding: 4px 7px;
+  background: #f7d94b;
+  color: #080808 !important;
+  font-size: 15px;
+  font-weight: 1000;
+}
+
+.productBody a {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #080808;
+}
+
+.bannerRecipe {
+  padding: 54px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1fr);
+  gap: 30px;
+  border-top: 5px solid #080808;
+  border-bottom: 5px solid #080808;
+}
+
+.noteGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.noteCard {
+  min-height: 150px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f7d94b;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 1000;
+}
+
+.promptSection {
+  padding: 68px 0 90px;
+}
+
+.promptCard {
+  padding: 22px;
+  margin-top: 14px;
+  background: #080808;
+  color: #fff;
+}
+
+.promptCard div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  color: #f7d94b;
+  font-size: 12px;
+  font-weight: 1000;
+}
+
+.promptCard p {
+  color: #fff;
+  font-size: 17px;
+}
+
+@media (max-width: 1040px) {
+  .navbar {
+    grid-template-columns: 140px 1fr auto;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectionHeader,
+  .promptIntro,
+  .bannerRecipe {
+    grid-template-columns: 1fr;
+  }
+
+  .proofStrip,
+  .noteGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .navbar {
+    position: static;
+    grid-template-columns: 1fr auto;
+    padding: 12px 0;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 28px;
+  }
+
+  .bannerBoard {
+    min-height: 580px;
+    box-shadow: 8px 8px 0 #080808;
+  }
+
+  .reactionImage {
+    right: -80px;
+    width: 115%;
+    height: 390px;
+  }
+
+  .dashboardPanel {
+    left: 14px;
+    right: 14px;
+    bottom: 165px;
+    width: auto;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .redCross {
+    left: 48px;
+    bottom: 265px;
+    font-size: 150px;
+  }
+
+  .stickyNote {
+    width: calc(100% - 44px);
+    right: 22px;
+    font-size: 22px;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}
