@@ -16,7 +16,7 @@ export default function sitemap() {
     { path: '/ecom-guide', priority: 0.75, changeFrequency: 'monthly' },
     { path: '/app-ads', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/consulting', priority: 0.7, changeFrequency: 'monthly' },
-    { path: '/hi-ob', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/agent', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/en', priority: 0.55, changeFrequency: 'monthly' },
     { path: '/m', priority: 0.45, changeFrequency: 'monthly' },
     { path: '/m/google', priority: 0.45, changeFrequency: 'monthly' },
