@@ -118,7 +118,7 @@ const visualIdeas = [
   {
     type: "Pexels",
     title: "빠른 운영 입력",
-    img: "/render-assets/hiob-reels-002/ai-supplement-board.png",
+    img: "/memes/hiob-001/10-wrong-person-money.jpeg",
     prompt: "Pexels 검색어: 노트북, 야간 마케팅 대시보드, 빠른 타이핑, 휴대폰 알림, 스타트업 팀",
     tags: ["빠른 타이핑", "운영 알림", "대시보드 클로즈업"],
   },
