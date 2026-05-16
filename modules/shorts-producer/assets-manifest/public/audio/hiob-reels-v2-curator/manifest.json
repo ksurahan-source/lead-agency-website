@@ -1,0 +1,61 @@
+{
+  "totalDuration": 25.38,
+  "segments": [
+    {
+      "role": "curator",
+      "text": "광고 돌려놨는데 결과가 없으면, 걱정되고. 다들 고생 많았잖아요. 근데 이게 다 이유가 있었음.",
+      "asset": "audio/hiob-reels-v2-curator/01-curator.mp3",
+      "at": 0,
+      "duration": 6.64,
+      "volume": 1
+    },
+    {
+      "role": "curator",
+      "text": "문의가 와도 기록이 안 남으면, 메타는 좋은 손님을 못 찾더라구.",
+      "asset": "audio/hiob-reels-v2-curator/02-curator.mp3",
+      "at": 6.72,
+      "duration": 3.6,
+      "volume": 1
+    },
+    {
+      "role": "curator",
+      "text": "그래서 잘하다가도 못해지는 이유가, 다 그거였더라고.",
+      "asset": "audio/hiob-reels-v2-curator/03-curator.mp3",
+      "at": 10.4,
+      "duration": 3,
+      "volume": 1
+    },
+    {
+      "role": "cameo",
+      "text": "아니 그럼 광고 탓이 아녀?",
+      "asset": "audio/hiob-reels-v2-curator/04-cameo.mp3",
+      "at": 13.48,
+      "duration": 1.57,
+      "volume": 0.92
+    },
+    {
+      "role": "curator",
+      "text": "그래, 그렇다니까? 근데 기록만 해둔다고 또 다 되는 게 아니래.",
+      "asset": "audio/hiob-reels-v2-curator/05-curator.mp3",
+      "at": 15.13,
+      "duration": 3.66,
+      "volume": 1
+    },
+    {
+      "role": "curator",
+      "text": "정확한지도 봐야 된대. 엄청 복잡한 거였지 뭐야.",
+      "asset": "audio/hiob-reels-v2-curator/06-curator.mp3",
+      "at": 18.85,
+      "duration": 3.29,
+      "volume": 1
+    },
+    {
+      "role": "curator",
+      "text": "그래서 히옵이 무료 진단 한다고 해서, 나도 받아보려고.",
+      "asset": "audio/hiob-reels-v2-curator/07-curator.mp3",
+      "at": 22.22,
+      "duration": 3.16,
+      "volume": 1
+    }
+  ]
+}
