@@ -913,6 +913,21 @@
   word-break: break-all;
 }
 
+.artifactLink {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: #f6c15b;
+  color: #080806;
+  font-size: 12px;
+  font-weight: 1000;
+  text-decoration: none;
+}
+
 .liveSceneList {
   display: grid;
   gap: 8px;

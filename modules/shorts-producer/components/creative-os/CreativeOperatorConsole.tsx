@@ -196,6 +196,7 @@ interface CreativeRunDetail {
     id: string;
     status: string;
     r2Key?: string;
+    metadata?: Record<string, unknown>;
   } | null;
   error?: string;
   message?: string;
@@ -206,9 +207,20 @@ interface RenderResponse {
   error?: string;
   message?: string;
   missingEnv?: string[];
+  artifactUrl?: string | null;
   renderJob?: {
     id: string;
     status: string;
+    r2Key?: string;
+    metadata?: Record<string, unknown>;
+  } | null;
+}
+
+interface RenderStatusResponse extends RenderResponse {
+  renderJob?: {
+    id: string;
+    status: string;
+    r2Key?: string;
     metadata?: Record<string, unknown>;
   } | null;
 }
@@ -238,6 +250,10 @@ function formatApiErrorMessage(data: Partial<LiveGenerationResponse>, status: nu
     return data.message ?? "일일 비용 한도에 도달했습니다.";
   }
   return data.message ?? data.error ?? `실제 생성 실패 (HTTP ${status})`;
+}
+
+function isTerminalRenderStatus(status?: string) {
+  return status === "succeeded" || status === "failed" || status === "canceled";
 }
 
 function makeHooks(brand: string, product: string, pain: string, offer: string, angle: string, cycle: number) {
@@ -493,6 +509,58 @@ export default function CreativeOperatorConsole() {
     }
   };
 
+  useEffect(() => {
+    const jobId = renderResult?.renderJob?.id;
+    const currentStatus = renderResult?.renderJob?.status;
+    if (!jobId || isTerminalRenderStatus(currentStatus)) return;
+
+    let cancelled = false;
+
+    const pollRenderStatus = async () => {
+      try {
+        const response = await fetch(`/api/creative/render/${encodeURIComponent(jobId)}`);
+        const data = await response.json() as RenderStatusResponse;
+
+        if (!response.ok || !data.success || !data.renderJob) {
+          throw new Error(data.message ?? data.error ?? `Render status failed (${response.status})`);
+        }
+        if (cancelled) return;
+
+        setRenderResult((current) => ({
+          ...(current ?? { success: true }),
+          success: true,
+          renderJob: data.renderJob,
+          artifactUrl: data.artifactUrl ?? current?.artifactUrl ?? null,
+        }));
+
+        if (data.renderJob.status === "failed") {
+          setRenderStatus("error");
+          setRenderError("Render failed");
+          await refreshDailyCost();
+        } else if (data.renderJob.status === "succeeded") {
+          setRenderStatus("success");
+          setRenderError(null);
+          await refreshDailyCost();
+        } else {
+          setRenderStatus("loading");
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setRenderStatus("error");
+          setRenderError(error instanceof Error ? error.message : "Render status polling failed");
+        }
+      }
+    };
+
+    pollRenderStatus();
+    const intervalId = window.setInterval(pollRenderStatus, 5000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, [renderResult?.renderJob?.id, renderResult?.renderJob?.status]);
+
   const triggerRender = async () => {
     if (!liveResult?.runId || artifactStatus !== "success") return;
     if (!window.confirm("최종 렌더를 요청합니다. 유료 렌더 비용이 발생할 수 있습니다.")) return;
@@ -521,7 +589,7 @@ export default function CreativeOperatorConsole() {
       }
 
       setRenderResult(data);
-      setRenderStatus("success");
+      setRenderStatus(data.renderJob?.status === "succeeded" ? "success" : "loading");
       await reloadRunAndScriptArtifact(liveResult.runId, runDetail?.scriptArtifactKey ?? liveResult.artifactKey);
       await refreshDailyCost();
     } catch (error) {
@@ -538,6 +606,9 @@ export default function CreativeOperatorConsole() {
 
   const displayedLiveScript = reloadedScript ?? liveResult?.script;
   const canRequestRender = Boolean(liveResult?.runId && artifactStatus === "success");
+  const currentRenderJob = renderResult?.renderJob ?? runDetail?.renderJob ?? null;
+  const renderArtifactUrl = renderResult?.artifactUrl ?? (currentRenderJob?.r2Key ? `/api/creative/artifacts?key=${encodeURIComponent(currentRenderJob.r2Key)}` : null);
+  const renderTerminalFailed = currentRenderJob?.status === "failed";
 
   return (
     <main className={styles.shell}>
@@ -1025,24 +1096,38 @@ export default function CreativeOperatorConsole() {
               <strong>~US${estimatedFinalCost.toFixed(2)}</strong>
             </div>
             {renderStatus !== "idle" || renderResult || renderError ? (
-              <div className={renderStatus === "error" ? styles.liveResultError : styles.liveResultSuccess}>
+              <div className={renderStatus === "error" || renderTerminalFailed ? styles.liveResultError : styles.liveResultSuccess}>
                 <span>
                   {renderStatus === "loading"
-                    ? "Render 요청 중"
-                    : renderStatus === "error"
-                      ? "Render 요청 실패"
-                      : "Render 요청 생성됨"}
+                    ? "Render 진행 중"
+                    : renderStatus === "error" || renderTerminalFailed
+                      ? "Render 실패"
+                      : currentRenderJob?.status === "succeeded"
+                        ? "Render 완료"
+                        : "Render 요청 생성됨"}
                 </span>
-                {renderResult?.renderJob ? (
+                {currentRenderJob ? (
                   <>
                     <div className={styles.liveMetaRow}>
                       <span>render job</span>
-                      <strong>{renderResult.renderJob.id}</strong>
+                      <strong>{currentRenderJob.id}</strong>
                     </div>
                     <div className={styles.liveMetaRow}>
                       <span>status</span>
-                      <strong>{renderResult.renderJob.status}</strong>
+                      <strong>{currentRenderJob.status}</strong>
                     </div>
+                    {currentRenderJob.r2Key ? (
+                      <div className={styles.liveMetaRow}>
+                        <span>MP4 artifact</span>
+                        <strong>{currentRenderJob.r2Key}</strong>
+                      </div>
+                    ) : null}
+                    {renderArtifactUrl && currentRenderJob.status === "succeeded" ? (
+                      <a className={styles.artifactLink} href={renderArtifactUrl} target="_blank" rel="noreferrer">
+                        <Download size={15} />
+                        MP4 열기
+                      </a>
+                    ) : null}
                   </>
                 ) : (
                   <strong>{renderError ?? "Render 요청 상태를 확인할 수 없습니다."}</strong>
