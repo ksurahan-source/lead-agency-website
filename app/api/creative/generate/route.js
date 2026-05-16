@@ -213,8 +213,7 @@ async function runRealGeneration(body) {
       mock: false,
       runId,
       error: 'REAL_GENERATION_FAILED',
-      message: 'OpenAI single generate failed before render/TTS.',
-      fallback: buildMockScripts(adapted.request.brief, buildMockHooks(adapted.request.brief)),
+      message: error instanceof Error ? error.message : 'OpenAI single generate failed before render/TTS.',
     }, { status: 500 });
   }
 }

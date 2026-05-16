@@ -151,6 +151,60 @@ interface MockGenerationResponse {
   scripts?: Array<{ id: string; title: string; hook: string; full_script: string }>;
 }
 
+interface ScriptScene {
+  text?: string;
+  voiceover?: string;
+  duration?: number;
+  shot_type?: string;
+  performance_stage?: string;
+  topic?: string;
+}
+
+interface LiveScript {
+  title?: string;
+  hook?: string;
+  full_script?: string;
+  scenes?: ScriptScene[];
+}
+
+interface LiveGenerationResponse {
+  success: boolean;
+  mock: boolean;
+  runId?: string;
+  artifactKey?: string;
+  script?: LiveScript;
+  error?: string;
+  message?: string;
+  missing_fields?: string[];
+  missing_env?: string[];
+  details?: Record<string, unknown>;
+}
+
+const REAL_REQUIRED_BRIEF_FIELDS: Array<{ key: keyof typeof initialBrief; apiField: string; label: string }> = [
+  { key: "brand", apiField: "brand", label: "브랜드" },
+  { key: "audience", apiField: "targetAudience", label: "타깃" },
+  { key: "offer", apiField: "offer", label: "제안" },
+  { key: "pain", apiField: "painPoint", label: "문제" },
+  { key: "cta", apiField: "cta", label: "행동 유도" },
+];
+
+function getMissingRealBriefFields(brief: typeof initialBrief) {
+  return REAL_REQUIRED_BRIEF_FIELDS.filter(({ key }) => !brief[key]?.trim()).map(({ label }) => label);
+}
+
+function formatApiErrorMessage(data: Partial<LiveGenerationResponse>, status: number) {
+  if (data.missing_fields?.length) {
+    return `필수 항목 누락: ${data.missing_fields.join(", ")}`;
+  }
+  if (data.missing_env?.length) {
+    return `서버 설정 누락: ${data.missing_env.join(", ")}`;
+  }
+  if (data.error === "CREATIVE_COST_GUARD_BLOCKED") {
+    return data.message ?? "일일 비용 한도에 도달했습니다.";
+  }
+  return data.message ?? data.error ?? `실제 생성 실패 (HTTP ${status})`;
+}
+
 function makeHooks(brand: string, product: string, pain: string, offer: string, angle: string, cycle: number) {
   const variants = [
     `${brand} 없이도 광고는 돌아갑니다. 문제는 이긴 소재가 안 쌓인다는 겁니다.`,
@@ -182,6 +236,11 @@ export default function CreativeOperatorConsole() {
   const [dailyCost, setDailyCost] = useState<DailyCostSummary | null>(null);
   const [mockResult, setMockResult] = useState<MockGenerationResponse | null>(null);
   const [mockStatus, setMockStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [liveApiEnabled, setLiveApiEnabled] = useState(false);
+  const [liveResult, setLiveResult] = useState<LiveGenerationResponse | null>(null);
+  const [liveStatus, setLiveStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [liveError, setLiveError] = useState<string | null>(null);
+  const [liveValidationErrors, setLiveValidationErrors] = useState<string[]>([]);
 
   const score = useMemo(() => {
     const hook = hooks[selectedHook] ?? "";
@@ -274,6 +333,8 @@ export default function CreativeOperatorConsole() {
       if (!response.ok) throw new Error("mock generation failed");
 
       const data = await response.json() as MockGenerationResponse;
+      if (!data.success || data.mock !== true) throw new Error("mock generation failed");
+
       const nextHooks = data.hooks?.length ? data.hooks : makeHooks(brief.brand, brief.product, brief.pain, brief.offer, brief.angle, cycle + 1);
 
       setMockResult(data);
@@ -284,6 +345,65 @@ export default function CreativeOperatorConsole() {
     } catch {
       regenerateHooks();
       setMockStatus("error");
+    }
+  };
+
+  const runRealGeneration = async () => {
+    const missingLabels = getMissingRealBriefFields(brief);
+    setLiveValidationErrors(missingLabels);
+
+    if (missingLabels.length > 0) {
+      setLiveStatus("error");
+      setLiveError(`다음 필드를 입력하세요: ${missingLabels.join(", ")}`);
+      setLiveResult(null);
+      return;
+    }
+
+    setLiveStatus("loading");
+    setLiveError(null);
+    setLiveResult(null);
+
+    try {
+      const response = await fetch("/api/creative/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mock: false,
+          brief: {
+            ...brief,
+            tone,
+          },
+          selectedHook: hooks[selectedHook],
+        }),
+      });
+
+      const data = await response.json() as LiveGenerationResponse;
+
+      if (!response.ok || !data.success || data.mock !== false) {
+        setLiveStatus("error");
+        setLiveError(formatApiErrorMessage(data, response.status));
+        setLiveResult(data.runId ? { ...data, success: false } : null);
+        return;
+      }
+
+      setLiveResult(data);
+      setLiveStatus("success");
+
+      if (data.script?.hook) {
+        setHooks((current) => {
+          const next = [...current];
+          next[selectedHook] = data.script?.hook ?? next[selectedHook];
+          return next;
+        });
+      }
+
+      await refreshDailyCost();
+    } catch (error) {
+      setLiveStatus("error");
+      setLiveError(error instanceof Error ? error.message : "실제 생성 요청에 실패했습니다.");
+      setLiveResult(null);
     }
   };
 
@@ -420,9 +540,31 @@ export default function CreativeOperatorConsole() {
               )}
             </label>
           ))}
-          <button className={styles.primaryAction} onClick={() => runMockGeneration("single")} type="button">
+          <label className={styles.liveApiToggle}>
+            <input
+              checked={liveApiEnabled}
+              onChange={(event) => setLiveApiEnabled(event.target.checked)}
+              type="checkbox"
+            />
+            Live API (OpenAI 실제 호출)
+          </label>
+          {liveValidationErrors.length > 0 ? (
+            <p className={styles.liveMetaRow}>
+              <small>실제 생성 필수: {liveValidationErrors.join(", ")}</small>
+            </p>
+          ) : null}
+          <button
+            className={`${styles.primaryAction} ${styles.liveGenerateButton}`}
+            disabled={liveStatus === "loading"}
+            onClick={runRealGeneration}
+            type="button"
+          >
+            <Sparkles size={17} />
+            {liveStatus === "loading" ? "실제 생성 중…" : "실제 생성 (OpenAI)"}
+          </button>
+          <button className={styles.primaryAction} disabled={liveStatus === "loading"} onClick={() => runMockGeneration("single")} type="button">
             <RefreshCw size={17} />
-            후킹 문구 다시 생성
+            Mock 후킹 다시 생성
           </button>
         </aside>
 
@@ -644,6 +786,69 @@ export default function CreativeOperatorConsole() {
               <span>오늘 사용 비용</span>
               <strong>US${todaySpend.toFixed(2)}</strong>
             </div>
+            {liveStatus !== "idle" || liveResult || liveError ? (
+              <div className={liveStatus === "error" ? styles.liveResultError : styles.liveResultSuccess}>
+                <span>
+                  {liveStatus === "loading"
+                    ? "Live API 생성 중"
+                    : liveStatus === "error"
+                      ? "Live API 생성 실패"
+                      : "Live API 생성 완료"}
+                </span>
+                {liveStatus === "success" && liveResult ? (
+                  <>
+                    <div className={styles.liveMetaRow}>
+                      <span>runId</span>
+                      <strong>{liveResult.runId}</strong>
+                    </div>
+                    {liveResult.artifactKey ? (
+                      <div className={styles.liveMetaRow}>
+                        <span>R2 script artifact</span>
+                        <strong>{liveResult.artifactKey}</strong>
+                      </div>
+                    ) : null}
+                    {liveResult.script?.title ? (
+                      <div className={styles.liveMetaRow}>
+                        <span>title</span>
+                        <strong>{liveResult.script.title}</strong>
+                      </div>
+                    ) : null}
+                    {liveResult.script?.hook ? (
+                      <div className={styles.liveMetaRow}>
+                        <span>hook</span>
+                        <strong>{liveResult.script.hook}</strong>
+                      </div>
+                    ) : null}
+                    {liveResult.script?.scenes?.length ? (
+                      <div className={styles.liveSceneList}>
+                        {liveResult.script.scenes.map((scene, index) => (
+                          <article className={styles.liveSceneCard} key={`live-scene-${index}`}>
+                            <strong>
+                              장면 {index + 1}
+                              {scene.shot_type ? ` · ${scene.shot_type}` : ""}
+                              {scene.duration ? ` · ${scene.duration}s` : ""}
+                            </strong>
+                            <p>{scene.voiceover || scene.text || "—"}</p>
+                            {scene.performance_stage || scene.topic ? (
+                              <small>{[scene.performance_stage, scene.topic].filter(Boolean).join(" · ")}</small>
+                            ) : null}
+                          </article>
+                        ))}
+                      </div>
+                    ) : null}
+                    <pre className={styles.liveScriptJson}>{JSON.stringify(liveResult.script ?? {}, null, 2)}</pre>
+                  </>
+                ) : (
+                  <strong>{liveError ?? "실제 생성에 실패했습니다. Mock 결과로 대체되지 않습니다."}</strong>
+                )}
+                {liveStatus === "error" && liveResult?.runId ? (
+                  <div className={styles.liveMetaRow}>
+                    <span>runId (failed)</span>
+                    <strong>{liveResult.runId}</strong>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
             {mockStatus !== "idle" || mockResult ? (
               <div className={styles.mockResult}>
                 <span>
@@ -653,13 +858,13 @@ export default function CreativeOperatorConsole() {
                       ? "mock 생성 실패"
                       : "mock 생성 완료"}
                 </span>
-                <strong>{mockResult?.mock ? "실제 API 호출 없음" : "로컬 fallback"}</strong>
+                <strong>Mock — 실제 API 호출 없음</strong>
                 <small>
-                  {mockResult?.concepts?.[0]?.name ?? "실패 시 로컬 후킹 문구로 안전하게 대체됩니다."}
+                  {mockResult?.concepts?.[0]?.name ?? "테스트용 로컬 후킹 파이프라인입니다."}
                 </small>
               </div>
             ) : null}
-            <button disabled={mockStatus === "loading"} onClick={() => runMockGeneration("batch")} type="button">
+            <button disabled={mockStatus === "loading" || liveStatus === "loading"} onClick={() => runMockGeneration("batch")} type="button">
               <Layers3 size={17} />
               {mockStatus === "loading" ? "mock 생성 중" : "초안 묶음 생성"}
             </button>
@@ -669,7 +874,7 @@ export default function CreativeOperatorConsole() {
             </button>
             <div className={styles.costWarning}>
               <AlertTriangle size={16} />
-              <span>유료 API 호출이 발생합니다.</span>
+              <span>{liveApiEnabled ? "Live API: OpenAI 유료 호출이 발생합니다." : "유료 API 호출이 발생할 수 있습니다."}</span>
             </div>
             <div className={styles.costLine}>
               <span>예상 최종 비용</span>
