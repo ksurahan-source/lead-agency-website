@@ -180,6 +180,29 @@ interface LiveGenerationResponse {
   details?: Record<string, unknown>;
 }
 
+interface CreativeRunDetail {
+  success: boolean;
+  run?: {
+    id: string;
+    status: string;
+    mode: string;
+    mock: boolean;
+    outputKey?: string;
+    createdAt?: string;
+    updatedAt?: string;
+  };
+  scriptArtifactKey?: string | null;
+  renderJob?: {
+    id: string;
+    status: string;
+    r2Key?: string;
+  } | null;
+  error?: string;
+  message?: string;
+}
+
+type ArtifactStatus = "idle" | "loading" | "success" | "error";
+
 const REAL_REQUIRED_BRIEF_FIELDS: Array<{ key: keyof typeof initialBrief; apiField: string; label: string }> = [
   { key: "brand", apiField: "brand", label: "브랜드" },
   { key: "audience", apiField: "targetAudience", label: "타깃" },
@@ -241,6 +264,10 @@ export default function CreativeOperatorConsole() {
   const [liveStatus, setLiveStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [liveError, setLiveError] = useState<string | null>(null);
   const [liveValidationErrors, setLiveValidationErrors] = useState<string[]>([]);
+  const [runDetail, setRunDetail] = useState<CreativeRunDetail | null>(null);
+  const [artifactStatus, setArtifactStatus] = useState<ArtifactStatus>("idle");
+  const [artifactError, setArtifactError] = useState<string | null>(null);
+  const [reloadedScript, setReloadedScript] = useState<LiveScript | null>(null);
 
   const score = useMemo(() => {
     const hook = hooks[selectedHook] ?? "";
@@ -362,6 +389,10 @@ export default function CreativeOperatorConsole() {
     setLiveStatus("loading");
     setLiveError(null);
     setLiveResult(null);
+    setRunDetail(null);
+    setReloadedScript(null);
+    setArtifactStatus("idle");
+    setArtifactError(null);
 
     try {
       const response = await fetch("/api/creative/generate", {
@@ -399,6 +430,10 @@ export default function CreativeOperatorConsole() {
         });
       }
 
+      if (data.runId) {
+        await reloadRunAndScriptArtifact(data.runId, data.artifactKey);
+      }
+
       await refreshDailyCost();
     } catch (error) {
       setLiveStatus("error");
@@ -407,11 +442,46 @@ export default function CreativeOperatorConsole() {
     }
   };
 
+  const reloadRunAndScriptArtifact = async (runId: string, fallbackArtifactKey?: string) => {
+    setArtifactStatus("loading");
+    setArtifactError(null);
+
+    try {
+      const runResponse = await fetch(`/api/creative/runs/${encodeURIComponent(runId)}`);
+      const detail = await runResponse.json() as CreativeRunDetail;
+
+      if (!runResponse.ok || !detail.success) {
+        throw new Error(detail.message ?? detail.error ?? "Run detail reload failed");
+      }
+
+      setRunDetail(detail);
+
+      const artifactKey = detail.scriptArtifactKey ?? fallbackArtifactKey;
+      if (!artifactKey) {
+        throw new Error("Script artifact key is missing");
+      }
+
+      const artifactResponse = await fetch(`/api/creative/artifacts?key=${encodeURIComponent(artifactKey)}`);
+      if (!artifactResponse.ok) {
+        throw new Error(`Artifact reload failed (${artifactResponse.status})`);
+      }
+
+      const artifact = await artifactResponse.json() as { result?: LiveScript; script?: LiveScript };
+      setReloadedScript(artifact.result ?? artifact.script ?? null);
+      setArtifactStatus("success");
+    } catch (error) {
+      setArtifactStatus("error");
+      setArtifactError(error instanceof Error ? error.message : "R2 artifact reload failed");
+    }
+  };
+
   const toggleFavorite = (index: number) => {
     setFavorites((current) =>
       current.includes(index) ? current.filter((item) => item !== index) : [...current, index],
     );
   };
+
+  const displayedLiveScript = reloadedScript ?? liveResult?.script;
 
   return (
     <main className={styles.shell}>
@@ -555,12 +625,12 @@ export default function CreativeOperatorConsole() {
           ) : null}
           <button
             className={`${styles.primaryAction} ${styles.liveGenerateButton}`}
-            disabled={liveStatus === "loading"}
+            disabled={!liveApiEnabled || liveStatus === "loading"}
             onClick={runRealGeneration}
             type="button"
           >
             <Sparkles size={17} />
-            {liveStatus === "loading" ? "실제 생성 중…" : "실제 생성 (OpenAI)"}
+            {liveStatus === "loading" ? "실제 생성 중…" : liveApiEnabled ? "실제 생성 (OpenAI)" : "Live API 토글 필요"}
           </button>
           <button className={styles.primaryAction} disabled={liveStatus === "loading"} onClick={() => runMockGeneration("single")} type="button">
             <RefreshCw size={17} />
@@ -807,21 +877,39 @@ export default function CreativeOperatorConsole() {
                         <strong>{liveResult.artifactKey}</strong>
                       </div>
                     ) : null}
-                    {liveResult.script?.title ? (
+                    {runDetail?.run ? (
+                      <div className={styles.liveMetaRow}>
+                        <span>run detail reload</span>
+                        <strong>{runDetail.run.status} · renderJob: {runDetail.renderJob ? runDetail.renderJob.status : "null"}</strong>
+                      </div>
+                    ) : null}
+                    <div className={styles.liveMetaRow}>
+                      <span>R2 artifact check</span>
+                      <strong>
+                        {artifactStatus === "loading"
+                          ? "확인 중"
+                          : artifactStatus === "success"
+                            ? "확인 완료"
+                            : artifactStatus === "error"
+                              ? `실패: ${artifactError}`
+                              : "대기"}
+                      </strong>
+                    </div>
+                    {displayedLiveScript?.title ? (
                       <div className={styles.liveMetaRow}>
                         <span>title</span>
-                        <strong>{liveResult.script.title}</strong>
+                        <strong>{displayedLiveScript.title}</strong>
                       </div>
                     ) : null}
-                    {liveResult.script?.hook ? (
+                    {displayedLiveScript?.hook ? (
                       <div className={styles.liveMetaRow}>
                         <span>hook</span>
-                        <strong>{liveResult.script.hook}</strong>
+                        <strong>{displayedLiveScript.hook}</strong>
                       </div>
                     ) : null}
-                    {liveResult.script?.scenes?.length ? (
+                    {displayedLiveScript?.scenes?.length ? (
                       <div className={styles.liveSceneList}>
-                        {liveResult.script.scenes.map((scene, index) => (
+                        {displayedLiveScript.scenes.map((scene, index) => (
                           <article className={styles.liveSceneCard} key={`live-scene-${index}`}>
                             <strong>
                               장면 {index + 1}
@@ -836,7 +924,7 @@ export default function CreativeOperatorConsole() {
                         ))}
                       </div>
                     ) : null}
-                    <pre className={styles.liveScriptJson}>{JSON.stringify(liveResult.script ?? {}, null, 2)}</pre>
+                    <pre className={styles.liveScriptJson}>{JSON.stringify(displayedLiveScript ?? {}, null, 2)}</pre>
                   </>
                 ) : (
                   <strong>{liveError ?? "실제 생성에 실패했습니다. Mock 결과로 대체되지 않습니다."}</strong>
@@ -889,9 +977,9 @@ export default function CreativeOperatorConsole() {
                 </div>
               ))}
             </div>
-            <button className={costMode === "final" ? styles.finalAction : ""} disabled={costMode !== "final"} type="button">
+            <button className={costMode === "final" ? styles.finalAction : ""} disabled type="button">
               <Gauge size={17} />
-              최종 렌더 승인 - 예상 ${estimatedFinalCost.toFixed(2)}
+              Render this — Step C에서 활성화 예정
             </button>
           </div>
         </article>
