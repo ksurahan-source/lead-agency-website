@@ -14,11 +14,11 @@ const syne = Syne({
 
 export const metadata = {
   title: {
-    default: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
+    default: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
     template: '%s | HI-OP',
   },
   description:
-    'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    'HI-OP은 브랜드 내부의 raw material을 성과형 광고 소재로 변환해 DTC 브랜드의 소재 병목과 광고비 확장 문제를 해결하는 Creative Performance Infrastructure입니다.',
   metadataBase: new URL('https://hi-ob.com'),
   icons: { icon: '/favicon.svg' },
   openGraph: {
@@ -26,13 +26,13 @@ export const metadata = {
     locale: 'ko_KR',
     type: 'website',
     url: 'https://hi-ob.com',
-    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
-    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
+    description: '브랜드 내부의 raw material을 성과형 광고 소재로 변환하는 Creative Performance Infrastructure.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
-    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
+    description: '브랜드 내부의 raw material을 성과형 광고 소재로 변환하는 Creative Performance Infrastructure.',
   },
 };
 

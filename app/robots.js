@@ -3,7 +3,7 @@ export default function robots() {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin', '/api/'],
+      disallow: ['/admin', '/agent', '/api/', '/studio'],
     },
     sitemap: 'https://hi-ob.com/sitemap.xml',
     host: 'https://hi-ob.com',

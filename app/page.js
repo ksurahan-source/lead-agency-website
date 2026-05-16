@@ -5,7 +5,7 @@ import {
   Boxes,
   Check,
   ClipboardList,
-  Database,
+  Cpu,
   Factory,
   Film,
   LineChart,
@@ -13,107 +13,118 @@ import {
   PackageCheck,
   Radar,
   SearchCheck,
+  ShieldCheck,
   Sparkles,
   TestTube2,
   Truck,
   Zap,
 } from 'lucide-react';
 import CreativeVelocityForm from '@/components/CreativeVelocityForm';
+import { positioningLine } from '@/lib/categoryPages';
 
 const pipeline = [
-  '광고 원재료',
-  '소구점 추출',
-  'AI 소재 확장',
-  '소재 테스트',
-  '승자 소재 확장',
+  'raw material',
+  'hook generation',
+  'AI expansion',
+  'testing rhythm',
+  'Winner Scaling',
 ];
 
 const problemStats = [
-  ['₩3,000만–₩5,000만', '광고비가 자주 막히는 구간'],
-  ['7-14일', '새 소재 테스트까지 걸리는 내부 리드타임'],
+  ['₩3,000만-₩5,000만', 'DTC 브랜드가 자주 막히는 광고비 구간'],
   ['CAC ↑', '승자 소재 피로 이후 반복되는 비용 상승'],
+  ['Creative Fatigue', '알고리즘에 공급할 새 학습 재료 부족'],
 ];
 
 const rawMaterials = [
-  ['생산 과정', Factory],
-  ['포장 과정', PackageCheck],
   ['고객 리뷰', MessageSquareText],
+  ['대표 메시지', Sparkles],
+  ['포장/배송 장면', PackageCheck],
   ['CS 질문', ClipboardList],
-  ['대표 인터뷰', Sparkles],
-  ['제품 비교 실험', TestTube2],
-  ['사용 장면', Film],
-  ['배송/창고/직원 루틴', Truck],
+  ['제품 데모', Film],
+  ['생산 과정', Factory],
+  ['비교 실험', TestTube2],
+  ['창고/직원 루틴', Truck],
 ];
 
 const outputs = [
-  '후킹 문구 변형',
-  'UGC형 대본',
-  '숏폼 광고',
-  '카탈로그 영상',
-  'Meta 광고 소재',
-  'Google 광고 소재',
-  '리타게팅 소구점',
+  'Hook variations',
+  'UGC 숏폼 광고',
+  'Meta creatives',
+  'Video Catalog assets',
+  '리타게팅 angle',
+  'Winner 후보 소재',
 ];
 
-const pillars = [
-  {
-    icon: Database,
-    title: '데이터 인프라',
-    summary: '추적 기준이 흔들리면 테스트 결과도 흔들립니다. 알고리즘이 학습할 수 있는 전환 데이터 기준을 먼저 정리합니다.',
-    items: ['Meta CAPI', 'GA4/GTM 세팅', '이벤트 품질 개선', '동적 전환 가치 설정', '퍼널 추적'],
-  },
+const osSteps = [
   {
     icon: Boxes,
-    title: '광고 원재료 엔진',
-    summary: '브랜드 내부에 이미 존재하는 장면, 말, 반박, 증거를 성과형 광고 원재료로 분류하고 확장합니다.',
-    items: ['내부 촬영 가이드', '대표·제품 메시지 추출', '리뷰·고객 반박 포인트 분석', 'AI 기반 대본 확장', 'UGC형 광고 변형'],
+    title: 'Raw Material Extraction',
+    body: '브랜드 내부의 리뷰, CS, 데모, 대표 메시지를 광고 원재료로 분류합니다.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Hook Generation',
+    body: '고객 반박과 구매 이유를 첫 3초에 걸리는 hook과 angle로 바꿉니다.',
+  },
+  {
+    icon: Cpu,
+    title: 'AI Expansion',
+    body: '검증된 메시지를 여러 포맷과 길이의 성과형 광고 소재 후보로 확장합니다.',
   },
   {
     icon: Radar,
-    title: '성과 테스트 시스템',
-    summary: '많이 만드는 것에서 끝나지 않습니다. 어떤 소재가 이기는지 찾고, 이긴 소재를 변형해 예산 확장으로 연결합니다.',
-    items: ['후킹 테스트', '소구점 테스트', '포맷 테스트', '승자 소재 발견', '예산 확장', 'CAC 방어'],
+    title: 'Winner Scaling',
+    body: '테스트 신호를 기준으로 이긴 소재를 변형하고 예산 확장 구조에 연결합니다.',
   },
 ];
 
-const offers = [
+const infraSignals = [
+  ['AWS Remotion', '반복 렌더링을 통제 가능한 파이프라인으로 운영'],
+  ['Shorts Producer', 'Hook, 대본, 소재 변형을 빠르게 생산하는 내부 모듈'],
+  ['Cost Meter', '소재 생산량이 늘어도 비용 한도를 확인하는 장치'],
+  ['Approval Gating', '브랜드 톤, 표현 리스크, 최종 승인 흐름 통제'],
+];
+
+const categories = [
   {
-    kicker: '서비스 01',
-    title: '단기 소재 테스트 스프린트',
-    forWho: '빠른 소재 테스트가 필요한 브랜드',
-    deliverables: ['광고 원재료 진단', '광고 소재 콘셉트 30개', '숏폼 소재 10–30개', '후킹·소구점 테스트 설계', '승자 소재 리포트'],
-    cta: '스프린트 진단 받기',
+    label: 'Growth',
+    href: '/growth',
+    title: '광고비가 더 이상 안 올라가는 브랜드를 위한 성장 구조',
+    body: 'CAC 상승, ROAS 정체, Meta 학습 약화, 전환 추적 문제를 Creative Velocity와 함께 진단합니다.',
+    items: ['Meta CAPI', 'GA4/GTM', '광고 구조 진단', 'Scale OS'],
   },
   {
-    kicker: '서비스 02',
-    title: '영상 카탈로그 소재 시스템',
-    forWho: 'SKU가 많고 제품별 소재 테스트가 필요한 이커머스',
-    deliverables: ['AI 영상 카탈로그 소재', '보조 피드 구조 설계', 'Meta 카탈로그 영상 세팅', '제품별 소재 테스트'],
-    cta: '카탈로그 구조 보기',
+    label: 'Creative',
+    href: '/creative',
+    title: '브랜드 내부 raw material을 성과형 광고 소재로 변환',
+    body: 'Creative Fatigue, 낮은 CTR, 약한 hook, 느린 Winner 발견 문제를 광고 실험 구조로 해결합니다.',
+    items: ['UGC Shorts', 'Hook generation', 'Video Catalog', 'Raw Material Engine'],
   },
   {
-    kicker: '서비스 03',
-    title: 'Scale OS (스케일 운영 시스템)',
-    forWho: '월 ₩1,000만–₩5,000만 이상 집행 브랜드',
-    deliverables: ['데이터 인프라', '소재 생산 파이프라인', 'Meta/Google 캠페인 구조', '주간 테스트 운영 리듬', '스케일링 프레임워크'],
-    cta: 'Scale OS 상담하기',
+    label: 'System',
+    href: '/system',
+    title: '광고 소재 생산을 시스템화',
+    body: '수작업 제작 병목, 비용 폭증, 승인 누락을 Creative Infrastructure로 전환합니다.',
+    items: ['Shorts Producer', 'AWS Remotion', 'Cost Meter', 'automation'],
   },
 ];
 
 const navItems = [
-  ['문제', '#problem'],
-  ['엔진', '#engine'],
-  ['운영 시스템', '#os'],
-  ['서비스 구성', '#offers'],
+  ['Creative OS', '#os'],
+  ['서비스', '#categories'],
+  ['사례', '#case'],
+  ['상담하기', '#diagnosis'],
 ];
 
 export const metadata = {
-  title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
+  title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
   description:
-    'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    'HI-OP은 브랜드 내부의 raw material을 성과형 광고 소재로 변환해 DTC 브랜드의 소재 병목과 광고비 확장 문제를 해결하는 Creative Performance Infrastructure입니다.',
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
-    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
+    description: '소재 병목을 풀고 Creative Velocity를 운영하는 DTC Creative Performance Infrastructure.',
     url: 'https://hi-ob.com',
     siteName: 'HI-OP',
     locale: 'ko_KR',
@@ -121,8 +132,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HI-OP Creative Velocity OS | DTC 소재 병목 진단',
-    description: 'DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 HI-OP Creative Velocity OS',
+    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
+    description: '소재 병목을 풀고 Creative Velocity를 운영하는 DTC Creative Performance Infrastructure.',
   },
 };
 
@@ -148,7 +159,7 @@ export default function HomePage() {
           <span className="cv-brand-mark">HI</span>
           <span>
             HI-OP
-            <small>Creative Velocity OS</small>
+            <small>Creative Performance OS</small>
           </span>
         </Link>
         <div className="cv-nav-links" aria-label="홈페이지 섹션 이동">
@@ -156,36 +167,37 @@ export default function HomePage() {
             <a key={href} href={href}>{label}</a>
           ))}
         </div>
-        <a className="cv-nav-cta" href="#diagnosis">무료 진단 신청</a>
+        <a className="cv-nav-cta" href="#diagnosis">광고 구조 무료 진단</a>
       </nav>
 
       <section className="cv-hero">
         <div className="cv-hero-copy">
-          <SectionLabel>월 ₩1,000만–₩5,000만 이상 광고비를 집행하는 DTC 브랜드를 위한 시스템</SectionLabel>
-          <h1>광고 성과는 더 이상 타게팅으로 결정되지 않습니다.</h1>
+          <SectionLabel>Creative Performance Infrastructure for DTC brands</SectionLabel>
+          <h1>광고비가 더 이상 안 올라가는 이유는 광고 운영이 아니라 소재 병목 때문입니다.</h1>
           <p className="cv-hero-sub">
-            HI-OP은 브랜드 내부의 원재료를 성과형 광고 소재로 변환하고, Meta/Google 알고리즘이 학습할 수 있는
-            <strong> Creative Velocity OS(소재 생산·테스트 운영 시스템)</strong>를 구축합니다.
+            HI-OP은 브랜드 내부의 raw material을 성과형 광고 소재로 변환하는
+            <strong> Creative Performance OS</strong>입니다.
           </p>
+          <div className="cv-positioning-line">{positioningLine}</div>
           <p className="cv-hero-proof">
-            ROAS는 이미 검증됐는데 스케일이 멈췄다면, 문제는 광고 설정이 아닐 가능성이 큽니다. 알고리즘에 먹일 소재 공급량과 테스트 속도가 부족한 것입니다.
+            브랜드는 아이디어가 부족해서 막히는 것이 아니라, 아이디어를 테스트 가능한 소재로 바꾸는 속도에서 막힙니다.
           </p>
           <div className="cv-actions">
             <a className="cv-button primary" href="#diagnosis">
-              광고 구조 진단 받기 <ArrowRight size={18} />
+              광고 구조 무료 진단 <ArrowRight size={18} />
             </a>
             <a className="cv-button secondary" href="#os">
-              소재 운영 시스템 보기
+              Creative Velocity 분석 받기
             </a>
           </div>
         </div>
 
-        <div className="cv-dashboard" aria-label="Creative Velocity OS 대시보드 시각화">
+        <div className="cv-dashboard" aria-label="Creative Velocity Pipeline">
           <div className="cv-window-bar">
             <span />
             <span />
             <span />
-            <strong>소재 생산·테스트 파이프라인</strong>
+            <strong>Creative Velocity Pipeline</strong>
           </div>
           <div className="cv-pipeline">
             {pipeline.map((step, index) => (
@@ -197,25 +209,25 @@ export default function HomePage() {
           </div>
           <div className="cv-live-grid">
             <div>
-              <small>입력 대기 원재료</small>
+              <small>raw material queue</small>
               <strong>128</strong>
-              <span>리뷰, 촬영본, CS, 데모 영상</span>
+              <span>리뷰, 촬영본, CS, 데모, 포장 장면</span>
             </div>
             <div>
-              <small>주간 테스트 수</small>
+              <small>weekly tests</small>
               <strong>32</strong>
-              <span>후킹, 소구점, 포맷</span>
+              <span>hook, angle, format 단위 테스트</span>
             </div>
             <div>
-              <small>승자 소재 신호</small>
+              <small>winner signals</small>
               <strong>4.8x</strong>
-              <span>확장 가능한 소재 변형 준비</span>
+              <span>확장 가능한 승자 후보 소재</span>
             </div>
           </div>
           <div className="cv-signal-panel">
             <div>
-              <small>알고리즘 학습 상태</small>
-              <strong>학습 속도 상승 중</strong>
+              <small>algorithm learning</small>
+              <strong>새 학습 재료 공급 중</strong>
             </div>
             <div className="cv-bars" aria-hidden="true">
               {[34, 58, 42, 76, 63, 88, 70, 96].map((height) => (
@@ -228,22 +240,22 @@ export default function HomePage() {
 
       <section id="problem" className="cv-section cv-problem">
         <SectionHeader
-          eyebrow="스케일이 막히는 진짜 이유"
-          title="광고비를 더 쓰지 못하는 진짜 이유"
-          body="이미 ROAS는 검증됐고, 제품 USP도 충분하고, 대표가 하고 싶은 말도 많습니다. 하지만 소재 테스트 속도가 광고비 증가 속도를 따라가지 못하면 광고비는 3천만-5천만 원 구간에서 막힙니다."
+          eyebrow="Market Problem"
+          title="DTC 브랜드가 막히는 지점은 점점 캠페인 밖으로 이동했습니다."
+          body="Creative Fatigue, CAC 상승, 느린 테스트, 약한 알고리즘 학습이 동시에 오면 광고비는 3천만-5천만 원 구간에서 멈춥니다."
         />
         <div className="cv-problem-grid">
           <div className="cv-problem-copy">
             <p>
-              문제는 광고 운영이 아닙니다.
+              브랜드는 아이디어가 부족해서 막히는 것이 아니라,
               <br />
-              <strong>알고리즘에 먹일 소재 공급량입니다.</strong>
+              <strong>아이디어를 테스트 가능한 소재로 바꾸는 속도에서 막힙니다.</strong>
             </p>
             <ul>
-              <li>새 소재가 늦어 테스트가 멈춥니다.</li>
+              <li>새 hook과 angle이 늦어 알고리즘 학습 재료가 부족합니다.</li>
               <li>승자 소재가 피로해지면 CAC가 다시 올라갑니다.</li>
-              <li>내부 마케팅 팀은 촬영, 편집, 카피, 운영을 동시에 감당합니다.</li>
-              <li>광고비를 늘려도 알고리즘은 새로운 학습 신호를 충분히 받지 못합니다.</li>
+              <li>내부 팀은 촬영, 카피, 검수, 운영을 동시에 감당합니다.</li>
+              <li>광고비를 올려도 새 실험 신호가 충분하지 않으면 스케일링이 멈춥니다.</li>
             </ul>
           </div>
           <div className="cv-stat-stack">
@@ -257,11 +269,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="cv-section cv-agency-fail">
+        <SectionHeader
+          eyebrow="Why Current Workflows Fail"
+          title="기존 운영 방식은 testing throughput을 고치지 못합니다."
+          body="문제는 운영 리포트가 아니라, 알고리즘에 공급되는 학습 재료의 속도입니다."
+        />
+        <div className="cv-failure-grid">
+          {[
+            ['운영 최적화에 머뭅니다', '예산과 캠페인을 조정하지만 소재 테스트 물량과 전환 신호 품질을 함께 보지 않습니다.'],
+            ['예쁜 결과물에 머뭅니다', '광고 실험 단위인 hook, angle, format, offer 변형량이 부족합니다.'],
+            ['Winner discovery가 없습니다', '이긴 소재를 발견하고 변형해 예산 확장으로 연결하는 구조가 약합니다.'],
+          ].map(([title, body]) => (
+            <article className="cv-failure-card" key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="os" className="cv-section cv-os">
+        <SectionHeader
+          eyebrow="Creative Performance OS"
+          title="HI-OP은 광고 성과 운영 시스템을 구축합니다."
+          body="raw material extraction → hook generation → AI expansion → testing rhythm → Winner Scaling으로 이어지는 Creative Velocity System입니다."
+        />
+        <div className="cv-pillars cv-os-steps">
+          {osSteps.map(({ icon: Icon, title, body }) => (
+            <article key={title} className="cv-pillar">
+              <div className="cv-pillar-icon"><Icon size={24} /></div>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section id="engine" className="cv-section">
         <SectionHeader
-          eyebrow="광고 원재료 엔진"
-          title="브랜드 내부를 광고 원재료 공장으로 바꿉니다."
-          body="HI-OP은 외부에서 억지로 아이디어를 만들지 않습니다. 브랜드 안에 이미 쌓여 있는 장면, 말, 질문, 반박, 증거를 꺼내 성과형 소재로 변환합니다."
+          eyebrow="Raw Material Engine"
+          title="브랜드 안에 이미 있는 원재료를 성과형 광고 소재로 변환합니다."
+          body="외부에서 억지로 아이디어를 만드는 대신, 브랜드 내부의 장면·말·질문·반박·증거를 광고 원재료로 꺼냅니다."
         />
         <div className="cv-engine-grid">
           <div className="cv-engine-column">
@@ -293,45 +342,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="os" className="cv-section cv-os">
+      <section className="cv-section cv-infra">
         <SectionHeader
-          eyebrow="운영 시스템"
-          title="HI-OP Creative Velocity OS"
-          body="데이터 인프라가 학습 기준을 만들고, 광고 원재료 엔진이 소재 공급량을 만들고, 성과 테스트 시스템이 승자 소재를 찾아 확장합니다."
+          eyebrow="System Infrastructure"
+          title="속도, 비용, 승인, 렌더링을 통제할 수 있어야 Creative Velocity가 운영됩니다."
+          body="기술은 전면의 제품이 아니라 깊이를 증명하는 운영 기반입니다. HI-OP은 소재 생산량이 늘어날 때 무너지는 지점을 시스템으로 통제합니다."
         />
-        <div className="cv-pillars">
-          {pillars.map(({ icon: Icon, title, summary, items }) => (
-            <article key={title} className="cv-pillar">
-              <div className="cv-pillar-icon"><Icon size={24} /></div>
+        <div className="cv-infra-grid">
+          {infraSignals.map(([title, body]) => (
+            <article className="cv-infra-card" key={title}>
+              <ShieldCheck size={20} />
               <h3>{title}</h3>
-              <p>{summary}</p>
-              <ul>
-                {items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              <p>{body}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="cv-section cv-case">
+      <section id="case" className="cv-section cv-case">
         <div className="cv-case-copy">
-          <SectionLabel>케이스 패턴</SectionLabel>
+          <SectionLabel>Case Pattern</SectionLabel>
           <h2>월 5,400만 원 광고비에서 스케일이 막힌 브랜드의 공통점</h2>
           <p>
-            이 브랜드는 제품 메시지도 많고, 하고 싶은 말도 많았습니다. 문제는 광고 아이디어가 없는 것이 아니라,
+            이 브랜드는 제품 메시지도 많고, 하고 싶은 말도 많았습니다. 문제는 아이디어가 없는 것이 아니라,
             그 메시지를 빠르게 소재화하고 테스트하는 시스템이 없다는 점이었습니다.
           </p>
-          <strong>스케일이 막힌 브랜드는 보통 아이디어가 부족한 것이 아닙니다. 아이디어를 광고 소재로 변환하는 속도가 부족합니다.</strong>
+          <strong>충분한 콘텐츠가 있었지만 testing throughput이 부족했습니다. 해결 구조는 Creative Performance OS였습니다.</strong>
         </div>
         <div className="cv-case-board">
           {[
             ['현재 월 광고비', '₩5,400만 / 월'],
-            ['문제', '소재 테스트 병목'],
-            ['활용 가능한 원재료', '공장 촬영본, 제품 스토리, 제품 데모, 고객 반박 포인트'],
-            ['해결 구조', '광고 원재료 엔진 + 영상 카탈로그 + 소재 테스트'],
-            ['목표', '소재 테스트 물량을 늘리고 확장 가능한 승자 소재 발견'],
+            ['막힌 지점', '소재 테스트 병목'],
+            ['보유 원재료', '공장 촬영본, 제품 스토리, 제품 데모, 고객 반박 포인트'],
+            ['해결 구조', 'Raw Material Engine + Video Catalog + Creative Testing'],
+            ['목표', '소재 테스트 물량 증가와 Winner Scaling'],
           ].map(([label, value]) => (
             <div key={label}>
               <small>{label}</small>
@@ -341,50 +385,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="offers" className="cv-section">
+      <section id="categories" className="cv-section">
         <SectionHeader
-          eyebrow="서비스 구성"
-          title="소재 병목을 푸는 3가지 진입 구조"
-          body="브랜드 상황에 따라 빠른 테스트, SKU 기반 영상 카탈로그, 또는 월 운영형 Scale OS(스케일 운영 시스템)로 시작할 수 있습니다."
+          eyebrow="Category Routing"
+          title="문제의 위치에 따라 세 가지 구조로 들어갑니다."
+          body="홈페이지는 서비스 카탈로그가 아닙니다. 브랜드가 막힌 원인을 진단하고 Growth, Creative, System 중 맞는 구조로 연결합니다."
         />
-        <div className="cv-offers">
-          {offers.map((offer) => (
-            <article key={offer.title} className="cv-offer">
-              <span>{offer.kicker}</span>
-              <h3>{offer.title}</h3>
-              <p>{offer.forWho}</p>
+        <div className="cv-category-grid">
+          {categories.map((category) => (
+            <Link href={category.href} className="cv-category-card" key={category.href}>
+              <span>{category.label}</span>
+              <h3>{category.title}</h3>
+              <p>{category.body}</p>
               <ul>
-                {offer.deliverables.map((item) => (
+                {category.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <a href="#diagnosis">{offer.cta} <ArrowRight size={16} /></a>
-            </article>
+              <b>자세히 보기 <ArrowRight size={16} /></b>
+            </Link>
           ))}
         </div>
       </section>
 
       <section id="diagnosis" className="cv-section cv-final">
         <div className="cv-final-copy">
-          <SectionLabel>무료 소재 병목 진단</SectionLabel>
-          <h2>광고비를 더 쓰기 전에, 소재 병목부터 진단하세요.</h2>
+          <SectionLabel>Free Diagnosis</SectionLabel>
+          <h2>광고 운영보다 먼저, 소재 병목부터 진단하세요.</h2>
           <p>
-            지금 필요한 것은 더 많은 광고 세팅이 아니라, 알고리즘이 계속 학습할 수 있는 소재 공급 시스템입니다.
-            월 ₩1,000만 이상 광고를 집행 중인 DTC·이커머스 브랜드를 우선 진단합니다.
+            지금 필요한 것은 더 많은 세팅이 아니라, 알고리즘이 계속 학습할 수 있는 소재 공급 시스템입니다.
+            {positioningLine}
           </p>
           <div className="cv-final-points">
             <span><SearchCheck size={18} />소재 병목 진단</span>
             <span><BarChart3 size={18} />광고 구조 확인</span>
-            <span><LineChart size={18} />승자 소재 확장 방향 제안</span>
+            <span><LineChart size={18} />Winner Scaling 방향</span>
           </div>
         </div>
-        <CreativeVelocityForm />
+        <CreativeVelocityForm
+          source="home_creative_performance_os"
+          title="광고 구조 무료 진단 신청"
+          description="월 광고비, 소재 제작량, 내부 원재료 보유 상태를 기준으로 광고 성과 운영 시스템의 병목을 확인합니다."
+          submitLabel="광고 구조 무료 진단"
+          successTitle="광고 구조 무료 진단 신청이 접수되었습니다."
+        />
       </section>
 
       <footer className="cv-footer">
         <div>
           <strong>HI-OP</strong>
-          <span>DTC 브랜드의 소재 병목을 풀고 광고비 확장을 돕는 Creative Velocity OS</span>
+          <span>{positioningLine}</span>
         </div>
         <div>
           <Link href="/privacy">개인정보 처리방침</Link>

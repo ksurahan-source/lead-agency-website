@@ -57,7 +57,14 @@ function SelectField({ label, name, value, options, onChange, required = true })
   );
 }
 
-export default function CreativeVelocityForm() {
+export default function CreativeVelocityForm({
+  source = 'creative_velocity_home',
+  eyebrow = '무료 진단',
+  title = '무료 소재 병목 진단 신청',
+  description = '월 광고비, 소재 제작량, 내부 촬영 가능 여부를 기준으로 소재 병목을 먼저 확인합니다.',
+  submitLabel = '무료 소재 병목 진단 신청',
+  successTitle = '무료 소재 병목 진단 신청이 접수되었습니다.',
+}) {
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -68,7 +75,7 @@ export default function CreativeVelocityForm() {
   };
 
   const buildInquiry = () => [
-    `[무료 소재 병목 진단]`,
+    `[${title}]`,
     `브랜드명: ${formData.brand}`,
     `웹사이트: ${formData.website}`,
     `월 광고비: ${formData.adSpend}`,
@@ -90,7 +97,6 @@ export default function CreativeVelocityForm() {
     try {
       const { fbc, fbp, fbclid } = captureMetaAttribution();
       const eventSourceUrl = window.location.href;
-      const source = 'creative_velocity_home';
       const eventValue = 300000;
       const eventCurrency = 'KRW';
 
@@ -190,7 +196,7 @@ export default function CreativeVelocityForm() {
     return (
       <div className="cv-form cv-form-success">
         <span>진단 신청 접수 완료</span>
-        <h3>무료 소재 병목 진단 신청이 접수되었습니다.</h3>
+        <h3>{successTitle}</h3>
         <p>브랜드의 소재 병목과 광고 구조를 확인한 뒤 24시간 내 연락드리겠습니다.</p>
         <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer">
           카카오톡으로 바로 문의하기
@@ -202,9 +208,9 @@ export default function CreativeVelocityForm() {
   return (
     <form className="cv-form" onSubmit={handleSubmit}>
       <div className="cv-form-head">
-        <span>무료 진단</span>
-        <h3>무료 소재 병목 진단 신청</h3>
-        <p>월 광고비, 소재 제작량, 내부 촬영 가능 여부를 기준으로 소재 병목을 먼저 확인합니다.</p>
+        <span>{eyebrow}</span>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
 
       <div className="cv-form-grid">
@@ -259,7 +265,7 @@ export default function CreativeVelocityForm() {
       {status === 'error' && <div className="cv-form-error">{errorMessage}</div>}
 
       <button type="submit" disabled={status === 'submitting'}>
-        {status === 'submitting' ? '제출 중...' : '무료 소재 병목 진단 신청'}
+        {status === 'submitting' ? '제출 중...' : submitLabel}
       </button>
     </form>
   );
