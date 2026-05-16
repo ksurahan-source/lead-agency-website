@@ -1,7 +1,14 @@
 import { NextResponse } from 'next/server';
 
-import { writeUsageEvent } from '@/lib/creativeUsageStore';
+import {
+  enforceCreativeCostGuard,
+  estimateOpenAiScriptCost,
+  getRealGenerationConfig,
+} from '@/lib/creativeCostGuard';
+import { putCreativeArtifact } from '@/lib/creativeArtifacts';
+import { updateCreativeRun, writeCreativeRun, writeUsageEvent } from '@/lib/creativeUsageStore';
 import { isStudioRequestAuthenticated } from '@/lib/studioAuth';
+import { generateShortScript } from '@/modules/shorts-producer/lib/openai';
 
 export const runtime = 'edge';
 
@@ -11,6 +18,10 @@ export async function POST(request) {
   }
 
   const body = await readJsonBody(request);
+  if (body?.mock === false) {
+    return runRealGeneration(body);
+  }
+
   const brief = body?.brief ?? {};
   const runId = crypto.randomUUID();
   const hooks = buildMockHooks(brief);
@@ -40,6 +51,172 @@ export async function POST(request) {
     hooks,
     scripts,
   });
+}
+
+async function runRealGeneration(body) {
+  const runId = crypto.randomUUID();
+  const adapted = adaptGenerateScriptRequest(body);
+
+  if (adapted.missingFields.length) {
+    await writeUsageEvent({
+      runId,
+      provider: 'openai',
+      model: 'not_called',
+      operationType: 'script_generation',
+      status: 'failed',
+      estimatedCostUsd: 0,
+      actualCostUsd: 0,
+      reason: `validation_missing_fields:${adapted.missingFields.join(',')}`,
+    });
+
+    return NextResponse.json({
+      success: false,
+      mock: false,
+      error: 'VALIDATION_ERROR',
+      missing_fields: adapted.missingFields,
+    }, { status: 422 });
+  }
+
+  const config = getRealGenerationConfig();
+  if (!config.ok) {
+    await writeUsageEvent({
+      runId,
+      provider: 'openai',
+      model: 'not_called',
+      operationType: 'script_generation',
+      status: 'failed',
+      estimatedCostUsd: 0,
+      actualCostUsd: 0,
+      reason: `missing_env:${config.missing.join(',')}`,
+    });
+
+    return NextResponse.json({
+      success: false,
+      mock: false,
+      error: 'REAL_GENERATION_NOT_CONFIGURED',
+      missing_env: config.missing,
+    }, { status: 503 });
+  }
+
+  const estimated = estimateOpenAiScriptCost({
+    model: config.model,
+    input: JSON.stringify(adapted.request),
+    outputTokens: config.maxOutputTokens,
+  });
+
+  try {
+    await enforceCreativeCostGuard({
+      runId,
+      assetId: runId,
+      estimatedCostUsd: estimated.estimatedCostUsd,
+    });
+  } catch (error) {
+    if (error?.code === 'CREATIVE_COST_GUARD_BLOCKED') {
+      return NextResponse.json({
+        success: false,
+        mock: false,
+        error: error.code,
+        message: error.message,
+        details: error.details,
+      }, { status: error.status ?? 402 });
+    }
+    throw error;
+  }
+
+  await writeCreativeRun({
+    id: runId,
+    status: 'running',
+    mode: 'draft',
+    mock: false,
+    input: adapted.request,
+  });
+
+  try {
+    const script = await generateShortScript(adapted.request, {
+      modelTier: 'cheap',
+      mode: 'draft',
+      apiKey: config.apiKey,
+      model: config.model,
+      maxOutputTokens: config.maxOutputTokens,
+      assetId: runId,
+    });
+    const actualCostUsd = script._meta?.openai?.requestCostUsd ?? estimated.estimatedCostUsd;
+    const artifact = await putCreativeArtifact({
+      type: 'scripts',
+      runId,
+      id: runId,
+      fileName: 'script.json',
+      json: {
+        request: adapted.request,
+        result: script,
+      },
+      mock: false,
+      metadata: {
+        provider: 'openai',
+        model: config.model,
+        operationType: 'script_generation',
+      },
+    });
+
+    await updateCreativeRun(runId, {
+      status: 'succeeded',
+      outputKey: artifact.key,
+    });
+    await writeUsageEvent({
+      runId,
+      assetId: runId,
+      provider: 'openai',
+      model: config.model,
+      operationType: 'script_generation',
+      status: 'generated',
+      estimatedCostUsd: estimated.estimatedCostUsd,
+      actualCostUsd,
+      reason: 'real_single_generate',
+      metadata: {
+        artifactKey: artifact.key,
+        stored: artifact.stored,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      mock: false,
+      runId,
+      artifactKey: artifact.key,
+      script,
+      concepts: buildRealConcepts(script),
+      hooks: [script.hook].filter(Boolean),
+      scripts: [{
+        id: `openai-script-${runId}`,
+        title: script.title,
+        hook: script.hook,
+        full_script: script.full_script,
+        scenes: script.scenes,
+      }],
+    });
+  } catch (error) {
+    await updateCreativeRun(runId, { status: 'failed' }).catch(() => null);
+    await writeUsageEvent({
+      runId,
+      assetId: runId,
+      provider: 'openai',
+      model: config.model,
+      operationType: 'script_generation',
+      status: 'failed',
+      estimatedCostUsd: estimated.estimatedCostUsd,
+      actualCostUsd: 0,
+      reason: error instanceof Error ? error.message : 'real_generate_failed',
+    });
+
+    return NextResponse.json({
+      success: false,
+      mock: false,
+      runId,
+      error: 'REAL_GENERATION_FAILED',
+      message: 'OpenAI single generate failed before render/TTS.',
+      fallback: buildMockScripts(adapted.request.brief, buildMockHooks(adapted.request.brief)),
+    }, { status: 500 });
+  }
 }
 
 async function readJsonBody(request) {
@@ -94,4 +271,59 @@ function buildMockConcepts(brief) {
 
 function clean(value) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function adaptGenerateScriptRequest(body) {
+  const brief = body?.brief ?? {};
+  const request = {
+    prompt: clean(body?.prompt) || clean(body?.selectedHook),
+    templateId: 'problem-solution-reels',
+    brief: {
+      brand: clean(brief.brand),
+      industry: clean(brief.industry) || clean(brief.product) || 'DTC/ecommerce',
+      goal: clean(brief.goal) || '성과형 광고 소재 테스트로 승자 소재를 찾는다',
+      targetAudience: clean(brief.targetAudience) || clean(brief.audience),
+      offer: clean(brief.offer),
+      painPoint: clean(brief.painPoint) || clean(brief.pain),
+      tone: clean(brief.tone) || '프리미엄하고 직설적인 B2B 퍼포먼스 마케팅 톤',
+      creativeStyle: normalizeCreativeStyle(brief.creativeStyle),
+      cta: clean(brief.cta),
+      channel: clean(brief.channel) || 'Meta Reels',
+      constraints: clean(brief.constraints) || '성과 보장, 허위 수치, 과장된 보장 표현 금지',
+      proofPoints: toStringList(brief.proofPoints),
+      forbiddenTerms: toStringList(brief.forbiddenTerms),
+      referenceLinks: toStringList(brief.referenceLinks),
+      locale: clean(brief.locale) || 'ko-KR',
+    },
+    format: {
+      contentFormat: body?.format?.contentFormat || 'reels',
+      aspectRatio: body?.format?.aspectRatio || '9:16',
+      targetDurationSeconds: Number(body?.format?.targetDurationSeconds) || 12,
+      sceneCount: Number(body?.format?.sceneCount) || 6,
+    },
+  };
+  const requiredFields = ['brand', 'targetAudience', 'offer', 'painPoint', 'cta'];
+  const missingFields = requiredFields.filter((field) => !request.brief[field]);
+
+  return { request, missingFields };
+}
+
+function normalizeCreativeStyle(value) {
+  const allowed = new Set(['ugc', 'influencer', 'pov', 'testimonial', 'native', 'shortform']);
+  return allowed.has(value) ? value : 'native';
+}
+
+function toStringList(value) {
+  if (Array.isArray(value)) return value.map(clean).filter(Boolean);
+  if (typeof value === 'string') return value.split(',').map(clean).filter(Boolean);
+  return undefined;
+}
+
+function buildRealConcepts(script) {
+  return (script.scenes ?? []).slice(0, 3).map((scene, index) => ({
+    id: `real-concept-${index + 1}`,
+    name: scene.topic || scene.performance_stage || `장면 ${index + 1}`,
+    format: scene.shot_type || 'shortform',
+    goal: scene.target_reaction || scene.market_emotion || '성과 반응 확인',
+  }));
 }

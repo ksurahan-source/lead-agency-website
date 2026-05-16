@@ -1,18 +1,7 @@
 import OpenAI from 'openai';
-import {
-  createPromptHash,
-  enforceDailyCostGuard,
-  getMaxOutputTokens,
-  getOpenAiModel,
-  readCachedArtifact,
-  recordUsageEvent,
-  requireFinalApproval,
-  writeCachedArtifact,
-  type CostMode,
-  type ModelTier,
-} from '@/lib/cost-control';
-import { estimateAssetCost } from '@/lib/cost-meter';
-import { buildTtsNarrationText, optimizeElevenLabsTtsScript } from '@/lib/tts-preprocessor';
+
+import { getOpenAiPricing, roundUsd } from './pricing';
+import { buildTtsNarrationText, optimizeElevenLabsTtsScript } from './tts-preprocessor';
 import type {
   AspectRatio,
   ContentFormat,
@@ -25,10 +14,13 @@ import type {
   ShortScript,
   ShotType,
   TtsVoiceRole,
-} from '@/lib/types';
+} from './types';
 
-function getOpenAiClient() {
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+export type CostMode = 'draft' | 'final';
+export type ModelTier = 'cheap' | 'premium';
+
+function getOpenAiClient(apiKeyInput?: string) {
+  const apiKey = apiKeyInput?.trim() || process.env.OPENAI_API_KEY?.trim();
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is not configured');
   }
@@ -63,6 +55,9 @@ export interface GenerateShortScriptOptions {
   modelTier?: ModelTier;
   approvedFinalRender?: boolean;
   assetId?: string;
+  apiKey?: string;
+  model?: string;
+  maxOutputTokens?: number;
 }
 
 export async function generateShortScript(
@@ -163,48 +158,14 @@ export async function generateShortScript(
     }
   `;
   const modelTier = options.modelTier ?? 'cheap';
-  const model = getOpenAiModel(modelTier);
-  const maxOutputTokens = getMaxOutputTokens();
-  const promptHash = createPromptHash({
-    kind: 'script',
-    model,
-    maxOutputTokens,
-    request,
-    format,
-    prompt,
-    systemPrompt,
-  });
+  const model = options.model || getOpenAiModel(modelTier);
+  const maxOutputTokens = options.maxOutputTokens ?? getMaxOutputTokens();
 
-  if (modelTier === 'premium') {
-    requireFinalApproval({
-      provider: 'openai',
-      action: 'premium_script_generation',
-      mode: options.mode ?? 'draft',
-      approvedFinalRender: options.approvedFinalRender,
-    });
+  if (modelTier === 'premium' && (options.mode !== 'final' || options.approvedFinalRender !== true)) {
+    throw new Error('Final approval is required before calling premium OpenAI models.');
   }
 
-  const cached = await readCachedArtifact<ScriptGenerationResult>('script', promptHash);
-  if (cached) return cached;
-
-  const estimatedInputTokens = estimateTextTokens(`${systemPrompt}\n${prompt}`);
-  const estimatedCost = estimateAssetCost({
-    provider: 'openai',
-    model,
-    operationType: 'script_generation',
-    inputTokens: estimatedInputTokens,
-    outputTokens: maxOutputTokens,
-  });
-
-  await enforceDailyCostGuard({
-    provider: 'openai',
-    action: 'script_generation',
-    estimatedCostUsd: estimatedCost.totalUsd,
-    assetId: options.assetId,
-  });
-
-  const startedAt = Date.now();
-  const response = await getOpenAiClient().chat.completions.create({
+  const response = await getOpenAiClient(options.apiKey).chat.completions.create({
     model,
     messages: [
       { role: 'system', content: systemPrompt },
@@ -214,7 +175,7 @@ export async function generateShortScript(
     max_completion_tokens: maxOutputTokens,
   });
 
-  const parsed = JSON.parse(response.choices[0].message.content || '{}') as ShortScript;
+  const parsed = parseJsonObject(response.choices[0].message.content || '{}') as ShortScript;
   const rawScenes = Array.isArray(parsed.scenes) ? parsed.scenes : [];
   const scenes = rawScenes.map((scene, index) => sanitizeScene(scene, index, rawScenes.length, format.contentFormat));
   const script = { ...parsed, scenes };
@@ -225,17 +186,8 @@ export async function generateShortScript(
 
   const inputTokens = response.usage?.prompt_tokens ?? undefined;
   const outputTokens = response.usage?.completion_tokens ?? undefined;
-  const totalTokens = response.usage?.total_tokens ?? maxOutputTokens;
   const cachedInputTokens = response.usage?.prompt_tokens_details?.cached_tokens ?? undefined;
-  const actualCostUsd = estimateAssetCost({
-    provider: 'openai',
-    model,
-    operationType: 'script_generation',
-    inputTokens,
-    outputTokens,
-    cachedInputTokens,
-    includeSafetyBuffer: false,
-  }).totalUsd;
+  const actualCostUsd = estimateOpenAiCostUsd(model, inputTokens, outputTokens, cachedInputTokens);
   const result: ScriptGenerationResult = {
     ...script,
     full_script: tts.text,
@@ -266,27 +218,7 @@ export async function generateShortScript(
     },
   };
 
-  await recordUsageEvent({
-    provider: 'openai',
-    action: 'script_generation',
-    status: 'generated',
-    model,
-    assetId: options.assetId,
-    promptHash,
-    inputTokens,
-    outputTokens,
-    cachedInputTokens,
-    totalTokens,
-    durationMs: Date.now() - startedAt,
-    actualCostUsd,
-  });
-  await writeCachedArtifact('script', promptHash, result, { provider: 'openai', model });
-
   return result;
-}
-
-function estimateTextTokens(text: string) {
-  return Math.ceil(text.length / 4);
 }
 
 function normalizeGenerateRequest(input: GenerateScriptRequest | string): GenerateScriptRequest {
@@ -312,6 +244,47 @@ function normalizeGenerateRequest(input: GenerateScriptRequest | string): Genera
     },
     format: defaultFormatSettings('reels'),
   };
+}
+
+export function getOpenAiModel(tier: ModelTier) {
+  if (tier === 'premium') return process.env.OPENAI_PREMIUM_MODEL?.trim() || 'gpt-4o';
+  return process.env.OPENAI_CHEAP_MODEL?.trim() || 'gpt-4o-mini';
+}
+
+export function getMaxOutputTokens() {
+  const configured = Number(process.env.MAX_OUTPUT_TOKENS_PER_REQUEST);
+  if (Number.isFinite(configured) && configured > 0) return Math.floor(configured);
+  return 2200;
+}
+
+function estimateOpenAiCostUsd(
+  model: string,
+  inputTokens?: number,
+  outputTokens?: number,
+  cachedInputTokens?: number,
+) {
+  const pricing = getOpenAiPricing(model);
+  const cachedTokens = cachedInputTokens ?? 0;
+  const billableInputTokens = Math.max(0, (inputTokens ?? 0) - cachedTokens);
+  const inputCost = (billableInputTokens / 1_000_000) * pricing.inputPerMillionTokensUsd;
+  const cachedCost = (cachedTokens / 1_000_000) * pricing.cachedInputPerMillionTokensUsd;
+  const outputCost = ((outputTokens ?? 0) / 1_000_000) * pricing.outputPerMillionTokensUsd;
+
+  return roundUsd(inputCost + cachedCost + outputCost);
+}
+
+function parseJsonObject(content: string) {
+  const cleaned = content
+    .trim()
+    .replace(/^```(?:json)?/i, '')
+    .replace(/```$/i, '')
+    .trim();
+
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    return JSON.parse(cleaned.replace(/,\s*([}\]])/g, '$1'));
+  }
 }
 
 function buildCustomerPrompt(request: GenerateScriptRequest) {

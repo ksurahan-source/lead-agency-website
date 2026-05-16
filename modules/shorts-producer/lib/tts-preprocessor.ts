@@ -1,4 +1,4 @@
-import type { ShortScript, TtsPreprocessOptions, TtsPreprocessResult } from '@/lib/types';
+import type { ShortScript, TtsPreprocessOptions, TtsPreprocessResult } from './types';
 
 const DEFAULT_MAX_LINE_LENGTH = 22;
 
