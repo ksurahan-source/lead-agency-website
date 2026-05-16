@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 
+import { isStudioRequestAuthenticated } from '@/lib/studioAuth';
 import { getDailyCostSummary } from '@/modules/shorts-producer/lib/cost-meter';
 
 export const runtime = 'nodejs';
 
 export async function GET(req) {
   try {
+    if (!(await isStudioRequestAuthenticated(req))) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
     const date = searchParams.get('date') || undefined;
 
