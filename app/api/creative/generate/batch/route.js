@@ -1,11 +1,9 @@
-import { randomUUID } from 'node:crypto';
-
 import { NextResponse } from 'next/server';
 
+import { writeUsageEvent } from '@/lib/creativeUsageStore';
 import { isStudioRequestAuthenticated } from '@/lib/studioAuth';
-import { recordProviderUsage } from '@/modules/shorts-producer/lib/cost-meter';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 export async function POST(request) {
   if (!(await isStudioRequestAuthenticated(request))) {
@@ -14,7 +12,7 @@ export async function POST(request) {
 
   const body = await readJsonBody(request);
   const brief = body?.brief ?? {};
-  const batchId = randomUUID();
+  const batchId = crypto.randomUUID();
   const hooks = [
     'mock batch: 첫 1초에서 멈추지 않으면 좋은 제안도 지나갑니다.',
     'mock batch: 스케일은 예산보다 소재 테스트 속도에서 먼저 막힙니다.',
@@ -22,7 +20,7 @@ export async function POST(request) {
     'mock batch: 이긴 소재는 감이 아니라 반복 가능한 운영 리듬에서 나옵니다.',
   ];
 
-  await recordProviderUsage({
+  await writeUsageEvent({
     runId: batchId,
     provider: 'openai',
     model: 'mock-batch-generation-pipeline',

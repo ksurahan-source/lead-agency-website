@@ -1,11 +1,9 @@
-import { randomUUID } from 'node:crypto';
-
 import { NextResponse } from 'next/server';
 
+import { writeUsageEvent } from '@/lib/creativeUsageStore';
 import { isStudioRequestAuthenticated } from '@/lib/studioAuth';
-import { recordProviderUsage } from '@/modules/shorts-producer/lib/cost-meter';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 export async function POST(request) {
   if (!(await isStudioRequestAuthenticated(request))) {
@@ -14,12 +12,12 @@ export async function POST(request) {
 
   const body = await readJsonBody(request);
   const brief = body?.brief ?? {};
-  const runId = randomUUID();
+  const runId = crypto.randomUUID();
   const hooks = buildMockHooks(brief);
   const scripts = buildMockScripts(brief, hooks);
   const concepts = buildMockConcepts(brief);
 
-  await recordProviderUsage({
+  await writeUsageEvent({
     runId,
     provider: 'openai',
     model: 'mock-generation-pipeline',

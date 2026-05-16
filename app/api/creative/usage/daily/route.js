@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
+import { readDailyUsage } from '@/lib/creativeUsageStore';
 import { isStudioRequestAuthenticated } from '@/lib/studioAuth';
-import { getDailyCostSummary } from '@/modules/shorts-producer/lib/cost-meter';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 export async function GET(req) {
   try {
@@ -14,7 +14,7 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const date = searchParams.get('date') || undefined;
 
-    return NextResponse.json(await getDailyCostSummary(date));
+    return NextResponse.json(await readDailyUsage(date));
   } catch (error) {
     console.error('[creative/usage/daily]', error);
 
