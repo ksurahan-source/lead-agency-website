@@ -201,6 +201,18 @@ interface CreativeRunDetail {
   message?: string;
 }
 
+interface RenderResponse {
+  success: boolean;
+  error?: string;
+  message?: string;
+  missingEnv?: string[];
+  renderJob?: {
+    id: string;
+    status: string;
+    metadata?: Record<string, unknown>;
+  } | null;
+}
+
 type ArtifactStatus = "idle" | "loading" | "success" | "error";
 
 const REAL_REQUIRED_BRIEF_FIELDS: Array<{ key: keyof typeof initialBrief; apiField: string; label: string }> = [
@@ -268,6 +280,9 @@ export default function CreativeOperatorConsole() {
   const [artifactStatus, setArtifactStatus] = useState<ArtifactStatus>("idle");
   const [artifactError, setArtifactError] = useState<string | null>(null);
   const [reloadedScript, setReloadedScript] = useState<LiveScript | null>(null);
+  const [renderStatus, setRenderStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [renderResult, setRenderResult] = useState<RenderResponse | null>(null);
+  const [renderError, setRenderError] = useState<string | null>(null);
 
   const score = useMemo(() => {
     const hook = hooks[selectedHook] ?? "";
@@ -393,6 +408,9 @@ export default function CreativeOperatorConsole() {
     setReloadedScript(null);
     setArtifactStatus("idle");
     setArtifactError(null);
+    setRenderStatus("idle");
+    setRenderResult(null);
+    setRenderError(null);
 
     try {
       const response = await fetch("/api/creative/generate", {
@@ -475,6 +493,43 @@ export default function CreativeOperatorConsole() {
     }
   };
 
+  const triggerRender = async () => {
+    if (!liveResult?.runId || artifactStatus !== "success") return;
+    if (!window.confirm("최종 렌더를 요청합니다. 유료 렌더 비용이 발생할 수 있습니다.")) return;
+
+    setRenderStatus("loading");
+    setRenderError(null);
+    setRenderResult(null);
+
+    try {
+      const response = await fetch("/api/creative/render", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          runId: liveResult.runId,
+          mode: "final",
+          approvedFinalRender: true,
+        }),
+      });
+      const data = await response.json() as RenderResponse;
+
+      if (!response.ok || !data.success) {
+        const missing = data.missingEnv?.length ? ` (${data.missingEnv.join(", ")})` : "";
+        throw new Error(`${data.message ?? data.error ?? `Render request failed (${response.status})`}${missing}`);
+      }
+
+      setRenderResult(data);
+      setRenderStatus("success");
+      await reloadRunAndScriptArtifact(liveResult.runId, runDetail?.scriptArtifactKey ?? liveResult.artifactKey);
+      await refreshDailyCost();
+    } catch (error) {
+      setRenderStatus("error");
+      setRenderError(error instanceof Error ? error.message : "Render request failed");
+    }
+  };
+
   const toggleFavorite = (index: number) => {
     setFavorites((current) =>
       current.includes(index) ? current.filter((item) => item !== index) : [...current, index],
@@ -482,6 +537,7 @@ export default function CreativeOperatorConsole() {
   };
 
   const displayedLiveScript = reloadedScript ?? liveResult?.script;
+  const canRequestRender = Boolean(liveResult?.runId && artifactStatus === "success");
 
   return (
     <main className={styles.shell}>
@@ -968,6 +1024,31 @@ export default function CreativeOperatorConsole() {
               <span>예상 최종 비용</span>
               <strong>~US${estimatedFinalCost.toFixed(2)}</strong>
             </div>
+            {renderStatus !== "idle" || renderResult || renderError ? (
+              <div className={renderStatus === "error" ? styles.liveResultError : styles.liveResultSuccess}>
+                <span>
+                  {renderStatus === "loading"
+                    ? "Render 요청 중"
+                    : renderStatus === "error"
+                      ? "Render 요청 실패"
+                      : "Render 요청 생성됨"}
+                </span>
+                {renderResult?.renderJob ? (
+                  <>
+                    <div className={styles.liveMetaRow}>
+                      <span>render job</span>
+                      <strong>{renderResult.renderJob.id}</strong>
+                    </div>
+                    <div className={styles.liveMetaRow}>
+                      <span>status</span>
+                      <strong>{renderResult.renderJob.status}</strong>
+                    </div>
+                  </>
+                ) : (
+                  <strong>{renderError ?? "Render 요청 상태를 확인할 수 없습니다."}</strong>
+                )}
+              </div>
+            ) : null}
             <div className={styles.providerBreakdown}>
               {providerCostBreakdown.map((item) => (
                 <div key={item.provider}>
@@ -977,9 +1058,14 @@ export default function CreativeOperatorConsole() {
                 </div>
               ))}
             </div>
-            <button className={costMode === "final" ? styles.finalAction : ""} disabled type="button">
+            <button
+              className={costMode === "final" ? styles.finalAction : ""}
+              disabled={!canRequestRender || renderStatus === "loading"}
+              onClick={triggerRender}
+              type="button"
+            >
               <Gauge size={17} />
-              Render this — Step C에서 활성화 예정
+              {canRequestRender ? "Render this" : "R2 script 확인 후 Render 가능"}
             </button>
           </div>
         </article>
