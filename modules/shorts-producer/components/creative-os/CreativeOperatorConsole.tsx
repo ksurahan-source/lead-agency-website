@@ -143,6 +143,14 @@ interface DailyCostSummary {
   byProvider?: Record<string, number>;
 }
 
+interface MockGenerationResponse {
+  success: boolean;
+  mock: boolean;
+  concepts?: Array<{ id: string; name: string; format?: string; goal?: string }>;
+  hooks?: string[];
+  scripts?: Array<{ id: string; title: string; hook: string; full_script: string }>;
+}
+
 function makeHooks(brand: string, product: string, pain: string, offer: string, angle: string, cycle: number) {
   const variants = [
     `${brand} 없이도 광고는 돌아갑니다. 문제는 이긴 소재가 안 쌓인다는 겁니다.`,
@@ -172,6 +180,8 @@ export default function CreativeOperatorConsole() {
   const [favorites, setFavorites] = useState<number[]>([0, 4]);
   const [subtitle, setSubtitle] = useState("다크 퍼포먼스");
   const [dailyCost, setDailyCost] = useState<DailyCostSummary | null>(null);
+  const [mockResult, setMockResult] = useState<MockGenerationResponse | null>(null);
+  const [mockStatus, setMockStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const score = useMemo(() => {
     const hook = hooks[selectedHook] ?? "";
@@ -206,6 +216,17 @@ export default function CreativeOperatorConsole() {
 
   const todaySpend = dailyCost?.totals?.actualCostUsd ?? 0;
 
+  const refreshDailyCost = () => {
+    return fetch("/api/creative/usage/daily")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: DailyCostSummary | null) => {
+        setDailyCost(data);
+      })
+      .catch(() => {
+        setDailyCost(null);
+      });
+  };
+
   useEffect(() => {
     let cancelled = false;
 
@@ -232,6 +253,38 @@ export default function CreativeOperatorConsole() {
     setCycle(nextCycle);
     setHooks(makeHooks(brief.brand, brief.product, brief.pain, brief.offer, brief.angle, nextCycle));
     setSelectedHook(0);
+  };
+
+  const runMockGeneration = async (mode: "single" | "batch") => {
+    setMockStatus("loading");
+
+    try {
+      const response = await fetch(`/api/creative/generate${mode === "batch" ? "/batch" : ""}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          brief,
+          selectedHook: hooks[selectedHook],
+          favorites: favorites.map((index) => hooks[index]).filter(Boolean),
+        }),
+      });
+
+      if (!response.ok) throw new Error("mock generation failed");
+
+      const data = await response.json() as MockGenerationResponse;
+      const nextHooks = data.hooks?.length ? data.hooks : makeHooks(brief.brand, brief.product, brief.pain, brief.offer, brief.angle, cycle + 1);
+
+      setMockResult(data);
+      setHooks(nextHooks);
+      setSelectedHook(0);
+      setMockStatus("success");
+      await refreshDailyCost();
+    } catch {
+      regenerateHooks();
+      setMockStatus("error");
+    }
   };
 
   const toggleFavorite = (index: number) => {
@@ -367,7 +420,7 @@ export default function CreativeOperatorConsole() {
               )}
             </label>
           ))}
-          <button className={styles.primaryAction} onClick={regenerateHooks} type="button">
+          <button className={styles.primaryAction} onClick={() => runMockGeneration("single")} type="button">
             <RefreshCw size={17} />
             후킹 문구 다시 생성
           </button>
@@ -591,9 +644,24 @@ export default function CreativeOperatorConsole() {
               <span>오늘 사용 비용</span>
               <strong>US${todaySpend.toFixed(2)}</strong>
             </div>
-            <button type="button">
+            {mockStatus !== "idle" || mockResult ? (
+              <div className={styles.mockResult}>
+                <span>
+                  {mockStatus === "loading"
+                    ? "mock 생성 중"
+                    : mockStatus === "error"
+                      ? "mock 생성 실패"
+                      : "mock 생성 완료"}
+                </span>
+                <strong>{mockResult?.mock ? "실제 API 호출 없음" : "로컬 fallback"}</strong>
+                <small>
+                  {mockResult?.concepts?.[0]?.name ?? "실패 시 로컬 후킹 문구로 안전하게 대체됩니다."}
+                </small>
+              </div>
+            ) : null}
+            <button disabled={mockStatus === "loading"} onClick={() => runMockGeneration("batch")} type="button">
               <Layers3 size={17} />
-              초안 묶음 생성
+              {mockStatus === "loading" ? "mock 생성 중" : "초안 묶음 생성"}
             </button>
             <button type="button">
               <Scissors size={17} />
