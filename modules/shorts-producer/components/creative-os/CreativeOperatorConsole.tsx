@@ -209,7 +209,7 @@ export default function CreativeOperatorConsole() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/usage/daily")
+    fetch("/api/creative/usage/daily")
       .then((response) => (response.ok ? response.json() : null))
       .then((data: DailyCostSummary | null) => {
         if (!cancelled) setDailyCost(data);

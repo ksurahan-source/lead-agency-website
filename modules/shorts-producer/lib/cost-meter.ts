@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { applySafetyBuffer, getOpenAiPricing, PRICING_CONFIG, roundUsd, type PricingProvider } from '@/lib/pricing';
+import { applySafetyBuffer, getOpenAiPricing, PRICING_CONFIG, roundUsd, type PricingProvider } from './pricing';
 
 export type OperationType =
   | 'script_generation'
