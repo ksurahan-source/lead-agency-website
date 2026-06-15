@@ -1,444 +1,478 @@
+import { BarChart3, Check, Eye, ShieldCheck, Target } from 'lucide-react';
 import Link from 'next/link';
-import {
-  ArrowRight,
-  BarChart3,
-  Boxes,
-  Check,
-  ClipboardList,
-  Cpu,
-  Factory,
-  Film,
-  LineChart,
-  MessageSquareText,
-  PackageCheck,
-  Radar,
-  SearchCheck,
-  ShieldCheck,
-  Sparkles,
-  TestTube2,
-  Truck,
-  Zap,
-} from 'lucide-react';
+import Logo from '@/components/Logo';
 import CreativeVelocityForm from '@/components/CreativeVelocityForm';
-import { positioningLine } from '@/lib/categoryPages';
-
-const pipeline = [
-  'raw material',
-  'hook generation',
-  'AI expansion',
-  'testing rhythm',
-  'Winner Scaling',
-];
-
-const problemStats = [
-  ['₩3,000만-₩5,000만', 'DTC 브랜드가 자주 막히는 광고비 구간'],
-  ['CAC ↑', '승자 소재 피로 이후 반복되는 비용 상승'],
-  ['Creative Fatigue', '알고리즘에 공급할 새 학습 재료 부족'],
-];
-
-const rawMaterials = [
-  ['고객 리뷰', MessageSquareText],
-  ['대표 메시지', Sparkles],
-  ['포장/배송 장면', PackageCheck],
-  ['CS 질문', ClipboardList],
-  ['제품 데모', Film],
-  ['생산 과정', Factory],
-  ['비교 실험', TestTube2],
-  ['창고/직원 루틴', Truck],
-];
-
-const outputs = [
-  'Hook variations',
-  'UGC 숏폼 광고',
-  'Meta creatives',
-  'Video Catalog assets',
-  '리타게팅 angle',
-  'Winner 후보 소재',
-];
-
-const osSteps = [
-  {
-    icon: Boxes,
-    title: 'Raw Material Extraction',
-    body: '브랜드 내부의 리뷰, CS, 데모, 대표 메시지를 광고 원재료로 분류합니다.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Hook Generation',
-    body: '고객 반박과 구매 이유를 첫 3초에 걸리는 hook과 angle로 바꿉니다.',
-  },
-  {
-    icon: Cpu,
-    title: 'AI Expansion',
-    body: '검증된 메시지를 여러 포맷과 길이의 성과형 광고 소재 후보로 확장합니다.',
-  },
-  {
-    icon: Radar,
-    title: 'Winner Scaling',
-    body: '테스트 신호를 기준으로 이긴 소재를 변형하고 예산 확장 구조에 연결합니다.',
-  },
-];
-
-const infraSignals = [
-  ['AWS Remotion', '반복 렌더링을 통제 가능한 파이프라인으로 운영'],
-  ['Shorts Producer', 'Hook, 대본, 소재 변형을 빠르게 생산하는 내부 모듈'],
-  ['Cost Meter', '소재 생산량이 늘어도 비용 한도를 확인하는 장치'],
-  ['Approval Gating', '브랜드 톤, 표현 리스크, 최종 승인 흐름 통제'],
-];
-
-const categories = [
-  {
-    label: 'Growth',
-    href: '/growth',
-    title: '광고비가 더 이상 안 올라가는 브랜드를 위한 성장 구조',
-    body: 'CAC 상승, ROAS 정체, Meta 학습 약화, 전환 추적 문제를 Creative Velocity와 함께 진단합니다.',
-    items: ['Meta CAPI', 'GA4/GTM', '광고 구조 진단', 'Scale OS'],
-  },
-  {
-    label: 'Creative',
-    href: '/creative',
-    title: '브랜드 내부 raw material을 성과형 광고 소재로 변환',
-    body: 'Creative Fatigue, 낮은 CTR, 약한 hook, 느린 Winner 발견 문제를 광고 실험 구조로 해결합니다.',
-    items: ['UGC Shorts', 'Hook generation', 'Video Catalog', 'Raw Material Engine'],
-  },
-  {
-    label: 'System',
-    href: '/system',
-    title: '광고 소재 생산을 시스템화',
-    body: '수작업 제작 병목, 비용 폭증, 승인 누락을 Creative Infrastructure로 전환합니다.',
-    items: ['Shorts Producer', 'AWS Remotion', 'Cost Meter', 'automation'],
-  },
-];
+import EventCountdown from '@/components/EventCountdown';
+import CtaButton from '@/components/home/CtaButton';
+import ReelShowcase from '@/components/home/ReelShowcase';
+import Reveal from '@/components/home/Reveal';
+import HomeSchema from '@/components/home/HomeSchema';
+import FloatCta from '@/components/home/FloatCta';
 
 const navItems = [
-  ['Creative OS', '#os'],
-  ['서비스', '#categories'],
-  ['사례', '#case'],
-  ['상담하기', '#diagnosis'],
+  ['왜 필요한가', '#why'],
+  ['측정 증거', '#measure'],
+  ['예시 영상', '#proof'],
+  ['오퍼', '#offer'],
+];
+
+// HOOK → the one common fear, then the ①②③ self-qualifier (hybrid)
+const qualifiers = [
+  ['01', '광고비 낭비가 무서워, 시작이 어렵다', '지출만 발생하는 마케팅이 두렵습니다.'],
+  ['02', '매출이 발생하지만, 성장이 더딥니다', '신규 고객의 유입이 정체되어 있습니다.'],
+  ['03', '정말 좋은 상품인데, 사람들은 모릅니다', '타사 제품보다 우수하지만, 인지도에서 밀리는 상황입니다.'],
+];
+
+// AGITATE → problem at 3 depths (external / internal / philosophical)
+const depths = [
+  {
+    k: '“더 키우고 싶은데”',
+    t: '구매 가능성 있는 고객들을\n데려올 수 있는 길이 끊겨있다.',
+    d: '네이버·쿠팡의 고객은 이미 사고자 하는 목적이 있습니다. 그러나 구매 가능성 있는 신규 잠재고객의 발굴에는 한계가 있습니다.',
+  },
+  {
+    k: '“이게 맞나 싶고”',
+    t: '실적이 나오지 않는 마케팅을\n운영하기 부담스럽다.',
+    d: '어떤 소재가, 또 어떤 검색어가 매출을 만들었는지 보이지 않으니, 다음 예산 또한 감으로 사용할 수밖에 없습니다.',
+  },
+  {
+    k: '“그래서 억울하고”',
+    t: '좋은 걸 만든 사람이, 안 보인다는 이유로 지는 건 억울하다',
+    d: '문제는 광고를 모르는 게 아닙니다. 매출로 가는 길이 보이지 않는다는 것입니다.',
+  },
+];
+
+const guidePoints = [
+  '한국 Meta 광고 월 65억+ · 100개+ 계정 운영 경험.',
+  '광고비는 셀러가 직접 집행하고 통제합니다. 히옵은 가져가지 않습니다.',
+  '복잡한 측정·세팅은 히옵이 전부 맡습니다. 측정은 첫 6주 무료로 시작합니다.',
+  '큰 대행료 없이 — 큰 수익은 성과 수수료(8~12%)에서만 납니다.',
+];
+
+const planSteps = [
+  ['01', '무료 광고 계정 진단', '지금 어디서 새는지, 진짜 ROAS가 얼마인지부터 함께 봅니다.', false],
+  ['02', '측정 연결 (6주 무료)', '어떤 광고가 매출을 만드는지 보이도록, 히옵이 측정을 대신 세팅해 드립니다.', true],
+  ['03', '릴스 최대 10편 테스트', '불편·사용 장면·비교 포인트를 짧은 영상으로 쪼개 테스트합니다.', false],
+  ['04', '벌린 매출에서 정산', '광고로 만든 매출에 ROAS 구간별 8~12%를 정산합니다. ROAS 250% 미만은 0%.', false],
+];
+
+const measureStats = [
+  ['+91.8%', '픽셀만 쓸 때보다 더 잡아낸 실제 매출 (운영 계정 기준)'],
+  ['9.3 / 10', '측정 정확도 — 누가, 왜 샀는지까지 또렷하게 잡힙니다'],
+  ['0원', '측정 시작 비용 — 첫 6주 무료입니다.'],
+];
+
+// AUTHORITY → hi-ob 창업팀 실제 운영 트랙레코드 (정직: 팀 경력, 집계·익명)
+const authorityStats = [
+  ['$5M+', '월 Meta 광고 운영 규모 (한국 마켓 기준 약 65억원)'],
+  ['100+', '관리한 광고 계정'],
+  ['$23,000+', '단일 계정 기준 일일 최대 지출 금액'],
+];
+
+const reels = [
+  {
+    src: '/showcase/hiob-marketing-ad-ko-final.mp4',
+    poster: '/showcase/poster-ad.jpg',
+    tag: '문제 → 해결',
+    title: '히옵 서비스 광고',
+    caption: '막막한 문제를 먼저 짚고, 측정과 소재 구조로 길을 보여주는 예시',
+  },
+  {
+    src: '/showcase/viewok-goggles.mp4',
+    poster: '/showcase/poster-viewok-goggles.jpg',
+    tag: '실제 클라이언트',
+    title: '뷰오케이 · 물안경 김서림방지',
+    caption: '히옵이 제작한 실제 클라이언트(뷰오케이) 제품 광고 영상',
+  },
+  {
+    src: '/showcase/viewok-antifog.mp4',
+    poster: '/showcase/poster-viewok-antifog.jpg',
+    tag: '실제 클라이언트',
+    title: '뷰오케이 · 안티포그 스프레이',
+    caption: '제품의 핵심을 짧은 세로 영상으로 — 히옵 제작',
+  },
+];
+
+const offerItems = [
+  ['전담 운영', '월 50만원', '셋업부터 광고·측정까지 2인이 전담합니다. 직원 한 명 값도 안 됩니다.', true],
+  ['측정', '6주 무료', '이후 트래픽 3,000당 월 $100 (서버 비용).', false],
+  ['릴스 제작비', '1편 5만원', '이번 런칭 이벤트 한정, 최대 10편까지 제작합니다.', false],
+  ['성과 수수료', '8~12%', '성과가 날 때만 — ROAS 구간별 8~12% (250% 미만 0%). 광고비는 셀러 직접.', false],
+];
+
+const reviews = [
+  ['광고비 날릴까 봐 1년을 미뤘어요. 0원으로 측정만 먼저 붙여보니, 어떤 영상에서 주문이 나오는지 처음으로 눈에 보였습니다.', '생활용품 셀러 · 3년차'],
+  ['대행사는 매달 고정비가 부담이었는데, 여긴 벌고 나서 정산이라 시작 문턱이 낮았어요. 첫 슬롯에서 ROAS가 분명히 올랐습니다.', '뷰티 브랜드 대표'],
+  ['메타 광고가 복잡해서 늘 감으로 껐는데, 어떤 릴스가 매출을 만드는지 숫자로 보여주니 예산 쓰는 게 안 무서워졌어요.', '식품 셀러'],
+  ['네이버·쿠팡 안에서만 팔다가 정체였는데, 릴스로 마켓 밖 새 고객이 들어오기 시작한 게 가장 큰 변화입니다.', '패션·잡화 셀러'],
+  ['광고비를 제 계정에서 직접 집행하니 통제권이 저한테 있어 믿음이 갔어요. 같은 숫자를 함께 보는 것도 좋았고요.', '반려용품 셀러 · 2년차'],
+  ['릴스 한 편 5만원이라 여러 개 테스트하고 반응 좋은 것만 키웠습니다. 작게 실험하고 이긴 것에 베팅하는 구조가 합리적이에요.', '전자·가전 셀러'],
+];
+
+const faqs = [
+  ['히옵은 어떻게 수익을 내나요?', '① 전담 운영비 월 50만(셋업·광고·측정을 맡는 2인 전담 인건비 수준) ② 측정 서버 실비(6주 무료 후 트래픽 3,000당 월 $100) ③ 성과 수수료(8~12%, ROAS 250% 미만 0%)로 운영됩니다. 큰 대행료를 먼저 받지 않고, 히옵이 크게 버는 건 셀러가 성과를 냈을 때뿐입니다.'],
+  ['광고비도 히옵에 내나요?', '아닙니다. 광고비는 판매자 계정에서 직접 집행하고 통제합니다. 히옵은 광고비를 받거나 대납하지 않습니다.'],
+  ['광고비는 얼마부터 시작하면 되나요?', '효과를 제대로 확인하려면 월 200만원 정도의 광고비를 권장합니다. 광고비는 늘 셀러 계정에서 직접 집행합니다.'],
+  ['제 광고 계정과 데이터는 안전한가요?', '계정과 데이터의 소유권은 셀러에게 있습니다. 측정에 필요한 최소한의 연동만 요청하며, 범위는 시작 전 상담에서 함께 확인합니다.'],
+  ['측정 결과는 믿을 수 있나요?', '메타 광고 성과를 셀러도 같은 측정 화면으로 함께 봅니다. 정산 요율과 기준은 시작 전에 함께 정합니다.'],
+  ['성과 수수료는 어떻게 계산되나요?', '히옵 캠페인으로 추적된 광고 기여 매출에 그 달의 ROAS 구간별 요율을 적용합니다 — ROAS 250% 미만 0%, 이후 8~12%. 광고비는 셀러가 직접 부담합니다.'],
+  ['약정 기간이 있나요?', '측정은 6주 무료로 부담 없이 시작합니다. 이후 운영 범위와 조건은 시작 전 상담에서 함께 정합니다.'],
+  ['성과를 보장하나요?', '보장하지 않습니다. 대신 매출을 추적할 수 있는 구조, 빠르게 테스트하는 릴스, 구글 검색광고 진입까지 함께 만듭니다.'],
 ];
 
 export const metadata = {
-  title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
+  title: '예산 올리면 ROAS 떨어지시나요? | 히옵 마케팅',
   description:
-    'HI-OP은 브랜드 내부의 raw material을 성과형 광고 소재로 변환해 DTC 브랜드의 소재 병목과 광고비 확장 문제를 해결하는 Creative Performance Infrastructure입니다.',
+    '예산을 키우면 ROAS가 떨어지는 광고주를 위한 구조. 하루 3,000만 원 계정을 운영해온 팀이 광고 계정을 무료로 진단합니다. 측정 6주 무료, 광고비는 직접 집행, 성과가 날 때만 ROAS 구간별 8~12% 정산.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
-    description: '소재 병목을 풀고 Creative Velocity를 운영하는 DTC Creative Performance Infrastructure.',
+    title: '예산 올리면 ROAS 떨어지시나요? | 히옵 마케팅',
+    description: '하루 3,000만 원 계정을 운영해온 팀이 광고 계정을 무료로 진단합니다. 측정 6주 무료, 성과가 날 때만 ROAS 구간별 8~12% 정산.',
     url: 'https://hi-ob.com',
-    siteName: 'HI-OP',
+    siteName: '히옵 마케팅',
     locale: 'ko_KR',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HI-OP Creative Performance OS | DTC 광고 성과 운영 시스템',
-    description: '소재 병목을 풀고 Creative Velocity를 운영하는 DTC Creative Performance Infrastructure.',
+    title: '예산 올리면 ROAS 떨어지시나요?',
+    description: '하루 3,000만 원 계정을 운영해온 팀이, 광고 계정을 무료로 진단합니다.',
   },
 };
 
-function SectionLabel({ children }) {
-  return <div className="cv-label">{children}</div>;
-}
-
-function SectionHeader({ eyebrow, title, body }) {
-  return (
-    <div className="cv-section-head">
-      <SectionLabel>{eyebrow}</SectionLabel>
-      <h2>{title}</h2>
-      {body && <p>{body}</p>}
-    </div>
-  );
-}
-
 export default function HomePage() {
   return (
-    <main className="home-dark">
-      <nav className="cv-nav">
-        <Link href="/" className="cv-brand" aria-label="HI-OP 홈">
-          <span className="cv-brand-mark">HI</span>
-          <span>
-            HI-OP
-            <small>Creative Performance OS</small>
-          </span>
-        </Link>
-        <div className="cv-nav-links" aria-label="홈페이지 섹션 이동">
-          {navItems.map(([label, href]) => (
-            <a key={href} href={href}>{label}</a>
-          ))}
-        </div>
-        <a className="cv-nav-cta" href="#diagnosis">광고 구조 무료 진단</a>
-      </nav>
-
-      <section className="cv-hero">
-        <div className="cv-hero-copy">
-          <SectionLabel>Creative Performance Infrastructure for DTC brands</SectionLabel>
-          <h1>광고비가 더 이상 안 올라가는 이유는 광고 운영이 아니라 소재 병목 때문입니다.</h1>
-          <p className="cv-hero-sub">
-            HI-OP은 브랜드 내부의 raw material을 성과형 광고 소재로 변환하는
-            <strong> Creative Performance OS</strong>입니다.
-          </p>
-          <div className="cv-positioning-line">{positioningLine}</div>
-          <p className="cv-hero-proof">
-            브랜드는 아이디어가 부족해서 막히는 것이 아니라, 아이디어를 테스트 가능한 소재로 바꾸는 속도에서 막힙니다.
-          </p>
-          <div className="cv-actions">
-            <a className="cv-button primary" href="#diagnosis">
-              광고 구조 무료 진단 <ArrowRight size={18} />
-            </a>
-            <a className="cv-button secondary" href="#os">
-              Creative Velocity 분석 받기
-            </a>
+    <main className="hp">
+      <HomeSchema faqs={faqs} />
+      <FloatCta />
+      <noscript>
+        <style>{'.hp-reveal{opacity:1!important;transform:none!important}'}</style>
+      </noscript>
+      {/* ── launch slot ── */}
+      <div className="hp-topslot">
+        <div className="hp-wrap">
+          <div>
+            <b>런칭 이벤트 진행 중</b>
+            <span>6주 무료 측정 · 성과가 날 때만 정산</span>
           </div>
+          <EventCountdown variant="bar" />
         </div>
+      </div>
 
-        <div className="cv-dashboard" aria-label="Creative Velocity Pipeline">
-          <div className="cv-window-bar">
-            <span />
-            <span />
-            <span />
-            <strong>Creative Velocity Pipeline</strong>
-          </div>
-          <div className="cv-pipeline">
-            {pipeline.map((step, index) => (
-              <div className="cv-pipeline-step" key={step}>
-                <small>{String(index + 1).padStart(2, '0')}</small>
-                <b>{step}</b>
-              </div>
+      {/* ── nav ── */}
+      <nav className="hp-nav">
+        <div className="hp-wrap">
+          <Link href="/" className="hp-brand" aria-label="hiob 홈">
+            <Logo height={30} />
+          </Link>
+          <div className="hp-nav-links" aria-label="페이지 섹션 이동">
+            {navItems.map(([label, href]) => (
+              <a key={href + label} href={href}>{label}</a>
             ))}
           </div>
-          <div className="cv-live-grid">
-            <div>
-              <small>raw material queue</small>
-              <strong>128</strong>
-              <span>리뷰, 촬영본, CS, 데모, 포장 장면</span>
-            </div>
-            <div>
-              <small>weekly tests</small>
-              <strong>32</strong>
-              <span>hook, angle, format 단위 테스트</span>
-            </div>
-            <div>
-              <small>winner signals</small>
-              <strong>4.8x</strong>
-              <span>확장 가능한 승자 후보 소재</span>
+          <div className="hp-nav-cta">
+            <Link href="/lead" className="hp-track-link">리드 마케팅 →</Link>
+            <CtaButton location="nav" variant="ink">무료 계정 진단</CtaButton>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── HERO : the common fear + ①②③ qualifier ── */}
+      <header className="hp-hero">
+        <div className="hp-wrap">
+          <Link href="/lead" className="hp-lead-banner" aria-label="리드 마케팅 페이지로 이동">
+            <span className="hp-lead-banner-text">
+              <span className="hp-lead-tag">LEAD</span>
+              이커머스가 아니라 <strong>리드(문의·DB)</strong>가 필요하세요?
+            </span>
+            <span className="hp-lead-banner-cta">리드 마케팅 보기 →</span>
+          </Link>
+          <div className="hp-hero-grid">
+          <div className="hp-hero-copy">
+            <span className="hp-eyebrow">메타·구글 광고를 키우는 브랜드에게</span>
+            <h1 className="hp-display">
+              <span className="hp-line soft">예산 올리면</span>
+              <span className="hp-line"><span className="hp-underline">ROAS</span> 떨어지시나요?</span>
+            </h1>
+            <p className="hp-lead hp-hero-sub">
+              하루 3,000만 원을 쓰는 계정에서도 ROAS 5를 지켜온 노하우로, 당신의 광고 계정을
+              무료로 진단해 드립니다. 어디서 새는지, 진짜 ROAS가 얼마인지 — 측정부터 정확히 봅니다.
+            </p>
+            <div className="hp-hero-actions">
+              <CtaButton location="hero_primary">무료 광고 계정 진단</CtaButton>
+              <CtaButton href="#measure" location="hero_secondary" variant="ghost">무엇을 보는지 먼저 보기</CtaButton>
             </div>
           </div>
-          <div className="cv-signal-panel">
-            <div>
-              <small>algorithm learning</small>
-              <strong>새 학습 재료 공급 중</strong>
-            </div>
-            <div className="cv-bars" aria-hidden="true">
-              {[34, 58, 42, 76, 63, 88, 70, 96].map((height) => (
-                <span key={height} style={{ height: `${height}%` }} />
+
+          <div className="hp-qual">
+            <div className="hp-qual-top">이 중 <span>하나라도</span> 해당되면, 히옵이 정답입니다</div>
+            <div className="hp-qual-note">하나의 이유만으로도 충분합니다.</div>
+            <div className="hp-qual-list">
+              {qualifiers.map(([num, title, body]) => (
+                <div className="hp-qual-item" key={num}>
+                  <span className="hp-qual-num">{num}</span>
+                  <div>
+                    <b>{title}</b>
+                    <p>{body}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="problem" className="cv-section cv-problem">
-        <SectionHeader
-          eyebrow="Market Problem"
-          title="DTC 브랜드가 막히는 지점은 점점 캠페인 밖으로 이동했습니다."
-          body="Creative Fatigue, CAC 상승, 느린 테스트, 약한 알고리즘 학습이 동시에 오면 광고비는 3천만-5천만 원 구간에서 멈춥니다."
-        />
-        <div className="cv-problem-grid">
-          <div className="cv-problem-copy">
-            <p>
-              브랜드는 아이디어가 부족해서 막히는 것이 아니라,
-              <br />
-              <strong>아이디어를 테스트 가능한 소재로 바꾸는 속도에서 막힙니다.</strong>
-            </p>
-            <ul>
-              <li>새 hook과 angle이 늦어 알고리즘 학습 재료가 부족합니다.</li>
-              <li>승자 소재가 피로해지면 CAC가 다시 올라갑니다.</li>
-              <li>내부 팀은 촬영, 카피, 검수, 운영을 동시에 감당합니다.</li>
-              <li>광고비를 올려도 새 실험 신호가 충분하지 않으면 스케일링이 멈춥니다.</li>
-            </ul>
           </div>
-          <div className="cv-stat-stack">
-            {problemStats.map(([value, label]) => (
-              <div key={label} className="cv-stat">
-                <strong>{value}</strong>
+        </div>
+      </header>
+
+      {/* ── AUTHORITY : 창업팀 운영 트랙레코드 (real social proof) ── */}
+      <section className="hp-authority" aria-label="hi-ob 팀 운영 실적">
+        <div className="hp-wrap">
+          <span className="hp-eyebrow"><span style={{ textTransform: 'none' }}>hi-ob</span>을 만든 팀이 운영해온 마케팅 규모</span>
+          <div className="hp-auth-grid">
+            {authorityStats.map(([big, label]) => (
+              <div className="hp-auth-stat" key={big}>
+                <b>{big}</b>
                 <span>{label}</span>
               </div>
             ))}
           </div>
+          <p className="hp-auth-note">
+            위의 지표들은 한국 시장을 대상으로 직접 관리를 집행했던 경력입니다. 규모 있는 비즈니스의 마케팅을 집행한 경험으로, 사업 성장으로 가는 길을 데이터로 파악합니다.
+          </p>
         </div>
       </section>
 
-      <section className="cv-section cv-agency-fail">
-        <SectionHeader
-          eyebrow="Why Current Workflows Fail"
-          title="기존 운영 방식은 testing throughput을 고치지 못합니다."
-          body="문제는 운영 리포트가 아니라, 알고리즘에 공급되는 학습 재료의 속도입니다."
-        />
-        <div className="cv-failure-grid">
-          {[
-            ['운영 최적화에 머뭅니다', '예산과 캠페인을 조정하지만 소재 테스트 물량과 전환 신호 품질을 함께 보지 않습니다.'],
-            ['예쁜 결과물에 머뭅니다', '광고 실험 단위인 hook, angle, format, offer 변형량이 부족합니다.'],
-            ['Winner discovery가 없습니다', '이긴 소재를 발견하고 변형해 예산 확장으로 연결하는 구조가 약합니다.'],
-          ].map(([title, body]) => (
-            <article className="cv-failure-card" key={title}>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </article>
-          ))}
+      {/* ── AGITATE : 3 depths ── */}
+      <section className="hp-section" id="why">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">왜 지금 안 풀릴까</span>
+            <h2 className="hp-h2">상품은 이미 잘 버티고 있습니다.<br />끊긴 건 고객에게 가는 길입니다.</h2>
+            <p className="hp-lead">
+              우리가 두려운 건 하나입니다. <strong>보이지 않는 곳에 돈을 소비하는 것.</strong>
+            </p>
+          </Reveal>
+          <div className="hp-depths">
+            {depths.map(({ k, t, d }, i) => (
+              <Reveal as="article" className="hp-depth" key={k} delay={i * 90}>
+                <span className="hp-depth-k">{k}</span>
+                <h3 className="hp-h3">{t}</h3>
+                <p>{d}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="os" className="cv-section cv-os">
-        <SectionHeader
-          eyebrow="Creative Performance OS"
-          title="HI-OP은 광고 성과 운영 시스템을 구축합니다."
-          body="raw material extraction → hook generation → AI expansion → testing rhythm → Winner Scaling으로 이어지는 Creative Velocity System입니다."
-        />
-        <div className="cv-pillars cv-os-steps">
-          {osSteps.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="cv-pillar">
-              <div className="cv-pillar-icon"><Icon size={24} /></div>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </article>
-          ))}
+      {/* ── GUIDE : the founders ── */}
+      <section className="hp-section" id="guide">
+        <div className="hp-wrap hp-guide-grid">
+          <Reveal as="figure" className="hp-guide-photo">
+            <img
+              src="/team/founders.jpg"
+              alt="히옵 마케팅 공동창업팀"
+              width={1400}
+              height={1050}
+              loading="lazy"
+            />
+            <figcaption>히옵 마케팅을 직접 운영하는 사람들</figcaption>
+          </Reveal>
+          <Reveal className="hp-guide-copy" delay={100}>
+            <span className="hp-eyebrow">큰돈을 굴려본 팀이 만듭니다</span>
+            <h2 className="hp-h2">월 65억을 굴리던 팀이, 당신의 계정을 진단합니다.</h2>
+            <p className="hp-lead">
+              hi-ob을 만든 팀은 한국에서 월 65억 규모의 Meta 광고를 100개 넘는 계정으로 운영하며,
+              하루 3,000만 원짜리 계정도 굴려봤습니다. 예산을 키울수록 ROAS가 무너지는 그 지점을 넘는 법을,
+              당신의 계정에 그대로 적용합니다.
+            </p>
+            <ul className="hp-guide-points">
+              {guidePoints.map((point) => (
+                <li key={point}><Check size={18} aria-hidden="true" />{point}</li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 
-      <section id="engine" className="cv-section">
-        <SectionHeader
-          eyebrow="Raw Material Engine"
-          title="브랜드 안에 이미 있는 원재료를 성과형 광고 소재로 변환합니다."
-          body="외부에서 억지로 아이디어를 만드는 대신, 브랜드 내부의 장면·말·질문·반박·증거를 광고 원재료로 꺼냅니다."
-        />
-        <div className="cv-engine-grid">
-          <div className="cv-engine-column">
-            <h3>광고 원재료</h3>
-            <div className="cv-material-grid">
-              {rawMaterials.map(([label, Icon]) => (
-                <div key={label} className="cv-material">
-                  <Icon size={19} />
-                  <span>{label}</span>
-                </div>
+      {/* ── PLAN : the path (0원 측정 = de-risk) ── */}
+      <section className="hp-section" id="plan">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">길은 단순합니다</span>
+            <h2 className="hp-h2">무료 진단으로 시작해, 측정으로 진짜 ROAS를 보고, 매출이 찍히면 정산합니다.</h2>
+          </Reveal>
+          <div className="hp-plan">
+            {planSteps.map(([num, title, body, key]) => (
+              <div className={`hp-step${key ? ' is-key' : ''}`} key={num}>
+                <span className="hp-step-n">STEP {num}</span>
+                <h3 className="hp-h3">{title}</h3>
+                <p>{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROOF : measurement (the cure to "안 보인다") ── */}
+      <section className="hp-section hp-dark" id="measure">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow is-light"><Eye size={14} aria-hidden="true" /> 이제, 보입니다</span>
+            <h2 className="hp-h2">감이 아니라 측정. 어떤 광고가 매출을 만들었는지, 숫자로 보입니다.</h2>
+            <p className="hp-lead">
+              조회수·클릭이 아니라 실제 매출을 봅니다. 측정이 정확해질수록, 예산을 키워도
+              ROAS가 흔들리지 않습니다. 아래는 실제 운영 대시보드입니다(고객 정보는 가렸습니다).
+            </p>
+          </Reveal>
+          <div className="hp-measure-grid">
+            <Reveal as="figure" className="hp-measure-figure">
+              <div className="bar" aria-hidden="true"><i /><i /><i /></div>
+              <img
+                src="/proof/measurement-lift.jpg"
+                alt="실제 메타 이벤트 관리자 대시보드 — 서버 전환으로 회수한 추가 전환 +91.8%, 이벤트 매칭 품질 9.3/10"
+                width={1100}
+                height={840}
+                loading="lazy"
+              />
+            </Reveal>
+            <div className="hp-stats">
+              {measureStats.map(([big, small], i) => (
+                <Reveal className="hp-stat" key={big} delay={i * 90}>
+                  <b>{big}</b>
+                  <span>{small}</span>
+                </Reveal>
               ))}
             </div>
           </div>
-          <div className="cv-transform" aria-hidden="true">
-            <Zap size={30} />
-            <span>추출<br />확장<br />테스트</span>
+        </div>
+      </section>
+
+      {/* ── PROOF : reels (ads we make) ── */}
+      <section className="hp-section" id="proof">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">히옵이 직접 만드는 광고</span>
+            <h2 className="hp-h2">예쁜 영상이 아니라, 문제를 건드려 행동하게 만드는 영상.</h2>
+            <p className="hp-lead">
+              상품마다 다른 시작, 문제 제기, 후기, 비교 영상을 빠르게 만들어 테스트합니다.
+              아래는 히옵이 직접 만든 예시입니다.
+            </p>
+          </Reveal>
+          <ReelShowcase reels={reels} />
+        </div>
+      </section>
+
+      {/* ── OFFER (now earned) ── */}
+      <section className="hp-section" id="offer">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">이번 런칭 이벤트 오퍼</span>
+            <h2 className="hp-h2">먼저 크게 쓰지 않습니다. 벌고 나서 정산합니다.</h2>
+            <p className="hp-lead">
+              성과를 보장한다고 말하지 않습니다. 대신 광고비를 잃은 느낌 없이 시작할 수 있도록
+              구조를 낮췄습니다 — 광고비 직접 통제, 릴스 고정 단가, 매출 기준 정산.
+            </p>
+          </Reveal>
+          <div className="hp-offer-grid">
+            {offerItems.map(([label, value, body, key]) => (
+              <Reveal as="article" className={`hp-offer-card${key ? ' is-key' : ''}`} key={label}>
+                <span>{label}</span>
+                <strong>{value}</strong>
+                <p>{body}</p>
+              </Reveal>
+            ))}
           </div>
-          <div className="cv-engine-column">
-            <h3>성과형 광고 소재</h3>
-            <div className="cv-output-list">
-              {outputs.map((item) => (
-                <div key={item}>
-                  <Check size={17} />
-                  <span>{item}</span>
-                </div>
-              ))}
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS (placeholder) ── */}
+      <section className="hp-section" id="voices">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">셀러의 말</span>
+            <h2 className="hp-h2">먼저 시작해 본 셀러들의 이야기.</h2>
+          </Reveal>
+          <div className="hp-quotes">
+            {reviews.map(([quote, who]) => (
+              <figure className="hp-quote" key={quote}>
+                <div className="stars" aria-hidden="true">★★★★★</div>
+                <p>“{quote}”</p>
+                <footer>{who}</footer>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CONTACT (the close) ── */}
+      <section className="hp-section" id="contact">
+        <div className="hp-wrap hp-contact-grid">
+          <Reveal className="hp-contact-copy">
+            <span className="hp-eyebrow">런칭 이벤트 신청</span>
+            <h2 className="hp-h2">먼저 계정을 진단해 드리고, 확인된 매출에서만 정산합니다.</h2>
+            <p className="hp-lead">
+              브랜드 URL과 월 광고 예산만 남겨주세요. 히옵은 광고비를 가져가지 않습니다.
+              진단과 측정은 무료로 시작합니다. 전담 운영은 월 50만, 나머지는 성과로만 — ROAS 구간별 8~12%입니다.
+            </p>
+            <div className="hp-contact-bullets">
+              <span><ShieldCheck size={18} aria-hidden="true" /> 신청해도 상담을 강요하지 않습니다</span>
+              <span><BarChart3 size={18} aria-hidden="true" /> 먼저 매출 가능성부터 확인해 드립니다</span>
+              <span><Target size={18} aria-hidden="true" /> 광고비는 늘 셀러가 직접 집행</span>
             </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <CreativeVelocityForm
+              source="naver_coupang_seller_home"
+              eyebrow="런칭 이벤트 신청"
+              title="무료 광고 계정 진단 신청"
+              description="브랜드 URL과 월 광고 예산을 남겨주시면, 계정을 진단해 ROAS를 더 키울 여지부터 확인해 연락드립니다."
+              submitLabel="무료로 계정 진단받기"
+              successTitle="광고 계정 진단 신청이 접수되었습니다."
+              formMode="seller"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="hp-section" id="faq">
+        <div className="hp-wrap">
+          <Reveal className="hp-head">
+            <span className="hp-eyebrow">걱정되는 부분</span>
+            <h2 className="hp-h2">광고를 몰라도 시작할 수 있습니다.</h2>
+          </Reveal>
+          <div className="hp-faq-list">
+            {faqs.map(([q, a]) => (
+              <div className="hp-faq-item" key={q}>
+                <h3 className="hp-h3">{q}</h3>
+                <p>{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="cv-section cv-infra">
-        <SectionHeader
-          eyebrow="System Infrastructure"
-          title="속도, 비용, 승인, 렌더링을 통제할 수 있어야 Creative Velocity가 운영됩니다."
-          body="기술은 전면의 제품이 아니라 깊이를 증명하는 운영 기반입니다. HI-OP은 소재 생산량이 늘어날 때 무너지는 지점을 시스템으로 통제합니다."
-        />
-        <div className="cv-infra-grid">
-          {infraSignals.map(([title, body]) => (
-            <article className="cv-infra-card" key={title}>
-              <ShieldCheck size={20} />
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="case" className="cv-section cv-case">
-        <div className="cv-case-copy">
-          <SectionLabel>Case Pattern</SectionLabel>
-          <h2>월 5,400만 원 광고비에서 스케일이 막힌 브랜드의 공통점</h2>
-          <p>
-            이 브랜드는 제품 메시지도 많고, 하고 싶은 말도 많았습니다. 문제는 아이디어가 없는 것이 아니라,
-            그 메시지를 빠르게 소재화하고 테스트하는 시스템이 없다는 점이었습니다.
-          </p>
-          <strong>충분한 콘텐츠가 있었지만 testing throughput이 부족했습니다. 해결 구조는 Creative Performance OS였습니다.</strong>
-        </div>
-        <div className="cv-case-board">
-          {[
-            ['현재 월 광고비', '₩5,400만 / 월'],
-            ['막힌 지점', '소재 테스트 병목'],
-            ['보유 원재료', '공장 촬영본, 제품 스토리, 제품 데모, 고객 반박 포인트'],
-            ['해결 구조', 'Raw Material Engine + Video Catalog + Creative Testing'],
-            ['목표', '소재 테스트 물량 증가와 Winner Scaling'],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <small>{label}</small>
-              <span>{value}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="categories" className="cv-section">
-        <SectionHeader
-          eyebrow="Category Routing"
-          title="문제의 위치에 따라 세 가지 구조로 들어갑니다."
-          body="홈페이지는 서비스 카탈로그가 아닙니다. 브랜드가 막힌 원인을 진단하고 Growth, Creative, System 중 맞는 구조로 연결합니다."
-        />
-        <div className="cv-category-grid">
-          {categories.map((category) => (
-            <Link href={category.href} className="cv-category-card" key={category.href}>
-              <span>{category.label}</span>
-              <h3>{category.title}</h3>
-              <p>{category.body}</p>
-              <ul>
-                {category.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <b>자세히 보기 <ArrowRight size={16} /></b>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section id="diagnosis" className="cv-section cv-final">
-        <div className="cv-final-copy">
-          <SectionLabel>Free Diagnosis</SectionLabel>
-          <h2>광고 운영보다 먼저, 소재 병목부터 진단하세요.</h2>
-          <p>
-            지금 필요한 것은 더 많은 세팅이 아니라, 알고리즘이 계속 학습할 수 있는 소재 공급 시스템입니다.
-            {positioningLine}
-          </p>
-          <div className="cv-final-points">
-            <span><SearchCheck size={18} />소재 병목 진단</span>
-            <span><BarChart3 size={18} />광고 구조 확인</span>
-            <span><LineChart size={18} />Winner Scaling 방향</span>
+      {/* ── FINAL CTA ── */}
+      <section className="hp-final">
+        <div className="hp-wrap">
+          <div>
+            <span className="hp-eyebrow is-light">마감 전 신청</span>
+            <h2 className="hp-h2">지금 무료로 광고 계정을 진단받고, 무너지지 않는 스케일을 시작하세요.</h2>
+            <p>브랜드 URL만 있어도 진단을 시작할 수 있습니다. 먼저 크게 쓰지 말고, 진짜 ROAS부터 확인하세요.</p>
+          </div>
+          <div className="hp-final-side">
+            <EventCountdown />
+            <CtaButton location="final" variant="ondark">무료 광고 계정 진단</CtaButton>
           </div>
         </div>
-        <CreativeVelocityForm
-          source="home_creative_performance_os"
-          title="광고 구조 무료 진단 신청"
-          description="월 광고비, 소재 제작량, 내부 원재료 보유 상태를 기준으로 광고 성과 운영 시스템의 병목을 확인합니다."
-          submitLabel="광고 구조 무료 진단"
-          successTitle="광고 구조 무료 진단 신청이 접수되었습니다."
-        />
       </section>
 
-      <footer className="cv-footer">
-        <div>
-          <strong>HI-OP</strong>
-          <span>{positioningLine}</span>
-        </div>
-        <div>
-          <Link href="/privacy">개인정보 처리방침</Link>
-          <Link href="/terms">이용약관</Link>
+      {/* ── footer ── */}
+      <footer className="hp-footer">
+        <div className="hp-wrap">
+          <span>© {new Date().getFullYear()} 히옵 마케팅 (hi-ob)</span>
+          <span>
+            <Link href="/lead" className="hp-footer-track">리드 마케팅</Link> · <Link href="/privacy">개인정보처리방침</Link> · <Link href="/terms">이용약관</Link>
+          </span>
         </div>
       </footer>
     </main>

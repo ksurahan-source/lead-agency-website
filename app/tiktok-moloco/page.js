@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
 import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 
@@ -19,8 +21,10 @@ export default function TikTokMolocoPage() {
       <PixelScrollTracker />
 
       {/* Navigation */}
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
-        <div className="font-display" style={{ fontSize: '1.8rem' }}>HI-OP / SHORT-FORM</div>
+      <nav style={{ padding: 'clamp(1.05rem, 3vw, 1.5rem) clamp(1.1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
+        <a href="/" aria-label="hiob 홈" style={{ textDecoration: 'none' }}>
+          <Logo height={28} />
+        </a>
         <a href="#contact" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none', fontSize: '1.1rem' }}>무료 진단 신청 →</a>
       </nav>
 
@@ -42,8 +46,8 @@ export default function TikTokMolocoPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="massive-text" style={{ color: '#00f2fe' }}>숏폼 &</h1>
-            <h1 className="massive-text">알고리즘</h1>
+            <h1 className="massive-text" style={{ color: '#00f2fe', wordBreak: 'keep-all' }}>숏폼 &</h1>
+            <h1 className="massive-text" style={{ wordBreak: 'keep-all' }}>알고리즘</h1>
           </motion.div>
           
           <div className="grid-half" style={{ border: 'none', marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
@@ -64,8 +68,8 @@ export default function TikTokMolocoPage() {
       {/* Inquiries Section */}
       <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: '#00f2fe', color: '#111', overflow: 'hidden' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ color: '#111' }}>문의가</h2>
-          <h2 className="massive-text" style={{ color: 'rgba(0,0,0,0.2)' }}>증명하는 성과</h2>
+          <h2 className="massive-text" style={{ color: '#111', wordBreak: 'keep-all' }}>문의가</h2>
+          <h2 className="massive-text" style={{ color: 'rgba(0,0,0,0.2)', wordBreak: 'keep-all' }}>증명하는 성과</h2>
           
           <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
             {[
@@ -91,15 +95,15 @@ export default function TikTokMolocoPage() {
 
       {/* Algorithm Focus Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ padding: '6rem 2rem' }}>
+        <div className="split-left" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <p style={{ fontWeight: 800, color: '#00f2fe', marginBottom: '1rem' }}>ALGORITHM HACKING</p>
-          <h2 style={{ fontSize: '4rem', marginBottom: '2rem' }}>숏폼의 성공은<br/>기획이 아니라<br/>'알고리즘' 이해입니다.</h2>
+          <h2 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>숏폼의 성공은<br/>기획이 아니라<br/>'알고리즘' 이해입니다.</h2>
           <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444' }}>
             예쁘고 멋진 영상이 반드시 성과를 내지는 않습니다. <br/>
             알고리즘이 '반응할 수밖에 없는' 장치들을 소재 곳곳에 심어두는 것이 히옵의 전략입니다.
           </p>
         </div>
-        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#eee' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             <div>
               <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>01. Retention-driven 기획</h3>
@@ -119,11 +123,11 @@ export default function TikTokMolocoPage() {
 
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ background: '#00f2fe', color: '#111', padding: '5rem 2rem' }}>
-          <h2 style={{ fontSize: '5rem', marginBottom: '2rem' }}>왜<br/>히옵인가?</h2>
+        <div className="split-left" style={{ background: '#00f2fe', color: '#111', padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <h2 style={{ fontSize: 'clamp(2.4rem, 9vw, 5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>왜<br/>히옵인가?</h2>
           <p style={{ fontSize: '1.4rem', fontWeight: 700 }}>숏폼 알고리즘을 꿰뚫는 네이티브 콘텐츠 중심의 퍼포먼스 전략.</p>
         </div>
-        <div className="split-right" style={{ padding: '5rem 2rem' }}>
+        <div className="split-right" style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             {[
               { t: '후킹 크리에이티브', d: '틱톡 유저의 시선을 3초 만에 사로잡는 Hook 중심의 네이티브 소재 기획' },
@@ -141,9 +145,9 @@ export default function TikTokMolocoPage() {
       </section>
 
       {/* Services */}
-      <section style={{ padding: '7rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ fontSize: '7vw', marginBottom: '5rem' }}>핵심 서비스</h2>
+          <h2 className="massive-text" style={{ fontSize: '7vw', marginBottom: '5rem', wordBreak: 'keep-all' }}>핵심 서비스</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
             {[
               { title: '틱톡 크리에이티브 기획', items: ['숏폼 후크(Hook) 설계', 'UGC 스타일 소재 발굴', '고효율 스토리보드 기획'] },
@@ -167,22 +171,22 @@ export default function TikTokMolocoPage() {
 
       {/* Contact Section */}
       <section id="contact" className="split-section" style={{ background: 'var(--bg-dark)', color: 'var(--text-light)' }}>
-        <div className="split-left" style={{ padding: '7rem 2rem' }}>
-          <h2 className="massive-text" style={{ color: '#00FF66' }}>트렌드를</h2>
-          <h2 className="massive-text">선도하라</h2>
+        <div className="split-left" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <h2 className="massive-text" style={{ color: '#00FF66', wordBreak: 'keep-all' }}>트렌드를</h2>
+          <h2 className="massive-text" style={{ wordBreak: 'keep-all' }}>선도하라</h2>
           <p style={{ marginTop: '2.5rem', fontSize: '1.3rem', color: '#aaa', maxWidth: '450px', fontWeight: 600 }}>
             숏폼과 RTB 광고의 성공은 속도와 정확성입니다. 히옵의 전문가들이 여러분의 캠페인을 가속화해 드립니다.
           </p>
         </div>
-        <div className="split-right" style={{ padding: '7rem 2rem', background: '#F4F4F0' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', background: '#F4F4F0' }}>
           <LeadForm source="tiktok-moloco" />
         </div>
       </section>
 
       {/* SUCCESS CASES SECTION */}
-      <section style={{ padding: '8rem 2rem', background: '#fff' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3.5rem', marginBottom: '4rem' }}>SUCCESS CASES</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3.5rem)', marginBottom: '4rem', wordBreak: 'keep-all' }}>SUCCESS CASES</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
             
             <div className="brutalist-card" style={{ borderLeft: '15px solid #00f2fe' }}>
@@ -210,16 +214,16 @@ export default function TikTokMolocoPage() {
       </section>
 
       {/* MASSIVE TIKTOK SEO ENCYCLOPEDIA V2 */}
-      <section style={{ padding: '10rem 2rem', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 10rem) clamp(1.1rem, 4vw, 2rem)', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #00f2fe', display: 'inline-block' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #00f2fe', display: 'inline-block', wordBreak: 'keep-all' }}>
             THE NEXT-GEN ADS PERFORMANCE MASTERCLASS
           </h2>
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
             
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 핵심 시그널 해독</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>CHAPTER 01: 틱톡 추천 알고리즘(FYP)의 핵심 시그널 해독</h3>
               <p>
                 틱톡은 기존 소셜 미디어와는 완전히 다른 문법을 가진 '엔터테인먼트 플랫폼'입니다. 지인 기반의 네트워크가 아닌, 오직 유저의 '관심사'와 '반응'만을 기반으로 콘텐츠를 추천하는 FYP(For You Page) 알고리즘은 마케팅 관점에서 거대한 기회를 제공합니다. 
               </p>
@@ -229,7 +233,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>CHAPTER 02: 몰로코(Moloco) 머신러닝과 프로그래매틱 RTB의 파워</h3>
               <p>
                 빅테크 매체 외에도 강력한 성과를 내는 플랫폼이 있습니다. 바로 몰로코(Moloco)입니다. 몰로코의 강점은 전 세계 수백만 개의 앱 지면을 대상으로 실시간 입찰(RTB)을 수행하는 독자적인 머신러닝 엔진에 있습니다. 
               </p>
@@ -239,7 +243,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>CHAPTER 03: 숏폼 크리에이티브 엔지니어링 - Don't Make Ads</h3>
               <p>
                 틱톡의 슬로건인 "Don't make ads, make TikToks"는 숏폼 광고의 본질을 관통합니다. 유저들은 광고임을 인지하는 순간 스크롤을 넘깁니다. 히옵은 '광고 같지 않은 광고'를 만들기 위해 크리에이티브 엔지니어링을 수행합니다.
               </p>
@@ -249,7 +253,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>CHAPTER 04: ATT 시대의 앱 마케팅과 성과 측정 (MMP/SKAN)</h3>
               <p>
                 애플의 개인정보 보호 강화 이후 모바일 앱 마케팅의 성과 측정은 미로처럼 복잡해졌습니다. 이제는 단순한 트래킹 링크가 아닌, MMP(AppsFlyer, Airbridge 등)와 애플의 SKAdNetwork(SKAN) 체계에 대한 깊은 이해가 필수적입니다.
               </p>
@@ -259,7 +263,7 @@ export default function TikTokMolocoPage() {
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>CHAPTER 05: 글로벌 시장 진출과 확장성(Scalability)</h3>
               <p>
                 틱톡과 몰로코의 공통점은 글로벌 확장성이 뛰어나다는 점입니다. 히옵은 국내 성과에 안주하지 않고 북미, 동남아, 일본 등 글로벌 시장 진출을 원하는 브랜드에게 최적의 솔루션을 제공합니다. 
               </p>
@@ -272,7 +276,7 @@ export default function TikTokMolocoPage() {
         </div>
       </section>
 
-      <footer style={{ padding: '5rem 2rem', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
+      <footer style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
         <div style={{ marginBottom: '2.5rem' }}>
           <a
             href="https://open.kakao.com/o/srdaF2si"
@@ -284,8 +288,10 @@ export default function TikTokMolocoPage() {
             카카오톡 1:1 채팅 문의하기
           </a>
         </div>
-        <p style={{ fontWeight: 800, fontSize: '1.2rem' }}>© 2025 HI-OP / SHORT-FORM SPECIALIST. ALL RIGHTS RESERVED.</p>
+        <p style={{ fontWeight: 800, fontSize: '1.2rem' }}>© 2025 hi-ob / SHORT-FORM SPECIALIST. ALL RIGHTS RESERVED.</p>
       </footer>
+
+      <MobileStickyCTA label="무료 진단 신청하기" />
     </main>
   );
 }

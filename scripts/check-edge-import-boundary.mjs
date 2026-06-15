@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * M0 guardrail: fail if app/api/** imports Node-only or non-edge-safe modules.
+ * Guardrail: fail if app/api/** imports Node-only or product-only modules.
  * Run: npm run check:edge-boundary
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -10,22 +10,6 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const API_DIR = join(ROOT, 'app', 'api');
 
-/** Subpaths under modules/shorts-producer/lib that must not be imported from edge API routes. */
-const BLOCKED_SHORTS_PRODUCER = [
-  'remotion',
-  'render-queue',
-  'render-state',
-  'render-jobs',
-  'render',
-  'cost-meter',
-  'cost-control',
-  'elevenlabs',
-  'assets',
-  'openai-usage',
-  'pexels',
-  'auth',
-];
-
 /** Regex patterns applied to import sources in app/api files. */
 const FORBIDDEN_PATTERNS = [
   { re: /^node:/, label: 'node: built-in prefix' },
@@ -33,9 +17,10 @@ const FORBIDDEN_PATTERNS = [
   { re: /^path$/, label: 'path module' },
   { re: /^@remotion\//, label: '@remotion package' },
   { re: /^child_process$/, label: 'child_process' },
+  { re: /modules\/shorts-producer/, label: 'shorts-producer belongs in hiop-studio' },
+  { re: /services\/render-trigger/, label: 'render-trigger belongs in hiop-studio' },
+  { re: /^openai$/, label: 'paid generation belongs in hiop-studio' },
 ];
-
-const ALLOWED_SHORTS_PRODUCER = new Set(['openai', 'types']);
 
 function walk(dir, files = []) {
   for (const name of readdirSync(dir)) {
@@ -57,39 +42,12 @@ function extractImports(source) {
   return imports;
 }
 
-function checkShortsProducer(specifier) {
-  const marker = 'modules/shorts-producer/lib/';
-  const idx = specifier.indexOf(marker);
-  if (idx === -1) return null;
-  const sub = specifier.slice(idx + marker.length).replace(/\.(js|ts|tsx)$/, '').split('/')[0];
-  if (ALLOWED_SHORTS_PRODUCER.has(sub)) return null;
-  if (BLOCKED_SHORTS_PRODUCER.includes(sub)) {
-    return `blocked shorts-producer submodule "${sub}"`;
-  }
-  return `shorts-producer import "${sub}" (not on allowlist; verify edge-safe before adding to ALLOWED_SHORTS_PRODUCER)`;
-}
-
 function checkSpecifier(specifier, file) {
   const violations = [];
   const rel = relative(ROOT, file);
 
   for (const { re, label } of FORBIDDEN_PATTERNS) {
     if (re.test(specifier)) violations.push({ file: rel, specifier, reason: label });
-  }
-
-  const shortsIssue = checkShortsProducer(specifier);
-  if (shortsIssue) violations.push({ file: rel, specifier, reason: shortsIssue });
-
-  if (specifier.startsWith('@/lib/cost-meter') || specifier.startsWith('@/lib/cost-control')) {
-    violations.push({
-      file: rel,
-      specifier,
-      reason: 'filesystem cost-meter/cost-control (Node-only); use @/lib/creativeCostGuard + creativeUsageStore on edge',
-    });
-  }
-
-  if (specifier.startsWith('@/lib/remotion') || specifier.startsWith('@/lib/render')) {
-    violations.push({ file: rel, specifier, reason: 'render pipeline belongs on AWS Worker/Lambda, not edge API' });
   }
 
   return violations;

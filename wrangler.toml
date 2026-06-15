@@ -7,16 +7,7 @@ pages_build_output_dir = ".vercel/output/static"
 binding = "DB"
 database_name = "leads-db"
 database_id = "b4f91404-552b-4505-a9e9-52701d44bd78"
-
-[[d1_databases]]
-binding = "CREATIVE_DB"
-database_name = "hi-ob-creative-db"
-database_id = "e6b3fe70-b10c-41a8-b69d-f8319c4fc253"
-
-[[r2_buckets]]
-binding = "HI_OB_R2"
-bucket_name = "hi-ob"
-preview_bucket_name = "hi-ob"
+migrations_dir = "db/migrations"
 
 # ── 아래 변수들은 Cloudflare Pages 대시보드 > Settings > Environment variables 에서 설정
 # ADMIN_PASSWORD     = "change-this-admin-password" (관리자 페이지 접속 비밀번호)

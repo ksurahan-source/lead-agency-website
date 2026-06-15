@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Logo from '@/components/Logo';
 
 const WHATSAPP = 'https://wa.me/60167471566';
 const EMAIL_USER = 'hiob4515';
@@ -47,9 +48,9 @@ export default function EnPage() {
     <main style={{ background: '#f5f0e8', minHeight: '100vh', fontFamily: 'var(--font-syne, sans-serif)' }}>
 
       {/* Nav */}
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #111' }}>
-        <a href="/en" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img src="/logo/04_logo_en_horizontal_light.svg" alt="HI-OB" style={{ height: '2.4rem', width: 'auto', display: 'block' }} />
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #111' }}>
+        <a href="/en" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <span className="font-syne" style={{ fontWeight: 800, fontSize: '0.9rem' }}>PERFORMANCE MARKETING</span>
@@ -64,18 +65,18 @@ export default function EnPage() {
       <section style={{ padding: 'clamp(3rem, 10vw, 6rem) 2rem', position: 'relative', overflow: 'hidden' }}>
         <motion.h1
           initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }}
-          style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#111' }}>
+          style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#111', wordBreak: 'keep-all' }}>
           Stop Wasting<br />Ad Budget.
         </motion.h1>
         <motion.h1
           initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.1 }}
-          style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#111', WebkitTextStroke: '3px #111', WebkitTextFillColor: 'transparent' }}>
+          style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#111', WebkitTextStroke: '3px #111', WebkitTextFillColor: 'transparent', wordBreak: 'keep-all' }}>
           Start Getting Leads.
         </motion.h1>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3rem' }}>
-          <p style={{ maxWidth: '560px', fontSize: 'clamp(1rem, 3vw, 1.4rem)', fontWeight: 700, lineHeight: 1.5, textAlign: 'right', color: '#111' }}>
+          <p style={{ maxWidth: '560px', fontSize: 'clamp(1rem, 3vw, 1.4rem)', fontWeight: 700, lineHeight: 1.5, textAlign: 'right', color: '#111', width: '100%' }}>
             HI-OB is a performance marketing specialist operating across Southeast Asia and beyond. We engineer tracking, build creatives, and run your ads — from day one.
           </p>
         </motion.div>
@@ -104,7 +105,7 @@ export default function EnPage() {
       {/* Stats */}
       <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', borderBottom: '4px solid #111' }}>
         {stats.map((s, i) => (
-          <div key={i} style={{ padding: '4rem 2rem', borderRight: i < 2 ? '4px solid #111' : 'none', textAlign: 'center' }}>
+          <div key={i} style={{ padding: 'clamp(2.5rem, 7vw, 4rem) clamp(0.8rem, 3vw, 2rem)', borderRight: i < 2 ? '4px solid #111' : 'none', textAlign: 'center' }}>
             <div style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontWeight: 900, color: '#111', lineHeight: 1 }}>{s.num}</div>
             <p style={{ marginTop: '1rem', fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.5, color: '#444' }}>{s.label}</p>
           </div>
@@ -126,7 +127,7 @@ export default function EnPage() {
       {/* Pricing */}
       <section style={{ padding: 'clamp(4rem, 10vw, 8rem) 2rem', background: '#111', color: '#f5f0e8', borderTop: '4px solid #111' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em', wordBreak: 'keep-all' }}>
             Transparent Pricing.
           </h2>
           <p style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '4rem', opacity: 0.6 }}>
@@ -137,7 +138,7 @@ export default function EnPage() {
             {/* Starter */}
             <div style={{ border: '3px solid #f5f0e8', padding: '2.5rem' }}>
               <div style={{ fontSize: '0.85rem', fontWeight: 800, marginBottom: '1rem', opacity: 0.5, letterSpacing: '0.1em' }}>STARTER PACKAGE</div>
-              <div style={{ fontSize: '3rem', fontWeight: 900, lineHeight: 1 }}>$350</div>
+              <div style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', fontWeight: 900, lineHeight: 1 }}>$350</div>
               <div style={{ fontSize: '1rem', fontWeight: 700, opacity: 0.6, marginBottom: '2rem' }}>one-time setup</div>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                 {['Landing page build', 'Reels creative (1 video)', '6-day Meta/Google campaign', 'CAPI + GA4 tracking setup', '7-day delivery guarantee'].map(item => (
@@ -154,7 +155,7 @@ export default function EnPage() {
             {/* Performance */}
             <div style={{ border: '3px solid #25D366', padding: '2.5rem', background: '#1a2a1a' }}>
               <div style={{ fontSize: '0.85rem', fontWeight: 800, marginBottom: '1rem', color: '#25D366', letterSpacing: '0.1em' }}>PERFORMANCE MODEL</div>
-              <div style={{ fontSize: '3rem', fontWeight: 900, lineHeight: 1 }}>15%</div>
+              <div style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', fontWeight: 900, lineHeight: 1 }}>15%</div>
               <div style={{ fontSize: '1rem', fontWeight: 700, opacity: 0.6, marginBottom: '2rem' }}>of ad spend / month</div>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                 {['No fixed retainer', 'We win when you win', 'Full campaign management', 'Creative refresh included', 'Monthly performance report'].map(item => (
@@ -174,7 +175,7 @@ export default function EnPage() {
       {/* Contact */}
       <section style={{ padding: 'clamp(4rem, 10vw, 8rem) 2rem', background: '#f5f0e8', borderTop: '4px solid #111' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 7vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, marginBottom: '2rem', letterSpacing: '-0.03em' }}>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 7vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, marginBottom: '2rem', letterSpacing: '-0.03em', wordBreak: 'keep-all' }}>
             Ready to start?
           </h2>
           <p style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '3rem', color: '#444', lineHeight: 1.6 }}>
@@ -194,10 +195,10 @@ export default function EnPage() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '4rem 2rem', borderTop: '4px solid #111', background: '#111', color: '#f5f0e8' }}>
+      <footer style={{ padding: 'clamp(2.5rem, 8vw, 4rem) clamp(1.1rem, 4vw, 2rem)', borderTop: '4px solid #111', background: '#111', color: '#f5f0e8' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem' }}>
           <div>
-            <div className="font-display" style={{ fontSize: '3rem' }}>HI-OB</div>
+            <div className="font-display" style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', wordBreak: 'keep-all' }}>HI-OB</div>
             <p style={{ fontWeight: 700, marginTop: '0.5rem', opacity: 0.6 }}>Performance Marketing — Southeast Asia & Beyond</p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'right' }}>

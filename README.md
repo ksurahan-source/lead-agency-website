@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HI-OP Marketing Website
 
-## Getting Started
+This repository is the public website for HI-OP:
 
-First, run the development server:
+- Public marketing and SEO pages live under `app/`.
+- Lead capture and tracking routes live under `app/api/submit-lead` and `app/api/track-view`.
+- Admin lead review remains under `app/admin`, `app/api/leads`, and `app/api/admin/leads`.
+
+The Studio product surface now lives in `/Users/surahanchoi/hiop-studio`. Do not add Studio UI, creative generation APIs, Remotion workers, or shorts-producer modules back into this repo.
+
+## Main Commands
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run pages:build
+npm run check:edge-boundary
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Repo Boundary
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+The desired shape is two repos with separate ownership:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```txt
+lead-agency-website
+  public marketing pages
+  SEO content
+  lead capture
+  Meta CAPI / tracking
+  admin lead review
 
-## Learn More
+hiop-studio
+  Studio UI
+  creative generation APIs
+  D1/R2 creative storage
+  shorts-producer module
+  render-trigger worker
+```
 
-To learn more about Next.js, take a look at the following resources:
+Keep paid generation, render infrastructure, and Studio auth in `hiop-studio`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Verification
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the website checks before shipping marketing/API changes:
 
-## Deploy on Vercel
+```bash
+npm run check:edge-boundary
+npm run lint
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For Cloudflare Pages output:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run pages:build
+```
+
+Deployment is manual and should only happen when explicitly requested.

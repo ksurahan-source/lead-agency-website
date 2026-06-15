@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" font-family="'Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic','Helvetica Neue',Arial,sans-serif">
+  <rect width="1080" height="1350" fill="#080504"/>
+  <rect x="28" y="28" width="1024" height="1294" rx="36" fill="none" stroke="#29231f" stroke-width="2"/>
+  <rect x="56" y="184" width="968" height="3" fill="#f97316"/>
+  <rect x="56" y="1160" width="968" height="2" fill="#29231f"/>
+  <path d="M762 188L1024 188L1024 1034L762 1034Z" fill="#fbfaf6" opacity="0.04"/>
+  <path d="M820 238L1024 238L1024 552L820 552Z" fill="#4fd1c5" opacity="0.10"/>
+  
+  <rect x="56" y="56" width="72" height="72" rx="12" fill="#080504"/>
+  <path d="M77.2 98.3L106 80.8V109.6H99V93L84.1 101.8V104H92V109.6H77.2V98.3Z" fill="#fff"/>
+  <path d="M110.7 88L117.9 84V109.6H110.7V88Z" fill="#fff"/>
+  <path d="M110.7 74.9H117.9V82.1H110.7V74.9Z" fill="#fff"/>
+
+  <text x="148" y="104" font-size="29" font-weight="900" fill="#fbfaf6" letter-spacing="0">HIOB marketing</text>
+  <text x="148" y="133" font-size="17" font-weight="800" fill="#8f887f" letter-spacing="2">HOOK / PROBLEM</text>
+  <text x="954" y="111" text-anchor="end" font-size="48" font-weight="900" fill="#f97316" letter-spacing="0">01</text>
+
+  <text x="56" y="282" font-size="24" font-weight="900" fill="#f97316" letter-spacing="4">HOOK / PROBLEM</text>
+  <text x="56" y="396" font-size="76" font-weight="950" fill="#fbfaf6" letter-spacing="0">Does ROAS break</text>
+<text x="56" y="475.8" font-size="76" font-weight="950" fill="#fbfaf6" letter-spacing="0">when budget scales?</text>
+  <text x="62" y="610" font-size="30" font-weight="800" fill="#c7beb3" letter-spacing="0">The problem may not be spend.</text>
+<text x="62" y="650.2" font-size="30" font-weight="800" fill="#c7beb3" letter-spacing="0">Your ad platform may be learning from weak signals.</text>
+
+  <g font-family="'Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic','Helvetica Neue',Arial,sans-serif">
+    
+        <rect x="68" y="771" width="34" height="34" rx="8" fill="#f97316"/>
+        <text x="85" y="795" text-anchor="middle" font-size="16" font-weight="900" fill="#080504">01</text>
+        <text x="124" y="794" font-size="30" font-weight="900" fill="#fbfaf6" letter-spacing="0">Invisible revenue</text>
+        <text x="124" y="831" font-size="21" font-weight="700" fill="#bfb8ad" letter-spacing="0">Pixel-only tracking misses real purchase signals.</text>
+      
+
+        <rect x="68" y="863" width="34" height="34" rx="8" fill="#f97316"/>
+        <text x="85" y="887" text-anchor="middle" font-size="16" font-weight="900" fill="#080504">02</text>
+        <text x="124" y="886" font-size="30" font-weight="900" fill="#fbfaf6" letter-spacing="0">Creative fatigue</text>
+        <text x="124" y="923" font-size="21" font-weight="700" fill="#bfb8ad" letter-spacing="0">Winning ads decay after repeated exposure.</text>
+      
+
+        <rect x="68" y="955" width="34" height="34" rx="8" fill="#f97316"/>
+        <text x="85" y="979" text-anchor="middle" font-size="16" font-weight="900" fill="#080504">03</text>
+        <text x="124" y="978" font-size="30" font-weight="900" fill="#fbfaf6" letter-spacing="0">No scale rule</text>
+        <text x="124" y="1015" font-size="21" font-weight="700" fill="#bfb8ad" letter-spacing="0">Budget decisions happen by feel, not thresholds.</text>
+      
+  </g>
+
+  <rect x="56" y="1210" width="18" height="18" rx="4" fill="#f97316"/>
+  <text x="92" y="1227" font-size="24" font-weight="850" fill="#fbfaf6" letter-spacing="0">Do not scale harder until the leaks are visible.</text>
+  <text x="56" y="1282" font-size="16" font-weight="800" fill="#716a63" letter-spacing="2">MECE: HOOK -> DIAGNOSIS -> PROOF -> OFFER</text>
+</svg>

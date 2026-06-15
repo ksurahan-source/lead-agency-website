@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="120" viewBox="0 0 360 120"><rect width="360" height="120" fill="#080504"/><g transform="translate(28 24) scale(0.225)">
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#fff"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#fff"/>
+    <path d="M219 84H251V116H219V84Z" fill="#fff"/>
+  </g>
+    <text x="122" y="72" font-family="'Avenir Next Condensed','DIN Condensed','Helvetica Neue',Arial,sans-serif" font-size="44" font-weight="800" fill="#fff" letter-spacing="1.5">hi</text>
+    <text x="161" y="72" font-family="'Optima','Avenir Next','Helvetica Neue',Arial,sans-serif" font-size="41" font-weight="700" fill="#fff" letter-spacing="0">ob</text>
+  <title>hiob</title></svg>

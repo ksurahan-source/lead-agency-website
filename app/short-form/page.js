@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useLang } from '../../hooks/useLang';
 import Footer from '../../components/Footer';
 import LeadFormTop from '../../components/LeadFormTop';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 
 const content = {
   ko: {
@@ -40,8 +42,8 @@ export default function ShortFormPage() {
 
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="font-display" style={{ fontSize: '2.5rem' }}>HI-OP / SHORT-FORM</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Logo height={28} />
         <a href="/" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none' }}>BACK TO HOME</a>
       </nav>
       <LeadFormTop
@@ -55,33 +57,34 @@ export default function ShortFormPage() {
         bullets={lang === 'ko' ? ['밈형 후킹', '릴스/쇼츠', '성과 변주'] : ['Meme hooks', 'Reels/Shorts', 'Performance variants']}
         source="short-form-top"
         lang={lang}
-        accent="var(--hiop-green)"
+        accent="var(--hiob-green)"
       />
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-green)' }}>{c.hero1}</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">{c.hero2}</motion.h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px' }}>{c.heroDesc}</p>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiob-green)', wordBreak: 'keep-all' }}>{c.hero1}</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text" style={{ wordBreak: 'keep-all' }}>{c.hero2}</motion.h1>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, marginTop: '2rem', maxWidth: '800px' }}>{c.heroDesc}</p>
         </div>
       </section>
-      <section style={{ padding: '5rem 2rem' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
         <div className="wrap">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
             {c.points.map((p, i) => (
               <div key={i} className="brutalist-card">
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{p.t}</h3>
+                <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1rem', wordBreak: 'keep-all' }}>{p.t}</h3>
                 <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#444' }}>{p.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>{c.pricing}</h2>
-        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem', background: 'var(--hiop-green)', color: '#111' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', background: '#000', color: '#fff', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '1rem', wordBreak: 'keep-all' }}>{c.pricing}</h2>
+        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', background: 'var(--hiob-green)', color: '#111' }}>
           {c.cta}
         </a>
       </section>
+      <MobileStickyCTA label="숏폼 제작 문의하기" />
       <Footer lang={lang} />
     </main>
   );

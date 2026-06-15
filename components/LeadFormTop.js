@@ -10,7 +10,7 @@ export default function LeadFormTop({
   source = 'hi-ob-top',
   lang = 'ko',
   formVariant = 'lead',
-  accent = 'var(--hiop-orange)',
+  accent = 'var(--hiob-orange)',
 }) {
   return (
     <section className="lead-form-top" style={{ '--lead-accent': accent }}>

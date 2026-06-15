@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useLang } from '../../hooks/useLang';
 import Footer from '../../components/Footer';
 import LeadFormTop from '../../components/LeadFormTop';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 
 const content = {
   ko: {
@@ -40,8 +42,13 @@ export default function AppAdsPage() {
 
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="font-display" style={{ fontSize: '2.5rem' }}>HI-OP / APP ADS</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <a href="/" style={{ color: 'inherit', textDecoration: 'none' }} aria-label="hiob 홈">
+            <Logo height={28} />
+          </a>
+          <span style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>APP ADS</span>
+        </div>
         <a href="/" style={{ fontWeight: 800, textTransform: 'uppercase', color: 'inherit', textDecoration: 'none' }}>BACK TO HOME</a>
       </nav>
       <LeadFormTop
@@ -55,16 +62,16 @@ export default function AppAdsPage() {
         bullets={lang === 'ko' ? ['MMP 포스트백', 'SKAN 4.0', '인앱 이벤트'] : ['MMP postbacks', 'SKAN 4.0', 'In-app events']}
         source="app-ads-top"
         lang={lang}
-        accent="var(--hiop-blue)"
+        accent="var(--hiob-blue)"
       />
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-blue)' }}>{c.hero1}</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">{c.hero2}</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiob-blue)', wordBreak: 'keep-all' }}>{c.hero1}</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text" style={{ wordBreak: 'keep-all' }}>{c.hero2}</motion.h1>
           <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px' }}>{c.heroDesc}</p>
         </div>
       </section>
-      <section style={{ padding: '5rem 2rem' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
         <div className="wrap">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
             {c.points.map((p, i) => (
@@ -76,12 +83,13 @@ export default function AppAdsPage() {
           </div>
         </div>
       </section>
-      <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>{c.pricing}</h2>
-        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem', background: 'var(--hiop-blue)', color: '#fff' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', background: '#000', color: '#fff', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '1rem' }}>{c.pricing}</h2>
+        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', background: 'var(--hiob-blue)', color: '#fff' }}>
           {c.cta}
         </a>
       </section>
+      <MobileStickyCTA label="문의하기" />
       <Footer lang={lang} />
     </main>
   );

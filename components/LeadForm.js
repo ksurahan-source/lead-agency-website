@@ -22,6 +22,14 @@ const t = {
       inquiryPlaceholder: '월 매출, 월 광고비, 주요 판매채널, ROAS 고민을 간단히 적어주세요.',
       submit: '이커머스 진단 신청하기 →',
     },
+    video: {
+      title: '영상 제작 신청',
+      company: '가게명 / 업종',
+      companyPlaceholder: '예) 망원동 OO카페 (카페)',
+      inquiry: '어떤 영상이 필요하세요?',
+      inquiryPlaceholder: '업종, 위치, 알리고 싶은 메뉴·서비스를 간단히 적어주세요. 인스타/플레이스 링크가 있으면 함께 남겨주세요.',
+      submit: '5만원 영상 제작 신청하기 →',
+    },
     name: '성함 *', namePlaceholder: '홍길동',
     email: '이메일 *', emailPlaceholder: 'example@naver.com',
     phone: '연락처 *', phonePlaceholder: '010-0000-0000',
@@ -47,6 +55,14 @@ const t = {
       inquiry: 'Current sales / advertising situation',
       inquiryPlaceholder: 'Share monthly revenue, ad spend, sales channels, and your ROAS challenge.',
       submit: 'Apply for Ecommerce Diagnosis →',
+    },
+    video: {
+      title: 'Request Your Video',
+      company: 'Store / Business Type',
+      companyPlaceholder: 'e.g. Mangwon OO Cafe (Cafe)',
+      inquiry: 'What kind of video do you need?',
+      inquiryPlaceholder: 'Tell us your business type, location, and what you want to promote. Add your Instagram / Place link if you have one.',
+      submit: 'Request Video for ₩50,000 →',
     },
     name: 'Name *', namePlaceholder: 'John Doe',
     email: 'Email *', emailPlaceholder: 'example@company.com',
@@ -205,7 +221,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
     return (
       <div
         className="brutalist-card"
-        style={{ background: 'var(--hiop-orange)', textAlign: 'center' }}
+        style={{ background: 'var(--hiob-orange)', textAlign: 'center' }}
       >
         <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎉</div>
         <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>{s.successTitle}</h3>
@@ -218,7 +234,7 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
             { label: s.labelEmail, value: submittedData.email },
             { label: s.labelPhone, value: submittedData.phone }].map(r => (
             <div key={r.label} style={{ marginBottom: '0.6rem', display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--hiop-orange)' }}>{r.label}</span>
+              <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--hiob-orange)' }}>{r.label}</span>
               <span style={{ fontWeight: 700 }}>{r.value}</span>
             </div>
           ))}
@@ -281,11 +297,11 @@ export default function LeadForm({ source = 'hi-op', lang = 'ko', variant = 'lea
             <span style={{ fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.4 }}>
               {lang === 'ko' ? (
                 <>
-                  <Link href="/privacy" target="_blank" style={{ color: 'var(--hiop-orange)', textDecoration: 'underline' }}>개인정보 수집 및 이용</Link>에 동의합니다. (필수)
+                  <Link href="/privacy" target="_blank" style={{ color: 'var(--hiob-orange)', textDecoration: 'underline' }}>개인정보 수집 및 이용</Link>에 동의합니다. (필수)
                 </>
               ) : (
                 <>
-                  I agree to the <Link href="/privacy" target="_blank" style={{ color: 'var(--hiop-orange)', textDecoration: 'underline' }}>collection and use of personal information</Link>. (Required)
+                  I agree to the <Link href="/privacy" target="_blank" style={{ color: 'var(--hiob-orange)', textDecoration: 'underline' }}>collection and use of personal information</Link>. (Required)
                 </>
               )}
             </span>

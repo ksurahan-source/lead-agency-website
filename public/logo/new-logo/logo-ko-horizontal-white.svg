@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="255" height="100" viewBox="0 0 255 100"><rect width="255" height="100" fill="#fff"/><g transform="translate(-4 5) scale(0.31)">
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#080504"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#080504"/>
+    <path d="M219 84H251V116H219V84Z" fill="#080504"/>
+  </g>
+    <g transform="translate(94 80) rotate(-3) skewX(-7)">
+      <text x="0" y="0" font-family="'Pretendard Variable','Apple SD Gothic Neo','Hiragino Sans','Malgun Gothic',sans-serif" font-size="40" font-weight="950" font-style="italic" fill="#080504" letter-spacing="0">히옵</text>
+    </g>
+  <title>히옵</title></svg>

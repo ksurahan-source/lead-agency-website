@@ -5,7 +5,7 @@ import { useLang } from '../../hooks/useLang';
 const content = {
   ko: {
     title: '개인정보 처리방침',
-    intro: '히옵(HI-OP, 이하 "회사")은 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.',
+    intro: '히옵(hi-ob, 이하 "회사")은 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.',
     sections: [
       {
         title: '1. 개인정보의 처리 목적',
@@ -36,7 +36,7 @@ const content = {
   },
   en: {
     title: 'Privacy Policy',
-    intro: 'HI-OP ("Company") establishes and discloses the following privacy policy in order to protect the personal information of data subjects and to process related grievances quickly and smoothly.',
+    intro: 'hi-ob ("Company") establishes and discloses the following privacy policy in order to protect the personal information of data subjects and to process related grievances quickly and smoothly.',
     sections: [
       {
         title: '1. Purpose of Processing Personal Information',
@@ -58,18 +58,18 @@ export default function PrivacyPage() {
 
   return (
     <main className="bg-light min-h-screen pb-20">
-      <nav style={{ padding: '1.5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="font-display" style={{ fontSize: '2rem' }}>HI-OP / PRIVACY</div>
+      <nav style={{ padding: 'clamp(1.05rem, 3vw, 1.5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
+        <div className="font-display" style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)' }}>hi-ob / PRIVACY</div>
       </nav>
 
       <div className="wrap" style={{ marginTop: '5rem', maxWidth: '900px' }}>
-        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{c.title}</h1>
+        <h1 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', wordBreak: 'keep-all' }}>{c.title}</h1>
         <p style={{ fontSize: '1.2rem', marginBottom: '4rem', fontWeight: 600, lineHeight: 1.8 }}>{c.intro}</p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
           {c.sections.map((s, i) => (
             <section key={i}>
-              <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontWeight: 800 }}>{s.title}</h2>
+              <h2 style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', marginBottom: '1.5rem', fontWeight: 800, wordBreak: 'keep-all' }}>{s.title}</h2>
               <p style={{ fontSize: '1.1rem', lineHeight: 2, whiteSpace: 'pre-line', color: '#333' }}>{s.content}</p>
             </section>
           ))}

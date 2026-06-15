@@ -1,32 +1,33 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import Footer from '../../../components/Footer';
 
 export default function BlogPost2() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </Link>
         <Link href="/blog" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 인사이트 목록으로</Link>
       </nav>
 
-      <article className="wrap" style={{ padding: '8rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+      <article className="wrap" style={{ padding: 'clamp(3.5rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', maxWidth: '1000px', margin: '0 auto' }}>
         <header style={{ marginBottom: '6rem' }}>
-          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiop-orange)', marginBottom: '2rem' }}>구글 광고 | 2025.05.09</div>
+          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiob-orange)', marginBottom: '2rem' }}>구글 광고 | 2025.05.09</div>
           <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>
             구글 광고의 함정: 스마트 캠페인이 당신의 예산을 갉아먹고 있다
           </h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiop-green)', paddingLeft: '2rem' }}>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiob-green)', paddingLeft: '2rem' }}>
             편리함 뒤에 숨겨진 블랙박스. 데이터 주도권이 없는 마케팅은 결국 구글의 배만 불려줄 뿐입니다.
           </p>
         </header>
 
         <section style={{ fontSize: '1.2rem', lineHeight: 2, color: '#111', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>1. &lsquo;스마트&rsquo;라는 단어에 속지 마세요</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>1. &lsquo;스마트&rsquo;라는 단어에 속지 마세요</h2>
             <p>
               구글 광고의 &lsquo;스마트 캠페인&rsquo;이나 &lsquo;실적 최대화(PMax) 캠페인&rsquo;은 광고주에게 매우 매력적으로 다가옵니다. 키워드를 고를 필요도 없고, 입찰가를 조정할 필요도 없습니다. 구글의 인공지능이 알아서 최적의 사용자에게 광고를 보여준다고 말하죠.
             </p>
@@ -36,7 +37,7 @@ export default function BlogPost2() {
           </div>
 
           <div style={{ background: '#f4f4f0', padding: '3rem', border: '4px solid #000', boxShadow: '10px 10px 0 #000' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>2. 데이터 오염과 최적화의 실패</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>2. 데이터 오염과 최적화의 실패</h2>
             <p>
               구글 인공지능이 가장 잘 작동하려면 &lsquo;깨끗한 데이터&rsquo;가 필요합니다. 만약 웹사이트 추적이 엉망이라서 단순 페이지 방문을 구매로 집계하고 있다면, 구글 인공지능은 계속해서 &lsquo;구경만 하는 사람&rsquo;들을 찾아 광고비를 씁니다.
             </p>
@@ -46,7 +47,7 @@ export default function BlogPost2() {
           </div>
 
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>3. 해결책: 데이터 주도권을 되찾는 마케팅</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>3. 해결책: 데이터 주도권을 되찾는 마케팅</h2>
             <p>
               성공적인 구글 광고를 위해서는 인공지능에게 모든 것을 맡기는 대신, 인공지능이 올바른 방향으로 달릴 수 있도록 가이드라인을 직접 설계해야 합니다.
             </p>
@@ -58,8 +59,8 @@ export default function BlogPost2() {
           </div>
 
           <div style={{ borderTop: '4px solid #000', paddingTop: '4rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '2rem', marginBottom: '2rem' }}>지금 내 구글 광고 계정, 안전한가요?</h3>
-            <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.8rem', background: 'var(--hiop-green)', color: '#000' }}>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>지금 내 구글 광고 계정, 안전한가요?</h3>
+            <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', background: 'var(--hiob-green)', color: '#000' }}>
               무료 계정 진단 신청하고 낭비 예산 찾기 →
             </a>
           </div>

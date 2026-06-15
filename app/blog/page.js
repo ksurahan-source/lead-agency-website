@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import Footer from '../../components/Footer';
 
 const posts = [
@@ -130,16 +131,16 @@ const posts = [
 export default function BlogListPage() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </Link>
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
 
-      <section style={{ padding: '5rem 2rem' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ marginBottom: '5rem' }}>인사이트</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ marginBottom: 'clamp(3rem, 8vw, 5rem)', wordBreak: 'keep-all' }}>인사이트</motion.h1>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             {posts.map((post) => (
@@ -149,10 +150,10 @@ export default function BlogListPage() {
                   className="brutalist-card"
                   style={{ background: '#fff', cursor: 'pointer' }}
                 >
-                  <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--hiop-orange)', marginBottom: '1rem' }}>
+                  <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--hiob-orange)', marginBottom: '1rem' }}>
                     {post.category} | {post.date}
                   </div>
-                  <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>{post.title}</h2>
+                  <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '1.5rem', lineHeight: 1.2, wordBreak: 'keep-all' }}>{post.title}</h2>
                   <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444' }}>{post.excerpt}</p>
                 </motion.div>
               </Link>

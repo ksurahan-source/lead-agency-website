@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { STAGE_EVENTS, buildLeadStageEvent, sendLeadStageEvent } from '@/lib/metaLeadStages';
 
 export const runtime = 'edge';
 
@@ -19,6 +20,38 @@ const requireAdmin = (request, env) => {
   const pw = searchParams.get('pw');
 
   return pw && pw === getAdminPassword(env);
+};
+
+// Helper to emit lead stage events to Meta (fire-and-forget)
+const emitLeadStageEvent = async (lead, newStatus, env) => {
+  try {
+    // Only emit if Meta is configured and status is in the map
+    const accessToken = env.META_ACCESS_TOKEN || env.META_LEADS_TOKEN;
+    if (!accessToken || !STAGE_EVENTS[newStatus]) {
+      return;
+    }
+
+    const pixelId = env.META_PIXEL_ID || '1715625702927911';
+    const graphVersion = env.META_GRAPH_API_VERSION || 'v25.0';
+
+    const payload = await buildLeadStageEvent(lead, newStatus, {
+      testEventCode: env.META_TEST_EVENT_CODE,
+      paidValue: 500000,
+    });
+
+    if (!payload) {
+      return;
+    }
+
+    await sendLeadStageEvent(payload, {
+      pixelId,
+      accessToken,
+      graphVersion,
+    });
+  } catch (err) {
+    // Fire-and-forget: only warn, never affect response
+    console.warn('[Lead Stage Event Error]', err);
+  }
 };
 
 const getDb = (env) => {
@@ -71,6 +104,10 @@ export async function PATCH(request) {
     }
 
     const lead = await DB.prepare('SELECT * FROM leads WHERE id = ?').bind(id).first();
+
+    // Fire-and-forget: emit lead stage event to Meta (never blocks response)
+    await emitLeadStageEvent(lead, status, env).catch(() => {});
+
     return NextResponse.json({ success: true, lead });
   } catch (error) {
     console.error('[Leads API Error]', error);

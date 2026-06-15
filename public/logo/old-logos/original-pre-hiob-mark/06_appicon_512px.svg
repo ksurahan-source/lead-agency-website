@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="76 154 248 192">
+<defs>
+  <!-- 원본 필터 -->
+  <filter id="shadow-outer" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.7"/>
+  </filter>
+  <filter id="shadow-mid" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+  </filter>
+  <filter id="shadow-inner" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.5"/>
+  </filter>
+  <filter id="shadow-core" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+  </filter>
+
+  <!-- 원본 그라디언트 -->
+  <radialGradient id="grad-outer" cx="50%" cy="25%" r="60%">
+    <stop offset="0%" stop-color="#FF7040"/>
+    <stop offset="100%" stop-color="#CC3000"/>
+  </radialGradient>
+  <radialGradient id="grad-cream" cx="50%" cy="25%" r="60%">
+    <stop offset="0%" stop-color="#FFFFFF"/>
+    <stop offset="100%" stop-color="#D8D4CE"/>
+  </radialGradient>
+  <radialGradient id="grad-core" cx="50%" cy="20%" r="60%">
+    <stop offset="0%" stop-color="#FF6030"/>
+    <stop offset="100%" stop-color="#BB2800"/>
+  </radialGradient>
+
+  <!-- TAM 도넛 마스크: 윗면 -->
+  <mask id="mTAM-top">
+    <ellipse cx="200" cy="198" rx="108" ry="28" fill="white"/>
+    <ellipse cx="200" cy="202" rx="78"  ry="20" fill="black"/>
+  </mask>
+  <!-- TAM 도넛 마스크: 옆면(그림자) -->
+  <mask id="mTAM-side">
+    <ellipse cx="200" cy="206" rx="108" ry="28" fill="white"/>
+    <ellipse cx="200" cy="210" rx="78"  ry="20" fill="black"/>
+  </mask>
+
+  <!-- SAM 도넛 마스크: 윗면 -->
+  <mask id="mSAM-top">
+    <ellipse cx="200" cy="228" rx="78"  ry="32" fill="white"/>
+    <ellipse cx="200" cy="234" rx="50"  ry="22" fill="black"/>
+  </mask>
+  <!-- SAM 도넛 마스크: 옆면 -->
+  <mask id="mSAM-side">
+    <ellipse cx="200" cy="238" rx="78"  ry="32" fill="white"/>
+    <ellipse cx="200" cy="244" rx="50"  ry="22" fill="black"/>
+  </mask>
+
+  <!-- SOM 도넛 마스크: 윗면 -->
+  <mask id="mSOM-top">
+    <ellipse cx="200" cy="264" rx="50"  ry="36" fill="white"/>
+    <ellipse cx="200" cy="270" rx="28"  ry="22" fill="black"/>
+  </mask>
+  <!-- SOM 도넛 마스크: 옆면 -->
+  <mask id="mSOM-side">
+    <ellipse cx="200" cy="276" rx="50"  ry="36" fill="white"/>
+    <ellipse cx="200" cy="282" rx="28"  ry="22" fill="black"/>
+  </mask>
+</defs>
+<rect x="76" y="154" width="248" height="192" fill="#0A0A0A"/>
+  <!-- TAM: 옆면 그림자 + 윗면, 도넛 마스크 -->
+  <ellipse cx="200" cy="206" rx="108" ry="28" fill="#7A2000" filter="url(#shadow-outer)" mask="url(#mTAM-side)"/>
+  <ellipse cx="200" cy="198" rx="108" ry="28" fill="url(#grad-outer)" mask="url(#mTAM-top)"/>
+
+  <!-- SAM: 옆면 그림자 + 윗면, 도넛 마스크 -->
+  <ellipse cx="200" cy="238" rx="78"  ry="32" fill="#5A1800" filter="url(#shadow-mid)" mask="url(#mSAM-side)"/>
+  <ellipse cx="200" cy="228" rx="78"  ry="32" fill="url(#grad-outer)" mask="url(#mSAM-top)"/>
+
+  <!-- SOM 크림: 옆면 그림자 + 윗면, 도넛 마스크 -->
+  <ellipse cx="200" cy="276" rx="50"  ry="36" fill="#9A9690" filter="url(#shadow-inner)" mask="url(#mSOM-side)"/>
+  <ellipse cx="200" cy="264" rx="50"  ry="36" fill="url(#grad-cream)" mask="url(#mSOM-top)"/>
+
+  <!-- CORE: 솔리드 구슬 — 마스크 불필요 -->
+  <ellipse cx="200" cy="308" rx="28"  ry="22" fill="#882000" filter="url(#shadow-core)"/>
+  <ellipse cx="200" cy="296" rx="28"  ry="22" fill="url(#grad-core)"/>
+  <ellipse cx="196" cy="291" rx="12"  ry="6"  fill="#FF9070" opacity="0.4"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="96" viewBox="0 0 256 96"><rect width="256" height="96" fill="#080504"/><g transform="translate(24 22) scale(0.1625)">
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#fff"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#fff"/>
+    <path d="M219 84H251V116H219V84Z" fill="#fff"/>
+  </g><g transform="scale(0.92 1)">
+    <text x="108.69565217391303" y="61" font-family="'Apple SD Gothic Neo','Hiragino Sans','Malgun Gothic',sans-serif" font-size="44" font-weight="800" fill="#fff" letter-spacing="0">히</text>
+    <text x="146.69565217391303" y="61" font-family="'AppleMyungjo','Apple SD Gothic Neo','Hiragino Mincho ProN',serif" font-size="43" font-weight="700" fill="#fff" letter-spacing="-2">옵</text>
+  </g><title>히옵</title></svg>

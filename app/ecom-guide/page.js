@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
 import LeadFormTop from '../../components/LeadFormTop';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
 
 const points = [
   {
@@ -28,9 +30,9 @@ const points = [
 export default function EcomGuidePage() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </Link>
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
@@ -42,48 +44,49 @@ export default function EcomGuidePage() {
         bullets={['구매 이벤트 정리', 'PG/GA4 기준 맞춤', '자가 진단표 제공']}
         source="ecom-guide-top"
         formVariant="ecom"
-        accent="var(--hiop-green)"
+        accent="var(--hiob-green)"
       />
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-green)' }}>구매 데이터</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">길 잃었음</motion.h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiob-green)', wordBreak: 'keep-all' }}>구매 데이터</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text" style={{ wordBreak: 'keep-all' }}>길 잃었음</motion.h1>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5, wordBreak: 'keep-all' }}>
             매출 한 건도 놓치지 않는다는 말, 이벤트가 정확할 때만 가능합니다.<br />
             히옵이 구매 여정의 누락, 중복, 기준 불일치를 표시합니다.
           </p>
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>가이드에서 다루는 내용</h2>
+          <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '3rem', wordBreak: 'keep-all' }}>가이드에서 다루는 내용</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
             {points.map((p, i) => (
               <div key={i} className="brutalist-card">
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{p.t}</h3>
-                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#444', lineHeight: 1.7 }}>{p.d}</p>
+                <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1rem', wordBreak: 'keep-all' }}>{p.t}</h3>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#444', lineHeight: 1.7, wordBreak: 'keep-all' }}>{p.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
         <p style={{ fontSize: '1.2rem', fontWeight: 700, color: '#aaa', marginBottom: '1rem' }}>서비스 금액</p>
-        <h2 style={{ fontSize: 'clamp(3rem, 6vw, 4rem)', fontWeight: 900, marginBottom: '3rem' }}>100만원~</h2>
-        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem', background: 'var(--hiop-green)' }}>
+        <h2 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', fontWeight: 900, marginBottom: '3rem', wordBreak: 'keep-all' }}>100만원~</h2>
+        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', background: 'var(--hiob-green)' }}>
           가이드 신청하기 →
         </a>
       </section>
 
-      <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
           <LeadForm source="ecom-guide" lang="ko" variant="ecom" />
         </div>
       </section>
 
+      <MobileStickyCTA label="상담 신청하기" />
       <Footer />
     </main>
   );

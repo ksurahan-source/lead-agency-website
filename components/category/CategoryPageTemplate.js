@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { categoryNavItems, positioningLine } from '@/lib/categoryPages';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 import ProblemSection from './ProblemSection';
 import ProcessPipeline from './ProcessPipeline';
 import PricingCards from './PricingCards';
@@ -12,12 +14,8 @@ export default function CategoryPageTemplate({ page }) {
   return (
     <main className="category-page">
       <nav className="category-nav">
-        <Link href="/" className="cv-brand" aria-label="HI-OP 홈">
-          <span className="cv-brand-mark">HI</span>
-          <span>
-            HI-OP
-            <small>Creative Performance OS</small>
-          </span>
+        <Link href="/" className="cv-brand" aria-label="hiob 홈">
+          <Logo height={26} />
         </Link>
         <div className="category-nav-links">
           {categoryNavItems.map((item) => (
@@ -73,7 +71,7 @@ export default function CategoryPageTemplate({ page }) {
           <p>{page.testingBody}</p>
         </div>
         <div>
-          <span className="category-eyebrow">HI-OP</span>
+          <span className="category-eyebrow">hi-ob</span>
           <h2>{page.systemTitle}</h2>
           <p>{page.systemBody}</p>
           <ul>
@@ -90,8 +88,10 @@ export default function CategoryPageTemplate({ page }) {
       <FAQBlock items={page.faqs} />
       <CTASection page={page} />
 
+      <MobileStickyCTA label={page.primaryCta} href="#diagnosis" />
+
       <footer className="category-footer">
-        <strong>HI-OP</strong>
+        <strong>hi-ob</strong>
         <span>{positioningLine}</span>
         <Link href="/privacy">개인정보 처리방침</Link>
         <Link href="/terms">이용약관</Link>

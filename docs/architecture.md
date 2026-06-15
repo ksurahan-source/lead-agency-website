@@ -1,58 +1,53 @@
-# HI-OP Creative Performance Infrastructure — Architecture
+# HI-OP Marketing Website — Architecture
 
-This document defines **runtime boundaries** and **module ownership** for `lead-agency-website`. It complements the architecture review and is the source of truth for M0–M2 work.
+This document defines runtime boundaries and ownership for `lead-agency-website` after the Studio split.
+
+## Repo ownership
+
+| Area | Owner | Rule |
+|------|-------|------|
+| Public marketing pages | `lead-agency-website` | Build SEO, positioning, and lead capture here. |
+| Lead capture APIs | `lead-agency-website` | Keep edge-safe and backed by D1 `DB`. |
+| Admin lead review | `lead-agency-website` | Keep scoped to collected marketing leads. |
+| Studio UI and creative APIs | `/Users/surahanchoi/hiop-studio` | Do not re-add `/studio` or `/api/creative/*` here. |
+| shorts-producer and render worker | `/Users/surahanchoi/hiop-studio` | Keep paid generation/render infrastructure out of this repo. |
 
 ## System layers
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Marketing (static/SSR)                                       │
-│  app/page.js, /growth, /creative, /system, blog, service pages│
-│  Runtime: mostly static; no paid APIs                         │
-└────────────────────────────┬─────────────────────────────────┘
-                             │
-┌────────────────────────────▼─────────────────────────────────┐
-│  Edge platform (Cloudflare Pages + next-on-pages)             │
-│  app/api/**          export const runtime = 'edge'              │
-│  app/studio/**       studio auth + mock/real creative APIs    │
-│  Bindings: DB, CREATIVE_DB, HI_OB_R2                          │
-└────────────────────────────┬─────────────────────────────────┘
-                             │
-┌────────────────────────────▼─────────────────────────────────┐
-│  shorts-producer (modules/shorts-producer)                    │
-│  TypeScript pipeline: OpenAI, TTS, Remotion, cost, QA         │
-│  Default: NOT on edge unless explicitly allowlisted           │
-└────────────────────────────┬─────────────────────────────────┘
-                             │
-┌────────────────────────────▼─────────────────────────────────┐
-│  AWS (future / separate deploy)                               │
-│  Remotion Lambda, S3 outputs, webhooks                        │
-│  Must not be imported from app/api/**                         │
-└──────────────────────────────────────────────────────────────┘
+```txt
+Marketing website
+  app/page.js, /growth, /creative, /system, blog, service pages
+  Runtime: mostly static or edge-safe
+
+Lead platform
+  app/api/submit-lead
+  app/api/track-view
+  app/api/leads, app/api/admin/leads
+  Binding: DB
+
+Studio product
+  Lives in /Users/surahanchoi/hiop-studio
 ```
 
-## Edge vs Node rules
+## Edge rules
 
-### May run on Cloudflare Pages (edge)
+### May run on Cloudflare Pages
 
 | Area | Location | Notes |
-|------|----------|--------|
-| Lead capture | `app/api/submit-lead` | D1 `DB`, Meta CAPI |
-| Creative APIs | `app/api/creative/*` | D1 `CREATIVE_DB`, R2, OpenAI via fetch |
-| Studio auth | `lib/studioAuth.js` | Web Crypto only |
-| Cost guard (edge) | `lib/creativeCostGuard.js`, `lib/creativeUsageStore.js` | D1-backed |
-| OpenAI script (edge) | `modules/shorts-producer/lib/openai.ts` | **Only** allowlisted shorts-producer entry from API |
+|------|----------|-------|
+| Lead capture | `app/api/submit-lead` | D1 `DB`, optional Meta CAPI |
+| Tracking | `app/api/track-view` | Edge-safe fetch only |
+| Admin leads | `app/api/leads`, `app/api/admin/leads` | D1 `DB` |
 
-### Must NOT run on edge (`app/api/**`)
+### Must not be added to this repo
 
 | Pattern | Why |
 |---------|-----|
-| `node:fs`, `node:path`, `fs`, `path` | No persistent filesystem on Workers |
-| `@remotion/*` | AWS Lambda client + heavy deps |
-| `modules/shorts-producer/lib/cost-meter.ts` | Writes `.data/usage` on disk |
-| `modules/shorts-producer/lib/cost-control.ts` | Filesystem cache under `.data/cache` |
-| `modules/shorts-producer/lib/render-*.ts`, `remotion.ts` | AWS Remotion pipeline |
-| `modules/shorts-producer/lib/elevenlabs.ts`, `assets.ts` | External paid APIs + fs (until worker split) |
+| `app/studio/**` | Studio belongs in `hiop-studio`. |
+| `app/api/creative/**` | Creative APIs belong in `hiop-studio`. |
+| `modules/shorts-producer/**` | Product engine belongs in `hiop-studio`. |
+| `services/render-trigger/**` | Render worker belongs in `hiop-studio`. |
+| `node:fs`, `node:path`, `@remotion/*`, `child_process` in `app/api/**` | Not edge-safe for Pages routes. |
 
 Enforced locally by:
 
@@ -60,56 +55,21 @@ Enforced locally by:
 npm run check:edge-boundary
 ```
 
-## Path alias hazard (`@/lib` in shorts-producer)
-
-Root `jsconfig.json` maps `@/*` → repository root. Therefore `@/lib/types` resolves to **`/lib/types`**, not `modules/shorts-producer/lib/types`.
-
-| Import in shorts-producer | Resolves today | Status |
-|---------------------------|----------------|--------|
-| `@/lib/types` | Missing at root | **M1 debt** — use relative `./types` or `lib/creative/` merge |
-| `@/lib/cost-meter` | Missing at root | **M1 debt** — edge uses `creativeUsageStore` instead |
-| Relative `./openai`, `./pricing` | Correct | Safe for `app/api/creative/generate` |
-
-Checked by:
-
-```bash
-npm run check:shorts-paths
-```
-
-**M1 fix options (pick one):**
-
-1. Add `lib/creative/` at repo root and move shared types + edge-safe helpers there.
-2. Add alias `@/shorts/*` → `modules/shorts-producer/lib/*` in root `jsconfig.json`.
-3. Replace all `@/lib/*` inside shorts-producer with relative imports.
-
-Do **not** import render/TTS modules from edge routes until paths and runtime are fixed.
-
-## Dual cost systems (do not merge blindly)
-
-| System | Storage | Used by |
-|--------|---------|---------|
-| **Production (edge)** | D1 `CREATIVE_DB` | `creativeUsageStore`, `creativeCostGuard`, `/api/creative/*` |
-| **Module (dev/Node)** | `.data/usage`, `.data/cache` | `cost-meter.ts`, `cost-control.ts`, render queue |
-
-New spend events for Pages **must** go through `writeUsageEvent` / `enforceCreativeCostGuard`. See [cost-guard-atomic-reservation.md](./cost-guard-atomic-reservation.md).
-
 ## Auth boundaries
 
 | Surface | Mechanism | Scope |
-|---------|-----------|--------|
-| Studio | `hiob_studio_session` HMAC cookie | `/studio`, `/api/creative/*` |
-| Agent | `hiob_agent_session` (separate) | `/agent`, `/api/agent/*` — **do not change in M0** |
-| Admin leads | `?pw=` query param | `/api/leads`, `/api/admin/leads` — fallback removal planned |
+|---------|-----------|-------|
+| Agent | `hiob_agent_session` (separate) | `/agent`, `/api/agent/*` — do not change unless explicitly requested. |
+| Admin leads | `?pw=` query param | `/api/leads`, `/api/admin/leads` — fallback removal planned. |
+| Studio | HMAC cookie in `hiop-studio` | Not owned by this repo. |
 
 ## Bindings (`wrangler.toml`)
 
-| Binding | Database / bucket | Purpose |
-|---------|-------------------|---------|
+| Binding | Database | Purpose |
+|---------|----------|---------|
 | `DB` | `leads-db` | Marketing leads |
-| `CREATIVE_DB` | `hi-ob-creative-db` | Usage, runs, jobs |
-| `HI_OB_R2` | `hi-ob` | Creative artifacts |
 
-Requires Pages compatibility flag: **`nodejs_compat`** (production + preview).
+Requires Pages compatibility flag: `nodejs_compat` for production and preview.
 
 ## Deploy output
 
@@ -120,5 +80,4 @@ Do not commit `.cf-pages/` as source of truth; it is build output.
 
 ## Related docs
 
-- [m0-checklist.md](./m0-checklist.md) — operational checklist
-- [cost-guard-atomic-reservation.md](./cost-guard-atomic-reservation.md) — D1 budget design (M1 implementation)
+- [m0-checklist.md](./m0-checklist.md) — operational checklist for the website.

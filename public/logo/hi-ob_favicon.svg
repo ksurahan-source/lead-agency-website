@@ -1,16 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- 투명 배경 — 파비콘/앱 아이콘용 -->
-
-  <clipPath id="left">
-    <rect x="0" y="0" width="62" height="100"/>
-  </clipPath>
-
-  <!-- TAM -->
-  <circle cx="62" cy="50" r="44" fill="none" stroke="#FF3C3C" stroke-width="1.5" opacity="0.5" clip-path="url(#left)"/>
-  <!-- SAM -->
-  <circle cx="62" cy="50" r="29" fill="none" stroke="#888888" stroke-width="2" opacity="0.65" clip-path="url(#left)"/>
-  <!-- SOM -->
-  <circle cx="62" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="3" clip-path="url(#left)"/>
-  <!-- 중심 -->
-  <circle cx="62" cy="50" r="5" fill="#FF3C3C"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 320 320">
+    <rect width="320" height="320" rx="28" fill="#080504"/>
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#fff"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#fff"/>
+    <path d="M219 84H251V116H219V84Z" fill="#fff"/>
+  </svg>

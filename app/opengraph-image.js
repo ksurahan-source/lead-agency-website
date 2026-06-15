@@ -1,11 +1,15 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'HI-OP 소재 병목 진단';
+export const alt = '히옵 마케팅 — 네이버·쿠팡 셀러 측정·성과 마케팅';
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = 'image/png';
+
+const LOGO_SVG =
+  "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290 110'><g fill='none' stroke='#1c1917' stroke-width='13' stroke-linecap='butt' stroke-linejoin='round'><path d='M30 10V100'/><path d='M30 65a22 22 0 0 1 44 0V100'/><path d='M105 43V100'/><circle cx='158' cy='71.5' r='22'/><path d='M211 10V100'/><circle cx='233' cy='71.5' r='22'/></g><circle cx='105' cy='24' r='7' fill='#1c1917'/></svg>";
+const LOGO_DATA = `data:image/svg+xml;base64,${btoa(LOGO_SVG)}`;
 
 export default function Image() {
   return new ImageResponse(
@@ -15,8 +19,8 @@ export default function Image() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          background: '#f7f8fa',
-          color: '#15171f',
+          background: '#f4f1ea',
+          color: '#1c1917',
           padding: 56,
           fontFamily: 'sans-serif',
           position: 'relative',
@@ -28,55 +32,55 @@ export default function Image() {
             flexDirection: 'column',
             justifyContent: 'space-between',
             width: '100%',
-            border: '2px solid rgba(21,23,31,0.16)',
+            border: '2px solid rgba(28,25,23,0.14)',
             borderRadius: 28,
-            background: '#fff',
+            background: '#fbfaf6',
             padding: 48,
             position: 'relative',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: 42, fontWeight: 900, letterSpacing: 2, color: '#111827' }}>HI-OP</div>
-              <div style={{ fontSize: 24, fontWeight: 800, color: '#E65828', marginTop: 8 }}>
-                소재 생산·테스트 운영 시스템
+              <img src={LOGO_DATA} width={150} height={57} alt="hiob" style={{ display: 'flex' }} />
+              <div style={{ fontSize: 24, fontWeight: 800, color: '#c2410c', marginTop: 8 }}>
+                이커머스 성장 파트너
               </div>
             </div>
             <div
               style={{
                 display: 'flex',
-                border: '2px solid rgba(29,78,216,0.2)',
+                border: '2px solid rgba(230,88,40,0.30)',
                 borderRadius: 999,
-                color: '#1D4ED8',
-                fontSize: 42,
+                color: '#c2410c',
+                fontSize: 40,
                 fontWeight: 900,
                 padding: '14px 30px',
               }}
             >
-              CAPI · GA4
+              측정 · 성과
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', marginTop: 28 }}>
-            <div style={{ fontSize: 92, fontWeight: 1000, lineHeight: 1.04 }}>소재 병목을 풀고</div>
+          <div style={{ display: 'flex', flexDirection: 'column', marginTop: 24 }}>
+            <div style={{ fontSize: 84, fontWeight: 1000, lineHeight: 1.06 }}>광고비는 나가는데,</div>
             <div
               style={{
                 display: 'flex',
                 alignSelf: 'flex-start',
-                background: '#111827',
+                background: '#1c1917',
                 color: '#fff',
-                fontSize: 92,
+                fontSize: 84,
                 fontWeight: 1000,
                 lineHeight: 1,
-                padding: '12px 28px 20px',
-                marginTop: 10,
+                padding: '12px 26px 18px',
+                marginTop: 12,
                 borderRadius: 18,
               }}
             >
-              광고비 확장까지
+              어디서 버는지
             </div>
-            <div style={{ fontSize: 92, fontWeight: 1000, lineHeight: 1.04, marginTop: 8 }}>
-              연결합니다
+            <div style={{ fontSize: 84, fontWeight: 1000, lineHeight: 1.06, marginTop: 10 }}>
+              안 보입니다.
             </div>
           </div>
 
@@ -84,7 +88,7 @@ export default function Image() {
             <div
               style={{
                 display: 'flex',
-                background: '#fff7ed',
+                background: '#fff1ea',
                 border: '2px solid rgba(230,88,40,0.22)',
                 borderRadius: 999,
                 color: '#9a3412',
@@ -93,9 +97,9 @@ export default function Image() {
                 padding: '16px 24px',
               }}
             >
-              원재료 추출 · 소재 테스트 · 승자 확장
+              측정 6주 무료 · 성과 ROAS 8~12%
             </div>
-            <div style={{ fontSize: 30, fontWeight: 900, color: '#374151' }}>Pixel · CAPI · GA4 · GTM</div>
+            <div style={{ fontSize: 28, fontWeight: 900, color: '#3b3530' }}>sGTM · Meta CAPI · GA4</div>
           </div>
         </div>
       </div>

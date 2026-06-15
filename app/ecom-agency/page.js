@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
 import LeadFormTop from '../../components/LeadFormTop';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
 
 const points = [
   {
@@ -28,9 +30,9 @@ const points = [
 export default function EcomAgencyPage() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </Link>
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
@@ -42,27 +44,27 @@ export default function EcomAgencyPage() {
         bullets={['상품별 누수 확인', 'ASC/PMax 구조 점검', '매출 기준 리포트']}
         source="ecom-agency-top"
         formVariant="ecom"
-        accent="var(--hiop-blue)"
+        accent="var(--hiob-blue)"
       />
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-blue)' }}>매출은 있는데</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">광고가 억울함</motion.h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiob-blue)', wordBreak: 'keep-all' }}>매출은 있는데</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text" style={{ wordBreak: 'keep-all' }}>광고가 억울함</motion.h1>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
             구매 데이터가 제대로 들어가지 않으면 알고리즘도 감으로 움직입니다.<br />
             히옵은 이커머스 광고가 배울 수 있는 데이터를 다시 정리합니다.
           </p>
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>히옵이 다른 이유</h2>
+          <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '3rem', wordBreak: 'keep-all' }}>히옵이 다른 이유</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
             {points.map((p, i) => (
               <div key={i} className="brutalist-card">
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{p.t}</h3>
+                <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1rem', wordBreak: 'keep-all' }}>{p.t}</h3>
                 <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#444', lineHeight: 1.7 }}>{p.d}</p>
               </div>
             ))}
@@ -70,21 +72,22 @@ export default function EcomAgencyPage() {
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
         <p style={{ fontSize: '1.2rem', fontWeight: 700, color: '#aaa', marginBottom: '1rem' }}>대행 수수료</p>
         <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '0.5rem' }}>월 집행 예산의 20%</h2>
         <p style={{ fontSize: '1.2rem', color: '#aaa', marginBottom: '3rem' }}>최소 월 300만원부터</p>
-        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem', background: 'var(--hiop-blue)', color: '#fff' }}>
+        <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', background: 'var(--hiob-blue)', color: '#fff' }}>
           대행 상담 신청하기 →
         </a>
       </section>
 
-      <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
           <LeadForm source="ecom-agency" lang="ko" variant="ecom" />
         </div>
       </section>
 
+      <MobileStickyCTA label="이커머스 진단 신청하기" />
       <Footer />
     </main>
   );

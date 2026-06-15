@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import Footer from '../../components/Footer';
 import LeadForm from '../../components/LeadForm';
 import LeadFormTop from '../../components/LeadFormTop';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
 
 const points = [
   {
@@ -28,9 +30,9 @@ const points = [
 export default function LeadGenPage() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} aria-label="hiob 홈">
+          <Logo height={28} />
         </Link>
         <Link href="/" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 홈으로</Link>
       </nav>
@@ -41,27 +43,27 @@ export default function LeadGenPage() {
         description="현재 웹사이트와 광고 흐름을 기준으로 리드 전환이 막히는 지점을 정중하게 진단해드립니다. 버튼 위치, 메시지, 추적 이벤트까지 함께 확인합니다."
         bullets={['첫 화면 리드폼', 'GA4/GTM 이벤트', '카카오/시트 연동']}
         source="lead-gen-top"
-        accent="var(--hiop-orange)"
+        accent="var(--hiob-orange)"
       />
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiop-orange)' }}>리드 안 오면</motion.h1>
-          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text">랜딩부터 의심</motion.h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="massive-text" style={{ color: 'var(--hiob-orange)', wordBreak: 'keep-all' }}>리드 안 오면</motion.h1>
+          <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="massive-text" style={{ wordBreak: 'keep-all' }}>랜딩부터 의심</motion.h1>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, marginTop: '2rem', maxWidth: '800px', lineHeight: 1.5 }}>
             클릭은 있는데 문의가 없다면, 손님이 사라진 구간이 있습니다.<br />
             히옵은 카피, 폼, 이벤트 추적까지 한 번에 고칩니다.
           </p>
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>히옵 웹사이트에 포함되는 것들</h2>
+          <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '3rem', wordBreak: 'keep-all' }}>히옵 웹사이트에 포함되는 것들</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
             {points.map((p, i) => (
               <div key={i} className="brutalist-card">
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{p.t}</h3>
+                <h3 style={{ fontSize: 'clamp(1.25rem, 4.5vw, 2rem)', marginBottom: '1rem', wordBreak: 'keep-all' }}>{p.t}</h3>
                 <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#444', lineHeight: 1.7 }}>{p.d}</p>
               </div>
             ))}
@@ -69,7 +71,7 @@ export default function LeadGenPage() {
         </div>
       </section>
 
-      <section style={{ padding: '5rem 2rem', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', background: '#000', color: '#fff', textAlign: 'center', borderBottom: '4px solid var(--border-dark)' }}>
         <p style={{ fontSize: '1.2rem', fontWeight: 700, color: '#aaa', marginBottom: '1rem' }}>서비스 금액</p>
         <h2 style={{ fontSize: 'clamp(3rem, 6vw, 4rem)', fontWeight: 900, marginBottom: '3rem' }}>150만원~</h2>
         <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.5rem' }}>
@@ -77,12 +79,13 @@ export default function LeadGenPage() {
         </a>
       </section>
 
-      <section style={{ padding: '6rem 2rem', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap" style={{ maxWidth: '700px', margin: '0 auto' }}>
           <LeadForm source="lead-gen" lang="ko" variant="lead" />
         </div>
       </section>
 
+      <MobileStickyCTA label="웹사이트 제작 문의하기" />
       <Footer />
     </main>
   );

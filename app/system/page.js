@@ -11,7 +11,7 @@ export const metadata = {
     title: page.metadata.title,
     description: page.metadata.description,
     url: 'https://hi-ob.com/system',
-    siteName: 'HI-OP',
+    siteName: 'hi-ob',
     locale: 'ko_KR',
     type: 'website',
   },

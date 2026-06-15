@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="224" height="96" viewBox="0 0 224 96"><rect width="224" height="96" fill="#080504"/><g transform="translate(-2 4) scale(0.23)">
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#fff"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#fff"/>
+    <path d="M219 84H251V116H219V84Z" fill="#fff"/>
+  </g><g transform="scale(0.9 1)">
+    <g transform="translate(94.44444444444444 65) rotate(-2.4) skewX(-10) scale(1.04 1)">
+      <text x="0" y="0" font-family="'Arial Black','Avenir Next Heavy','Pretendard Variable','Helvetica Neue',Arial,sans-serif" font-size="42" font-weight="950" font-style="italic" fill="#fff" letter-spacing="-1.2">hiob</text>
+      <path d="M7 -35H28L23 -31H2Z" fill="#fff"/>
+    </g>
+  </g><title>hiob</title></svg>

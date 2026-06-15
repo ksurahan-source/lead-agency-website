@@ -2,31 +2,32 @@
 
 import Link from 'next/link';
 import Footer from '../../../components/Footer';
+import Logo from '@/components/Logo';
 
 export default function ROASOptimizationPost() {
   return (
     <main className="bg-light min-h-screen">
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)' }}>
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="font-display" style={{ fontSize: '2.5rem' }}>히옵</div>
+          <Logo height={28} />
         </Link>
         <Link href="/blog" style={{ fontWeight: 800, color: 'inherit', textDecoration: 'none' }}>← 인사이트 목록으로</Link>
       </nav>
 
-      <article className="wrap" style={{ padding: '8rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+      <article className="wrap" style={{ padding: 'clamp(3.5rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', maxWidth: '1000px', margin: '0 auto' }}>
         <header style={{ marginBottom: '6rem' }}>
-          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiop-orange)', marginBottom: '2rem' }}>퍼포먼스 전략 | 2025.05.11</div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--hiob-orange)', marginBottom: '2rem' }}>퍼포먼스 전략 | 2025.05.11</div>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, marginBottom: '3rem', fontFamily: 'Black Han Sans, sans-serif', wordBreak: 'keep-all' }}>
             ROAS 극대화 전문 에이전시의 기술: 전환 가치 기반 AI 입찰 최적화
           </h1>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiop-blue)', paddingLeft: '2rem' }}>
+          <p style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)', fontWeight: 700, lineHeight: 1.4, borderLeft: '10px solid var(--hiob-blue)', paddingLeft: '2rem', wordBreak: 'keep-all' }}>
             단순히 유입만 늘리는 광고는 이제 그만. 진짜 매출로 연결되는 고가치 유저를 찾는 퍼포먼스 마케팅의 정수를 공개합니다.
           </p>
         </header>
 
         <section style={{ fontSize: '1.2rem', lineHeight: 2, color: '#111', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>1. 클릭이 아닌 '가치'에 입찰하세요: 왜 tROAS인가?</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>1. 클릭이 아닌 '가치'에 입찰하세요: 왜 tROAS인가?</h2>
             <p>
               많은 광고주들이 여전히 CPC(클릭당 비용)나 단순 CPA(전환당 비용) 최적화에 머물러 있습니다. 하지만 모든 구매가 같은 가치를 가지지는 않습니다. 1만 원을 구매하는 고객 10명보다 20만 원을 구매하는 고객 1명이 비즈니스 성장에 더 큰 기여를 합니다.
             </p>
@@ -36,7 +37,7 @@ export default function ROASOptimizationPost() {
           </div>
 
           <div style={{ background: '#f4f4f0', padding: '3rem', border: '4px solid #000', boxShadow: '10px 10px 0 #000' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>2. 해결책: 데이터 피딩(Data Feeding) 최적화 전략</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>2. 해결책: 데이터 피딩(Data Feeding) 최적화 전략</h2>
             <p>
               AI 입찰이 성공하려면 양질의 데이터가 필요합니다. 히옵은 다음의 3단계 솔루션을 통해 알고리즘의 지능을 높입니다.
             </p>
@@ -48,7 +49,7 @@ export default function ROASOptimizationPost() {
           </div>
 
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>3. 기대 효과: 지속 가능한 스케일업의 기반을 만듭니다</h2>
+            <h2 style={{ fontSize: 'clamp(1.55rem, 6vw, 2.5rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>3. 기대 효과: 지속 가능한 스케일업의 기반을 만듭니다</h2>
             <p>
               전환 가치 기반의 입찰 전략은 광고 예산을 증액해도 ROAS가 무너지지 않게 지탱해 줍니다. 감에 의존하는 것이 아닌, 철저히 데이터에 기반해 확장(Scale-up)할 수 있는 구조를 만드는 것입니다.
             </p>
@@ -58,8 +59,8 @@ export default function ROASOptimizationPost() {
           </div>
 
           <div style={{ borderTop: '4px solid #000', paddingTop: '4rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '2rem', marginBottom: '2rem' }}>당신의 비즈니스 가치를 숫자로 증명합니다</h3>
-            <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: '1.8rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '2rem', wordBreak: 'keep-all' }}>당신의 비즈니스 가치를 숫자로 증명합니다</h3>
+            <a href="https://open.kakao.com/o/srdaF2si" target="_blank" rel="noopener noreferrer" className="btn-brutal primary" style={{ fontSize: 'clamp(1.15rem, 4.2vw, 1.8rem)' }}>
               ROAS 최적화 전략 상담하기
             </a>
           </div>

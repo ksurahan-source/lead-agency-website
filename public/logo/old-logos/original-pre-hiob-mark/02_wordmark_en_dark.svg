@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="148" viewBox="0 0 480 148">
+<defs>
+  <radialGradient id="gOB" cx="38%" cy="18%" r="72%">
+    <stop offset="0%"   stop-color="#FF6030"/>
+    <stop offset="100%" stop-color="#C42B00"/>
+  </radialGradient>
+  <radialGradient id="gWH" cx="38%" cy="18%" r="72%">
+    <stop offset="0%"   stop-color="#FFFFFF"/>
+    <stop offset="100%" stop-color="#CCCCCC"/>
+  </radialGradient>
+</defs>
+
+
+<text x="0" y="128" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="128" font-weight="900" letter-spacing="-5"><tspan fill="url(#gWH)">hi</tspan><tspan fill="url(#gOB)">-ob</tspan></text>
+</svg>

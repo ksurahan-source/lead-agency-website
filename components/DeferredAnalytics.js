@@ -14,7 +14,7 @@ const appendScript = (id, src) => {
   document.head.appendChild(script);
 };
 
-const initGtm = (gtmId) => {
+const initGtm = (gtmId, gtmServerUrl) => {
   if (!gtmId || window.__hiobGtmLoaded) return;
 
   window.__hiobGtmLoaded = true;
@@ -24,7 +24,10 @@ const initGtm = (gtmId) => {
     event: 'gtm.js',
   });
 
-  appendScript('hiob-gtm', `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`);
+  // First-party loading via the GCP server-side GTM container when configured
+  // (ad-blocker / ITP resilient). Falls back to Google's CDN otherwise.
+  const base = gtmServerUrl ? gtmServerUrl.replace(/\/+$/, '') : 'https://www.googletagmanager.com';
+  appendScript('hiob-gtm', `${base}/gtm.js?id=${encodeURIComponent(gtmId)}`);
 };
 
 const getOrCreatePageViewEventId = () => {
@@ -59,7 +62,7 @@ const initMetaPixel = (pixelId) => {
   window.fbq('track', 'PageView', {}, { eventID: getOrCreatePageViewEventId() });
 };
 
-export default function DeferredAnalytics({ gtmId, pixelId }) {
+export default function DeferredAnalytics({ gtmId, pixelId, gtmServerUrl }) {
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
@@ -71,7 +74,7 @@ export default function DeferredAnalytics({ gtmId, pixelId }) {
       });
 
       const run = () => {
-        initGtm(gtmId);
+        initGtm(gtmId, gtmServerUrl);
         initMetaPixel(pixelId);
       };
 
@@ -86,12 +89,18 @@ export default function DeferredAnalytics({ gtmId, pixelId }) {
       window.addEventListener(eventName, loadAnalytics, { passive: true, once: true });
     });
 
+    // Fallback: load anyway after 3s so bouncers (no scroll/click/keypress)
+    // still register a PageView in GTM/Pixel. Without this, ~30% of arriving
+    // sessions fire zero events anywhere.
+    const fallbackTimer = window.setTimeout(loadAnalytics, 3000);
+
     return () => {
+      window.clearTimeout(fallbackTimer);
       interactionEvents.forEach((eventName) => {
         window.removeEventListener(eventName, loadAnalytics);
       });
     };
-  }, [gtmId, pixelId]);
+  }, [gtmId, pixelId, gtmServerUrl]);
 
   return null;
 }

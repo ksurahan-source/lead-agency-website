@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "node --test test/*.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "check:edge-boundary": "node scripts/check-edge-import-boundary.mjs",
-    "check:shorts-paths": "node scripts/check-shorts-producer-paths.mjs",
-    "check:m0": "npm run check:edge-boundary && npm run check:shorts-paths",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && npx wrangler pages dev",
     "deploy": "npm run pages:build && npx wrangler pages deploy"
@@ -19,15 +18,16 @@
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.11.0",
     "next": "16.2.4",
-    "openai": "^6.38.0",
     "pretendard": "^1.3.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.98.0"
   }
 }

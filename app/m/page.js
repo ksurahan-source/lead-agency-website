@@ -3,14 +3,15 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 export default function MobilePortal() {
   return (
     <main className="bg-light min-h-screen pb-20">
       {/* Mobile Header */}
       <nav style={{ padding: '1.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '3px solid var(--border-dark)', background: '#fff', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div className="font-display" style={{ fontSize: '1.8rem', lineHeight: 1 }}>HI-OP</div>
-        <div style={{ fontSize: '0.8rem', fontWeight: 900, background: 'var(--hiop-orange)', padding: '0.2rem 0.5rem' }}>MOBILE</div>
+        <Logo height={28} />
+        <div style={{ fontSize: '0.8rem', fontWeight: 900, background: 'var(--hiob-orange)', padding: '0.2rem 0.5rem' }}>MOBILE</div>
       </nav>
 
       {/* Hero */}
@@ -20,7 +21,7 @@ export default function MobilePortal() {
           animate={{ y: 0, opacity: 1 }}
         >
           <h1 className="font-display" style={{ fontSize: '3rem', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-            데이터로<br />증명하는<br /><span style={{ color: 'var(--hiop-orange)' }}>ROAS 1위</span>
+            데이터로<br />증명하는<br /><span style={{ color: 'var(--hiob-orange)' }}>ROAS 1위</span>
           </h1>
           <p style={{ fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.5, color: '#444' }}>
             가장 최신 기술을 적용한 디지털 광고를 설계하여 고객에게 압도적 성과를 가져다 드립니다.
@@ -32,9 +33,9 @@ export default function MobilePortal() {
       <section style={{ padding: '0 1.2rem' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {[
-            { href: '/m/meta', name: '메타 광고', color: 'var(--hiop-blue)', text: '#fff' },
+            { href: '/m/meta', name: '메타 광고', color: 'var(--hiob-blue)', text: '#fff' },
             { href: '/m/google', name: '구글 광고', color: '#EA4335', text: '#fff' },
-            { href: '/m/tiktok-moloco', name: '틱톡 & 몰로코', color: 'var(--hiop-green)', text: '#000' }
+            { href: '/m/tiktok-moloco', name: '틱톡 & 몰로코', color: 'var(--hiob-green)', text: '#000' }
           ].map((item) => (
             <Link key={item.href} href={item.href} style={{ textDecoration: 'none' }}>
               <motion.div 
@@ -102,7 +103,7 @@ export default function MobilePortal() {
       </section>
 
       <footer style={{ padding: '3rem 1.2rem', textAlign: 'center', fontWeight: 800, fontSize: '0.9rem', color: '#999' }}>
-        © 2025 HI-OP DIGITAL. MOBILE VER.
+        © 2025 hi-ob DIGITAL. MOBILE VER.
       </footer>
     </main>
   );

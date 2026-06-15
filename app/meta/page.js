@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
 import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 import { useLang } from '../../hooks/useLang';
@@ -74,7 +76,7 @@ const content = {
     ch5p1: '광고 관리자에서 보여주는 ROAS 수치는 때로는 환상일 수 있습니다. 중복 전환, 기여 기간 설정에 따른 왜곡 등 데이터는 수많은 함정을 가지고 있습니다. 히옵은 매체 리포트에 매몰되지 않습니다. 우리는 비즈니스 전체의 마케팅 효율성 비율(MER, Marketing Efficiency Ratio)을 분석합니다.',
     ch5p2: '전체 매출 대비 총 광고비 비중을 확인하고, 광고 집행 후 브랜드 검색량이 얼마나 늘었는지, 자연 유입 매출에 어떤 영향을 주었는지 다각도로 검토합니다. 이러한 홀리스틱(Holistic)한 접근만이 광고주에게 진짜 수익을 안겨줄 수 있습니다. 히옵은 당신의 비즈니스가 지속 가능한 성장을 할 수 있도록 데이터를 엔지니어링합니다.',
     kakao: '카카오톡 1:1 채팅 문의하기',
-    footer: '© 2025 HI-OP / META SPECIALIST. ALL RIGHTS RESERVED.',
+    footer: '© 2025 hi-ob / META SPECIALIST. ALL RIGHTS RESERVED.',
   },
   en: {
     navCta: 'Free Diagnosis →',
@@ -95,13 +97,13 @@ const content = {
     ],
     engLabel: 'ENGINEERING SPIRIT',
     engTitle: 'We don\'t "run" ads.\nWe engineer them.',
-    engDesc: 'Most agencies ask "which creative should we use?"\nHI-OP asks "how do we train the machine learning algorithm with our data?"',
+    engDesc: 'Most agencies ask "which creative should we use?"\nhi-ob asks "how do we train the machine learning algorithm with our data?"',
     engPoints: [
       { t: '01. Data Pipeline Architecture', d: 'We feed perfect conversion data to the platform via CAPI and GTM, even in a cookieless environment.' },
       { t: '02. Machine Learning Optimization', d: 'We technically tune account structures so the platform algorithm operates at peak efficiency.' },
       { t: '03. Real-Time Performance Dashboard', d: 'We share a live performance dashboard with clients for full transparency on every metric.' },
     ],
-    whyTitle: 'Why\nHI-OP?',
+    whyTitle: 'Why\nhi-ob?',
     whyDesc: 'We build a data infrastructure that operates on a completely different level from standard agencies.',
     whyPoints: [
       { t: 'CAPI Server-Side Tracking', d: 'Full server-side tracking for iOS 14+ compliance and recovery of previously lost conversion data' },
@@ -126,22 +128,22 @@ const content = {
     case2Body: 'Situation: Great brand aesthetic, but CTR leading to actual purchases was below 0.5%.\n\nSolution: Analyzed 3-second drop-off data and tested 12 hook variations. Produced native-feel Reels creatives and applied them to ASC campaigns.\n\nResult: CTR rose to 2.4%. With data consolidating in one place, ML precisely targeted buyers — revenue 7.5× ad spend.',
     masterTitle: 'THE META ADS PERFORMANCE MASTERCLASS',
     ch1Title: 'CHAPTER 01: Reclaiming Data Sovereignty in the Privacy-First Era',
-    ch1p1: 'The "Meta Pixel" as we knew it is no longer a complete tracking tool. Browser Intelligent Tracking Prevention (ITP) and user ad-blockers are hiding more than half of your marketing data. Running ads without data is like shooting arrows with your eyes closed. HI-OP begins by reclaiming your data sovereignty.',
+    ch1p1: 'The "Meta Pixel" as we knew it is no longer a complete tracking tool. Browser Intelligent Tracking Prevention (ITP) and user ad-blockers are hiding more than half of your marketing data. Running ads without data is like shooting arrows with your eyes closed. hi-ob begins by reclaiming your data sovereignty.',
     ch1p2: 'We go far beyond just installing Conversions API (CAPI) — we match every business signal generated server-side. This includes precisely hashing customer emails, phone numbers, names, addresses, browser IDs, and IP addresses to maximize match rates. The higher your Event Match Quality (EMQ), the more accurately Meta\'s AI recognizes "this is the exact person who saw our ad," driving immediate machine learning optimization.',
     ch2Title: 'CHAPTER 02: AI Audience Targeting — Broad vs. Segmented',
     ch2p1: 'Are you still targeting "women in their 20s in Seoul interested in yoga"? With Meta\'s latest algorithms, hyper-specific interest targeting can actually hurt performance. Meta\'s AI already understands user intent better than we do — through thousands of signals including search queries, post reactions, and dwell time.',
-    ch2p2: 'HI-OP believes in the power of Broad Targeting. We remove all constraints beyond age, gender, and region — letting the algorithm explore audiences freely. Instead, we use the creative itself to do the targeting. When the creative acts as the filter, machine learning can cast a wide audience net while still precisely identifying real buyers — achieving true economies of scale.',
+    ch2p2: 'hi-ob believes in the power of Broad Targeting. We remove all constraints beyond age, gender, and region — letting the algorithm explore audiences freely. Instead, we use the creative itself to do the targeting. When the creative acts as the filter, machine learning can cast a wide audience net while still precisely identifying real buyers — achieving true economies of scale.',
     ch3Title: 'CHAPTER 03: The Structural Revolution of Advantage+ Shopping Campaigns (ASC)',
-    ch3p1: 'ASC is Meta\'s ultimate weapon for commerce advertisers — but simply launching an ASC campaign doesn\'t guarantee results. HI-OP uses a Data Feeding strategy to maximize ASC efficiency. We inject existing customer purchase and cart data into the AI, giving the machine learning model a shortcut to learning "which users actually spend money."',
+    ch3p1: 'ASC is Meta\'s ultimate weapon for commerce advertisers — but simply launching an ASC campaign doesn\'t guarantee results. hi-ob uses a Data Feeding strategy to maximize ASC efficiency. We inject existing customer purchase and cart data into the AI, giving the machine learning model a shortcut to learning "which users actually spend money."',
     ch3p2: 'We also dynamically adjust the budget allocation ratio between new and existing customers within ASC campaigns in real time — cutting unnecessary remarketing spend and maximizing pure new customer acquisition. This is the most powerful way to grow your total business pie.',
     ch4Title: 'CHAPTER 04: Managing Creative Fatigue & Extending Ad Lifespan',
-    ch4p1: '80% of Meta ad performance is determined by creative. But even the best creative loses efficiency as users experience fatigue from repeated exposure. HI-OP quantifies and manages creative fatigue — scientifically determining the optimal creative refresh timing by analyzing the correlation between weekly frequency and CPC.',
-    ch4p2: 'We don\'t just make new images — we extract the "DNA" of proven creatives. We analyze which fonts, colors, and messages drove results, then rapidly generate variants based on those winning elements. This cuts production costs while maintaining an upward performance trajectory — HI-OP\'s signature method.',
+    ch4p1: '80% of Meta ad performance is determined by creative. But even the best creative loses efficiency as users experience fatigue from repeated exposure. hi-ob quantifies and manages creative fatigue — scientifically determining the optimal creative refresh timing by analyzing the correlation between weekly frequency and CPC.',
+    ch4p2: 'We don\'t just make new images — we extract the "DNA" of proven creatives. We analyze which fonts, colors, and messages drove results, then rapidly generate variants based on those winning elements. This cuts production costs while maintaining an upward performance trajectory — hi-ob\'s signature method.',
     ch5Title: 'CHAPTER 05: The Truth About Attribution Models & MER Analysis',
-    ch5p1: 'The ROAS number shown in Ads Manager can sometimes be an illusion. Duplicate conversions, attribution window distortions — data is riddled with traps. HI-OP doesn\'t get buried in platform reports. We analyze the Marketing Efficiency Ratio (MER) across your entire business.',
-    ch5p2: 'We examine total ad spend as a ratio of overall revenue, measure how much brand search volume increased post-campaign, and assess the impact on organic sales from multiple angles. Only this holistic approach can deliver real, lasting returns to advertisers. HI-OP engineers your data so your business can achieve sustainable growth.',
+    ch5p1: 'The ROAS number shown in Ads Manager can sometimes be an illusion. Duplicate conversions, attribution window distortions — data is riddled with traps. hi-ob doesn\'t get buried in platform reports. We analyze the Marketing Efficiency Ratio (MER) across your entire business.',
+    ch5p2: 'We examine total ad spend as a ratio of overall revenue, measure how much brand search volume increased post-campaign, and assess the impact on organic sales from multiple angles. Only this holistic approach can deliver real, lasting returns to advertisers. hi-ob engineers your data so your business can achieve sustainable growth.',
     kakao: 'KakaoTalk Live Chat',
-    footer: '© 2025 HI-OP / META SPECIALIST. ALL RIGHTS RESERVED.',
+    footer: '© 2025 hi-ob / META SPECIALIST. ALL RIGHTS RESERVED.',
   },
 };
 
@@ -161,8 +163,8 @@ export default function MetaPage() {
       <PixelScrollTracker />
 
       {/* Navigation */}
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
-        <div className="font-display" style={{ fontSize: '1.8rem' }}>HI-OP / META</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
+        <Logo height={28} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <button onClick={() => toggle('ko')} style={{ fontWeight: lang === 'ko' ? 900 : 400, background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem' }}>KO</button>
@@ -185,7 +187,7 @@ export default function MetaPage() {
         source="meta-top"
         lang={lang}
         formVariant="lead"
-        accent="var(--hiop-blue)"
+        accent="var(--hiob-blue)"
       />
 
       {/* Hero */}
@@ -196,14 +198,14 @@ export default function MetaPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="massive-text" style={{ color: 'var(--hiop-blue)' }}>{c.hero1}</h1>
-            <h1 className="massive-text">{c.hero2}</h1>
+            <h1 className="massive-text" style={{ color: 'var(--hiob-blue)', wordBreak: 'keep-all' }}>{c.hero1}</h1>
+            <h1 className="massive-text" style={{ wordBreak: 'keep-all' }}>{c.hero2}</h1>
           </motion.div>
 
           <div className="grid-half" style={{ border: 'none', marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
             <div style={{ padding: '2rem 0' }}>
-              <p style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 800, lineHeight: 1.2, whiteSpace: 'pre-line' }}>
-                {c.heroSub.split('ROAS')[0]}<span style={{ color: 'var(--hiop-blue)' }}>ROAS</span>{c.heroSub.split('ROAS')[1]}
+              <p style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', fontWeight: 800, lineHeight: 1.2, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
+                {c.heroSub.split('ROAS')[0]}<span style={{ color: 'var(--hiob-blue)' }}>ROAS</span>{c.heroSub.split('ROAS')[1]}
               </p>
             </div>
             <div style={{ padding: '0 0 2rem' }}>
@@ -216,10 +218,10 @@ export default function MetaPage() {
       </section>
 
       {/* Inquiries Section */}
-      <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: 'var(--hiop-blue)', color: '#fff', overflow: 'hidden' }}>
+      <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: 'var(--hiob-blue)', color: '#fff', overflow: 'hidden' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ color: '#fff' }}>{c.statsTitle1}</h2>
-          <h2 className="massive-text" style={{ color: 'rgba(255,255,255,0.3)' }}>{c.statsTitle2}</h2>
+          <h2 className="massive-text" style={{ color: '#fff', wordBreak: 'keep-all' }}>{c.statsTitle1}</h2>
+          <h2 className="massive-text" style={{ color: 'rgba(255,255,255,0.3)', wordBreak: 'keep-all' }}>{c.statsTitle2}</h2>
 
           <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
             {c.stats.map((stat, i) => (
@@ -238,12 +240,12 @@ export default function MetaPage() {
 
       {/* Engineering Focus Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ padding: '6rem 2rem' }}>
-          <p style={{ fontWeight: 800, color: 'var(--hiop-blue)', marginBottom: '1rem' }}>{c.engLabel}</p>
-          <h2 style={{ fontSize: '4rem', marginBottom: '2rem', whiteSpace: 'pre-line' }}>{c.engTitle}</h2>
+        <div className="split-left" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <p style={{ fontWeight: 800, color: 'var(--hiob-blue)', marginBottom: '1rem' }}>{c.engLabel}</p>
+          <h2 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', marginBottom: '2rem', whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>{c.engTitle}</h2>
           <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444', whiteSpace: 'pre-line' }}>{c.engDesc}</p>
         </div>
-        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#eee' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             {c.engPoints.map((pt, i) => (
               <div key={i}>
@@ -257,11 +259,11 @@ export default function MetaPage() {
 
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ background: 'var(--hiop-blue)', color: '#fff', padding: '5rem 2rem' }}>
-          <h2 style={{ fontSize: '5rem', marginBottom: '2rem', whiteSpace: 'pre-line' }}>{c.whyTitle}</h2>
+        <div className="split-left" style={{ background: 'var(--hiob-blue)', color: '#fff', padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <h2 style={{ fontSize: 'clamp(2.4rem, 9vw, 5rem)', marginBottom: '2rem', whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>{c.whyTitle}</h2>
           <p style={{ fontSize: '1.4rem', fontWeight: 700 }}>{c.whyDesc}</p>
         </div>
-        <div className="split-right" style={{ padding: '5rem 2rem' }}>
+        <div className="split-right" style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             {c.whyPoints.map((item, idx) => (
               <div key={idx} style={{ borderBottom: '3px solid #ddd', paddingBottom: '2rem' }}>
@@ -274,9 +276,9 @@ export default function MetaPage() {
       </section>
 
       {/* Services */}
-      <section style={{ padding: '7rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 className="massive-text" style={{ fontSize: '7vw', marginBottom: '5rem' }}>{c.servicesTitle}</h2>
+          <h2 className="massive-text" style={{ fontSize: 'clamp(2.2rem, 7vw, 5rem)', marginBottom: '5rem', wordBreak: 'keep-all' }}>{c.servicesTitle}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
             {c.services.map((s, i) => (
               <div key={i} className="brutalist-card">
@@ -284,7 +286,7 @@ export default function MetaPage() {
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                   {s.items.map(item => (
                     <li key={item} style={{ marginBottom: '1rem', fontWeight: 700, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
-                      <Check size={22} strokeWidth={4} color="var(--hiop-blue)" /> {item}
+                      <Check size={22} strokeWidth={4} color="var(--hiob-blue)" /> {item}
                     </li>
                   ))}
                 </ul>
@@ -296,27 +298,27 @@ export default function MetaPage() {
 
       {/* Contact Section */}
       <section id="contact" className="split-section" style={{ background: 'var(--bg-dark)', color: 'var(--text-light)' }}>
-        <div className="split-left" style={{ padding: '7rem 2rem' }}>
-          <h2 className="massive-text" style={{ color: 'var(--hiop-orange)' }}>{c.ctaTitle1}</h2>
-          <h2 className="massive-text">{c.ctaTitle2}</h2>
+        <div className="split-left" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <h2 className="massive-text" style={{ color: 'var(--hiob-orange)', wordBreak: 'keep-all' }}>{c.ctaTitle1}</h2>
+          <h2 className="massive-text" style={{ wordBreak: 'keep-all' }}>{c.ctaTitle2}</h2>
           <p style={{ marginTop: '2.5rem', fontSize: '1.3rem', color: '#aaa', maxWidth: '450px', fontWeight: 600 }}>
             {c.ctaDesc}
           </p>
         </div>
-        <div className="split-right" style={{ padding: '7rem 2rem', background: '#F4F4F0' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', background: '#F4F4F0' }}>
           <LeadForm source="meta" lang={lang} />
         </div>
       </section>
 
       {/* SUCCESS CASES SECTION */}
-      <section style={{ padding: '8rem 2rem', background: '#fff' }}>
+      <section style={{ padding: 'clamp(4rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3.5rem', marginBottom: '4rem' }}>SUCCESS CASES</h2>
+          <h2 className="font-display" style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3.5rem)', marginBottom: '4rem', wordBreak: 'keep-all' }}>SUCCESS CASES</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
 
-            <div className="brutalist-card" style={{ borderLeft: '15px solid var(--hiop-blue)' }}>
-              <div style={{ background: 'var(--hiop-blue)', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case1Tag}</div>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>{c.case1Title}</h3>
+            <div className="brutalist-card" style={{ borderLeft: '15px solid var(--hiob-blue)' }}>
+              <div style={{ background: 'var(--hiob-blue)', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case1Tag}</div>
+              <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1.5rem', wordBreak: 'keep-all' }}>{c.case1Title}</h3>
               <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600, whiteSpace: 'pre-line' }}>
                 {c.case1Body}
               </p>
@@ -324,7 +326,7 @@ export default function MetaPage() {
 
             <div className="brutalist-card" style={{ borderLeft: '15px solid #ff0055' }}>
               <div style={{ background: '#ff0055', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case2Tag}</div>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>{c.case2Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1.5rem', wordBreak: 'keep-all' }}>{c.case2Title}</h3>
               <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600, whiteSpace: 'pre-line' }}>
                 {c.case2Body}
               </p>
@@ -335,40 +337,40 @@ export default function MetaPage() {
       </section>
 
       {/* MASSIVE META SEO ENCYCLOPEDIA V2 */}
-      <section style={{ padding: '10rem 2rem', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(5rem, 12vw, 10rem) clamp(1.1rem, 4vw, 2rem)', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid var(--hiop-blue)', display: 'inline-block' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid var(--hiob-blue)', display: 'inline-block', wordBreak: 'keep-all' }}>
             {c.masterTitle}
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch1Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch1Title}</h3>
               <p>{c.ch1p1}</p>
               <p>{c.ch1p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch2Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch2Title}</h3>
               <p>{c.ch2p1}</p>
               <p>{c.ch2p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch3Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch3Title}</h3>
               <p>{c.ch3p1}</p>
               <p>{c.ch3p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch4Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch4Title}</h3>
               <p>{c.ch4p1}</p>
               <p>{c.ch4p2}</p>
             </article>
 
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch5Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch5Title}</h3>
               <p>{c.ch5p1}</p>
               <p>{c.ch5p2}</p>
             </article>
@@ -377,7 +379,8 @@ export default function MetaPage() {
         </div>
       </section>
 
-      <footer style={{ padding: '5rem 2rem', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
+      <MobileStickyCTA label="무료 진단 신청하기" />
+      <footer style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
         <div style={{ marginBottom: '2.5rem' }}>
           <a
             href="https://open.kakao.com/o/srdaF2si"

@@ -3,6 +3,7 @@
 import LeadForm from '@/components/LeadForm';
 import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
+import Logo from '@/components/Logo';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, Smartphone, Cpu, Zap } from 'lucide-react';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ export default function MobileTikTokPage() {
       {/* Mobile Nav */}
       <nav style={{ padding: '1rem', display: 'flex', alignItems: 'center', borderBottom: '3px solid var(--border-dark)', background: '#fff', position: 'sticky', top: 0, zIndex: 100 }}>
         <Link href="/m" style={{ marginRight: '1rem', color: 'inherit' }}><ArrowLeft size={24} /></Link>
-        <div className="font-display" style={{ fontSize: '1.2rem' }}>HI-OP / SHORT-FORM</div>
+        <Logo height={28} />
       </nav>
 
       <LeadFormTop
@@ -106,7 +107,7 @@ export default function MobileTikTokPage() {
             카카오톡 상담하기
           </a>
         </div>
-        <p style={{ fontWeight: 800, fontSize: '0.8rem' }}>© 2025 HI-OP SHORT-FORM MOBILE</p>
+        <p style={{ fontWeight: 800, fontSize: '0.8rem' }}>© 2025 hi-ob SHORT-FORM MOBILE</p>
       </footer>
     </main>
   );

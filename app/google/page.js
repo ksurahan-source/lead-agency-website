@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import LeadForm from '@/components/LeadForm';
 import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
+import Logo from '@/components/Logo';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { useLang } from '../../hooks/useLang';
@@ -62,7 +64,7 @@ const content = {
     masterTitle: 'THE GOOGLE ADS MASTERCLASS 2025',
     ch1Title: 'CHAPTER 01: 검색의 본질 - 사용자의 고통(Pain Point)을 해결하는 기술',
     ch1p1: '구글 검색창은 세상에서 가장 솔직한 \'욕망의 집합체\'입니다. 사용자는 고민이 있을 때 구글을 찾습니다. 따라서 구글 검색 광고의 핵심은 단순히 상위에 노출되는 것이 아니라, 사용자가 가진 문제에 대한 \'가장 완벽한 해답\'임을 증명하는 것입니다.',
-    ch1p2: '히옵(HI-OP)은 키워드 분석 단계부터 다르게 접근합니다. 우리는 단순히 조회수가 높은 키워드를 나열하지 않습니다. 사용자가 검색을 수행하는 시점의 심리 상태를 분석하여 \'인지-비교-결정\'의 단계를 나눕니다. 각 단계에 맞는 광고 문구(Headline)와 설명(Description)을 설계하고, 사용자가 클릭 후 마주할 랜딩 페이지의 콘텐츠까지 일관성 있게 정렬(Alignment)합니다. 이러한 정교한 설계만이 높은 품질지수(Quality Score)와 낮은 CPC를 보장합니다.',
+    ch1p2: '히옵(hi-ob)은 키워드 분석 단계부터 다르게 접근합니다. 우리는 단순히 조회수가 높은 키워드를 나열하지 않습니다. 사용자가 검색을 수행하는 시점의 심리 상태를 분석하여 \'인지-비교-결정\'의 단계를 나눕니다. 각 단계에 맞는 광고 문구(Headline)와 설명(Description)을 설계하고, 사용자가 클릭 후 마주할 랜딩 페이지의 콘텐츠까지 일관성 있게 정렬(Alignment)합니다. 이러한 정교한 설계만이 높은 품질지수(Quality Score)와 낮은 CPC를 보장합니다.',
     ch2Title: 'CHAPTER 02: 실적 최대화(PMax) 캠페인의 통제권을 되찾는 전략',
     ch2p1: '구글이 야심 차게 내놓은 PMax 캠페인은 강력하지만 위험합니다. AI에게 모든 것을 맡기면 브랜드의 가치를 훼손하거나, 이미 우리 브랜드를 알고 있는 유저에게 예산을 낭비할 가능성이 크기 때문입니다. 히옵은 PMax를 단순히 \'운영\'하지 않고 \'통제\'합니다.',
     ch2p2: '우리는 \'브랜드 제외\' 설정과 \'맞춤형 오디언스 시그널\' 주입을 통해 PMax가 순수 신규 고객을 찾는 데 집중하게 만듭니다. 또한, 자산 그룹별로 검색 테마를 세분화하여 어떤 메시지가 어떤 지면에서 가장 잘 통하는지 데이터로 증명합니다. PMax는 블랙박스가 아닙니다. 히옵의 엔지니어링을 통하면 투명한 성과 측정 도구가 됩니다.',
@@ -76,7 +78,7 @@ const content = {
     ch5p1: 'tCPA, tROAS 입찰 전략은 구글 광고의 정점입니다. 하지만 매체의 추천만 따르다 보면 예산이 과도하게 집행되거나 오히려 성과가 정체될 수 있습니다. 히옵은 알고리즘의 학습 상태를 실시간으로 모니터링하며 \'입찰 목표치\'를 미세 조정합니다.',
     ch5p2: '계절성(Seasonality) 데이터를 미리 주입하여 대규모 프로모션 기간에 머신러닝이 당황하지 않게 만들고, 가치 기반 입찰(Value-based Bidding)을 통해 단순히 구매 수가 아닌 \'높은 객단가를 가진 유저\'를 우선적으로 획득하도록 설계합니다. 히옵은 구글의 AI를 가장 효율적으로 부리는 데이터 엔지니어입니다.',
     kakao: '카카오톡 1:1 채팅 문의하기',
-    footer: '© 2025 HI-OP / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.',
+    footer: '© 2025 hi-ob / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.',
   },
   en: {
     navCta: 'Free Diagnosis →',
@@ -105,7 +107,7 @@ const content = {
       { t: '02. PMax Asset Optimization', d: 'Engineer signal data for Performance Max campaigns to eliminate low-efficiency budget waste.' },
       { t: '03. GA4 Audience Integration', d: 'Feed advanced GA4 behavioral data directly into Google Ads audiences for high-value targeting.' },
     ],
-    whyTitle: 'Why\nHI-OP?',
+    whyTitle: 'Why\nhi-ob?',
     whyDesc: 'Technical Google Ads consulting — beyond simple bid adjustments.',
     whyPoints: [
       { t: 'GTM Infrastructure', d: 'Precise user behavior tracking and data integrity using Google Tag Manager' },
@@ -131,21 +133,21 @@ const content = {
     masterTitle: 'THE GOOGLE ADS MASTERCLASS 2025',
     ch1Title: 'CHAPTER 01: The Nature of Search — Solving the User\'s Pain Point',
     ch1p1: 'The Google search bar is the world\'s most honest aggregator of human desire. When people have a problem, they turn to Google. The core of search advertising, therefore, is not simply ranking at the top — it\'s proving that you are the most complete answer to the user\'s problem.',
-    ch1p2: 'HI-OP approaches keyword analysis differently. We don\'t just list high-volume keywords. We analyze the psychological state of users at the moment of search and map the \'Awareness → Comparison → Decision\' funnel. We engineer headlines and descriptions for each stage, and align the landing page content the user sees after clicking. Only this level of precision guarantees a high Quality Score and low CPC.',
+    ch1p2: 'hi-ob approaches keyword analysis differently. We don\'t just list high-volume keywords. We analyze the psychological state of users at the moment of search and map the \'Awareness → Comparison → Decision\' funnel. We engineer headlines and descriptions for each stage, and align the landing page content the user sees after clicking. Only this level of precision guarantees a high Quality Score and low CPC.',
     ch2Title: 'CHAPTER 02: Reclaiming Control of Performance Max (PMax) Campaigns',
-    ch2p1: 'Google\'s PMax campaign is powerful but risky. Handing full control to AI risks diluting brand value or wasting budget on users who already know your brand. HI-OP doesn\'t just \'run\' PMax — we \'control\' it.',
-    ch2p2: 'We use brand exclusion settings and custom audience signal injection to keep PMax focused on finding genuinely new customers. We also segment search themes by asset group to prove, with data, which messages perform best on which placements. PMax is not a black box — with HI-OP\'s engineering, it becomes a transparent performance measurement tool.',
+    ch2p1: 'Google\'s PMax campaign is powerful but risky. Handing full control to AI risks diluting brand value or wasting budget on users who already know your brand. hi-ob doesn\'t just \'run\' PMax — we \'control\' it.',
+    ch2p2: 'We use brand exclusion settings and custom audience signal injection to keep PMax focused on finding genuinely new customers. We also segment search themes by asset group to prove, with data, which messages perform best on which placements. PMax is not a black box — with hi-ob\'s engineering, it becomes a transparent performance measurement tool.',
     ch3Title: 'CHAPTER 03: Maximizing Video Performance with YouTube VAC',
     ch3p1: 'YouTube has evolved beyond a branding channel into a direct-response performance channel. The Video Action Campaign (VAC) combines Google\'s powerful intent signals with YouTube video inventory.',
-    ch3p2: 'HI-OP plans videos with conversion — not views — as the goal. We integrate product feeds below the video and place strong overlay CTAs to drive clicks. Most importantly, we use \'custom segment\' targeting to show ads to users who have already searched for your product on Google — maximizing the probability of conversion. Video is not for entertainment; it is a sales instrument.',
+    ch3p2: 'hi-ob plans videos with conversion — not views — as the goal. We integrate product feeds below the video and place strong overlay CTAs to drive clicks. Most importantly, we use \'custom segment\' targeting to show ads to users who have already searched for your product on Google — maximizing the probability of conversion. Video is not for entertainment; it is a sales instrument.',
     ch4Title: 'CHAPTER 04: GA4 and Completing Your Data Governance Framework',
-    ch4p1: 'GA4 is the brain of Google Ads. If GA4 misreads data, your entire ad campaign is built on a faulty foundation. HI-OP builds custom data governance beyond GA4\'s default settings.',
+    ch4p1: 'GA4 is the brain of Google Ads. If GA4 misreads data, your entire ad campaign is built on a faulty foundation. hi-ob builds custom data governance beyond GA4\'s default settings.',
     ch4p2: 'We minimize data loss through cross-domain tracking, enhanced measurement event optimization, and the critical Enhanced Conversions feature. We safely transmit first-party data to Google\'s systems so machine learning can match customers more accurately. Clean data produces clear ROAS.',
     ch5Title: 'CHAPTER 05: Tuning Smart Bidding Algorithms for Maximum Profitability',
-    ch5p1: 'tCPA and tROAS bidding strategies represent the pinnacle of Google Ads. But blindly following platform recommendations can lead to overspending or stagnant performance. HI-OP monitors algorithm learning states in real time and fine-tunes bid targets continuously.',
-    ch5p2: 'We pre-inject seasonality data so machine learning doesn\'t get caught off guard during major promotions, and we implement value-based bidding to prioritize acquiring users with high average order value — not just more purchases. HI-OP is the data engineer that makes Google\'s AI work hardest for you.',
+    ch5p1: 'tCPA and tROAS bidding strategies represent the pinnacle of Google Ads. But blindly following platform recommendations can lead to overspending or stagnant performance. hi-ob monitors algorithm learning states in real time and fine-tunes bid targets continuously.',
+    ch5p2: 'We pre-inject seasonality data so machine learning doesn\'t get caught off guard during major promotions, and we implement value-based bidding to prioritize acquiring users with high average order value — not just more purchases. hi-ob is the data engineer that makes Google\'s AI work hardest for you.',
     kakao: 'KakaoTalk Live Chat',
-    footer: '© 2025 HI-OP / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.',
+    footer: '© 2025 hi-ob / GOOGLE SPECIALIST. ALL RIGHTS RESERVED.',
   },
 };
 
@@ -164,8 +166,8 @@ export default function GooglePage() {
       <PixelScrollTracker />
 
       {/* Navigation */}
-      <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
-        <div className="font-display" style={{ fontSize: '1.8rem' }}>HI-OP / GOOGLE</div>
+      <nav style={{ padding: '1.05rem clamp(1rem, 4vw, 2rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid var(--border-dark)', position: 'sticky', top: 0, background: 'var(--bg-light)', zIndex: 100 }}>
+        <Logo height={28} aria-label="hiob 홈" />
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <button onClick={() => toggle('ko')} style={{ fontWeight: lang === 'ko' ? 900 : 400, background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem' }}>KO</button>
@@ -205,12 +207,12 @@ export default function GooglePage() {
 
           <div className="grid-half" style={{ border: 'none', marginTop: 'clamp(2rem, 5vw, 4rem)' }}>
             <div style={{ padding: '2rem 0' }}>
-              <p style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>
+              <p style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', fontWeight: 800, lineHeight: 1.2 }}>
                 {c.heroDesc1}<br />{c.heroDesc2}<br /><span style={{ color: '#EA4335' }}>{c.heroDescAccent}</span>{c.heroDescEnd}
               </p>
             </div>
             <div style={{ padding: '0 0 2rem' }}>
-              <p style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#444', maxWidth: '450px', fontWeight: 600 }}>
+              <p style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', color: '#444', maxWidth: '100%', fontWeight: 600 }}>
                 {c.heroSub}
               </p>
             </div>
@@ -241,12 +243,12 @@ export default function GooglePage() {
 
       {/* Engineering Focus Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ padding: '6rem 2rem' }}>
+        <div className="split-left" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <p style={{ fontWeight: 800, color: '#EA4335', marginBottom: '1rem' }}>{c.engLabel}</p>
-          <h2 style={{ fontSize: '4rem', marginBottom: '2rem', whiteSpace: 'pre-line' }}>{c.engTitle}</h2>
+          <h2 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', marginBottom: '2rem', whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>{c.engTitle}</h2>
           <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#444', whiteSpace: 'pre-line' }}>{c.engDesc}</p>
         </div>
-        <div className="split-right" style={{ padding: '6rem 2rem', background: '#eee' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)', background: '#eee' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             {c.engPoints.map((pt, i) => (
               <div key={i}>
@@ -260,11 +262,11 @@ export default function GooglePage() {
 
       {/* Why Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="split-left" style={{ background: '#EA4335', color: '#fff', padding: '5rem 2rem' }}>
-          <h2 style={{ fontSize: '5rem', marginBottom: '2rem', whiteSpace: 'pre-line' }}>{c.whyTitle}</h2>
+        <div className="split-left" style={{ background: '#EA4335', color: '#fff', padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
+          <h2 style={{ fontSize: 'clamp(2.4rem, 9vw, 5rem)', marginBottom: '2rem', whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>{c.whyTitle}</h2>
           <p style={{ fontSize: '1.4rem', fontWeight: 700 }}>{c.whyDesc}</p>
         </div>
-        <div className="split-right" style={{ padding: '5rem 2rem' }}>
+        <div className="split-right" style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             {c.whyPoints.map((item, idx) => (
               <div key={idx} style={{ borderBottom: '3px solid #ddd', paddingBottom: '2rem' }}>
@@ -277,7 +279,7 @@ export default function GooglePage() {
       </section>
 
       {/* Services */}
-      <section style={{ padding: '7rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <h2 className="massive-text" style={{ fontSize: '7vw', marginBottom: '5rem' }}>{c.servicesTitle}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
@@ -299,23 +301,23 @@ export default function GooglePage() {
 
       {/* Contact Section */}
       <section id="contact" className="split-section" style={{ background: 'var(--bg-dark)', color: 'var(--text-light)' }}>
-        <div className="split-left" style={{ padding: '7rem 2rem' }}>
+        <div className="split-left" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)' }}>
           <h2 className="massive-text" style={{ color: '#FBBC05' }}>{c.ctaTitle1}</h2>
           <h2 className="massive-text">{c.ctaTitle2}</h2>
-          <p style={{ marginTop: '2.5rem', fontSize: '1.3rem', color: '#aaa', maxWidth: '450px', fontWeight: 600 }}>
+          <p style={{ marginTop: '2.5rem', fontSize: '1.3rem', color: '#aaa', maxWidth: '100%', fontWeight: 600 }}>
             {c.ctaDesc}
           </p>
         </div>
-        <div className="split-right" style={{ padding: '7rem 2rem', background: '#F4F4F0' }}>
+        <div className="split-right" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', background: '#F4F4F0' }}>
           <LeadForm source="google" lang={lang} />
         </div>
       </section>
 
       {/* SUCCESS CASES SECTION */}
-      <section style={{ padding: '8rem 2rem', background: '#fff' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff' }}>
         <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: '3.5rem', marginBottom: '4rem' }}>SUCCESS CASES</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3.5rem)', marginBottom: '4rem' }}>SUCCESS CASES</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
 
             <div className="brutalist-card" style={{ borderLeft: '15px solid #EA4335' }}>
               <div style={{ background: '#EA4335', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case1Tag}</div>
@@ -334,7 +336,7 @@ export default function GooglePage() {
       </section>
 
       {/* MASTERCLASS */}
-      <section style={{ padding: '10rem 2rem', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
+      <section style={{ padding: 'clamp(3.5rem, 10vw, 10rem) clamp(1.1rem, 4vw, 2rem)', background: '#121212', color: '#fff', borderTop: '4px solid var(--border-dark)' }}>
         <div className="wrap">
           <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '5rem', borderBottom: '10px solid #EA4335', display: 'inline-block' }}>
             {c.masterTitle}
@@ -342,27 +344,27 @@ export default function GooglePage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', fontSize: '1.2rem', lineHeight: '2.4', textAlign: 'justify', color: '#ccc' }}>
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch1Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch1Title}</h3>
               <p>{c.ch1p1}</p>
               <p>{c.ch1p2}</p>
             </article>
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch2Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch2Title}</h3>
               <p>{c.ch2p1}</p>
               <p>{c.ch2p2}</p>
             </article>
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch3Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch3Title}</h3>
               <p>{c.ch3p1}</p>
               <p>{c.ch3p2}</p>
             </article>
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch4Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch4Title}</h3>
               <p>{c.ch4p1}</p>
               <p>{c.ch4p2}</p>
             </article>
             <article>
-              <h3 style={{ fontSize: '3rem', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff' }}>{c.ch5Title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '2.5rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', color: '#fff', wordBreak: 'keep-all' }}>{c.ch5Title}</h3>
               <p>{c.ch5p1}</p>
               <p>{c.ch5p2}</p>
             </article>
@@ -370,7 +372,8 @@ export default function GooglePage() {
         </div>
       </section>
 
-      <footer style={{ padding: '5rem 2rem', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
+      <MobileStickyCTA label="무료 진단 신청하기" />
+      <footer style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.1rem, 4vw, 2rem)', textAlign: 'center', borderTop: '4px solid var(--border-dark)' }}>
         <div style={{ marginBottom: '2.5rem' }}>
           <a
             href="https://open.kakao.com/o/srdaF2si"

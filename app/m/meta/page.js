@@ -6,6 +6,7 @@ import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, TrendingUp, BarChart3, Database } from 'lucide-react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function MobileMetaPage() {
   return (
@@ -15,7 +16,7 @@ export default function MobileMetaPage() {
       {/* Mobile Nav */}
       <nav style={{ padding: '1rem', display: 'flex', alignItems: 'center', borderBottom: '3px solid var(--border-dark)', background: '#fff', position: 'sticky', top: 0, zIndex: 100 }}>
         <Link href="/m" style={{ marginRight: '1rem', color: 'inherit' }}><ArrowLeft size={24} /></Link>
-        <div className="font-display" style={{ fontSize: '1.2rem' }}>HI-OP / META</div>
+        <Link href="/" aria-label="hiob 홈"><Logo height={28} /></Link>
       </nav>
 
       <LeadFormTop
@@ -24,17 +25,17 @@ export default function MobileMetaPage() {
         description="Pixel, CAPI, EMQ, 릴스 소재가 성과 학습에 잘 연결되는지 먼저 확인합니다."
         bullets={['CAPI 체크', '릴스 소재', '계정 구조']}
         source="meta-mobile-top"
-        accent="var(--hiop-blue)"
+        accent="var(--hiob-blue)"
       />
 
       {/* Hero Section - Readability Focus */}
       <section style={{ padding: '3rem 1.2rem', background: '#fff' }}>
         <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-          <p style={{ fontWeight: 900, color: 'var(--hiop-blue)', marginBottom: '1rem', fontSize: '0.9rem' }}>ENGINEERING SPIRIT</p>
+          <p style={{ fontWeight: 900, color: 'var(--hiob-blue)', marginBottom: '1rem', fontSize: '0.9rem' }}>ENGINEERING SPIRIT</p>
           <h1 className="font-display" style={{ fontSize: '2.4rem', lineHeight: 1.2, marginBottom: '2rem', wordBreak: 'keep-all' }}>
             우리는 광고를<br />
-            <span style={{ background: 'var(--hiop-blue)', color: '#fff', padding: '0 0.4rem' }}>'집행'</span>하지 않고<br />
-            <span style={{ borderBottom: '5px solid var(--hiop-blue)' }}>'설계'</span>합니다.
+            <span style={{ background: 'var(--hiob-blue)', color: '#fff', padding: '0 0.4rem' }}>'집행'</span>하지 않고<br />
+            <span style={{ borderBottom: '5px solid var(--hiob-blue)' }}>'설계'</span>합니다.
           </h1>
           <p style={{ fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.6, color: '#333' }}>
             대부분의 대행사는 '어떤 소재를 쓸까'만 고민합니다.<br />
@@ -44,7 +45,7 @@ export default function MobileMetaPage() {
       </section>
 
       {/* Social Proof - Mobile Grid */}
-      <section style={{ padding: '2rem 1.2rem', background: 'var(--hiop-blue)', color: '#fff' }}>
+      <section style={{ padding: '2rem 1.2rem', background: 'var(--hiob-blue)', color: '#fff' }}>
         <h2 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>문의가 증명하는 성과</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
           {[
@@ -53,7 +54,7 @@ export default function MobileMetaPage() {
             { b: 'YY 뷰티 몰', m: 'CPA 45% 절감', icon: <Database size={20} /> }
           ].map((stat, i) => (
             <div key={i} style={{ border: '2px solid #fff', padding: '1.2rem', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ background: '#fff', color: 'var(--hiop-blue)', padding: '0.5rem', borderRadius: '50%' }}>{stat.icon}</div>
+              <div style={{ background: '#fff', color: 'var(--hiob-blue)', padding: '0.5rem', borderRadius: '50%' }}>{stat.icon}</div>
               <div>
                 <div style={{ fontSize: '0.8rem', fontWeight: 800, opacity: 0.8 }}>{stat.b}</div>
                 <div style={{ fontSize: '1.4rem', fontWeight: 900 }}>{stat.m}</div>
@@ -74,7 +75,7 @@ export default function MobileMetaPage() {
           ].map((item, idx) => (
             <div key={idx} className="brutalist-card" style={{ padding: '1.5rem' }}>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                <Check size={24} color="var(--hiop-blue)" strokeWidth={4} style={{ marginTop: '0.2rem' }} />
+                <Check size={24} color="var(--hiob-blue)" strokeWidth={4} style={{ marginTop: '0.2rem' }} />
                 <div>
                   <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>{item.t}</h3>
                   <p style={{ color: '#555', fontSize: '0.95rem', fontWeight: 600 }}>{item.d}</p>
@@ -87,7 +88,7 @@ export default function MobileMetaPage() {
 
       {/* Lead Form - Mobile Full Width */}
       <section id="contact" style={{ padding: '3rem 1.2rem', background: 'var(--bg-dark)' }}>
-        <h2 className="font-display" style={{ color: 'var(--hiop-orange)', fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem' }}>무료 진단 신청</h2>
+        <h2 className="font-display" style={{ color: 'var(--hiob-orange)', fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem' }}>무료 진단 신청</h2>
         <LeadForm source="meta-mobile" />
       </section>
 
@@ -107,7 +108,7 @@ export default function MobileMetaPage() {
             카카오톡 상담하기
           </a>
         </div>
-        <p style={{ fontWeight: 800, fontSize: '0.8rem' }}>© 2025 HI-OP META MOBILE</p>
+        <p style={{ fontWeight: 800, fontSize: '0.8rem' }}>© 2025 hi-ob META MOBILE</p>
       </footer>
     </main>
   );

@@ -1,31 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
-  <!-- Background -->
-  <rect width="400" height="400" fill="#0A0A0A"/>
-
-  <!-- TAM: 가장 큰 원, 레드, 얇음 — 전체 시장 -->
-  <!-- 중심: 우측 cx=260, cy=200 / 왼쪽으로 퍼짐 -->
-  <clipPath id="left">
-    <rect x="0" y="0" width="262" height="400"/>
-  </clipPath>
-
-  <!-- TAM -->
-  <circle cx="262" cy="200" r="180" fill="none" stroke="#FF3C3C" stroke-width="2.5" opacity="0.5" clip-path="url(#left)"/>
-  <!-- SAM -->
-  <circle cx="262" cy="200" r="118" fill="none" stroke="#888888" stroke-width="3" opacity="0.65" clip-path="url(#left)"/>
-  <!-- SOM -->
-  <circle cx="262" cy="200" r="62" fill="none" stroke="#FFFFFF" stroke-width="5" clip-path="url(#left)"/>
-  <!-- 중심점: 히옵 -->
-  <circle cx="262" cy="200" r="14" fill="#FF3C3C"/>
-
-  <!-- TAM SAM SOM 레이블 — 오른쪽 정렬 -->
-  <text x="380" y="72" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#FF3C3C" opacity="0.6" letter-spacing="2">TAM</text>
-  <text x="380" y="148" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#888888" letter-spacing="2">SAM</text>
-  <text x="380" y="196" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" letter-spacing="2">SOM</text>
-  <!-- 중심 레이블 -->
-  <text x="380" y="216" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" fill="#FF3C3C" letter-spacing="1">히옵</text>
-
-  <!-- 가이드 라인 (레이블 → 원) -->
-  <line x1="296" y1="69" x2="348" y2="69" stroke="#FF3C3C" stroke-width="0.5" opacity="0.3"/>
-  <line x1="296" y1="145" x2="348" y2="145" stroke="#888" stroke-width="0.5" opacity="0.3"/>
-  <line x1="296" y1="193" x2="348" y2="193" stroke="#FFF" stroke-width="0.5" opacity="0.3"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 320 320">
+    <rect width="320" height="320" rx="28" fill="#080504"/>
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#fff"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#fff"/>
+    <path d="M219 84H251V116H219V84Z" fill="#fff"/>
+  </svg>

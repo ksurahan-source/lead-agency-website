@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { captureMetaAttribution } from '@/lib/browserMetaAttribution';
 
 const getPageContext = () => {
@@ -30,11 +31,6 @@ const pushEvent = (event, extra = {}) => {
     ...getPageContext(),
     ...extra,
   });
-};
-
-const getOrCreatePageViewEventId = () => {
-  window.__hiobPageViewEventId = window.__hiobPageViewEventId || crypto.randomUUID();
-  return window.__hiobPageViewEventId;
 };
 
 const scheduleIdle = (callback) => {
@@ -72,10 +68,25 @@ const trackViewContent = (eventId, extra = {}) => {
 };
 
 export default function TrackingBridge() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Re-fire on every Next.js client-side navigation. Re-running this effect
+  // mints a fresh PageView event_id, re-arms scroll-depth and stay-duration
+  // listeners, and triggers a new /api/track-view CAPI hit so server-side
+  // signal matches what a full page reload would have produced.
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
-    const pageViewEventId = getOrCreatePageViewEventId();
+    // Mint a fresh id per route. Stash on window so DeferredAnalytics's
+    // deferred Pixel init reads the same id (prevents 2x PageView on
+    // first-interaction pages — see DeferredAnalytics.getOrCreatePageViewEventId).
+    window.__hiobPageViewEventId = crypto.randomUUID();
+    const pageViewEventId = window.__hiobPageViewEventId;
+
+    if (window.fbq) {
+      window.fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+    }
 
     pushEvent('hiob_page_view', {
       event_id: pageViewEventId,
@@ -228,7 +239,7 @@ export default function TrackingBridge() {
       document.removeEventListener('click', handleKakaoClick);
       window.removeEventListener('scroll', handleScrollDepth);
     };
-  }, []);
+  }, [pathname, searchParams]);
 
   return null;
 }

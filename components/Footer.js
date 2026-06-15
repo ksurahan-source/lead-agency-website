@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 const EmailAddress = () => (
   <>
@@ -14,11 +15,11 @@ export default function Footer({ lang = 'ko' }) {
   const isKo = lang !== 'en';
 
   return (
-    <footer style={{ padding: '6rem 2rem 4rem', borderTop: '4px solid var(--border-dark)', background: '#fff' }}>
+    <footer style={{ padding: 'clamp(3.5rem, 9vw, 6rem) clamp(1.2rem, 4vw, 2rem) clamp(2.5rem, 6vw, 4rem)', borderTop: '4px solid var(--border-dark)', background: '#fff' }}>
       <div className="wrap">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(2rem, 6vw, 4rem)', marginBottom: 'clamp(2.5rem, 6vw, 4rem)' }}>
           <div>
-            <div className="font-display" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{isKo ? '히옵' : 'HI-OB'}</div>
+            <div style={{ marginBottom: '1.5rem' }}><Logo height={40} /></div>
             <p style={{ fontWeight: 800, fontSize: '1.2rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
               {isKo
                 ? '데이터 엔지니어링으로\n광고의 판을 바꿉니다.'
@@ -36,7 +37,7 @@ export default function Footer({ lang = 'ko' }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>{isKo ? '법적 고지' : 'LEGAL'}</h4>
-            <Link href="/privacy" style={{ fontWeight: 900, color: 'var(--hiop-orange)', textDecoration: 'none' }}>
+            <Link href="/privacy" style={{ fontWeight: 900, color: 'var(--hiob-orange)', textDecoration: 'none' }}>
               {isKo ? '개인정보 처리방침' : 'Privacy Policy'}
             </Link>
             <Link href="/terms" style={{ fontWeight: 700, color: 'inherit', textDecoration: 'none' }}>

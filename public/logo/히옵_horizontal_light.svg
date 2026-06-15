@@ -1,29 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
-  <rect width="800" height="200" fill="#F2F2EE"/>
-
-  <clipPath id="left">
-    <rect x="0" y="0" width="112" height="200"/>
-  </clipPath>
-
-  <!-- TAM -->
-  <circle cx="112" cy="100" r="88" fill="none" stroke="#FF3C3C" stroke-width="2" opacity="0.35" clip-path="url(#left)"/>
-  <!-- SAM -->
-  <circle cx="112" cy="100" r="57" fill="none" stroke="#555555" stroke-width="2.5" opacity="0.38" clip-path="url(#left)"/>
-  <!-- SOM -->
-  <circle cx="112" cy="100" r="30" fill="none" stroke="#111111" stroke-width="4" clip-path="url(#left)"/>
-  <!-- 중심점 -->
-  <circle cx="112" cy="100" r="8" fill="#FF3C3C"/>
-
-  <!-- 메인 워드마크: 히옵 -->
-  <text x="138" y="118" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Black Han Sans', sans-serif" font-size="72" font-weight="900" fill="#111111" letter-spacing="-2">히</text>
-  <text x="228" y="118" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Black Han Sans', sans-serif" font-size="72" font-weight="900" fill="#FF3C3C" letter-spacing="-2">옵</text>
-
-  <!-- 서브: hi-ob 영문 -->
-  <text x="140" y="142" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#AAAAAA" letter-spacing="2">hi-ob</text>
-
-  <!-- 구분선 -->
-  <rect x="140" y="152" width="340" height="0.5" fill="#CCCCCC"/>
-
-  <!-- 태그라인 -->
-  <text x="140" y="168" font-family="'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="11" fill="#AAAAAA" letter-spacing="2">퍼포먼스 마케팅 · 메타 · 구글</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="255" height="100" viewBox="0 0 255 100"><g transform="translate(-4 5) scale(0.31)">
+    <path d="M70 188L198 110V238H167V164L101 203V213H136V238H70V188Z" fill="#080504"/>
+    <path d="M219 142L251 124V238H219V142Z" fill="#080504"/>
+    <path d="M219 84H251V116H219V84Z" fill="#080504"/>
+  </g>
+    <g transform="translate(94 80) rotate(-3) skewX(-7)">
+      <text x="0" y="0" font-family="'Pretendard Variable','Apple SD Gothic Neo','Hiragino Sans','Malgun Gothic',sans-serif" font-size="40" font-weight="950" font-style="italic" fill="#080504" letter-spacing="0">히옵</text>
+    </g>
+  <title>히옵</title></svg>

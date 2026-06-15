@@ -8,7 +8,7 @@ const content = {
     sections: [
       {
         title: '제1조 (목적)',
-        content: '본 약관은 히옵(HI-OP, 이하 "회사")이 운영하는 웹사이트에서 제공하는 제반 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무 및 책임사항 등을 규정함을 목적으로 합니다.'
+        content: '본 약관은 히옵(hi-ob, 이하 "회사")이 운영하는 웹사이트에서 제공하는 제반 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무 및 책임사항 등을 규정함을 목적으로 합니다.'
       },
       {
         title: '제2조 (서비스의 제공 및 변경)',
@@ -26,7 +26,7 @@ const content = {
     sections: [
       {
         title: 'Article 1 (Purpose)',
-        content: 'The purpose of these terms is to prescribe the conditions and procedures for using the services provided by HI-OP ("Company").'
+        content: 'The purpose of these terms is to prescribe the conditions and procedures for using the services provided by hi-ob ("Company").'
       }
     ],
     footer: 'Effective Date: May 10, 2025'
@@ -39,15 +39,15 @@ export default function TermsPage() {
 
   return (
     <main className="bg-light min-h-screen pb-20">
-      <nav style={{ padding: '1.5rem 2rem', borderBottom: '4px solid var(--border-dark)' }}>
-        <div className="font-display" style={{ fontSize: '2rem' }}>HI-OP / TERMS</div>
+      <nav style={{ padding: 'clamp(1.05rem, 3vw, 1.5rem) clamp(1.1rem, 4vw, 2rem)', borderBottom: '4px solid var(--border-dark)' }}>
+        <div className="font-display" style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)' }}>hi-ob / TERMS</div>
       </nav>
       <div className="wrap" style={{ marginTop: '5rem', maxWidth: '900px' }}>
-        <h1 style={{ fontSize: '4rem', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{c.title}</h1>
+        <h1 style={{ fontSize: 'clamp(2.1rem, 8vw, 4rem)', marginBottom: '3rem', fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif', wordBreak: 'keep-all' }}>{c.title}</h1>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
           {c.sections.map((s, i) => (
             <section key={i}>
-              <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 800 }}>{s.title}</h2>
+              <h2 style={{ fontSize: 'clamp(1.12rem, 3.4vw, 1.5rem)', marginBottom: '1rem', fontWeight: 800, wordBreak: 'keep-all' }}>{s.title}</h2>
               <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#333' }}>{s.content}</p>
             </section>
           ))}
