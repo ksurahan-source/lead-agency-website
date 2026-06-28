@@ -3941,3 +3941,62 @@ html { scroll-behavior: smooth; }
     word-break: keep-all;
   }
 }
+
+/* ── STUDIO-V2 mobile compaction (founder 2026-06-28): on phones shrink type
+   ~1.5x, tighten the vertical rhythm + box sizes (like studio.hi-ob.com). The
+   --hp-* variable overrides cascade to every component; specific boxes/buttons
+   are tightened below. ── */
+@media (max-width: 768px) {
+  .hp {
+    --hp-section: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+    --hp-display: clamp(1.7rem, 1.1rem + 3.5vw, 2.5rem);
+    --hp-h2: clamp(1.25rem, 0.95rem + 1.8vw, 1.75rem);
+    --hp-h3: clamp(1.05rem, 0.95rem + 0.8vw, 1.28rem);
+    --hp-lead: clamp(0.92rem, 0.88rem + 0.4vw, 1.05rem);
+    --hp-gutter: clamp(1rem, 0.6rem + 2vw, 1.5rem);
+  }
+  .hp-display { line-height: 1.14; letter-spacing: -0.03em; }
+  .hp-eyebrow { font-size: 0.66rem; }
+  .hp-eyebrow::before { width: 1.1rem; }
+  /* hero rhythm */
+  .hp-hero { padding-block: clamp(1.3rem, 1rem + 2vw, 2.2rem) var(--hp-section); }
+  .hp-hero-copy .hp-display { margin-top: 0.85rem; }
+  .hp-hero-sub { margin-top: 0.95rem; }
+  .hp-hero-actions { margin-top: 1.35rem; gap: 0.55rem; }
+  /* qualifier card + boxes */
+  .hp-qual { padding: 1.05rem 1.1rem; border-radius: 16px; box-shadow: 0 14px 34px -26px rgba(28, 25, 23, 0.5); }
+  .hp-qual-num { font-size: 1.18rem; }
+  .hp-qual-item { grid-template-columns: 1.85rem 1fr; gap: 0.55rem; padding: 0.65rem 0; }
+  .hp-qual-item b { font-size: 0.94rem; }
+  .hp-qual-item p { font-size: 0.81rem; margin-top: 0.15rem; }
+  .hp-qual-top { font-size: 0.9rem; }
+  .hp-qual-note { font-size: 0.78rem; margin-bottom: 0.85rem; }
+  /* lead banner — ONE ROW: text block + compact button side by side (founder:
+     "버튼까지 1줄로"). Overrides the ≤640 full-width-button rule above. */
+  .hp-lead-banner { margin-bottom: 0.95rem; padding: 0.65rem 0.75rem; border-radius: 12px;
+    flex-wrap: nowrap; align-items: center; gap: 0.6rem; }
+  .hp-lead-banner-text { flex: 1; min-width: 0; font-size: 0.8rem; gap: 0.35rem; line-height: 1.35; }
+  .hp-lead-banner-cta { width: auto; flex: none; padding: 0.5rem 0.8rem; font-size: 0.78rem; white-space: nowrap; }
+  /* buttons */
+  .hp-btn { padding: 0.6rem 1.05rem; font-size: 0.88rem; }
+  /* top announcement — ONE LINE, lighter weight (founder: "너무 굵어 · 한줄만").
+     Drop the secondary "6주 무료 측정…" line on phones so the title + countdown
+     stay on a single row; thin the bold title from 700→600. */
+  /* one THIN row: title left + countdown right, small (founder: "15px로 끝내고"). */
+  .hp-topslot .hp-wrap { padding-block: 0.28rem; gap: 0.5rem; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between; }
+  .hp-topslot b { font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+  .hp-topslot b + span { display: none; } /* hide only the secondary "6주 무료…", NOT the countdown spans */
+  .hp-countdown.bar { gap: 0.28rem; flex: none; }
+  .hp-countdown-clock { gap: 0.28rem; white-space: nowrap; }
+  .hp-countdown-clock b { font-size: 0.72rem; font-weight: 700; }
+  .hp-countdown-clock i { font-size: 0.5rem; }
+  /* hero: single THIN ghost button (founder: "얇은 버튼 한개"). */
+  .hp-hero-actions .hp-btn.is-ghost { padding: 0.42rem 0.95rem; font-size: 0.84rem; }
+  /* nav */
+  .hp-nav .hp-wrap { padding-block: 0.6rem; }
+  .hp-brand svg { height: 24px !important; }
+  .hp-brand .mark { font-size: 0.85rem; padding: 0.22rem 0.5rem; }
+  /* facts strip */
+  .hp-strip .hp-wrap { padding-block: 0.85rem; gap: 0.45rem 1.3rem; }
+  .hp-strip span { font-size: 0.84rem; }
+}

@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .claude/worktrees/
+
+# local D1 miniflare runtime state (런타임 쓰레기)
+.wrangler/

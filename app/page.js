@@ -171,8 +171,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="hp-nav-cta">
-            <Link href="/lead" className="hp-track-link">리드 마케팅 →</Link>
-            <CtaButton location="nav" variant="ink">무료 계정 진단</CtaButton>
+            <CtaButton href="/lead" location="nav" variant="ink">문의·DB광고</CtaButton>
           </div>
         </div>
       </nav>
@@ -180,13 +179,6 @@ export default function HomePage() {
       {/* ── HERO : the common fear + ①②③ qualifier ── */}
       <header className="hp-hero">
         <div className="hp-wrap">
-          <Link href="/lead" className="hp-lead-banner" aria-label="리드 마케팅 페이지로 이동">
-            <span className="hp-lead-banner-text">
-              <span className="hp-lead-tag">LEAD</span>
-              이커머스가 아니라 <strong>리드(문의·DB)</strong>가 필요하세요?
-            </span>
-            <span className="hp-lead-banner-cta">리드 마케팅 보기 →</span>
-          </Link>
           <div className="hp-hero-grid">
           <div className="hp-hero-copy">
             <span className="hp-eyebrow">메타·구글 광고를 키우는 브랜드에게</span>
@@ -199,8 +191,7 @@ export default function HomePage() {
               무료로 진단해 드립니다. 어디서 새는지, 진짜 ROAS가 얼마인지 — 측정부터 정확히 봅니다.
             </p>
             <div className="hp-hero-actions">
-              <CtaButton location="hero_primary">무료 광고 계정 진단</CtaButton>
-              <CtaButton href="#measure" location="hero_secondary" variant="ghost">무엇을 보는지 먼저 보기</CtaButton>
+              <CtaButton href="#measure" location="hero_secondary" variant="ghost">마케팅 인사이트 먼저 보기</CtaButton>
             </div>
           </div>
 
