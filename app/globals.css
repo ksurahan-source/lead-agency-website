@@ -3889,6 +3889,12 @@ html { scroll-behavior: smooth; }
 @media (max-width: 600px) {
   .hp-float-cta { right: 1rem; bottom: 1rem; padding: 0.85rem 1.25rem; font-size: 0.92rem; }
 }
+/* On phones the full-width MobileStickyCTA takes over (z-200, with a spacer that
+   reserves height). The floating pill has no spacer, so it overlapped the footer/
+   trust bar — hide it on mobile and let the sticky bar own conversion there. */
+@media (max-width: 768px) {
+  .hp-float-cta { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hp-float-cta, .hp-float-cta svg { transition: none; }

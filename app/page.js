@@ -8,6 +8,7 @@ import ReelShowcase from '@/components/home/ReelShowcase';
 import Reveal from '@/components/home/Reveal';
 import HomeSchema from '@/components/home/HomeSchema';
 import FloatCta from '@/components/home/FloatCta';
+import MobileStickyCTA from '@/components/MobileStickyCTA';
 
 const navItems = [
   ['왜 필요한가', '#why'],
@@ -144,7 +145,10 @@ export default function HomePage() {
   return (
     <main className="hp">
       <HomeSchema faqs={faqs} />
+      {/* Desktop: floating pill. Mobile (≤768px): full-width sticky bar with a
+          spacer so the footer is never covered — the float pill is hidden there. */}
       <FloatCta />
+      <MobileStickyCTA label="문의하기" href="#contact" />
       <noscript>
         <style>{'.hp-reveal{opacity:1!important;transform:none!important}'}</style>
       </noscript>
