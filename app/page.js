@@ -2,7 +2,6 @@ import { BarChart3, Check, Eye, ShieldCheck, Target } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import CreativeVelocityForm from '@/components/CreativeVelocityForm';
-import EventCountdown from '@/components/EventCountdown';
 import CtaButton from '@/components/home/CtaButton';
 import ReelShowcase from '@/components/home/ReelShowcase';
 import Reveal from '@/components/home/Reveal';
@@ -96,17 +95,8 @@ const reels = [
 const offerItems = [
   ['전담 운영', '월 50만원', '셋업부터 광고·측정까지 2인이 전담합니다. 직원 한 명 값도 안 됩니다.', true],
   ['측정', '6주 무료', '이후 트래픽 3,000당 월 $100 (서버 비용).', false],
-  ['릴스 제작비', '1편 5만원', '이번 런칭 이벤트 한정, 최대 10편까지 제작합니다.', false],
+  ['릴스 제작비', '1편 5만원', '정해진 범위 안에서 최대 10편까지 제작합니다.', false],
   ['성과 수수료', '8~12%', '성과가 날 때만 — ROAS 구간별 8~12% (250% 미만 0%). 광고비는 셀러 직접.', false],
-];
-
-const reviews = [
-  ['광고비 날릴까 봐 1년을 미뤘어요. 0원으로 측정만 먼저 붙여보니, 어떤 영상에서 주문이 나오는지 처음으로 눈에 보였습니다.', '생활용품 셀러 · 3년차'],
-  ['대행사는 매달 고정비가 부담이었는데, 여긴 벌고 나서 정산이라 시작 문턱이 낮았어요. 첫 슬롯에서 ROAS가 분명히 올랐습니다.', '뷰티 브랜드 대표'],
-  ['메타 광고가 복잡해서 늘 감으로 껐는데, 어떤 릴스가 매출을 만드는지 숫자로 보여주니 예산 쓰는 게 안 무서워졌어요.', '식품 셀러'],
-  ['네이버·쿠팡 안에서만 팔다가 정체였는데, 릴스로 마켓 밖 새 고객이 들어오기 시작한 게 가장 큰 변화입니다.', '패션·잡화 셀러'],
-  ['광고비를 제 계정에서 직접 집행하니 통제권이 저한테 있어 믿음이 갔어요. 같은 숫자를 함께 보는 것도 좋았고요.', '반려용품 셀러 · 2년차'],
-  ['릴스 한 편 5만원이라 여러 개 테스트하고 반응 좋은 것만 키웠습니다. 작게 실험하고 이긴 것에 베팅하는 구조가 합리적이에요.', '전자·가전 셀러'],
 ];
 
 const faqs = [
@@ -148,14 +138,13 @@ export default function HomePage() {
       <noscript>
         <style>{'.hp-reveal{opacity:1!important;transform:none!important}'}</style>
       </noscript>
-      {/* ── launch slot ── */}
+      {/* ── current offer ── */}
       <div className="hp-topslot">
         <div className="hp-wrap">
           <div>
-            <b>런칭 이벤트 진행 중</b>
+            <b>무료 진단 운영 중</b>
             <span>6주 무료 측정 · 성과가 날 때만 정산</span>
           </div>
-          <EventCountdown variant="bar" />
         </div>
       </div>
 
@@ -356,7 +345,7 @@ export default function HomePage() {
       <section className="hp-section" id="offer">
         <div className="hp-wrap">
           <Reveal className="hp-head">
-            <span className="hp-eyebrow">이번 런칭 이벤트 오퍼</span>
+            <span className="hp-eyebrow">측정형 시작 오퍼</span>
             <h2 className="hp-h2">먼저 크게 쓰지 않습니다. 벌고 나서 정산합니다.</h2>
             <p className="hp-lead">
               성과를 보장한다고 말하지 않습니다. 대신 광고비를 잃은 느낌 없이 시작할 수 있도록
@@ -375,30 +364,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS (placeholder) ── */}
-      <section className="hp-section" id="voices">
-        <div className="hp-wrap">
-          <Reveal className="hp-head">
-            <span className="hp-eyebrow">셀러의 말</span>
-            <h2 className="hp-h2">먼저 시작해 본 셀러들의 이야기.</h2>
-          </Reveal>
-          <div className="hp-quotes">
-            {reviews.map(([quote, who]) => (
-              <figure className="hp-quote" key={quote}>
-                <div className="stars" aria-hidden="true">★★★★★</div>
-                <p>“{quote}”</p>
-                <footer>{who}</footer>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── CONTACT (the close) ── */}
       <section className="hp-section" id="contact">
         <div className="hp-wrap hp-contact-grid">
           <Reveal className="hp-contact-copy">
-            <span className="hp-eyebrow">런칭 이벤트 신청</span>
+            <span className="hp-eyebrow">무료 진단 신청</span>
             <h2 className="hp-h2">먼저 계정을 진단해 드리고, 확인된 매출에서만 정산합니다.</h2>
             <p className="hp-lead">
               브랜드 URL과 월 광고 예산만 남겨주세요. 히옵은 광고비를 가져가지 않습니다.
@@ -413,7 +383,7 @@ export default function HomePage() {
           <Reveal delay={100}>
             <CreativeVelocityForm
               source="naver_coupang_seller_home"
-              eyebrow="런칭 이벤트 신청"
+              eyebrow="무료 진단 신청"
               title="무료 광고 계정 진단 신청"
               description="브랜드 URL과 월 광고 예산을 남겨주시면, 계정을 진단해 ROAS를 더 키울 여지부터 확인해 연락드립니다."
               submitLabel="무료로 계정 진단받기"
@@ -446,12 +416,11 @@ export default function HomePage() {
       <section className="hp-final">
         <div className="hp-wrap">
           <div>
-            <span className="hp-eyebrow is-light">마감 전 신청</span>
+            <span className="hp-eyebrow is-light">무료 진단 신청</span>
             <h2 className="hp-h2">지금 무료로 광고 계정을 진단받고, 무너지지 않는 스케일을 시작하세요.</h2>
             <p>브랜드 URL만 있어도 진단을 시작할 수 있습니다. 먼저 크게 쓰지 말고, 진짜 ROAS부터 확인하세요.</p>
           </div>
           <div className="hp-final-side">
-            <EventCountdown />
             <CtaButton location="final" variant="ondark">무료 광고 계정 진단</CtaButton>
           </div>
         </div>

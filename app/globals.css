@@ -3283,41 +3283,6 @@ h1, h2, h3, h4 {
 .hp-topslot b { font-weight: 700; }
 .hp-topslot span { color: rgba(251, 250, 246, 0.66); margin-left: 0.6rem; }
 
-/* ── countdown (EventCountdown → .hp-countdown) ── */
-.hp-countdown { display: flex; align-items: center; gap: 0.85rem; }
-.hp-countdown.bar { gap: 0.6rem; }
-.hp-countdown.bar .hp-countdown-copy,
-.hp-countdown.bar p { display: none; }
-.hp-countdown-copy { display: flex; flex-direction: column; line-height: 1.1; }
-.hp-countdown-copy span { font-size: 0.72rem; color: var(--hp-muted); }
-.hp-countdown-copy strong { font-size: 0.95rem; color: var(--hp-ink); font-weight: 800; }
-.hp-countdown-clock {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  font-synthesis: none;
-}
-.hp-countdown-clock span { display: inline-flex; align-items: baseline; gap: 0.1rem; }
-.hp-countdown-clock b { font-size: 1.05rem; }
-.hp-countdown-clock i { font-style: normal; opacity: 0.55; font-size: 0.62rem; font-weight: 700; }
-.hp-countdown.bar .hp-countdown-clock b { color: var(--hp-paper); }
-.hp-countdown.bar .hp-countdown-clock i { color: rgba(251, 250, 246, 0.6); }
-.hp-countdown.card {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  padding: 1.4rem 1.6rem;
-  background: var(--hp-paper);
-  border: 1px solid var(--hp-line);
-  border-radius: 18px;
-}
-.hp-countdown.card .hp-countdown-clock b { font-size: 1.8rem; }
-.hp-countdown.card .hp-countdown-clock i { font-size: 0.92rem; }
-.hp-countdown.card p { font-size: 0.78rem; color: var(--hp-muted); }
-
 /* ── nav ── */
 .hp-nav {
   position: sticky;
@@ -3581,20 +3546,6 @@ h1, h2, h3, h4 {
 .hp-offer-card p { font-size: 0.85rem; color: var(--hp-muted); line-height: 1.5; margin-top: 0.2rem; word-break: keep-all; }
 .hp-offer-card.is-key p { color: rgba(251,250,246,0.7); }
 
-/* ── TESTIMONIALS (placeholder) ── */
-.hp-quotes { columns: 3; column-gap: 1.4rem; margin-top: 3rem; }
-.hp-quote {
-  break-inside: avoid; margin-bottom: 1.4rem; padding: 1.5rem 1.5rem;
-  border: 1px solid var(--hp-line); border-radius: 16px; background: var(--hp-paper);
-}
-.hp-quote p { font-size: 0.96rem; line-height: 1.6; color: var(--hp-ink-2); word-break: keep-all; }
-.hp-quote footer { margin-top: 1.1rem; font-size: 0.82rem; color: var(--hp-muted); font-weight: 600; }
-.hp-quote .stars { color: var(--hp-accent); letter-spacing: 0.1em; font-size: 0.85rem; margin-bottom: 0.7rem; }
-.hp-placeholder-note {
-  margin-top: 1.6rem; font-size: 0.8rem; color: var(--hp-muted);
-  border: 1px dashed var(--hp-line); border-radius: 10px; padding: 0.7rem 1rem; display: inline-block;
-}
-
 /* ── CONTACT (form) ── */
 .hp-contact-grid {
   display: grid; grid-template-columns: 0.85fr 1.15fr;
@@ -3661,7 +3612,6 @@ h1, h2, h3, h4 {
   .hp-guide-grid, .hp-measure-grid, .hp-contact-grid, .hp-final .hp-wrap { grid-template-columns: 1fr; }
   .hp-plan, .hp-offer-grid { grid-template-columns: repeat(2, 1fr); }
   .hp-reels { grid-template-columns: repeat(2, 1fr); }
-  .hp-quotes { columns: 2; }
   .hp-faq-item { grid-template-columns: 1fr; gap: 0.6rem; }
   .hp-depths { grid-template-columns: 1fr; }
   .hp-depth, .hp-depth + .hp-depth { padding: 1.6rem 0 0; border-top: 1px solid var(--hp-line); }
@@ -3670,7 +3620,6 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 600px) {
   .hp-plan, .hp-offer-grid, .hp-reels { grid-template-columns: 1fr; }
-  .hp-quotes { columns: 1; }
   .hp-topslot .hp-wrap { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
   .hp-strip .hp-wrap { gap: 0.5rem 1.4rem; }
 }
@@ -3834,11 +3783,6 @@ h1, h2, h3, h4 {
 }
 
 /* ── MOBILE FIXES (must come last — override premium non-media rules at small widths) ── */
-/* countdown: never break a unit mid-word; wrap cleanly between groups */
-.hp-countdown-clock { flex-wrap: wrap; }
-.hp-countdown-clock span { white-space: nowrap; flex: none; }
-.hp-countdown-clock i { white-space: nowrap; }
-
 @media (max-width: 960px) {
   .hp-measure-grid { grid-template-columns: 1fr; }   /* stack dashboard + stats */
   .hp-reels { grid-template-columns: repeat(2, 1fr); }
@@ -3846,13 +3790,7 @@ h1, h2, h3, h4 {
 @media (max-width: 600px) {
   .hp-reels { grid-template-columns: 1fr; }
   .hp-measure-figure { max-width: 520px; margin-inline: auto; }
-  .hp-countdown.card .hp-countdown-clock b { font-size: 1.45rem; }
-  .hp-countdown.card .hp-countdown-clock i { font-size: 0.8rem; }
 }
-
-/* final-CTA countdown card: clock was inheriting white from .hp-final (dark) → invisible on the light card. Force dark. */
-.hp-countdown.card .hp-countdown-clock b { color: var(--hp-ink); }
-.hp-countdown.card .hp-countdown-clock i { color: var(--hp-accent-ink); }
 
 /* smooth anchor scrolling (문의하기 / nav → sections) */
 html { scroll-behavior: smooth; }
@@ -3979,17 +3917,10 @@ html { scroll-behavior: smooth; }
   .hp-lead-banner-cta { width: auto; flex: none; padding: 0.5rem 0.8rem; font-size: 0.78rem; white-space: nowrap; }
   /* buttons */
   .hp-btn { padding: 0.6rem 1.05rem; font-size: 0.88rem; }
-  /* top announcement — ONE LINE, lighter weight (founder: "너무 굵어 · 한줄만").
-     Drop the secondary "6주 무료 측정…" line on phones so the title + countdown
-     stay on a single row; thin the bold title from 700→600. */
-  /* one THIN row: title left + countdown right, small (founder: "15px로 끝내고"). */
+  /* top announcement — one compact row on phones. */
   .hp-topslot .hp-wrap { padding-block: 0.28rem; gap: 0.5rem; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between; }
   .hp-topslot b { font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
-  .hp-topslot b + span { display: none; } /* hide only the secondary "6주 무료…", NOT the countdown spans */
-  .hp-countdown.bar { gap: 0.28rem; flex: none; }
-  .hp-countdown-clock { gap: 0.28rem; white-space: nowrap; }
-  .hp-countdown-clock b { font-size: 0.72rem; font-weight: 700; }
-  .hp-countdown-clock i { font-size: 0.5rem; }
+  .hp-topslot b + span { display: none; }
   /* hero: single THIN ghost button (founder: "얇은 버튼 한개"). */
   .hp-hero-actions .hp-btn.is-ghost { padding: 0.42rem 0.95rem; font-size: 0.84rem; }
   /* nav */
