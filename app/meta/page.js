@@ -17,17 +17,6 @@ const content = {
     hero2: '퍼포먼스',
     heroSub: '트래킹 인프라부터\n다시 설계하여\nROAS를 증명합니다.',
     heroDesc: '픽셀 · CAPI · 계정 구조 · 소재 전략까지\n데이터 기반의 완벽한 Meta 광고 솔루션을 제공합니다.',
-    statsTitle1: '문의가',
-    statsTitle2: '증명하는 성과',
-    statsMore: 'AND 1,200+ MORE INQUIRIES',
-    stats: [
-      { b: 'OO 성형외과', m: '문의 324% 상승' },
-      { b: 'XX 패션 브랜드', m: 'ROAS 580% 달성' },
-      { b: 'YY 뷰티 몰', m: 'CPA 45% 절감' },
-      { b: 'ZZ 교육 플랫폼', m: '리드 단가 60% 하락' },
-      { b: 'AA 건강식품', m: '첫 달 매출 2억 달성' },
-      { b: 'BB 가구 브랜드', m: '전환 수 4배 증가' },
-    ],
     engLabel: 'ENGINEERING SPIRIT',
     engTitle: '우리는 광고를\n\'집행\'하지 않고\n\'설계\'합니다.',
     engDesc: '대부분의 대행사는 \'어떤 소재를 쓸까\'만 고민합니다. \n히옵은 \'어떻게 데이터를 머신러닝에 학습시킬까\'를 먼저 고민합니다.',
@@ -53,12 +42,6 @@ const content = {
     ctaTitle1: '지금',
     ctaTitle2: '시작하세요',
     ctaDesc: '현재 광고 계정의 문제점을 데이터 기반으로 무료 진단해 드립니다. 24시간 내로 담당자가 분석 리포트와 함께 연락드립니다.',
-    case1Tag: 'MEDICAL & BEAUTY',
-    case1Title: 'OO 성형외과: CAPI 연동 및 리드 단가 65% 절감',
-    case1Body: '상황: 쿠키 차단으로 인해 픽셀 데이터의 40%가 누락되어 광고 최적화가 불가능했던 상황.\n\n솔루션: GTM 서버사이드 구축 및 Meta CAPI 완벽 연동. 고객 오프라인 데이터를 해시 처리하여 매칭률(EMQ)을 8.5점까지 확보.\n\n결과: 머신러닝 학습 속도가 3배 빨라졌으며, 고품질 리드 유입량이 폭증하여 리드 당 단가(CPA)를 65% 절감하고 상담 전환율을 2배 높임.',
-    case2Tag: 'FASHION D2C',
-    case2Title: 'XX 패션 브랜드: 릴스 엔지니어링으로 ROAS 750% 달성',
-    case2Body: '상황: 브랜드 감성은 좋으나 실제 구매로 이어지는 CTR이 0.5% 미만으로 매우 저조했던 상황.\n\n솔루션: 초반 3초 이탈률 데이터를 분석하여 \'후킹 포인트\'를 12종 테스트. 유저의 공감을 사는 네이티브한 릴스 소재 제작 및 ASC 캠페인 적용.\n\n결과: CTR이 2.4%로 상승하였으며, 대량의 데이터가 한곳에 모이면서 머신러닝이 구매 유저를 정확히 타겟팅. 결과적으로 광고비 대비 매출 7.5배 상승.',
     masterTitle: 'THE META ADS PERFORMANCE MASTERCLASS',
     ch1Title: 'CHAPTER 01: 개인정보 보호 시대의 매체 데이터 주권 확보',
     ch1p1: '우리가 흔히 알고 있는 \'메타 픽셀\'은 더 이상 완벽한 추적 도구가 아닙니다. 브라우저의 지능형 추적 방지(ITP)와 사용자의 광고 차단 플러그인은 마케팅 데이터의 절반 이상을 가리고 있습니다. 데이터가 없는 마케팅은 눈을 감고 활을 쏘는 것과 같습니다. 히옵은 \'데이터 주권\'을 되찾는 것부터 시작합니다.',
@@ -84,17 +67,6 @@ const content = {
     hero2: 'Performance',
     heroSub: 'We rebuild your tracking\ninfrastructure from scratch\nto prove your ROAS.',
     heroDesc: 'Pixel · CAPI · Account Structure · Creative Strategy\nA complete, data-driven Meta advertising solution.',
-    statsTitle1: 'Inquiries that',
-    statsTitle2: 'prove results',
-    statsMore: 'AND 1,200+ MORE INQUIRIES',
-    stats: [
-      { b: 'Plastic Surgery Clinic', m: 'Inquiries +324%' },
-      { b: 'Fashion Brand', m: 'ROAS 580%' },
-      { b: 'Beauty Mall', m: 'CPA -45%' },
-      { b: 'EdTech Platform', m: 'CPL -60%' },
-      { b: 'Health Food Brand', m: '$140K rev. in month 1' },
-      { b: 'Furniture Brand', m: 'Conversions ×4' },
-    ],
     engLabel: 'ENGINEERING SPIRIT',
     engTitle: 'We don\'t "run" ads.\nWe engineer them.',
     engDesc: 'Most agencies ask "which creative should we use?"\nhi-ob asks "how do we train the machine learning algorithm with our data?"',
@@ -120,12 +92,6 @@ const content = {
     ctaTitle1: 'Start',
     ctaTitle2: 'Today',
     ctaDesc: 'We offer a free, data-driven diagnosis of your current ad account. Our team will contact you with a full analysis report within 24 hours.',
-    case1Tag: 'MEDICAL & BEAUTY',
-    case1Title: 'Plastic Surgery Clinic: CAPI Integration & 65% CPA Reduction',
-    case1Body: 'Situation: 40% of pixel data was lost due to cookie blocking, making ad optimization impossible.\n\nSolution: Built server-side GTM and completed Meta CAPI integration. Hashed offline customer data to achieve an Event Match Quality (EMQ) score of 8.5.\n\nResult: ML training speed tripled, high-quality leads surged, CPA dropped 65%, and consultation conversion rate doubled.',
-    case2Tag: 'FASHION D2C',
-    case2Title: 'Fashion Brand: Reels Engineering to Achieve 750% ROAS',
-    case2Body: 'Situation: Great brand aesthetic, but CTR leading to actual purchases was below 0.5%.\n\nSolution: Analyzed 3-second drop-off data and tested 12 hook variations. Produced native-feel Reels creatives and applied them to ASC campaigns.\n\nResult: CTR rose to 2.4%. With data consolidating in one place, ML precisely targeted buyers — revenue 7.5× ad spend.',
     masterTitle: 'THE META ADS PERFORMANCE MASTERCLASS',
     ch1Title: 'CHAPTER 01: Reclaiming Data Sovereignty in the Privacy-First Era',
     ch1p1: 'The "Meta Pixel" as we knew it is no longer a complete tracking tool. Browser Intelligent Tracking Prevention (ITP) and user ad-blockers are hiding more than half of your marketing data. Running ads without data is like shooting arrows with your eyes closed. hi-ob begins by reclaiming your data sovereignty.',
@@ -217,27 +183,6 @@ export default function MetaPage() {
         </div>
       </section>
 
-      {/* Inquiries Section */}
-      <section style={{ padding: 'clamp(3rem, 8vw, 6rem) 1.2rem', background: 'var(--hiob-blue)', color: '#fff', overflow: 'hidden' }}>
-        <div className="wrap">
-          <h2 className="massive-text" style={{ color: '#fff', wordBreak: 'keep-all' }}>{c.statsTitle1}</h2>
-          <h2 className="massive-text" style={{ color: 'rgba(255,255,255,0.3)', wordBreak: 'keep-all' }}>{c.statsTitle2}</h2>
-
-          <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
-            {c.stats.map((stat, i) => (
-              <div key={i} style={{ border: '3px solid #fff', padding: '1.5rem', background: 'rgba(255,255,255,0.1)' }}>
-                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', marginBottom: '0.5rem' }}>{stat.b}</div>
-                <div style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: 'Pretendard Variable, Pretendard, Noto Sans KR, sans-serif' }}>{stat.m}</div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: '3rem', textAlign: 'right' }}>
-            <p className="font-syne" style={{ fontSize: '2rem', fontWeight: 800 }}>{c.statsMore}</p>
-          </div>
-        </div>
-      </section>
-
       {/* Engineering Focus Section */}
       <section className="split-section" style={{ borderBottom: '4px solid var(--border-dark)' }}>
         <div className="split-left" style={{ padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.1rem, 4vw, 2rem)' }}>
@@ -307,32 +252,6 @@ export default function MetaPage() {
         </div>
         <div className="split-right" style={{ padding: 'clamp(3.5rem, 10vw, 7rem) clamp(1.1rem, 4vw, 2rem)', background: '#F4F4F0' }}>
           <LeadForm source="meta" lang={lang} />
-        </div>
-      </section>
-
-      {/* SUCCESS CASES SECTION */}
-      <section style={{ padding: 'clamp(4rem, 10vw, 8rem) clamp(1.1rem, 4vw, 2rem)', background: '#fff' }}>
-        <div className="wrap">
-          <h2 className="font-display" style={{ fontSize: 'clamp(1.8rem, 6.5vw, 3.5rem)', marginBottom: '4rem', wordBreak: 'keep-all' }}>SUCCESS CASES</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
-
-            <div className="brutalist-card" style={{ borderLeft: '15px solid var(--hiob-blue)' }}>
-              <div style={{ background: 'var(--hiob-blue)', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case1Tag}</div>
-              <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1.5rem', wordBreak: 'keep-all' }}>{c.case1Title}</h3>
-              <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600, whiteSpace: 'pre-line' }}>
-                {c.case1Body}
-              </p>
-            </div>
-
-            <div className="brutalist-card" style={{ borderLeft: '15px solid #ff0055' }}>
-              <div style={{ background: '#ff0055', color: '#fff', display: 'inline-block', padding: '0.3rem 1rem', fontWeight: 900, marginBottom: '1.5rem' }}>{c.case2Tag}</div>
-              <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', marginBottom: '1.5rem', wordBreak: 'keep-all' }}>{c.case2Title}</h3>
-              <p style={{ fontSize: '1.1rem', color: '#444', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 600, whiteSpace: 'pre-line' }}>
-                {c.case2Body}
-              </p>
-            </div>
-
-          </div>
         </div>
       </section>
 

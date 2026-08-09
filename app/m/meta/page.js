@@ -4,7 +4,7 @@ import LeadForm from '@/components/LeadForm';
 import LeadFormTop from '@/components/LeadFormTop';
 import PixelScrollTracker from '@/components/PixelScrollTracker';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, TrendingUp, BarChart3, Database } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 
@@ -34,34 +34,14 @@ export default function MobileMetaPage() {
           <p style={{ fontWeight: 900, color: 'var(--hiob-blue)', marginBottom: '1rem', fontSize: '0.9rem' }}>ENGINEERING SPIRIT</p>
           <h1 className="font-display" style={{ fontSize: '2.4rem', lineHeight: 1.2, marginBottom: '2rem', wordBreak: 'keep-all' }}>
             우리는 광고를<br />
-            <span style={{ background: 'var(--hiob-blue)', color: '#fff', padding: '0 0.4rem' }}>'집행'</span>하지 않고<br />
-            <span style={{ borderBottom: '5px solid var(--hiob-blue)' }}>'설계'</span>합니다.
+            <span style={{ background: 'var(--hiob-blue)', color: '#fff', padding: '0 0.4rem' }}>‘집행’</span>하지 않고<br />
+            <span style={{ borderBottom: '5px solid var(--hiob-blue)' }}>‘설계’</span>합니다.
           </h1>
           <p style={{ fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.6, color: '#333' }}>
-            대부분의 대행사는 '어떤 소재를 쓸까'만 고민합니다.<br />
-            히옵은 '어떻게 데이터를 머신러닝에 학습시킬까'를 먼저 고민합니다.
+            대부분의 대행사는 ‘어떤 소재를 쓸까’만 고민합니다.<br />
+            히옵은 ‘어떻게 데이터를 머신러닝에 학습시킬까’를 먼저 고민합니다.
           </p>
         </motion.div>
-      </section>
-
-      {/* Social Proof - Mobile Grid */}
-      <section style={{ padding: '2rem 1.2rem', background: 'var(--hiob-blue)', color: '#fff' }}>
-        <h2 className="font-display" style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>문의가 증명하는 성과</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-          {[
-            { b: 'OO 성형외과', m: '문의 324% 상승', icon: <TrendingUp size={20} /> },
-            { b: 'XX 패션 브랜드', m: 'ROAS 580% 달성', icon: <BarChart3 size={20} /> },
-            { b: 'YY 뷰티 몰', m: 'CPA 45% 절감', icon: <Database size={20} /> }
-          ].map((stat, i) => (
-            <div key={i} style={{ border: '2px solid #fff', padding: '1.2rem', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ background: '#fff', color: 'var(--hiob-blue)', padding: '0.5rem', borderRadius: '50%' }}>{stat.icon}</div>
-              <div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 800, opacity: 0.8 }}>{stat.b}</div>
-                <div style={{ fontSize: '1.4rem', fontWeight: 900 }}>{stat.m}</div>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* Core Services - Mobile List */}
