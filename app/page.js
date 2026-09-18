@@ -9,6 +9,7 @@ import HomeSchema from '@/components/home/HomeSchema';
 import FloatCta from '@/components/home/FloatCta';
 
 const navItems = [
+  ['MCP 설치', '/mcp'],
   ['왜 필요한가', '#why'],
   ['측정 증거', '#measure'],
   ['예시 영상', '#proof'],
@@ -166,6 +167,10 @@ export default function HomePage() {
       </nav>
 
       {/* ── HERO : the common fear + ①②③ qualifier ── */}
+      <aside aria-label="HIOB MCP 시작" style={{background:'#edf3e8',padding:'16px 24px',textAlign:'center',fontSize:14,lineHeight:1.8,color:'#213c2c'}}>
+        <strong>Codex에서 HIOB로 릴스를 만드세요.</strong>{' '}
+        <a href="/mcp" style={{color:'inherit',textDecoration:'underline',textUnderlineOffset:4,fontWeight:700}}>MCP 설치·회원가입 →</a>
+      </aside>
       <header className="hp-hero">
         <div className="hp-wrap">
           <div className="hp-hero-grid">
