@@ -11,7 +11,9 @@
     "check:edge-boundary": "node scripts/check-edge-import-boundary.mjs",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && npx wrangler pages dev",
-    "deploy": "npm run pages:build && npx wrangler pages deploy"
+    "deploy": "npm run pages:build && npx wrangler pages deploy",
+    "help:build": "node help-center/build.mjs",
+    "help:deploy": "npm run help:build && npx wrangler deploy --config help-center/wrangler.toml"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.4",
