@@ -38,7 +38,6 @@ hero.addEventListener('pause',updateControl);
 hero.addEventListener('play',updateControl);
 hero.addEventListener('timeupdate',()=>{
   $('#film-time').textContent=`00:${hero.currentTime.toFixed(2).padStart(5,'0')}`;
-  if(progress < .008 && !reduced() && hero.currentTime > 1.15) hero.currentTime=0;
 });
 hero.addEventListener('ended',()=>{hero.currentTime=0;if(!heroManuallyPaused)playHero();});
 hero.addEventListener('error',()=>{status.textContent='영상이 로드되지 않았습니다. 소리와 함께 보기로 원본을 열 수 있습니다.';});
