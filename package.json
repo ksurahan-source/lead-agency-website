@@ -13,7 +13,9 @@
     "preview": "npm run pages:build && npx wrangler pages dev",
     "deploy": "npm run pages:build && npx wrangler pages deploy",
     "help:build": "node help-center/build.mjs",
-    "help:deploy": "npm run help:build && npx wrangler deploy --config help-center/wrangler.toml"
+    "help:deploy": "npm run help:build && npx wrangler deploy --config help-center/wrangler.toml",
+    "landing:build": "node landing/build.mjs",
+    "landing:deploy": "npm run landing:build && npx wrangler deploy --config landing/wrangler.toml"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.4",

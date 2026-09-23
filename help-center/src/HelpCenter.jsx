@@ -238,8 +238,8 @@ export default function HelpCenter() {
                     },
                     {
                       id: "connect",
-                      title: "Studio 계정 연결",
-                      text: "회원가입 · 프로젝트 승인",
+                      title: "내 작업 공간 연결",
+                      text: "가입 · 내 정보 · Codex 승인",
                     },
                     {
                       id: "create",
