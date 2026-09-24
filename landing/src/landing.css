@@ -1165,3 +1165,11 @@ dialog::backdrop {
     top: 207px;
   }
 }
+@media (max-width: 699px) and (max-height: 760px) {
+  .cinema-stage[data-chapter="4"] .stage-caption {
+    visibility: hidden;
+  }
+  .stage-cta {
+    top: 128px;
+  }
+}
