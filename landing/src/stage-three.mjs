@@ -166,6 +166,9 @@ export async function createStage({ container, video, onFail, onReady }) {
     camera.position.y = -py * 0.02;
     camera.lookAt(0, 0, 0);
     if (video.readyState >= 2 && surface.map !== videoTexture) {
+      // A restored, paused video may have decoded before Three.js subscribed
+      // to requestVideoFrameCallback. Upload that existing frame explicitly.
+      videoTexture.needsUpdate = true;
       surface.map = videoTexture;
       surface.needsUpdate = true;
     }
@@ -242,7 +245,11 @@ export async function createStage({ container, video, onFail, onReady }) {
   };
   if (video.requestVideoFrameCallback)
     frameCallback = video.requestVideoFrameCallback(onVideoFrame);
-  video.addEventListener("seeked", invalidate);
+  const refreshDecodedFrame = () => {
+    videoTexture.needsUpdate = true;
+    invalidate();
+  };
+  video.addEventListener("seeked", refreshDecodedFrame);
   video.addEventListener("timeupdate", invalidate);
   resize();
   return {
@@ -265,7 +272,7 @@ export async function createStage({ container, video, onFail, onReady }) {
       observer.disconnect();
       container.removeEventListener("pointermove", onPointer);
       container.removeEventListener("pointerleave", resetPointer);
-      video.removeEventListener("seeked", invalidate);
+      video.removeEventListener("seeked", refreshDecodedFrame);
       video.removeEventListener("timeupdate", invalidate);
       scene.traverse((object) => {
         object.geometry?.dispose();
