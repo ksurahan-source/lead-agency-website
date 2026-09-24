@@ -154,6 +154,7 @@ function paint() {
   startEngine();
   preview = progress < 0.003;
   if (preview) {
+    if (hero.currentTime > 5.7) hero.currentTime = 0.5;
     if (hero.paused)
       hero.play().catch(() => {
         /* Poster and scroll seeking remain usable. */
