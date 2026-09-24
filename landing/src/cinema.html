@@ -1,38 +1,102 @@
 <section class="cinema" id="how" aria-labelledby="hero-title">
-<div class="cinema-stage" data-chapter="0">
-  <div class="cinema-grid" aria-hidden="true"></div>
-  <div class="film-shell">
-    <img class="film-poster" src="/site/media/hiob-reel.jpg" width="1278" height="720" alt="HIOB로 만든 인물 중심 광고 장면" fetchpriority="high">
-    <video id="hero-video" muted playsinline preload="none" data-src="/site/media/hiob-reel.mp4" poster="/site/media/hiob-reel.jpg" aria-label="스크롤 위치에 따라 앞뒤로 재생되는 HIOB 광고 쇼릴"></video>
-    <div class="film-shade"></div>
-    <div class="film-topline"><span><i></i> HIOB ORIGINAL</span><span><span id="film-time">00:00</span> / CREATIVE REEL</span></div>
-    <span class="film-corner">REC <i></i></span>
+  <div class="cinema-stage" data-chapter="0">
+    <div class="stage-glow" aria-hidden="true"></div>
+    <div class="intro-copy">
+      <p class="eyebrow">
+        <i class="live-dot"></i> HUMAN DIRECTED. AI CONNECTED.
+      </p>
+      <h1 id="hero-title">
+        당신의 AI에,<br class="mobile-break" />
+        <em>영상 제작 능력을.</em>
+      </h1>
+      <p class="intro-sub">상상은 당신이. 기획은 함께. 제작은 HIOB로.</p>
+    </div>
+    <div class="film-viewport" aria-label="HIOB 제작 과정을 설명하는 30초 영상">
+      <img
+        class="film-poster"
+        src="/site/media/hiob-poster.jpg"
+        width="1280"
+        height="720"
+        alt="대화와 자료가 HIOB의 영상 제작 프로젝트로 이어지는 모습"
+        fetchpriority="high"
+      />
+      <video
+        id="hero-video"
+        muted
+        playsinline
+        preload="none"
+        data-src="/site/media/hiob-scroll.mp4"
+        data-mobile-src="/site/media/hiob-scroll-mobile.mp4"
+        poster="/site/media/hiob-poster.jpg"
+        aria-label="스크롤로 앞뒤 장면을 탐색하는 HIOB 소개 영상"
+      ></video>
+    </div>
+    <div
+      id="three-stage"
+      aria-hidden="true"
+      data-poster="/site/media/hiob-poster.jpg"
+      data-components="/site/media/component-1.png,/site/media/component-2.png,/site/media/component-3.png,/site/media/component-5.png,/site/media/component-6.png,/site/media/component-7.png"
+    ></div>
+    <div class="stage-caption">
+      <span class="chapter-count">01 — 05</span>
+      <p id="chapter-description">쓰던 AI와 HIOB를 연결하세요.</p>
+      <span class="stage-note">HIOB 사용 흐름을 표현한 연출 영상</span>
+    </div>
+    <div class="cinema-bottom">
+      <div class="scroll-cue">
+        <span>SCROLL TO MAKE IT MOVE</span><span class="scroll-arrow">↓</span>
+      </div>
+      <nav class="chapters" aria-label="영상 장면 탐색">
+        <button data-jump="0" aria-current="step"><span>01</span> 연결</button
+        ><button data-jump=".255"><span>02</span> 기획</button
+        ><button data-jump=".455"><span>03</span> 제작</button
+        ><button data-jump=".675"><span>04</span> 수정</button
+        ><button data-jump=".92"><span>05</span> 완성</button>
+        <div class="chapter-track" aria-hidden="true"><i></i></div>
+      </nav>
+      <button
+        class="film-watch"
+        data-video="/site/media/hiob-film.mp4"
+        data-title="HIOB — 대화가 영상이 되다"
+      >
+        ▶ <span>소리 켜고 30초 보기</span>
+      </button>
+    </div>
+    <div class="stage-utilities">
+      <button class="motion-toggle" aria-pressed="false">동작 줄이기</button
+      ><span id="film-time" aria-hidden="true">00:00 / 00:30</span>
+    </div>
+    <p class="media-status" role="status"></p>
   </div>
-  <div class="intro-copy scene-copy">
-    <p class="eyebrow">YOUR AI. NOW A FILMMAKER.</p>
-    <h1 id="hero-title">당신의 AI에,<br><span>영상 제작 능력을.</span></h1>
-    <p>당신이 상상하고. LLM이 기획하고. HIOB가 만듭니다.</p>
-    <div class="intro-actions"><a class="button" href="https://studio.hi-ob.com/onboarding?next=%2Fmcp">HIOB 시작하기 <span>↗</span></a><button class="film-watch" data-video="/showcase/hiob-marketing-ad-ko-final.mp4" data-title="HIOB · 서비스 광고">▶ 소리와 함께 보기</button></div>
-  </div>
-  <div class="chapter-copy direction-copy scene-copy" aria-hidden="true" inert>
-    <p class="eyebrow">01 / YOU × LLM</p><h2>대화 한 줄.<br><span>이야기의 시작.</span></h2>
-    <p>자료를 읽고, 시선을 끌 첫 장면을 찾고.<br>당신의 AI와 광고의 방향을 정하세요.</p>
-    <div class="conversation"><div class="chat-user"><span>YOU</span><p>이 제품, 사람들이 공감할 수 있는<br>광고로 만들어줘.</p><i>↗</i></div><div class="chat-ai"><span class="ai-symbol">✳</span><div><b>YOUR AI</b><p>한 사람의 불편에서 시작할게요.<br>제품이 필요한 순간을 이야기로 연결합니다.</p><div class="chat-tags"><span>제품 자료</span><span>대본</span><span>장면 설계</span></div></div></div></div>
-  </div>
-  <div class="chapter-copy edit-copy scene-copy" aria-hidden="true" inert>
-    <p class="eyebrow">02 / LLM × HIOB</p><h2>생각한 장면이,<br><span>움직이기 시작.</span></h2>
-    <p>인물과 장면, 목소리와 자막.<br>HIOB가 제작 도구를 하나의 흐름으로 연결합니다.</p>
-    <div class="command-line"><span>✳</span><p>“목소리는 더 힘 있게.<br>자막은 크게, 이 장면은 빠르게.”</p></div>
-    <div class="connected"><i></i> YOUR AI <span>— MCP —</span> HIOB STUDIO</div>
-  </div>
-  <div class="chapter-copy finish-copy scene-copy" aria-hidden="true" inert>
-    <p class="eyebrow">03 / YOUR NEXT CREATIVE</p><h2>끝까지,<br><span>당신의 작품.</span></h2>
-    <p>마음에 드는 장면은 남기고.<br>고치고 싶은 부분만 다시.<br>영상과 편집할 프로젝트를 함께 가져가세요.</p>
-    <a class="button" href="https://studio.hi-ob.com/onboarding?next=%2Fmcp">내 첫 기획 시작하기 <span>↗</span></a>
-  </div>
-  <div class="editor-frame" aria-hidden="true"><div class="editor-title"><b>hi-ob <small>STUDIO</small></b><span>제작 흐름 데모</span><i>↗</i></div><div class="editor-label"><span>VIEWER</span><span>01 / CREATIVE</span></div><div class="editor-timeline"><div class="ruler"><span>00:00</span><span>00:02</span><span>00:04</span><span>00:06</span></div><div class="edit-track footage"><span>장면</span><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="edit-track speech"><span>음성</span><i></i><i></i><i></i><i></i></div><div class="edit-track captions"><span>자막</span><i></i><i></i><i></i></div><div class="edit-head"></div></div><div class="editor-save"><i></i><span>영상 · 음원 · 자막 · 프로젝트</span><b>↗</b></div></div>
-  <div class="cinema-bottom"><div class="scroll-cue"><span>SCROLL TO CREATE</span><i>↓</i></div><div class="chapters" aria-label="제작 흐름 탐색"><button data-jump="0" aria-current="step"><span>00</span> 가능성</button><button data-jump=".30"><span>01</span> 기획</button><button data-jump=".64"><span>02</span> 제작</button><button data-jump=".96"><span>03</span> 완성</button><i class="chapter-progress"></i></div><div class="motion-controls"><button id="hero-control" aria-label="광고 미리보기 일시정지">Ⅱ</button><button class="motion-toggle" aria-pressed="false">동작 줄이기</button></div></div>
-  <p class="media-status" role="status"></p>
-</div>
+  <ol class="accessible-story">
+    <li>
+      <span>01 / CONNECT</span>
+      <h2>쓰던 AI에, HIOB를 연결.</h2>
+      <p>Codex와 HIOB를 연결하고, 만들고 싶은 영상을 이야기하세요.</p>
+    </li>
+    <li>
+      <span>02 / DIRECT</span>
+      <h2>자료부터, 함께 정하는 기획.</h2>
+      <p>
+        브랜드 자료를 읽고 대본과 장면을 제안합니다. 방향은 당신이 정합니다.
+      </p>
+    </li>
+    <li>
+      <span>03 / CREATE</span>
+      <h2>장면·목소리·자막을 한 흐름으로.</h2>
+      <p>
+        확인한 기획에 필요한 제작 도구를 연결합니다. 생성 전 견적을 확인하세요.
+      </p>
+    </li>
+    <li>
+      <span>04 / REFINE</span>
+      <h2>좋은 건 남기고. 필요한 부분만.</h2>
+      <p>목소리 한 문장, 자막의 크기, 장면의 길이. 원하는 부분을 다듬으세요.</p>
+    </li>
+    <li>
+      <span>05 / DELIVER</span>
+      <h2>영상과 프로젝트를 함께.</h2>
+      <p>완성본을 가져가고, 같은 프로젝트에서 다음 버전을 이어 만드세요.</p>
+    </li>
+  </ol>
 </section>
-<section class="statement section"><p class="eyebrow">HUMAN DIRECTED. AI CONNECTED.</p><h2>대화를 넘어,<br><span>만들 수 있다는 것.</span></h2><p>LLM이 읽고 생각하는 능력에,<br>HIOB의 영상 제작 도구를 연결합니다.<br>무엇을 만들지, 무엇을 고칠지는 당신이 정합니다.</p></section>
