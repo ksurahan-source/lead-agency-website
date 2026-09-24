@@ -42,6 +42,9 @@ delays feedback. The current contract supersedes that playback choice:
 - `src/scroll-scene.mjs:11`: map scroll progress to the 900 film frames with no
   time-based easing. Keep 1000svh scroll distance and authored result holds for
   readability. Chapter buttons now navigate the same timeline.
+- `src/landing.css:200`: finish fading out the introductory headline before
+  revealing the chapter caption. Direct scrubbing makes intermediate positions
+  persistent, so these two text layers must not overlap on mobile.
 - `public/site/media/hiob-scroll*.mp4`: re-encode existing silent masters with
   a three-frame GOP to reduce random-seek decoding. Preserve visuals and audio
   masters. Record the larger preview sizes and verify actual playback on the
