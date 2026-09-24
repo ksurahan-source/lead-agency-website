@@ -110,7 +110,7 @@ export async function createStage({ container, video, onFail, onReady }) {
   let width = 1,
     height = 1,
     unit = 1,
-    state = { open: 0, progress: 0, phase: 0, chapter: 0, turn: 0 },
+    state = null,
     active = true,
     raf = 0,
     disposed = false,
@@ -145,7 +145,10 @@ export async function createStage({ container, video, onFail, onReady }) {
   }
   function paint() {
     raf = 0;
-    if (disposed || !active) return;
+    // Keep the native surface until both the restored scroll pose and its
+    // decoded video frame are ready; otherwise a deep reload flashes chapter 1.
+    if (disposed || !active || !state || video.readyState < 2 || video.seeking)
+      return;
     px += (tx - px) * 0.09;
     py += (ty - py) * 0.09;
     const layout = frameLayout(width, height, state.open);
