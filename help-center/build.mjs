@@ -107,7 +107,8 @@ const publishedAt = run(
   true,
 );
 if (!publishedAt) throw new Error("Film publication revision is missing");
-const context = { ...assets, media, transcript, publishedAt };
+const cssText = await readFile(new URL('.build/render.css', import.meta.url), 'utf8');
+const context = { ...assets, cssText, media, transcript, publishedAt };
 const { renderPage, renderNotFound } = await import("./.build/render.mjs");
 for (const route of PUBLIC_ROUTES) {
   const target = new URL("." + route.path + "/index.html", destination);

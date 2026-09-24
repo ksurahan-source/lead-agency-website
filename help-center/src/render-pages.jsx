@@ -139,9 +139,9 @@ export function renderPage(route, context) {
     '"><meta property="og:image" content="' +
     ORIGIN +
     context.media.poster +
-    '"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/site/favicon.svg"><link rel="stylesheet" href="' +
-    context.css +
-    '"><script type="application/ld+json">' +
+    '"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/site/favicon.svg"><style>' +
+    context.cssText +
+    '</style><script type="application/ld+json">' +
     JSON.stringify(schemas(route, context)).replaceAll("<", "\\u003c") +
     '</script><script type="module" src="' +
     context.js +

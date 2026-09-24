@@ -53,6 +53,11 @@ for (const extension of ["js", "css"]) {
   await rename(from, new URL(`site/${name}`, destination));
   html = html.replace(`/site/landing.${extension}`, `/site/${name}`);
   assets[extension] = { file: name, bytes: content.length };
+  // The complete landing stylesheet is only 16 KB before compression. Including
+  // it in HTML removes a render-blocking round trip for the first visit.
+  if (extension === "css") {
+    html = html.replace(`<link rel="stylesheet" href="/site/${name}" />`, `<style>${content.toString()}</style>`);
+  }
 }
 await writeFile(new URL("index.html", destination), html);
 const source = spawnSync("git", ["rev-parse", "HEAD"], {
