@@ -1,0 +1,362 @@
+[hidden] {
+  display: none !important;
+}
+html {
+  scroll-padding-top: 30px;
+}
+h2[id] {
+  scroll-margin-top: 28px;
+}
+.no-script {
+  max-width: 690px;
+  margin: 16px auto !important;
+}
+.article-toc {
+  padding: 20px 24px;
+  background: #f6f8fb;
+  border-left: 3px solid #2456a6;
+  margin: 24px 0 32px;
+}
+.article-toc strong {
+  display: block;
+  margin-bottom: 8px;
+}
+.article-toc ol {
+  margin: 0;
+  display: grid;
+  gap: 5px;
+}
+.help-discovery {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding: 24px 28px;
+  background: #f6f8fb;
+  border-radius: 10px;
+}
+.help-discovery h2 {
+  max-width: 550px;
+  margin: 8px 0;
+}
+.help-discovery p {
+  color: #5f6368;
+}
+.help-discovery > a {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.product,
+.watch-page {
+  max-width: 1220px;
+  margin: auto;
+  padding: 0 40px;
+}
+.product h1 {
+  font-size: clamp(48px, 5vw, 72px);
+  letter-spacing: -3px;
+  line-height: 1.12;
+  font-weight: 700;
+}
+.product h1 em {
+  font-style: normal;
+  color: #2456a6;
+}
+.product h2 {
+  font-size: clamp(30px, 3.2vw, 44px);
+  letter-spacing: -1.5px;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 18px 0 24px;
+}
+.product p {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #536780;
+}
+.product-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 76px 0 64px;
+}
+.hero-lede {
+  font-size: 21px;
+  line-height: 1.6;
+}
+.product-hero > div > p:not(.kicker) {
+  color: #4e535a;
+}
+.product-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 28px 0;
+}
+.product a.solid-button {
+  display: inline-flex;
+  background: #202124;
+  color: white;
+  text-decoration: none;
+  padding: 13px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.hero-note {
+  font-size: 12px !important;
+  max-width: 430px;
+}
+.product-preview {
+  margin: 0;
+  position: relative;
+}
+.product-preview > a {
+  display: block;
+  position: relative;
+}
+.product-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid #e0e4eb;
+}
+.product-preview > a > span {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  background: #fff;
+  color: #202124;
+  padding: 8px 14px;
+  border-radius: 30px;
+  box-shadow: 0 3px 18px #0002;
+  font-weight: 600;
+  font-size: 14px;
+}
+.product-preview figcaption {
+  font-size: 12px;
+  color: #5f6368;
+  text-align: right;
+  padding-top: 9px;
+}
+.product-jump {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-top: 1px solid #e0e4eb;
+  border-bottom: 1px solid #e0e4eb;
+}
+.product-jump a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+.product-section {
+  padding: 72px 0;
+  border-bottom: 1px solid #e4e7eb;
+}
+.section-lede {
+  max-width: 720px;
+  font-size: 18px;
+  color: #4e535a;
+  line-height: 1.8;
+}
+.role-grid,
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 36px 0 0;
+}
+.role-grid section,
+.example-grid section {
+  border-top: 2px solid #202124;
+  padding-top: 22px;
+}
+.role-grid span {
+  font-size: 12px;
+  color: #2456a6;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+.role-grid h3,
+.example-grid h3,
+.workflow-list h3 {
+  font-size: 21px;
+  margin: 10px 0;
+}
+.role-grid p,
+.example-grid p,
+.workflow-list p {
+  color: #4e535a;
+  line-height: 1.8;
+}
+.workflow-list {
+  list-style: none;
+  padding: 0;
+  margin: 36px 0;
+}
+.workflow-list li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 28px;
+  padding: 24px 0;
+  border-top: 1px solid #e4e7eb;
+  max-width: 880px;
+}
+.step-index {
+  font-size: 36px;
+  color: #2456a6;
+  font-weight: 600;
+}
+.workflow-list p {
+  max-width: 690px;
+}
+.os-start {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 32px 0;
+}
+.os-start a {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  background: #f6f8fb;
+  border: 1px solid #e0e4eb;
+  border-radius: 8px;
+  padding: 24px;
+}
+.os-start strong {
+  font-size: 22px;
+}
+.os-start span {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #4e535a;
+}
+.watch-page {
+  max-width: 1080px;
+  padding-top: 48px;
+  padding-bottom: 72px;
+}
+.watch-page > h1 {
+  font-size: clamp(32px, 4vw, 48px);
+}
+.watch-page video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  background: #202124;
+  border-radius: 10px;
+  margin-top: 26px;
+}
+.watch-caption {
+  font-size: 13px;
+  color: #5f6368;
+}
+.transcript {
+  max-width: 720px;
+  margin: 48px auto;
+}
+.transcript ol {
+  list-style: none;
+  padding: 0;
+}
+.transcript li {
+  display: flex;
+  gap: 24px;
+  border-top: 1px solid #e4e7eb;
+  padding: 12px 0;
+  margin: 0;
+}
+.transcript time {
+  font-variant-numeric: tabular-nums;
+  color: #5f6368;
+  font-size: 14px;
+}
+.watch-next {
+  background: #f6f8fb;
+  padding: 28px;
+  border-radius: 8px;
+}
+.watch-next a {
+  display: inline-block;
+  margin: 8px 24px 0 0;
+}
+@media (max-width: 760px) {
+  .product,
+  .watch-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .product-hero {
+    grid-template-columns: 1fr;
+    padding: 42px 0;
+    gap: 24px;
+  }
+  .product h1 {
+    letter-spacing: -2px;
+  }
+  .product h2 {
+    letter-spacing: -1px;
+  }
+  .role-grid,
+  .example-grid,
+  .os-start {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .product-section {
+    padding: 42px 0;
+  }
+  .product-jump {
+    gap: 14px 22px;
+  }
+  .workflow-list li {
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+  }
+  .step-index {
+    font-size: 28px;
+  }
+  .help-discovery {
+    display: block;
+    padding: 20px;
+  }
+  .help-discovery > a {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  .hero-lede {
+    font-size: 19px;
+  }
+  .watch-page {
+    padding-top: 32px;
+  }
+  .product-preview {
+    max-width: 520px;
+  }
+  .article-toc {
+    padding: 16px;
+  }
+  .product-actions {
+    gap: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -252,6 +252,8 @@ video {
   opacity: 0;
   pointer-events: none;
 }
+.film-viewport > video { opacity: 0; }
+.video-ready .film-viewport > video { opacity: 1; }
 #three-stage {
   position: absolute;
   inset: 0;

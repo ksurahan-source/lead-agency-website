@@ -45,5 +45,6 @@ next-env.d.ts
 .wrangler/
 
 /help-center/dist/
+/help-center/.build/
 
 /landing/dist/

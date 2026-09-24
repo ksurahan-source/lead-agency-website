@@ -23,7 +23,9 @@
       content="https://hi-ob.com/site/media/hiob-poster.jpg"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preload" as="image" href="/site/media/hiob-poster.jpg" />
+    <link rel="preload" as="image" href="/site/media/hiob-poster.jpg" media="(min-width: 700px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/site/media/hiob-poster-mobile.jpg" media="(max-width: 699px)" fetchpriority="high" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hi-ob.com/#organization","name":"HIOB","alternateName":"히옵","url":"https://hi-ob.com/"},{"@type":"WebSite","name":"HIOB","url":"https://hi-ob.com/","inLanguage":"ko","publisher":{"@id":"https://hi-ob.com/#organization"}}]}</script>
     <link rel="stylesheet" href="/site/landing.css" />
     <script type="module" src="/site/landing.js"></script>
   </head>
@@ -34,7 +36,7 @@
         >hiob<span></span
       ></a>
       <nav aria-label="주요 메뉴">
-        <a href="#how">제작 경험</a><a href="#workflow">작업 방식</a
+        <a href="#how">제작 경험</a><a href="/mcp">MCP 소개</a
         ><a href="/help">시작 안내 ↗</a>
       </nav>
       <div class="nav-actions">

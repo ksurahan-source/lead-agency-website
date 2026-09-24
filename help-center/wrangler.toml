@@ -2,7 +2,15 @@ name = "hiob-customer-help"
 main = "worker.mjs"
 compatibility_date = "2026-09-23"
 workers_dev = false
-routes = [ { pattern = "hi-ob.com/help*", zone_name = "hi-ob.com" }, { pattern = "hi-ob.com/mcp", zone_name = "hi-ob.com" } ]
+routes = [
+  { pattern = "hi-ob.com/help*", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/mcp", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/mcp/", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/watch/hiob*", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/robots.txt", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/sitemap.xml", zone_name = "hi-ob.com" },
+  { pattern = "hi-ob.com/video-sitemap.xml", zone_name = "hi-ob.com" }
+]
 [assets]
 directory = "./dist"
 binding = "ASSETS"

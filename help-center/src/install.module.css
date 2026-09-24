@@ -578,14 +578,17 @@
     gap: 10px;
   }
   .brand span {
-    font-size: 15px;
-    padding-left: 10px;
+    display: none;
   }
   .topbar nav {
     gap: 12px;
   }
   .topbar nav > a:first-child {
-    display: none;
+    display: inline-flex;
+  }
+  .topbar nav a {
+    white-space: nowrap;
+    font-size: 13px;
   }
   .outline {
     padding: 8px 10px;

@@ -52,11 +52,13 @@ const playback = createScrollPlayback(hero, {
 });
 hero.addEventListener("seeked", playback.decoded);
 hero.addEventListener("loadeddata", () => {
+  stage.classList.add("video-ready");
   status.textContent = "";
   playback.ready();
   schedule();
 });
 hero.addEventListener("error", () => {
+  stage.classList.remove("video-ready");
   status.textContent =
     "영상을 불러오지 못했습니다. 아래 전체 보기로 다시 확인하세요.";
 });
