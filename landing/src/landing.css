@@ -1142,3 +1142,26 @@ dialog::backdrop {
     font-size: 11px;
   }
 }
+.stage-cta {
+  display: none;
+  position: absolute;
+  right: 5vw;
+  top: 34px;
+  z-index: 6;
+}
+.cinema-stage[data-chapter="4"] .stage-cta {
+  display: inline-flex;
+}
+.cinema-stage[data-chapter="4"] .stage-note {
+  visibility: hidden;
+}
+.reduced-motion .stage-cta {
+  display: none;
+}
+@media (max-width: 699px) {
+  .stage-cta {
+    left: 6vw;
+    right: auto;
+    top: 207px;
+  }
+}
