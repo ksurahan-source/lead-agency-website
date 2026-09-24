@@ -1,9 +1,9 @@
 :root {
   color-scheme: dark;
-  --ink: #171916;
-  --paper: #f3f1eb;
+  --ink: #121212;
+  --paper: #f5f5f5;
   --orange: #f06a43;
-  --muted: #b5b6ae;
+  --muted: #b3b3b3;
 }
 * {
   box-sizing: border-box;
@@ -96,7 +96,7 @@ video {
   font-size: 12px;
 }
 .nav nav {
-  color: #c5c5bc;
+  color: #c2c2c2;
 }
 .nav a:hover {
   color: #fff;
@@ -110,7 +110,7 @@ video {
   justify-content: space-between;
   gap: 38px;
   background: var(--orange);
-  color: #171916;
+  color: #171717;
   border: 0;
   border-radius: 30px;
   padding: 18px 24px;
@@ -123,7 +123,7 @@ video {
 .button:hover {
   background: #ff825d;
   transform: translateY(-2px);
-  color: #171916 !important;
+  color: #171717 !important;
 }
 .button.small {
   padding: 12px 18px;
@@ -163,7 +163,7 @@ video {
   color: var(--orange);
 }
 .cinema {
-  height: 540svh;
+  height: 1000svh;
   position: relative;
 }
 .cinema-stage {
@@ -183,9 +183,9 @@ video {
   z-index: -1;
   background: radial-gradient(
     ellipse at 50% 67%,
-    #4e4031 0%,
-    #252821 37%,
-    #171916 73%
+    #404040 0%,
+    #252525 37%,
+    #171717 73%
   );
   opacity: calc(0.85 - var(--dark) * 0.6);
 }
@@ -201,7 +201,7 @@ video {
   transform: translateY(calc(var(--open) * -40px));
 }
 .intro-copy .eyebrow {
-  color: #c6c3b8;
+  color: #c0c0c0;
   font-size: 9px;
   margin-bottom: 18px;
 }
@@ -214,12 +214,12 @@ video {
 }
 .intro-copy h1 em {
   font-style: normal;
-  color: #aaa99c;
+  color: #a5a5a5;
 }
 .intro-sub {
   font-size: 13px;
   letter-spacing: -0.2px;
-  color: #cccabe;
+  color: #c7c7c7;
   margin-top: 18px;
 }
 .mobile-break {
@@ -228,7 +228,7 @@ video {
 .film-viewport {
   position: absolute;
   width: var(--film-width, 70vw);
-  aspect-ratio: 16/9;
+  aspect-ratio: var(--film-aspect, 16/9);
   left: 50%;
   top: var(--film-top, 59%);
   transform: translate(-50%, -50%);
@@ -236,9 +236,11 @@ video {
   overflow: hidden;
   box-shadow: 0 40px 85px #0005;
   z-index: 1;
-  background: #eeede6;
+  background: #ebebeb;
 }
 .film-viewport > img,
+.film-viewport picture,
+.film-viewport picture img,
 .film-viewport > video {
   position: absolute;
   width: 100%;
@@ -259,6 +261,10 @@ video {
 }
 .webgl-ready #three-stage {
   opacity: 1;
+}
+.scene-loading .film-viewport,
+.scene-loading #three-stage {
+  opacity: 0;
 }
 #three-stage canvas {
   width: 100%;
@@ -284,6 +290,7 @@ video {
   white-space: nowrap;
 }
 .stage-caption p {
+  word-break: keep-all;
   font-size: 14px;
   margin: 0;
   font-weight: 500;
@@ -291,7 +298,7 @@ video {
 .stage-note {
   margin-left: auto;
   font-size: 9px;
-  color: #babbb2;
+  color: #b8b8b8;
 }
 .cinema-bottom {
   position: absolute;
@@ -310,7 +317,7 @@ video {
   align-items: center;
   font: 8px/1.6 monospace;
   letter-spacing: 1.4px;
-  color: #c2c0b4;
+  color: #bdbdbd;
   max-width: 165px;
 }
 .scroll-arrow {
@@ -331,7 +338,7 @@ video {
 .chapters button {
   background: none;
   border: 0;
-  color: #b6b7ad;
+  color: #b3b3b3;
   font-size: 12px;
   padding: 10px 0;
   display: flex;
@@ -341,7 +348,7 @@ video {
 }
 .chapters button > span {
   font: 8px monospace;
-  color: #a3a699;
+  color: #a1a1a1;
 }
 .chapters button[aria-current] {
   color: #fff;
@@ -390,14 +397,14 @@ video {
   justify-content: space-between;
   align-items: center;
   z-index: 5;
-  color: #adafa2;
+  color: #aaaaaa;
   font: 9px monospace;
 }
 .motion-toggle {
   font-size: 10px;
   background: none;
   border: 0;
-  color: #c0c1b7;
+  color: #bdbdbd;
   padding: 7px 0;
 }
 .media-status {
@@ -426,7 +433,7 @@ video {
   padding-bottom: 90px;
 }
 .manifesto .eyebrow {
-  color: #746a5e;
+  color: #696969;
 }
 .manifesto h2 {
   font-size: clamp(34px, 5.9vw, 86px);
@@ -436,7 +443,7 @@ video {
   margin: 0;
 }
 .manifesto h2 span {
-  color: #868074;
+  color: #7e7e7e;
 }
 .manifesto-bottom {
   display: flex;
@@ -448,14 +455,14 @@ video {
 .manifesto-bottom > p {
   font-size: 15px;
   line-height: 1.9;
-  color: #626157;
+  color: #5e5e5e;
   margin: 0;
 }
 .workflow-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #c9c6bc;
+  border-top: 1px solid #c4c4c4;
   padding-top: 30px;
   margin-top: 65px;
   font-size: clamp(12px, 1.5vw, 22px);
@@ -470,14 +477,14 @@ video {
   grid-template-columns: 1.2fr 1fr;
   gap: 9vw;
   align-items: center;
-  background: #e6e2d8;
-  color: #262921;
+  background: #e0e0e0;
+  color: #252525;
   padding-top: 80px;
   padding-bottom: 125px;
   overflow: hidden;
 }
 .refine-copy .eyebrow {
-  color: #686153;
+  color: #5f5f5f;
   font-size: 9px;
 }
 .refine-copy h2 {
@@ -493,15 +500,15 @@ video {
 .refine-copy > p:not(.eyebrow) {
   font-size: 14px;
   line-height: 1.8;
-  color: #696558;
+  color: #626262;
   margin: 30px 0;
 }
 .refine-visual {
-  background: #f8f7f2;
+  background: #f6f6f6;
   padding: 26px;
   border: 1px solid #fff;
   border-radius: 10px;
-  box-shadow: 0 25px 50px #56463420;
+  box-shadow: 0 25px 50px #45454520;
   transform: perspective(1200px) rotateY(7deg) rotateZ(-3deg);
   transition: transform 0.45s;
 }
@@ -529,7 +536,7 @@ video {
 .refine-bottom {
   font: 7px monospace;
   letter-spacing: 0.7px;
-  color: #68685a;
+  color: #636363;
 }
 .strip {
   display: flex;
@@ -537,8 +544,8 @@ video {
   margin: 25px 0 14px;
 }
 .strip > span {
-  background: #252921;
-  color: #d4d4c9;
+  background: #252525;
+  color: #d0d0d0;
   position: relative;
   padding: 22px 10px;
   flex: 1;
@@ -553,11 +560,11 @@ video {
 }
 .strip > .selected {
   border: 2px solid var(--orange);
-  background: #ede4d7;
+  background: #e3e3e3;
   color: #79563c;
 }
 .strip > .selected b {
-  color: #3b2b22;
+  color: #2d2d2d;
 }
 .strip .selected i {
   position: absolute;
@@ -610,12 +617,12 @@ video {
 .caption-track {
   font-size: 10px;
   padding: 10px;
-  background: #e4e7da;
+  background: #e2e2e2;
   margin: 9px 0 18px;
 }
 .start-section {
   background: #f0754d;
-  color: #211f18;
+  color: #1d1d1d;
   position: relative;
   overflow: hidden;
 }
@@ -641,15 +648,15 @@ video {
   line-height: 1.8;
 }
 .button.light {
-  background: #22251e;
-  color: #f4f1e9;
+  background: #222222;
+  color: #efefef;
 }
 .button.light:hover {
-  background: #37392f;
+  background: #353535;
   color: #fff !important;
 }
 .start-steps {
-  border-top: 1px solid #3529194a;
+  border-top: 1px solid #2828284a;
   margin-top: 45px;
   padding-top: 25px;
   display: flex;
@@ -661,7 +668,7 @@ video {
   color: #67482e;
 }
 .start-section .micro {
-  color: #43271b;
+  color: #2c2c2c;
   margin: 25px 0 0;
 }
 .faq {
@@ -672,7 +679,7 @@ video {
   padding-bottom: 90px;
 }
 .faq .eyebrow {
-  color: #b4b4a5;
+  color: #afafaf;
 }
 .faq details {
   border-top: 1px solid #ffffff26;
@@ -693,7 +700,7 @@ video {
 }
 .faq summary span {
   font: 22px Arial;
-  color: #b7b7a8;
+  color: #b2b2b2;
 }
 .faq details[open] summary span {
   transform: rotate(45deg);
@@ -701,7 +708,7 @@ video {
 .faq details p {
   font-size: 13px;
   line-height: 1.9;
-  color: #bdbdb0;
+  color: #b9b9b9;
   margin: 0;
   padding: 0 20px 24px 0;
 }
@@ -725,7 +732,7 @@ video {
 .footer > p {
   font: 10px/1.8 monospace;
   letter-spacing: 1.3px;
-  color: #b1b2a4;
+  color: #adadad;
   margin: 0;
 }
 .footer > div {
@@ -733,20 +740,20 @@ video {
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   font-size: 10px;
-  color: #b9bbae;
+  color: #b6b6b6;
 }
 .footer > small {
   grid-column: 1/-1;
   font: 8px monospace;
   letter-spacing: 1px;
-  color: #9b9c8f;
+  color: #979797;
   padding-top: 30px;
   margin-top: 10px;
   border-top: 1px solid #ffffff1a;
 }
 dialog {
-  background: #1c201a;
-  color: #eeefe8;
+  background: #1d1d1d;
+  color: #ececec;
   border: 1px solid #ffffff30;
   padding: 20px;
   border-radius: 12px;
@@ -754,7 +761,7 @@ dialog {
   max-height: 94svh;
 }
 dialog::backdrop {
-  background: #070906ed;
+  background: #070707ed;
   backdrop-filter: blur(12px);
 }
 .dialog-head {
@@ -781,7 +788,7 @@ dialog::backdrop {
   background: #111;
 }
 .dialog-note {
-  color: #b9b9aa;
+  color: #b4b4b4;
   font-size: 10px;
   margin: 15px 0 0;
 }
@@ -842,7 +849,7 @@ dialog::backdrop {
     gap: 15px;
   }
   .cinema {
-    height: 470svh;
+    height: 1000svh;
   }
   .cinema-stage {
     min-height: 580px;
@@ -1089,7 +1096,7 @@ dialog::backdrop {
 .accessible-story p {
   font-size: 12px;
   line-height: 1.8;
-  color: #b7b8a9;
+  color: #b3b3b3;
 }
 .reduced-motion * {
   animation: none !important;
@@ -1171,5 +1178,73 @@ dialog::backdrop {
   }
   .stage-cta {
     top: 128px;
+  }
+}
+
+.scene-controls {
+  display: flex;
+  gap: 18px;
+}
+.scene-controls button {
+  background: none;
+  border: 0;
+  padding: 7px 0;
+  color: #ddd;
+  font-size: 11px;
+}
+.scene-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.reduced-motion .scene-controls,
+.reduced-motion #film-time {
+  display: none;
+}
+@media (max-width: 699px) {
+  .stage-utilities {
+    flex-wrap: wrap;
+    row-gap: 4px;
+    bottom: 13px;
+  }
+  #film-time {
+    width: 100%;
+    text-align: center;
+  }
+  .scene-controls {
+    gap: 14px;
+  }
+  .scene-controls button {
+    font-size: 10px;
+  }
+}
+@media (max-width: 699px) {
+  .film-viewport {
+    aspect-ratio: var(--film-aspect, 1);
+    top: 52%;
+  }
+}
+@media (max-width: 699px) and (max-height: 760px) {
+  .intro-copy {
+    top: 95px;
+  }
+  .intro-copy .eyebrow,
+  .intro-sub {
+    display: none;
+  }
+  .stage-caption {
+    top: 42px;
+  }
+  .stage-cta {
+    top: 70px;
+  }
+  .cinema-bottom {
+    gap: 10px;
+    bottom: 47px;
+  }
+  .chapters {
+    padding-bottom: 10px;
+  }
+  #film-time {
+    display: none;
   }
 }

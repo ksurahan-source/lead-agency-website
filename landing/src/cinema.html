@@ -12,14 +12,18 @@
       <p class="intro-sub">상상은 당신이. 기획은 함께. 제작은 HIOB로.</p>
     </div>
     <div class="film-viewport" aria-label="HIOB 제작 과정을 설명하는 30초 영상">
-      <img
-        class="film-poster"
-        src="/site/media/hiob-poster.jpg"
-        width="1280"
-        height="720"
-        alt="대화와 자료가 HIOB의 영상 제작 프로젝트로 이어지는 모습"
-        fetchpriority="high"
-      />
+      <picture
+        ><source
+          media="(max-width:699px)"
+          srcset="/site/media/hiob-poster-mobile.jpg" />
+        <img
+          class="film-poster"
+          src="/site/media/hiob-poster.jpg"
+          width="1280"
+          height="720"
+          alt="대화와 자료가 HIOB의 영상 제작 프로젝트로 이어지는 모습"
+          fetchpriority="high"
+      /></picture>
       <video
         id="hero-video"
         muted
@@ -27,15 +31,16 @@
         preload="none"
         data-src="/site/media/hiob-scroll.mp4"
         data-mobile-src="/site/media/hiob-scroll-mobile.mp4"
+        data-mobile-poster="/site/media/hiob-poster-mobile.jpg"
         poster="/site/media/hiob-poster.jpg"
-        aria-label="스크롤로 앞뒤 장면을 탐색하는 HIOB 소개 영상"
+        aria-label="스크롤로 선택한 장면이 정상 속도로 재생되는 HIOB 소개 영상"
       ></video>
     </div>
     <div
       id="three-stage"
       aria-hidden="true"
       data-poster="/site/media/hiob-poster.jpg"
-      data-components="/site/media/component-1.png,/site/media/component-2.png,/site/media/component-3.png,/site/media/component-5.png,/site/media/component-6.png,/site/media/component-7.png"
+      data-mobile-poster="/site/media/hiob-poster-mobile.jpg"
     ></div>
     <div class="stage-caption">
       <span class="chapter-count">01 — 05</span>
@@ -49,27 +54,33 @@
     >
     <div class="cinema-bottom">
       <div class="scroll-cue">
-        <span>SCROLL TO MAKE IT MOVE</span><span class="scroll-arrow">↓</span>
+        <span>스크롤로 장면 이동<br />각 장면은 정상 속도로 재생</span
+        ><span class="scroll-arrow">↓</span>
       </div>
       <nav class="chapters" aria-label="영상 장면 탐색">
         <button data-jump="0" aria-current="step"><span>01</span> 연결</button
-        ><button data-jump=".255"><span>02</span> 기획</button
-        ><button data-jump=".455"><span>03</span> 제작</button
-        ><button data-jump=".675"><span>04</span> 수정</button
+        ><button data-jump=".22"><span>02</span> 기획</button
+        ><button data-jump=".42"><span>03</span> 제작</button
+        ><button data-jump=".62"><span>04</span> 수정</button
         ><button data-jump=".92"><span>05</span> 완성</button>
         <div class="chapter-track" aria-hidden="true"><i></i></div>
       </nav>
       <button
         class="film-watch"
         data-video="/site/media/hiob-film.mp4"
+        data-mobile-video="/site/media/hiob-film-mobile.mp4"
         data-title="HIOB — 대화가 영상이 되다"
       >
         ▶ <span>소리 켜고 30초 보기</span>
       </button>
     </div>
     <div class="stage-utilities">
-      <button class="motion-toggle" aria-pressed="false">동작 줄이기</button
-      ><span id="film-time" aria-hidden="true">00:00 / 00:30</span>
+      <button class="motion-toggle" aria-pressed="false">동작 줄이기</button>
+      <div class="scene-controls">
+        <button id="scene-pause">일시정지</button
+        ><button id="scene-replay">이 장면 다시 보기 ↺</button>
+      </div>
+      <span id="film-time" aria-hidden="true">장면 재생 중 · 1×</span>
     </div>
     <p class="media-status" role="status"></p>
   </div>

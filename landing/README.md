@@ -4,19 +4,17 @@ The `hiob-creative-landing` Worker owns only `hi-ob.com/` and `/site/*`. Help, a
 
 ## Experience
 
-The new 30-second HIOB product film appears in the first viewport. Native scrolling controls the same film clock as five six-second chapters: connect, direct, create, refine, deliver. The film expands from an introduction into a full-width scene. Three.js 0.186.0 supplies a VideoTexture, perspective camera, physical screen depth and contextual component planes with pointer parallax. The production-flow illustrations are labelled; this is not a screen recording or proof of unattended customer generation.
+The first viewport plays the first chapter immediately. Native scrolling selects one of five six-second chapters: connect, plan, create, refine, deliver. Each selected chapter starts at its beginning, plays at 1x and holds its result before the next cut. A 160 ms scroll-settle window avoids seeking through intermediate chapters during a fast gesture. One viewport scroll no longer skips a chapter. Scrolling is never intercepted or locked; visitors can skip ahead deliberately. Pause and replay are explicit controls.
 
-The page is progressively enhanced. It immediately paints a small poster and plays the native muted video. The separately bundled Three.js stage initializes on scrolling or pointer movement. Until its first successful render the native video remains visible. WebGL failure/context loss retains native scroll-controlled playback. Frame rendering happens on video frames, scroll/resize changes and bounded pointer settling, and stops offscreen, in a hidden tab or behind the sound dialog. Reduced motion/data saver removes pinning, autoplay and WebGL, and exposes all five explanatory steps.
+Three.js 0.186.0 supplies the video texture, perspective camera and subtle pointer response. The extra floating cards were removed so there is one focal area. Neutral black/white surfaces replace the olive palette. The separately bundled Three.js stage initializes on interaction, keeps native video visible until its first successful render, and falls back to native video on WebGL failure. Rendering stops offscreen, in hidden tabs and behind the sound dialog. Reduced motion/data saver removes pinning, autoplay and WebGL, and exposes all five explanatory steps.
 
-The full sound button opens the original 1920×1080 MP4 with native playback controls and Korean caption track. It pauses the scrub video, then resumes the same scroll position on close. The original mix is unchanged. A 1280×720 desktop and 720×406 mobile silent derivative use six-frame keyframe intervals for seeking. The source film itself remains 30 seconds.
+The sound button opens the revised 1920×1080 film with the previously produced narration/music mix and Korean captions. Closing preserves scene selection and manual pause. Desktop uses a 1920×1080 composition with a 1280×720 preview. Mobile uses a separately composed 1080×1080 film and 720×720 preview; it is not a scaled-down landscape film. Each film is 30 seconds. The visuals illustrate product use; they are not an actual screen recording or a generation-time benchmark.
 
-## Asset provenance
+## Source and assets
 
-Approved source: `hiob/output/hiob-product-film-20260924/hiob-component-film-review.mp4`.
-SHA-256: `01f00c89f0d6da85fda0c73ec4f30506051147b5c1ef361c5068dbdb77b9b19e`.
-The components come from the same project's `components/rendered/Component{1,2,3,5,6,7}.png`. These were authored before the image and H3 generation pipeline. This website work makes no paid generation calls.
+`motion/WebFilm.tsx` and `motion/MobileFilm.tsx` are the revised desktop and mobile compositions: one large action per scene, followed by a stable result. Existing H3 source clips and the existing Typecast mix are reused without paid generation. The render workspace and source assets are recorded in `hiob/output/hiob-product-film-20260924/web-readability/`. The existing source public directory belongs to HIOB project `25f8b0d4-662c-48a2-bd21-87463e735e6a`; it contains the licensed font, H3 clips and ambient derivatives. Rendering uses the existing HIOB Remotion runtime, not this public Worker's bundle.
 
-`hiob-film.mp4` is the original with audio; `hiob-scroll*.mp4` are new derivatives. The old ViewOK/showcase, old `hiob-reel` and untracked rejected `hiob-product-film.mp4` are not referenced or published. The build copies only media explicitly referenced in the current HTML and fingerprints those assets. The old `prepare-media.mjs` is historical and must not be run for this film.
+Published media: `hiob-film*.mp4` (new visuals + existing sound), `hiob-scroll*.mp4` (silent), `hiob-poster*.jpg`, `hiob-film.vtt`. The build copies only explicitly referenced media and fingerprints all assets. Rejected films and old ViewOK/showcase assets are not published. The historical `prepare-media.mjs` must not be used for this film.
 
 ## Build and verify
 
@@ -24,14 +22,13 @@ The components come from the same project's `components/rendered/Component{1,2,3
 npm install
 npm run landing:build
 node --test landing/*.test.mjs
+npx eslint landing/src/*.mjs landing/src/landing.js landing/*.test.mjs
 npx wrangler dev --config landing/wrangler.toml --port 8797 --compatibility-date 2026-06-03
 npm run landing:deploy
 ```
 
-Commit before deployment; `/site/version.json` identifies the committed source, asset byte sizes and fingerprints. Verify the live marker and media Range responses. The build tests prevent rejected media from returning to a release. Unit tests cover six-second chapter boundaries, reverse seeking, readiness/in-flight guards and mobile/desktop frame bounds.
+Commit before deployment; `/site/version.json` identifies the source and asset fingerprints. Verify the live marker, video Range support and browser playback. Tests cover deep entry, pending metadata/seeks, backwards scene changes, user pause, result hold, autoplay rejection, viewport fit and rejected-asset exclusion.
 
-Manual browser QA: forward/backward scroll, chapter jumps, currentTime versus targetTime, first-viewport playback, mobile layout, full sound, close/resume, motion toggle, reload and help/account links. Lighthouse is a lab measurement, not creative quality or customer conversion evidence. The localhost audit skips production analytics; always report production separately. Evidence: `hiob/output/hiob-scroll-site-20260924/evidence`.
+Manual QA includes the actual rendered frames, normal/fast/backwards scroll, pause/replay, desktop/mobile layouts, sound-dialog return, reduced motion and deep reload. Evidence: `hiob/output/hiob-scroll-site-20260924/readability/`. Technical checks and Lighthouse are not evidence of creative quality or customer comprehension.
 
-The existing GTM, Meta Pixel, CAPI PageView deduplication and GPC behavior remain in production. Localhost does not send analytics. The CSP keeps the existing exact analytics allowlist; no external Three.js CDN or unsafe script execution is added. Fingerprinted chunks/media are immutable; the release marker and root revalidate. Roll back only this Worker's version if necessary.
-
-References: [Three.js](https://threejs.org/docs/), [Aside](https://aside.com/), [Apple MacBook Air](https://www.apple.com/macbook-air/). These inform scale and scroll continuity; no reference media or interface source is copied.
+Production GTM, Meta Pixel, CAPI deduplication and GPC behavior are preserved. Localhost skips analytics. No external Three.js CDN or relaxed CSP was added. Rollback changes only this landing Worker.

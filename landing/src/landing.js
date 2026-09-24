@@ -1,11 +1,7 @@
 import "./landing.css";
 import "./analytics.mjs";
-import {
-  frameLayout,
-  scrollProgress,
-  sceneState,
-  shouldSeek,
-} from "./scroll-scene.mjs";
+import { frameLayout, scrollProgress, sceneState } from "./scroll-scene.mjs";
+import { createChapterPlayback } from "./chapter-playback.mjs";
 const $ = (selector) => document.querySelector(selector);
 const hero = $("#hero-video"),
   cinema = $(".cinema"),
@@ -28,14 +24,13 @@ const reduced = () =>
 let progress = 0,
   visible = true,
   frame = 0,
-  desiredTime = 0,
-  seeking = false,
   engine,
   engineLoading = false,
   engineFailed = false,
   enhanceRequested = false,
   observed = -1,
-  preview = true;
+  scrollSettling = false,
+  settleTimer;
 const descriptions = [
   "쓰던 AI와 HIOB를 연결하세요.",
   "자료에서 출발해, 기획은 함께 정합니다.",
@@ -46,36 +41,56 @@ const descriptions = [
 function loadVideo() {
   if (!hero.getAttribute("src")) {
     hero.src = innerWidth < 700 ? hero.dataset.mobileSrc : hero.dataset.src;
+    if (innerWidth < 700) hero.poster = hero.dataset.mobilePoster;
     hero.load();
   }
 }
-function seekLatest() {
-  if (!visible || document.hidden || dialog.open || reduced() || preview)
-    return;
-  if (shouldSeek(hero.currentTime, desiredTime, hero.readyState, seeking)) {
-    seeking = true;
-    hero.currentTime = desiredTime;
+const playback = createChapterPlayback(hero, ({ paused, held }) => {
+  $("#scene-pause").textContent = held
+    ? "장면 완료"
+    : paused
+      ? "이어서 보기"
+      : "일시정지";
+  $("#scene-pause").disabled = held;
+  $("#film-time").textContent = held
+    ? "장면 완료 · 스크롤하면 다음 단계"
+    : paused
+      ? "일시정지"
+      : "장면 재생 중 · 1×";
+  stage.dataset.playback = held ? "held" : paused ? "paused" : "playing";
+});
+function revealSelectedFrame() {
+  if (
+    hero.readyState >= 2 &&
+    !hero.seeking &&
+    Math.floor(hero.currentTime / 6) === observed
+  ) {
+    stage.classList.remove("scene-loading");
   }
 }
 hero.addEventListener("seeked", () => {
-  seeking = false;
-  seekLatest();
+  playback.ready();
+  revealSelectedFrame();
 });
 hero.addEventListener("loadeddata", () => {
   status.textContent = "";
+  playback.ready();
+  revealSelectedFrame();
   schedule();
 });
 hero.addEventListener("error", () => {
   status.textContent =
     "영상을 불러오지 못했습니다. 아래 전체 보기로 다시 확인하세요.";
 });
-hero.addEventListener("timeupdate", () => {
-  $("#film-time").textContent =
-    `00:${Math.floor(hero.currentTime).toString().padStart(2, "0")} / 00:30`;
-  if (preview && hero.currentTime > 5.7) {
-    hero.currentTime = 0.5;
-  }
-});
+hero.addEventListener("timeupdate", playback.tick);
+// Frame-accurate stopping where available, timeupdate fallback otherwise.
+function videoFrame() {
+  playback.tick();
+  hero.requestVideoFrameCallback(videoFrame);
+}
+if (hero.requestVideoFrameCallback) hero.requestVideoFrameCallback(videoFrame);
+$("#scene-pause").addEventListener("click", () => playback.togglePause());
+$("#scene-replay").addEventListener("click", () => playback.replay());
 async function startEngine() {
   if (engine || engineLoading || engineFailed || reduced() || !enhanceRequested)
     return;
@@ -107,16 +122,27 @@ async function startEngine() {
   }
 }
 function layoutFallback(state) {
-  const layout = frameLayout(stage.clientWidth, stage.clientHeight, state.open);
+  const aspect = hero.videoWidth
+    ? hero.videoWidth / hero.videoHeight
+    : innerWidth < 700
+      ? 1
+      : 16 / 9;
+  const layout = frameLayout(
+    stage.clientWidth,
+    stage.clientHeight,
+    state.open,
+    aspect,
+  );
   stage.style.setProperty("--film-width", `${layout.width}px`);
   stage.style.setProperty("--film-top", `${layout.y}px`);
+  stage.style.setProperty("--film-aspect", aspect);
 }
 function paint() {
   frame = 0;
   const rect = cinema.getBoundingClientRect();
   visible = rect.bottom > 0 && rect.top < innerHeight;
   if (reduced()) {
-    hero.pause();
+    playback.setActive(false);
     engine?.setActive(false);
     return;
   }
@@ -131,7 +157,9 @@ function paint() {
   stage.style.setProperty("--dark", state.dark);
   layoutFallback(state);
   stage.dataset.progress = state.progress.toFixed(4);
-  if (observed !== state.chapter) {
+  if (observed !== state.chapter && !scrollSettling) {
+    if (observed !== -1 || state.chapter !== 0)
+      stage.classList.add("scene-loading");
     observed = state.chapter;
     stage.dataset.chapter = state.chapter;
     $("#chapter-description").textContent = descriptions[state.chapter];
@@ -140,29 +168,20 @@ function paint() {
       if (index === state.chapter) button.setAttribute("aria-current", "step");
       else button.removeAttribute("aria-current");
     });
+    playback.choose(state.chapter);
+    revealSelectedFrame();
   }
-  desiredTime = state.time;
-  stage.dataset.targetTime = desiredTime.toFixed(3);
+  // The selected film and labels stay together while a fast gesture settles.
+  state.chapter = Math.max(0, observed);
   const active = visible && !document.hidden && !dialog.open;
   engine?.setActive(active);
   engine?.update(state);
+  playback.setActive(active);
   if (!active) {
-    hero.pause();
     return;
   }
   loadVideo();
   startEngine();
-  preview = progress < 0.003;
-  if (preview) {
-    if (hero.currentTime > 5.7) hero.currentTime = 0.5;
-    if (hero.paused)
-      hero.play().catch(() => {
-        /* Poster and scroll seeking remain usable. */
-      });
-  } else {
-    hero.pause();
-    seekLatest();
-  }
 }
 function schedule() {
   if (!frame) frame = requestAnimationFrame(paint);
@@ -175,11 +194,23 @@ addEventListener(
   },
   { once: true, passive: true },
 );
-addEventListener("scroll", schedule, { passive: true });
+addEventListener(
+  "scroll",
+  () => {
+    scrollSettling = true;
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      scrollSettling = false;
+      schedule();
+    }, 160);
+    schedule();
+  },
+  { passive: true },
+);
 addEventListener("resize", schedule, { passive: true });
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
-    hero.pause();
+    playback.setActive(false);
     engine?.setActive(false);
   } else schedule();
 });
@@ -189,7 +220,11 @@ document.querySelectorAll("[data-jump]").forEach((button) =>
     const target =
       Number(button.dataset.jump) *
       Math.max(1, cinema.offsetHeight - stage.offsetHeight);
-    scrollTo({ top: top + target, behavior: reduced() ? "instant" : "smooth" });
+    // Explicit selection is immediate; native gestures are never intercepted.
+    clearTimeout(settleTimer);
+    scrollSettling = false;
+    scrollTo({ top: top + target, behavior: "instant" });
+    schedule();
   }),
 );
 const motionButton = $(".motion-toggle");
@@ -199,7 +234,7 @@ function applyMotion() {
   motionButton.setAttribute("aria-pressed", String(reduce));
   motionButton.textContent = reduce ? "동작 줄이기 켜짐" : "동작 줄이기";
   if (reduce) {
-    hero.pause();
+    playback.setActive(false);
     stage.classList.remove("webgl-ready");
     engine?.setActive(false);
   } else {
@@ -229,9 +264,12 @@ document.querySelectorAll("[data-video]").forEach((button) =>
   button.addEventListener("click", () => {
     returnFocus = button;
     $("#dialog-title").textContent = button.dataset.title;
-    hero.pause();
+    playback.setActive(false);
     engine?.setActive(false);
-    fullVideo.src = button.dataset.video;
+    fullVideo.src =
+      innerWidth < 700 && button.dataset.mobileVideo
+        ? button.dataset.mobileVideo
+        : button.dataset.video;
     dialog.showModal();
     fullVideo.play().catch(() => {
       /* Native controls allow explicit playback. */
@@ -261,7 +299,7 @@ dialog.addEventListener("close", () => {
 // Native scrolling; no wheel interception, artificial momentum or scroll lock.
 applyMotion();
 addEventListener("pagehide", () => {
-  hero.pause();
+  playback.setActive(false);
   engine?.setActive(false);
 });
 addEventListener("pageshow", schedule);

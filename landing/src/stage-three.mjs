@@ -10,15 +10,9 @@ import {
   TextureLoader,
   VideoTexture,
   SRGBColorSpace,
-  CatmullRomCurve3,
-  Vector3,
-  TubeGeometry,
-  TorusGeometry,
   LinearFilter,
-  Raycaster,
-  Vector2,
 } from "three";
-import { smoothstep, frameLayout } from "./scroll-scene.mjs";
+import { frameLayout } from "./scroll-scene.mjs";
 
 export async function createStage({ container, video, onFail, onReady }) {
   const renderer = new WebGLRenderer({
@@ -40,7 +34,7 @@ export async function createStage({ container, video, onFail, onReady }) {
   const loader = new TextureLoader();
   let poster;
   try {
-    poster = await loader.loadAsync(container.dataset.poster);
+    poster = await loader.loadAsync(innerWidth < 700 ? container.dataset.mobilePoster : container.dataset.poster);
   } catch (error) {
     renderer.dispose();
     throw error;
@@ -50,63 +44,15 @@ export async function createStage({ container, video, onFail, onReady }) {
   videoTexture.colorSpace = SRGBColorSpace;
   videoTexture.minFilter = LinearFilter;
   const surface = new MeshBasicMaterial({ map: poster, toneMapped: false });
-  const screen = new Mesh(new PlaneGeometry(16 / 9, 1), surface);
+  let aspect = video.videoWidth ? video.videoWidth / video.videoHeight : innerWidth < 700 ? 1 : 16 / 9;
+  const screen = new Mesh(new PlaneGeometry(aspect, 1), surface);
   screen.position.z = 0.024;
   screenGroup.add(screen);
   const chassis = new Mesh(
-    new BoxGeometry(16 / 9 + 0.032, 1 + 0.032, 0.032),
-    new MeshBasicMaterial({ color: "#44443b" }),
+    new BoxGeometry(aspect + 0.016, 1 + 0.016, 0.016),
+    new MeshBasicMaterial({ color: "#444444" }),
   );
   screenGroup.add(chassis);
-  const cableMaterial = new MeshBasicMaterial({
-    color: "#b15c3c",
-    transparent: true,
-    opacity: 0.22,
-  });
-  const path = new CatmullRomCurve3([
-    new Vector3(-5, -1.6, -1),
-    new Vector3(-3, 1.3, -0.8),
-    new Vector3(-1, -1.4, -0.9),
-    new Vector3(2, 1.4, -1),
-    new Vector3(5, -0.7, -1),
-  ]);
-  const cable = new Mesh(
-    new TubeGeometry(path, 200, 0.01, 8, false),
-    cableMaterial,
-  );
-  group.add(cable);
-  const halo = new Mesh(
-    new TorusGeometry(1.25, 0.008, 6, 120),
-    new MeshBasicMaterial({
-      color: "#e95830",
-      transparent: true,
-      opacity: 0.22,
-    }),
-  );
-  halo.position.set(0, 0, -2);
-  halo.rotation.x = 0.6;
-  group.add(halo);
-  const cards = [];
-  const cardSources = container.dataset.components.split(",");
-  // Contextual components enter at their own chapter, never random decorative shapes.
-  const geometry = new PlaneGeometry(1.2, 1);
-  const cardLoads = cardSources.map(async (src, index) => {
-    const texture = await loader.loadAsync(src);
-    texture.colorSpace = SRGBColorSpace;
-    const material = new MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      opacity: 0,
-      toneMapped: false,
-    });
-    const mesh = new Mesh(geometry, material);
-    mesh.userData.index = index;
-    group.add(mesh);
-    cards[index] = mesh;
-  });
-  Promise.allSettled(cardLoads).then(invalidate);
-  const pointer = new Vector2(),
-    raycaster = new Raycaster();
   let width = 1,
     height = 1,
     unit = 1,
@@ -118,8 +64,7 @@ export async function createStage({ container, video, onFail, onReady }) {
   let px = 0,
     py = 0,
     tx = 0,
-    ty = 0,
-    hover = -1;
+    ty = 0;
   container.append(renderer.domElement);
   renderer.domElement.setAttribute("aria-hidden", "true");
   function fail() {
@@ -151,8 +96,16 @@ export async function createStage({ container, video, onFail, onReady }) {
       return;
     px += (tx - px) * 0.09;
     py += (ty - py) * 0.09;
-    const layout = frameLayout(width, height, state.open);
-    const frameHeight = (layout.width * 9) / 16;
+    const decodedAspect = video.videoWidth / video.videoHeight;
+    if (decodedAspect && decodedAspect !== aspect) {
+      aspect = decodedAspect;
+      screen.geometry.dispose();
+      chassis.geometry.dispose();
+      screen.geometry = new PlaneGeometry(aspect, 1);
+      chassis.geometry = new BoxGeometry(aspect + 0.016, 1 + 0.016, 0.016);
+    }
+    const layout = frameLayout(width, height, state.open, aspect);
+    const frameHeight = layout.width / aspect;
     screenGroup.scale.setScalar(frameHeight / unit);
     screenGroup.position.set(0, (height / 2 - layout.y) / unit, 0);
     screenGroup.rotation.set(
@@ -172,33 +125,6 @@ export async function createStage({ container, video, onFail, onReady }) {
       surface.map = videoTexture;
       surface.needsUpdate = true;
     }
-    cable.position.y = screenGroup.position.y;
-    cable.rotation.z = state.progress * 0.2 - 0.05;
-    cable.scale.set(1 + state.open * 0.1, 0.7, 1);
-    halo.rotation.z = state.progress * Math.PI;
-    halo.scale.setScalar(1.2 + state.open * 0.55);
-    cards.forEach((card, index) => {
-      const moment = [0.35, 1.25, 1.65, 2.45, 3.5, 4.5][index];
-      const distance = Math.abs(state.chapter + state.phase - moment);
-      const presence =
-        (1 - smoothstep(0.02, 0.28, distance)) * (layout.mobile ? 0 : 1);
-      card.material.opacity = presence * 0.94;
-      card.visible = presence > 0.002;
-      const side = index % 2 === 0 ? -1 : 1;
-      card.position.set(
-        side * (layout.width / (2 * unit) + 0.4 + (1 - presence) * 0.35) +
-          px * 0.05,
-        screenGroup.position.y + (index % 2 === 0 ? 0.48 : -0.65) - py * 0.04,
-        0.25,
-      );
-      const scale = (index === 4 ? 0.68 : 0.64) * (hover === index ? 1.07 : 1);
-      card.scale.setScalar(scale);
-      card.rotation.set(
-        0.05 + py * 0.02,
-        side * -0.2 + px * 0.08,
-        side * (0.1 + (1 - presence) * 0.14),
-      );
-    });
     try {
       renderer.render(scene, camera);
     } catch {
@@ -222,17 +148,10 @@ export async function createStage({ container, video, onFail, onReady }) {
     const rect = container.getBoundingClientRect();
     tx = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     ty = ((event.clientY - rect.top) / rect.height) * 2 - 1;
-    pointer.set(tx, -ty);
-    raycaster.setFromCamera(pointer, camera);
-    const hit = raycaster
-      .intersectObjects(cards.filter(Boolean))
-      .find((result) => result.object.visible);
-    hover = hit ? hit.object.userData.index : -1;
     invalidate();
   };
   const resetPointer = () => {
     tx = ty = 0;
-    hover = -1;
     invalidate();
   };
   container.addEventListener("pointermove", onPointer, { passive: true });
