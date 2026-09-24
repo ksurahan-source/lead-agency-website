@@ -8,7 +8,7 @@ The former linear clock advanced 29.88 film seconds over 4.4 viewport heights on
 desktop and 3.7 on mobile: 6.79 / 8.08 seconds per viewport scroll. Each chapter
 lasted only 6 seconds. Narration-paced footage is not a readable scrub sequence.
 
-## Implementation contract (five tuples)
+## Initial implementation contract (superseded playback behavior below)
 
 - `src/scroll-scene.mjs:10`, `src/landing.js:44`: replace linear seeking with
   scroll-selected six-second chapters. Play at 1x, hold the result, expose replay
@@ -27,3 +27,25 @@ lasted only 6 seconds. Narration-paced footage is not a readable scrub sequence.
 
 These are illustrated product flows, not a screen recording or a generation-time
 benchmark. No provider generation, voice purchase or Sonar run is needed.
+
+## Direct scroll correction — 2026-09-24
+
+User testing identified a contradiction: chapter autoplay makes scrolling select
+a scene, but does not make the film follow the scroll. The 160ms settle timer also
+delays feedback. The current contract supersedes that playback choice:
+
+- `src/landing.js:46`, `src/scroll-playback.mjs:1`: replace chapter autoplay and
+  settle timing with latest-position seeking. Scroll events produce a target;
+  the controller sends it to the paused video, allowing a decoded frame to paint
+  before another seek. Forward/reverse movement must change presented frames
+  during scrolling; stopping must stop the film. Cover loading and modal return.
+- `src/scroll-scene.mjs:11`: map scroll progress to the 900 film frames with no
+  time-based easing. Keep 1000svh scroll distance and authored result holds for
+  readability. Chapter buttons now navigate the same timeline.
+- `public/site/media/hiob-scroll*.mp4`: re-encode existing silent masters with
+  a three-frame GOP to reduce random-seek decoding. Preserve visuals and audio
+  masters. Record the larger preview sizes and verify actual playback on the
+  deployed Worker, not only media metadata or requested currentTime.
+
+Colour, desktop/mobile composition and the real Three.js stage remain as in the
+readability repair. No new generation or voice costs are incurred.

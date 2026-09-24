@@ -33,7 +33,7 @@
         data-mobile-src="/site/media/hiob-scroll-mobile.mp4"
         data-mobile-poster="/site/media/hiob-poster-mobile.jpg"
         poster="/site/media/hiob-poster.jpg"
-        aria-label="스크롤로 선택한 장면이 정상 속도로 재생되는 HIOB 소개 영상"
+        aria-label="스크롤 위치에 맞춰 앞뒤로 움직이는 HIOB 소개 영상"
       ></video>
     </div>
     <div
@@ -54,15 +54,15 @@
     >
     <div class="cinema-bottom">
       <div class="scroll-cue">
-        <span>스크롤로 장면 이동<br />각 장면은 정상 속도로 재생</span
+        <span>스크롤하면 움직이고<br />멈추면 그 장면에 머뭅니다</span
         ><span class="scroll-arrow">↓</span>
       </div>
       <nav class="chapters" aria-label="영상 장면 탐색">
         <button data-jump="0" aria-current="step"><span>01</span> 연결</button
-        ><button data-jump=".22"><span>02</span> 기획</button
-        ><button data-jump=".42"><span>03</span> 제작</button
-        ><button data-jump=".62"><span>04</span> 수정</button
-        ><button data-jump=".92"><span>05</span> 완성</button>
+        ><button data-jump=".202"><span>02</span> 기획</button
+        ><button data-jump=".402"><span>03</span> 제작</button
+        ><button data-jump=".602"><span>04</span> 수정</button
+        ><button data-jump=".802"><span>05</span> 완성</button>
         <div class="chapter-track" aria-hidden="true"><i></i></div>
       </nav>
       <button
@@ -77,10 +77,9 @@
     <div class="stage-utilities">
       <button class="motion-toggle" aria-pressed="false">동작 줄이기</button>
       <div class="scene-controls">
-        <button id="scene-pause">일시정지</button
-        ><button id="scene-replay">이 장면 다시 보기 ↺</button>
+        <button id="scene-replay">이 장면 처음으로 ↺</button>
       </div>
-      <span id="film-time" aria-hidden="true">장면 재생 중 · 1×</span>
+      <span id="film-time" aria-hidden="true">스크롤에 맞춰 재생</span>
     </div>
     <p class="media-status" role="status"></p>
   </div>

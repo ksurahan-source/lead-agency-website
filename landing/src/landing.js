@@ -1,7 +1,7 @@
 import "./landing.css";
 import "./analytics.mjs";
 import { frameLayout, scrollProgress, sceneState } from "./scroll-scene.mjs";
-import { createChapterPlayback } from "./chapter-playback.mjs";
+import { createScrollPlayback } from "./scroll-playback.mjs";
 const $ = (selector) => document.querySelector(selector);
 const hero = $("#hero-video"),
   cinema = $(".cinema"),
@@ -28,9 +28,7 @@ let progress = 0,
   engineLoading = false,
   engineFailed = false,
   enhanceRequested = false,
-  observed = -1,
-  scrollSettling = false,
-  settleTimer;
+  observed = -1;
 const descriptions = [
   "쓰던 AI와 HIOB를 연결하세요.",
   "자료에서 출발해, 기획은 함께 정합니다.",
@@ -45,52 +43,32 @@ function loadVideo() {
     hero.load();
   }
 }
-const playback = createChapterPlayback(hero, ({ paused, held }) => {
-  $("#scene-pause").textContent = held
-    ? "장면 완료"
-    : paused
-      ? "이어서 보기"
-      : "일시정지";
-  $("#scene-pause").disabled = held;
-  $("#film-time").textContent = held
-    ? "장면 완료 · 스크롤하면 다음 단계"
-    : paused
-      ? "일시정지"
-      : "장면 재생 중 · 1×";
-  stage.dataset.playback = held ? "held" : paused ? "paused" : "playing";
-});
-function revealSelectedFrame() {
-  if (
-    hero.readyState >= 2 &&
-    !hero.seeking &&
-    Math.floor(hero.currentTime / 6) === observed
-  ) {
+const playback = createScrollPlayback(hero, {
+  onDecoded: (time, milliseconds) => {
+    stage.dataset.decodedTime = time.toFixed(3);
+    stage.dataset.seekMs = milliseconds.toFixed(1);
     stage.classList.remove("scene-loading");
-  }
-}
-hero.addEventListener("seeked", () => {
-  playback.ready();
-  revealSelectedFrame();
+  },
 });
+hero.addEventListener("seeked", playback.decoded);
 hero.addEventListener("loadeddata", () => {
   status.textContent = "";
   playback.ready();
-  revealSelectedFrame();
   schedule();
 });
 hero.addEventListener("error", () => {
   status.textContent =
     "영상을 불러오지 못했습니다. 아래 전체 보기로 다시 확인하세요.";
 });
-hero.addEventListener("timeupdate", playback.tick);
-// Frame-accurate stopping where available, timeupdate fallback otherwise.
-function videoFrame() {
-  playback.tick();
+// The compositor's mediaTime verifies the displayed frame, not just a seek request.
+function videoFrame(_now, metadata) {
+  stage.dataset.presentedTime = metadata.mediaTime.toFixed(3);
   hero.requestVideoFrameCallback(videoFrame);
 }
 if (hero.requestVideoFrameCallback) hero.requestVideoFrameCallback(videoFrame);
-$("#scene-pause").addEventListener("click", () => playback.togglePause());
-$("#scene-replay").addEventListener("click", () => playback.replay());
+$("#scene-replay").addEventListener("click", () =>
+  jumpTo(Math.max(0, observed) / 5 + 1 / 900),
+);
 async function startEngine() {
   if (engine || engineLoading || engineFailed || reduced() || !enhanceRequested)
     return;
@@ -157,9 +135,9 @@ function paint() {
   stage.style.setProperty("--dark", state.dark);
   layoutFallback(state);
   stage.dataset.progress = state.progress.toFixed(4);
-  if (observed !== state.chapter && !scrollSettling) {
-    if (observed !== -1 || state.chapter !== 0)
-      stage.classList.add("scene-loading");
+  if (!hero.hasAttribute("src") && state.chapter > 0)
+    stage.classList.add("scene-loading");
+  if (observed !== state.chapter) {
     observed = state.chapter;
     stage.dataset.chapter = state.chapter;
     $("#chapter-description").textContent = descriptions[state.chapter];
@@ -168,11 +146,10 @@ function paint() {
       if (index === state.chapter) button.setAttribute("aria-current", "step");
       else button.removeAttribute("aria-current");
     });
-    playback.choose(state.chapter);
-    revealSelectedFrame();
   }
-  // The selected film and labels stay together while a fast gesture settles.
-  state.chapter = Math.max(0, observed);
+  stage.dataset.targetTime = state.time.toFixed(3);
+  $("#film-time").textContent = `${state.time.toFixed(1)} / 30초 · 스크롤 연동`;
+  playback.seek(state.time);
   const active = visible && !document.hidden && !dialog.open;
   engine?.setActive(active);
   engine?.update(state);
@@ -194,19 +171,7 @@ addEventListener(
   },
   { once: true, passive: true },
 );
-addEventListener(
-  "scroll",
-  () => {
-    scrollSettling = true;
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => {
-      scrollSettling = false;
-      schedule();
-    }, 160);
-    schedule();
-  },
-  { passive: true },
-);
+addEventListener("scroll", schedule, { passive: true });
 addEventListener("resize", schedule, { passive: true });
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
@@ -214,19 +179,18 @@ document.addEventListener("visibilitychange", () => {
     engine?.setActive(false);
   } else schedule();
 });
-document.querySelectorAll("[data-jump]").forEach((button) =>
-  button.addEventListener("click", () => {
-    const top = scrollY + cinema.getBoundingClientRect().top;
-    const target =
-      Number(button.dataset.jump) *
-      Math.max(1, cinema.offsetHeight - stage.offsetHeight);
-    // Explicit selection is immediate; native gestures are never intercepted.
-    clearTimeout(settleTimer);
-    scrollSettling = false;
-    scrollTo({ top: top + target, behavior: "instant" });
-    schedule();
-  }),
-);
+function jumpTo(position) {
+  const top = scrollY + cinema.getBoundingClientRect().top;
+  const target =
+    position * Math.max(1, cinema.offsetHeight - stage.offsetHeight);
+  scrollTo({ top: top + target, behavior: "instant" });
+  schedule();
+}
+document
+  .querySelectorAll("[data-jump]")
+  .forEach((button) =>
+    button.addEventListener("click", () => jumpTo(Number(button.dataset.jump))),
+  );
 const motionButton = $(".motion-toggle");
 function applyMotion() {
   const reduce = reduced();
@@ -259,10 +223,11 @@ motionButton.addEventListener("click", () => {
   cinema.scrollIntoView({ behavior: "instant" });
 });
 motionQuery.addEventListener("change", applyMotion);
-let returnFocus;
+let returnFocus, returnScrollY = 0;
 document.querySelectorAll("[data-video]").forEach((button) =>
   button.addEventListener("click", () => {
     returnFocus = button;
+    returnScrollY = scrollY;
     $("#dialog-title").textContent = button.dataset.title;
     playback.setActive(false);
     engine?.setActive(false);
@@ -293,6 +258,7 @@ dialog.addEventListener("close", () => {
   fullVideo.pause();
   fullVideo.removeAttribute("src");
   fullVideo.load();
+  scrollTo({ top: returnScrollY, behavior: "instant" });
   returnFocus?.focus({ preventScroll: true });
   schedule();
 });

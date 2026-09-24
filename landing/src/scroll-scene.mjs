@@ -7,14 +7,18 @@ export const smoothstep = (a, b, value) => {
 export function scrollProgress(top, height, viewport) {
   return clamp(-top / Math.max(1, height - viewport));
 }
-// Progress selects an entire scene, never a timestamp within it.
+// Every scroll position maps to the same frame in either direction.
 export function sceneState(progress, duration = 30) {
   const p = clamp(progress);
   const validDuration =
     Number.isFinite(duration) && duration > 0 ? duration : 0;
-  const chapter = Math.min(4, Math.floor(p * 5));
-  const time = validDuration ? (chapter * validDuration) / 5 : 0;
-  const phase = p * 5 - chapter;
+  const frames = Math.floor(validDuration * 30);
+  const frame = Math.min(Math.max(0, frames - 1), Math.floor(p * frames));
+  const time = frame / 30;
+  const chapter = validDuration
+    ? Math.min(4, Math.floor(time / (validDuration / 5)))
+    : 0;
+  const phase = validDuration ? time / (validDuration / 5) - chapter : 0;
   return {
     progress: p,
     time,
