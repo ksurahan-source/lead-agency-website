@@ -85,6 +85,25 @@ await check("release-documentation", async () => {
   verifyCompatibility(await (await get(descriptor.verificationUrl)).json());
   return { mcp: descriptor.version };
 });
+await check("linked-skill-downloads", async () => {
+  const page = await (await get("/help/skills")).text();
+  const paths = [...new Set([...page.matchAll(/href="(\/help\/(?:skills\/|hiob-video-skill-)[^"]+)"/g)].map(m => m[1]))];
+  requireValue(paths.some(p => p.endsWith(".zip")) && paths.some(p => p.endsWith("SKILL.md")), "Skill download links missing");
+  for (const path of paths) {
+    const response = await get(path);
+    requireValue(response.status === 200, path + " HTTP " + response.status);
+    if (path.endsWith(".zip")) {
+      const bytes = Buffer.from(await response.arrayBuffer());
+      requireValue(bytes.subarray(0, 4).equals(Buffer.from([80, 75, 3, 4])), "Skill archive is not a ZIP");
+      requireValue(response.headers.get("content-disposition") === 'attachment; filename="' + path.split('/').at(-1) + '"', "Skill filename mismatch");
+    } else {
+      requireValue((await response.text()).includes("HIOB"), "Skill document missing");
+      const reference = await get(path.replace("SKILL.md", "references/production-workflow.md"));
+      requireValue(reference.status === 200 && (await reference.text()).includes("production_readiness"), "Skill workflow reference missing");
+    }
+  }
+  return { paths };
+});
 await check("sitemap-and-robots", async () => {
   const sitemap = await (await get("/sitemap.xml")).text();
   for (const path of [

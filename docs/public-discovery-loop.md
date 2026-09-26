@@ -23,7 +23,7 @@ The public sitemap preserves the existing service routes. A help deployment must
 - HelpArticles.jsx owns the visible procedures. ProductPage.jsx explains roles, examples, cost boundaries and the path to installation. WatchPage.jsx exposes the actual caption transcript with the film.
 - mcpInstall.mjs owns the immutable release descriptor used in visible commands and compatibility tables. check-release.mjs compares every field with the deployed install API and verifies the downloaded package hash plus exact-package audio/render evidence.
 - Static HTML, small search/copy JavaScript, metadata, navigation, schema and sitemaps are generated from these sources. No React client runtime is shipped.
-- A skill archive is immutable. Change its contents only with a deliberate version bump and validation of the linked release.
+- A skill archive is immutable. Change its contents only with a deliberate version bump and validation of the linked release. Preserve older archives; update the Worker asset allowlist and download filename together. Check every linked ZIP, SKILL.md and workflow reference over HTTP, not only the help document.
 - Neither structured data nor a JSON endpoint proves that a page is indexed or cited. The body is written for customers, with quick orientation, a visible table of contents, full instructions and task-specific recovery.
 
 ## Release sequence

@@ -199,3 +199,16 @@ test("update help explains diagnosis without claiming account or creative succes
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
   assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.1.0.zip"));
 });
+
+test("every linked skill download and its references are served by the worker", async () => {
+  const paths = new Set([...documents.get('/help/skills').matchAll(/href="(\/help\/(?:skills\/|hiob-video-skill-)[^"]+)"/g)].map(m => m[1]));
+  paths.add('/help/hiob-video-skill-1.0.0.zip');
+  paths.add('/help/skills/hiob-video-1.1.0/references/production-workflow.md');
+  assert.ok(paths.size >= 4);
+  for (const path of paths) {
+    const response = await worker.fetch(new Request(ORIGIN + path), env);
+    assert.equal(response.status, 200, path);
+    if (path.endsWith('.zip')) assert.equal(response.headers.get('content-disposition'), 'attachment; filename="' + path.split('/').at(-1) + '"');
+  }
+  assert.equal((await worker.fetch(new Request(ORIGIN + '/help/hiob-video-skill-9.9.9.zip'), env)).status, 404);
+});
