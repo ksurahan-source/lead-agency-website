@@ -9,7 +9,7 @@ test("reject changed install command, package, support claim or credit policy", 
   assert.doesNotThrow(() => verifyInstallDescriptor(MCP_RELEASE));
   for (const update of [
     { installerUrl: "https://example.com/install.sh" },
-    { version: "0.6.0" },
+    { version: MCP_RELEASE.version + "-unexpected" },
     { platforms: [...MCP_RELEASE.platforms, "win32-x64"] },
     { generationRequiresCredits: false },
   ]) {

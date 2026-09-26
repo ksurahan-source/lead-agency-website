@@ -192,3 +192,10 @@ test("watch media fingerprints match assets actually published by the landing bu
       file,
     );
 });
+
+test("update help explains diagnosis without claiming account or creative success", () => {
+  const update = documents.get("/help/troubleshooting/update");
+  assert.ok(update, "update route must exist");
+  for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
+  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.1.0.zip"));
+});
