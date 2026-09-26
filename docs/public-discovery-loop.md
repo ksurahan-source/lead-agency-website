@@ -55,3 +55,11 @@ No access or no data must be recorded explicitly. Do not create new subscription
 This release does not wire a new customer event collector. Existing homepage analytics remains in place. Documentation/copy events and actual Studio/MCP success need a common, consent-aware implementation in the Studio repository before a cross-domain completion rate can be reported. Never infer connected projects from outbound clicks.
 
 The follow-up event contract is: document_view and command_copy (public page/OS only), then connection_attached and export_succeeded from actual server results. Exclude copied prompt text, customer documents, private paths and project content. Prefer existing consent and storage, and verify receipts before calling the funnel wired.
+
+## First-customer welcome entry
+
+The homepage's three start calls and the public help header open `https://studio.hi-ob.com/start`. Explicit signup, login and profile setup links use `next=/start`. Studio owns this welcome hub and shows account creation → email confirmation → profile/workspace → first project → Codex connection. The public site explains those steps in readable HTML; it does not create accounts or approve a connection itself.
+
+Existing `/mcp` project management and challenge/run-specific connection links keep their purpose. The copied connection commands, installer archive, version, SHA and OS support evidence remain unchanged. `MCP_RELEASE.signupUrl` is the only changed field in the 0.6.0 descriptor.
+
+Before deploying these public links, deploy and verify Studio's `/start` route and signup redirect allowlist. Then the deployed install descriptor must expose `signupUrl=https://studio.hi-ob.com/studio/signup?next=%2Fstart`. Run `help:release-check`, deploy the reviewed landing/help changes, and rerun the public check. A pre-deployment signupUrl mismatch is a release-order dependency, not evidence of a working customer signup. Do not relax the exact descriptor assertion to hide it.

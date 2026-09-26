@@ -62,3 +62,14 @@ test("fingerprinted film and chunks are immutable but release marker is revalida
   );
   assert.match(result.headers.get("cache-control"), /must-revalidate/);
 });
+
+test("homepage start calls open the welcome hub while login returns to the same hub", async () => {
+  const html = await readFile(new URL('./dist/index.html', import.meta.url), 'utf8');
+  assert.equal([...html.matchAll(/href="https:\/\/studio\.hi-ob\.com\/start"/g)].length, 3);
+  assert.ok(html.includes('href="https://studio.hi-ob.com/studio/login?next=%2Fstart"'));
+  assert.doesNotMatch(html, /next=%2Fmcp|studio\.hi-ob\.com\/onboarding/);
+  const steps = html.match(/<div class="start-steps">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(steps, 'visible signup and setup steps');
+  assert.ok(steps.indexOf('가입·이메일 확인') < steps.indexOf('내 정보·작업공간'));
+  assert.ok(steps.indexOf('내 정보·작업공간') < steps.indexOf('첫 프로젝트·Codex 연결'));
+});

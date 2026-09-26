@@ -16,7 +16,7 @@ export function PublicHeader() {
       <nav aria-label="HIOB 서비스">
         <a href="/mcp">MCP 소개</a>
         <a href="/help">도움말</a>
-        <Link className={styles.outline} href="/studio/login?next=%2Fmcp">
+        <Link className={styles.outline} href="/start">
           Studio 열기 <ArrowRight size={15} aria-hidden="true" />
         </Link>
       </nav>
@@ -187,27 +187,28 @@ export default function HelpCenter({ route = {} }) {
                     <span className={styles.eyebrow}>처음 사용하시나요?</span>
                     <h2>이 순서로 시작하세요</h2>
                     <p>
-                      설치 확인에는 유료 영상 생성이 필요하지 않습니다. 내
-                      환경을 확인하고, 기획과 비용을 검토한 뒤 제작을
-                      시작하세요.
+                      <Link href="/start">HIOB 시작하기</Link>에서 계정을 만들고
+                      이메일을 확인하세요. 내 정보와 작업공간, 첫 프로젝트를
+                      준비한 뒤 Codex에 연결합니다. 설치 확인에는 유료 영상
+                      생성이 필요하지 않습니다.
                     </p>
                   </div>
                   <ol>
                     {[
                       [
-                        "install",
-                        "내 컴퓨터에 설치",
-                        "운영체제 선택 · 명령 복사",
+                        "connect",
+                        "계정과 첫 프로젝트 준비",
+                        "가입 · 이메일 확인 · 내 정보·작업공간",
                       ],
                       [
-                        "connect",
-                        "내 작업 공간 연결",
-                        "가입 · 내 정보 · Codex 승인",
+                        "install",
+                        "내 컴퓨터에 설치",
+                        "운영체제 선택 · Codex 준비",
                       ],
                       [
                         "create",
-                        "첫 영상 요청",
-                        "자료 전달 · 기획과 비용 확인",
+                        "Codex 연결 후 첫 기획",
+                        "프로젝트 승인 · 기획과 비용 확인",
                       ],
                     ].map(([id, title, text], i) => (
                       <li key={id}>

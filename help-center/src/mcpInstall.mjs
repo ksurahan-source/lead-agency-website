@@ -22,7 +22,7 @@ export const MCP_RELEASE = Object.freeze({
   setupPlatforms: ['darwin-arm64', 'darwin-x64', 'win32-x64', 'win32-arm64', 'linux-x64', 'linux-arm64'],
   guideUrl: 'https://hi-ob.com/help',
   connectUrl: 'https://studio.hi-ob.com/mcp',
-  signupUrl: 'https://studio.hi-ob.com/studio/signup?next=%2Fmcp',
+  signupUrl: 'https://studio.hi-ob.com/studio/signup?next=%2Fstart',
   generationRequiresCredits: true,
 });
 

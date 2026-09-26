@@ -57,7 +57,7 @@ export const HELP_ARTICLES = [
     id: "connect",
     topic: "account",
     title: "회원가입하고 Studio 프로젝트 연결하기",
-    summary: "이메일 인증, 프로젝트 준비, 연결 승인을 순서대로 진행합니다.",
+    summary: "가입·이메일 확인 → 내 정보·작업공간 → 첫 프로젝트·Codex 연결 순서입니다.",
     keywords:
       "로그인 계정 브랜드 권한 24시간 만료 해제 connection_begin 음성 허용",
   },

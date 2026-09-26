@@ -212,3 +212,29 @@ test("every linked skill download and its references are served by the worker", 
   }
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/hiob-video-skill-9.9.9.zip'), env)).status, 404);
 });
+
+test("new-customer entries return to the welcome hub and explain setup before Codex approval", () => {
+  for (const [route, html] of documents) {
+    assert.ok(html.includes('href="https://studio.hi-ob.com/start"'), route + ' welcome entry');
+    for (const [, raw] of html.matchAll(/href="(https:\/\/studio\.hi-ob\.com\/(?:studio\/(?:signup|login)|onboarding)[^"]*)"/g)) {
+      const url = new URL(decode(raw));
+      assert.equal(url.searchParams.get('next'), '/start', route + ' ' + url.pathname);
+    }
+  }
+  const connect = documents.get('/help/connect');
+  const article = connect.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)?.[1];
+  assert.ok(article, 'connection help article');
+  const headings = [...article.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)]
+    .map(([, heading]) => decode(heading.replace(/<[^>]+>/g, '')));
+  assert.deepEqual(headings.slice(0, 6), [
+    'HIOB 계정 만들기', '이메일 확인하기', '내 정보와 작업공간 설정하기',
+    '첫 프로젝트 준비하기', 'Codex에 연결 요청하기', '연결된 프로젝트 확인하기',
+  ]);
+  assert.ok(connect.includes('Codex 로그인과 HIOB 계정은 별개'));
+  assert.ok(connect.includes('connection_status와 connection_attach'));
+  assert.ok(connect.includes('실제로 접근하면'));
+  const windows = documents.get('/help/windows-test');
+  assert.ok(windows.indexOf('다른 이메일로 회원가입하고 확인하기') < windows.indexOf('Windows에 설치하고 Codex 연결'));
+  assert.ok(windows.includes('실제 고객 기기에서 확인하는 단계'));
+  assert.ok(windows.includes('전화번호는 선택'));
+});
