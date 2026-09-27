@@ -202,6 +202,7 @@ test("update help explains diagnosis without claiming account or creative succes
 
 test("every linked skill download and its references are served by the worker", async () => {
   const paths = new Set([...documents.get('/help/skills').matchAll(/href="(\/help\/(?:skills\/|hiob-video-skill-)[^"]+)"/g)].map(m => m[1]));
+  for (const m of documents.get('/help/create').matchAll(/href="(\/help\/skills\/[^"]+)"/g)) paths.add(m[1]);
   paths.add('/help/hiob-video-skill-1.0.0.zip');
   paths.add('/help/skills/hiob-video-1.1.0/references/production-workflow.md');
   assert.ok(paths.size >= 4);
@@ -211,6 +212,7 @@ test("every linked skill download and its references are served by the worker", 
     if (path.endsWith('.zip')) assert.equal(response.headers.get('content-disposition'), 'attachment; filename="' + path.split('/').at(-1) + '"');
   }
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/hiob-video-skill-9.9.9.zip'), env)).status, 404);
+  assert.equal((await worker.fetch(new Request(ORIGIN + '/help/skills/production-guide-9.9.9.md'), env)).status, 404);
 });
 
 test("new-customer entries return to the welcome hub and explain setup before Codex approval", () => {

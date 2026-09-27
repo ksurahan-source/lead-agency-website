@@ -26,7 +26,7 @@ const helpWorker = {
       return Response.redirect(url.toString(), 308);
     }
     const asset =
-      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|version\.json|hiob-video-skill-1\.[01]\.0\.zip|skills\/hiob-video(?:-1\.1\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
+      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|version\.json|skills\/production-guide-0\.6\.1\.md|hiob-video-skill-1\.[01]\.0\.zip|skills\/hiob-video(?:-1\.1\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
         url.pathname,
       );
     const known =
