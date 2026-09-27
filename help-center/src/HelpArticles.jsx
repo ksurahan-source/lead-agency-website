@@ -169,9 +169,8 @@ export function InstallGuide({ os }) {
                 </>
               )}
               <p>
-                이후{" "}
-                <strong>Codex를 완전히 종료했다가 다시 열고 새 대화</strong>를
-                시작하세요.
+                최초 등록 후 HIOB MCP를 연결하고 새 대화에서 확인하세요.
+                이미 관리형 실행기를 사용한다면 업데이트마다 앱을 닫을 필요가 없습니다.
               </p>
               <a href="#manual">앱만 사용하거나 수동 설정이 필요한가요?</a>
             </li>
@@ -522,25 +521,38 @@ export function HelpArticle({ id }) {
             <li><strong>unavailable:</strong> 공개 정보를 확인하지 못했습니다. 잠시 후 다시 확인하고 기존 프로젝트를 유지하세요.</li>
           </ul>
           <p>구버전에 이 도구가 없다면 아래 업데이트 절차를 이용하세요. 버전 일치는 설치 파일 무결성이나 영상 품질의 증거가 아닙니다.</p>
-          <h2>기존 hiob 등록을 바꾸려면</h2>
+          <h2>업데이트마다 앱을 다시 켜야 하나요?</h2>
+          <p>
+            관리형 설치는 앱 전체 재시작 없이 업데이트합니다. 설치 파일을 실행하면
+            새 버전을 별도 폴더에서 검사하고, 진행 중인 호출이 끝난 뒤 다음 호출부터
+            전환합니다. 이미 시작한 렌더와 원본·음원·프로젝트는 그대로 유지됩니다.
+          </p>
           <ol>
-            <li>
-              Codex의 <code>config.toml</code>을 백업하세요.
-            </li>
-            <li>
-              <code>codex mcp get hiob --json</code>으로 현재 버전의 경로를
-              확인하세요.
-            </li>
-            <li>
-              교체하려는 등록이 맞으면 <code>codex mcp remove hiob</code> 후 새
-              설치가 출력한 등록 명령을 실행하세요. Mac은 <code>--codex</code>{" "}
-              설치를 다시 실행합니다.
-            </li>
-            <li>Codex를 다시 열고 설치 점검을 요청하세요.</li>
+            <li>현재 운영체제의 설치 명령을 다시 실행하세요. 기존 버전 폴더를 지우지 마세요.</li>
+            <li>AI에게 <code>update_status</code>와 <code>release_check</code>를 요청하세요.</li>
+            <li>실행 버전과 설치 버전이 같고 <code>current</code>이면 계속 작업하세요.</li>
+            <li><code>waiting_for_calls</code>는 호출 종료를 기다리는 상태입니다. <code>update_blocked</code>면 기존 버전을 유지하므로 오류 문구를 확인하세요.</li>
+          </ol>
+          <h2>예전 설치를 쓰고 있다면 — 한 번만 전환</h2>
+          <p>
+            <code>codex mcp get hiob --json</code>의 경로에 <code>releases/버전/.../cli.mjs</code>가 있거나
+            <code>update_status</code> 도구가 없으면 예전 방식입니다.
+          </p>
+          <details>
+            <summary>Mac에서 예전 등록 때문에 설치가 멈춘 경우</summary>
+            <p>처음 전환할 때는 자동 등록 옵션 없이 아래 명령으로 설치하세요. 이후 생성된 TOML을 보고 기존 HIOB 항목만 수정합니다.</p>
+            <Command text={MCP_INSTALL_COMMAND} label="Mac 관리형 전환 설치 명령 복사" />
+          </details>
+          <ol>
+            <li><code>config.toml</code>을 백업하고 새 설치 파일을 실행하세요. 예전 Mac 등록이 있으면 위 전환 명령을 사용하세요.</li>
+            <li>설치가 만든 <code>codex-{MCP_RELEASE.version}.toml</code>을 열어 기존 <code>[mcp_servers.hiob]</code>의 command·args만 교체하세요. 작업 폴더·환경변수·다른 MCP는 보존하세요.</li>
+            <li>경로가 <code>launcher-v1.mjs</code>로 바뀌었는지 확인하고, 앱이 제공하는 HIOB MCP 재연결 또는 새 대화로 설정을 반영하세요.</li>
           </ol>
           <p>
-            등록 제거는 원본·프로젝트를 삭제하지 않습니다. Windows는{" "}
-            <code>codex.cmd</code>를 사용할 수 있습니다.
+            앱이 연결 새로 고침을 제공하지 않으면 이 최초 전환 때만 앱 재실행이 필요할 수 있습니다.
+            이후 호환 업데이트는 같은 연결에서 적용됩니다. 도구 목록 변경을 반영하지 않는 앱이나
+            실행기 호환 계약이 바뀌는 업데이트에서는 MCP 재연결이 필요할 수 있습니다.
+            Windows 실기기 검증 여부는 <a href="#compatibility">호환성 안내</a>를 확인하세요.
           </p>
           <h2>설치 중단 · 해시 오류가 나면</h2>
           <p>
@@ -578,7 +590,7 @@ export function HelpArticle({ id }) {
               이미 같은 항목이 있으면 그 항목만 수정합니다.
             </li>
             <li>
-              Codex를 완전히 종료했다가 다시 열어 도구가 보이는지 확인합니다.
+              HIOB MCP를 재연결하거나 새 대화에서 도구를 확인합니다. 앱에 재연결 기능이 없을 때만 최초 설정 반영을 위해 앱을 다시 실행합니다.
             </li>
           </ol>
           <dl className={styles.definitions}>
@@ -613,7 +625,7 @@ export function HelpArticle({ id }) {
               설치가 출력한 <code>mcpServers</code> JSON을 해당 앱의 MCP 설정에
               추가하세요. Codex는 TOML을 사용하므로 command, args, env.PATH 값을
               같은 이름의 항목으로 옮깁니다. command는 Node 실행 파일, args의 첫
-              항목은 cli.mjs입니다. 모두 출력된 절대 경로를 사용하세요.
+              항목은 launcher-v1.mjs입니다. 모두 출력된 절대 경로를 사용하세요.
             </p>
             <p>
               Windows·Linux도 설치가 출력한 앱별 설정을 사용합니다. 앱마다

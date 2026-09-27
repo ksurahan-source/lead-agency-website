@@ -1,13 +1,13 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [
     "darwin-arm64",
     "linux-arm64"
   ],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-0.6.2.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-0.6.3.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
@@ -18,13 +18,13 @@
     {
       "platform": "darwin-x64",
       "label": "macOS · Intel (실험적)",
-      "toolsLabel": "0.6.2 검증 대기",
-      "renderLabel": "0.6.2 검증 대기"
+      "toolsLabel": "0.6.3 검증 대기",
+      "renderLabel": "0.6.3 검증 대기"
     },
     {
       "platform": "win32-x64",
       "label": "Windows · x64",
-      "toolsLabel": "0.6.2 검증 대기",
+      "toolsLabel": "0.6.3 검증 대기",
       "renderLabel": "Docker 경로 제공 · 실기기 검증 대기"
     },
     {
@@ -47,10 +47,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-0.6.2.tgz",
-  "sha256": "957039a415408c676a45211fff928fc34a1e8969f3db22dcc13a49edf323963f",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-0.6.2.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-0.6.2.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-0.6.3.tgz",
+  "sha256": "048039ec6fb67a3384dba188e4a292099d7c51e2105f84ec0d056ffb52a269b2",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-0.6.3.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-0.6.3.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
