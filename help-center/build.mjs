@@ -7,7 +7,7 @@ import { MCP_RELEASE } from "./src/mcpInstall.mjs";
 
 // Product examples and human-readable support summaries were reviewed against this release.
 // Updating the installer descriptor requires re-reviewing that editorial copy too.
-if (MCP_RELEASE.version !== "0.6.1") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
+if (MCP_RELEASE.version !== "0.6.2") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const destination = new URL("./dist/", import.meta.url);
@@ -32,6 +32,10 @@ await cp(
   new URL("public/help/skills/", import.meta.url),
   new URL("help/skills/", destination),
   { recursive: true },
+);
+await cp(
+  new URL("public/help/mcp-release.json", import.meta.url),
+  new URL("help/mcp-release.json", destination),
 );
 run("npx", [
   "--yes",

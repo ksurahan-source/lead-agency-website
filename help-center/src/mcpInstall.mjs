@@ -1,30 +1,5 @@
-// A release is immutable: replace this descriptor only after testing the packed artifact.
-export const MCP_RELEASE = Object.freeze({
-  schema: 'HiobMcpInstall.v1',
-  version: '0.6.1',
-  channel: 'beta',
-  transport: 'stdio',
-  platforms: ['darwin-arm64', 'linux-arm64'],
-  verificationUrl: 'https://studio.hi-ob.com/downloads/mcp/compatibility-0.6.1.json',
-  compatibility: [
-    { platform: 'darwin-arm64', label: 'macOS · Apple Silicon', toolsLabel: '설치·통신·자료 가져오기 통과', renderLabel: '3초 테스트 영상·음원 합성 통과' },
-    { platform: 'darwin-x64', label: 'macOS · Intel (실험적)', toolsLabel: '0.6.1 검증 대기', renderLabel: '0.6.1 검증 대기' },
-    { platform: 'win32-x64', label: 'Windows · x64', toolsLabel: '0.6.1 검증 대기', renderLabel: 'Docker 경로 제공 · 실기기 검증 대기' },
-    { platform: 'win32-arm64', label: 'Windows · ARM64 (실험적)', toolsLabel: '실기기 검증 대기', renderLabel: 'Docker 경로 제공 · 실기기 검증 대기' },
-    { platform: 'linux-x64', label: 'Linux · x64 (실험적)', toolsLabel: '실기기 검증 대기', renderLabel: 'Docker 경로 제공 · 실기기 검증 대기' },
-    { platform: 'linux-arm64', label: 'Linux · ARM64 (가상 머신 검증)', toolsLabel: '설치·MCP·한글 경로 통과', renderLabel: 'Docker 영상·음원 합성 통과' },
-  ],
-  node: '>=22.18.0',
-  packageUrl: 'https://studio.hi-ob.com/downloads/mcp/hiob-mcp-0.6.1.tgz',
-  sha256: '85a8c268385ffebde3a724cb23b2395847b953832ee27e5c8373d9002b7dacce',
-  installerUrl: 'https://studio.hi-ob.com/downloads/mcp/install-0.6.1.sh',
-  toolsInstallerUrl: 'https://studio.hi-ob.com/downloads/mcp/install-tools-0.6.1.mjs',
-  setupPlatforms: ['darwin-arm64', 'darwin-x64', 'win32-x64', 'win32-arm64', 'linux-x64', 'linux-arm64'],
-  guideUrl: 'https://hi-ob.com/help',
-  connectUrl: 'https://studio.hi-ob.com/mcp',
-  signupUrl: 'https://studio.hi-ob.com/studio/signup?next=%2Fstart',
-  generationRequiresCredits: true,
-});
+import { MCP_RELEASE } from './mcpRelease.generated.mjs';
+export { MCP_RELEASE };
 
 export const MCP_INSTALL_COMMAND = `curl --fail --show-error --location --proto '=https' --tlsv1.2 '${MCP_RELEASE.installerUrl}' -o hiob-install.sh &&\nsh hiob-install.sh`;
 export const MCP_CODEX_INSTALL_COMMAND = `${MCP_INSTALL_COMMAND} --codex`;

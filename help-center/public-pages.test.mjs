@@ -240,3 +240,11 @@ test("new-customer entries return to the welcome hub and explain setup before Co
   assert.ok(windows.includes('실제 고객 기기에서 확인하는 단계'));
   assert.ok(windows.includes('전화번호는 선택'));
 });
+
+test("public release manifest is served as JSON and matches installation instructions", async () => {
+  const response = await worker.fetch(new Request(ORIGIN + '/help/mcp-release.json'), env);
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type'), /^application\/json/);
+  assert.deepEqual(await response.json(), MCP_RELEASE);
+  assert.equal((await worker.fetch(new Request(ORIGIN + '/help/missing-release.json'), env)).status, 404);
+});
