@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import worker from "./worker.mjs";
+import { createHash } from 'node:crypto';
 import { PUBLIC_ROUTES, LEGACY_HASHES, ORIGIN } from "./src/routes.mjs";
 import {
   MCP_RELEASE,
@@ -247,4 +248,26 @@ test("public release manifest is served as JSON and matches installation instruc
   assert.match(response.headers.get('content-type'), /^application\/json/);
   assert.deepEqual(await response.json(), MCP_RELEASE);
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/missing-release.json'), env)).status, 404);
+});
+
+test('Windows recovery download is complete, hash-bound, served with the correct MIME and documented separately from consent',async()=>{
+  const descriptor=await worker.fetch(new Request(ORIGIN+'/help/tools/windows-recovery-1.json'),env);
+  assert.equal(descriptor.status,200);
+  assert.match(descriptor.headers.get('content-type'),/^application\/json/);
+  const receipt=await descriptor.json();
+  const file=await worker.fetch(new Request(ORIGIN+'/help/tools/windows-recovery-1.mjs'),env);
+  assert.equal(file.status,200);
+  assert.match(file.headers.get('content-type'),/^text\/javascript/);
+  assert.match(file.headers.get('content-disposition'),/attachment/);
+  const bytes=Buffer.from(await file.arrayBuffer());
+  assert.equal(bytes.length,receipt.bytes);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),receipt.sha256);
+  const renderer=decode(documents.get('/help/troubleshooting/renderer'));
+  assert.ok(renderer.includes('Get-FileHash -Algorithm SHA256'));
+  assert.ok(renderer.includes('node $file --repair'));
+  assert.ok(renderer.includes('Windows 실기기 최종 검증은 아직 진행 전'));
+  const voice=documents.get('/help/troubleshooting/voice');
+  assert.ok(voice.includes('전체 제작 설정'));
+  assert.ok(voice.includes('connection_attach'));
+  assert.equal((await worker.fetch(new Request(ORIGIN+'/help/tools/not-a-tool.mjs'),env)).status,404);
 });

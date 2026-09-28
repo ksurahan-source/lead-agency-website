@@ -431,6 +431,29 @@ export function HelpArticle({ id }) {
             사용합니다. Mac 기본 렌더에는 FFmpeg·FFprobe와 Xcode Command Line
             Tools가 필요합니다.
           </p>
+          <h2>Windows에서 한 번에 점검·복구하기</h2>
+          <p>현재 설치한 MCP를 유지하면서 Docker 엔진과 렌더 환경을 확인합니다. 아래 명령은 해시를 확인한 복구 도구를 실행하고, 필요한 경우 Docker Desktop 시작과 렌더 이미지 준비만 수행합니다. 프로젝트·권한·크레딧을 변경하거나 유료 영상을 생성하지 않습니다.</p>
+          <Command text={[
+            "$base = 'https://hi-ob.com/help/tools'",
+            "$meta = Invoke-RestMethod -Uri ($base + '/windows-recovery-1.json')",
+            "if ($meta.schema -ne 'HiobWindowsRecoveryDownload.v1' -or $meta.sha256 -notmatch '^[a-f0-9]{64}$') { throw '복구 도구 정보를 확인할 수 없습니다.' }",
+            "$file = Join-Path $env:TEMP ('hiob-recovery-' + [guid]::NewGuid().ToString() + '.mjs')",
+            "Invoke-WebRequest -Uri ($base + '/windows-recovery-1.mjs') -OutFile $file",
+            "if ((Get-FileHash -Algorithm SHA256 $file).Hash.ToLowerInvariant() -ne $meta.sha256) { throw '파일 무결성 검사 실패. 실행하지 않습니다.' }",
+            'node $file --repair',
+          ].join('\n')} label="Windows 복구 명령 복사" />
+          <p>PowerShell에서 실행하세요. Node.js 22.18 이상과 기존 HIOB 관리형 설치가 필요합니다. 사용자 지정 설치는 마지막 줄에 <code>{"--install-dir 'C:\\설치 폴더'"}</code>를 추가합니다. 진단만 하려면 <code>--repair</code>를 빼세요. 최초 준비는 수 분 걸릴 수 있습니다.</p>
+          <p><code>ready: true</code>는 이 터미널의 렌더 환경 점검 통과입니다. 같은 Windows AI 앱에서 <code>runtime_check</code>를 다시 실행하고 실제 영상으로 검증하세요. Windows 실기기 최종 검증은 아직 진행 전입니다.</p>
+          <details><summary>복구 도구가 멈춘 위치 확인하기</summary>
+            <ul>
+              <li><code>DOCKER_CLI_UNAVAILABLE</code>: Docker Desktop 설치 또는 PATH 확인.</li>
+              <li><code>DOCKER_START_FAILED</code>: Docker Desktop을 직접 열고 약관·WSL·가상화 안내 확인. 구버전에는 시작 명령이 없을 수 있습니다.</li>
+              <li><code>LOCAL_DOCKER_REQUIRED</code> · <code>LINUX_CONTAINERS_REQUIRED</code>: 로컬 Linux 엔진 선택. 원격 엔진이나 기존 컨테이너 설정은 자동 변경하지 않습니다.</li>
+              <li><code>MCP_INSTALL_NOT_FOUND</code>: 사용자 지정 설치 경로 또는 <a href="#update">한 번의 관리형 설치 전환</a> 확인.</li>
+              <li><code>RENDERER_SETUP_FAILED</code>: Docker의 네트워크·디스크·빌드 상태 확인.</li>
+            </ul>
+          </details>
+          <Command prompt text="이 Windows PC에서 HIOB 제작 환경을 복구해줘. https://hi-ob.com/help/troubleshooting/renderer 의 공식 복구 도구와 해시 검증 명령을 사용해줘. 다른 컴퓨터의 성공으로 대신하지 말고, 현재 프로젝트를 보존하고 진단 후 필요하면 --repair로 Docker와 설치된 버전의 렌더 환경을 준비해. 같은 MCP에서 runtime_check를 다시 확인해. 계정 권한은 connection_diagnose와 connection_status로 별도 확인하고, 영상·음성·편집·저장·복원 중 막힌 기능을 구분해. 필요한 프로젝트 연결은 내가 전체 제작 범위와 예산을 확인하는 승인 화면으로 안내하고 임의 승인·유료 실행은 하지 마." label="Windows AI에 복구 요청 복사" />
           <h2>Docker를 사용하는 경우</h2>
           <ol>
             <li>Docker를 실행하고 아래 명령을 확인하세요.</li>
@@ -482,6 +505,15 @@ export function HelpArticle({ id }) {
     case "voice":
       return (
         <>
+          <h2>영상·음성을 모두 만들 수 있게 연결하기</h2>
+          <p>크레딧 충전과 AI 연결의 사용 허용은 별개입니다. 영상은 생성됐는데 음성이 막히면 연결의 생성 상한, 음성 허용과 만료를 먼저 확인하세요. 잔액이 있어도 음성 미허용이나 연결 상한 소진이면 요청이 차단됩니다.</p>
+          <ol>
+            <li>제작 중인 Windows AI에서 현재 프로젝트의 연결 상태를 확인하고 같은 프로젝트의 새 승인 화면을 여세요.</li>
+            <li>Studio에서 <strong>전체 제작 설정</strong>을 누르면 현재 사용 가능한 크레딧으로 영상·Typecast·편집·저장·복원 설정을 함께 준비합니다.</li>
+            <li>프로젝트, 생성 요청 상한과 24시간 유효기간을 확인하고 <strong>이 프로젝트 연결 허용</strong>을 누르세요. 설정 버튼만으로 권한이 바뀌거나 크레딧이 차감되지 않습니다.</li>
+            <li>같은 Windows AI로 돌아가 <code>connection_status</code> → <code>connection_attach</code> → <code>connection_diagnose</code>로 실제 연결을 확인하세요. 기존 영상과 사용할 수 있는 음원은 재생성하지 않습니다.</li>
+          </ol>
+          <p>현재 공개 MCP의 최종 렌더는 컴퓨터에서 실행하므로, <a href="#renderer">Windows Docker 준비</a>는 별도 확인합니다. 서버 렌더 권한 숫자만 올려도 지원되지 않는 프로젝트에서 AWS 렌더가 켜지는 것은 아닙니다.</p>
           <h2>아래 순서로 확인하세요</h2>
           <ol>
             <li>

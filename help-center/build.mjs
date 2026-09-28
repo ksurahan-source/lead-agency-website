@@ -37,6 +37,13 @@ await cp(
   new URL("public/help/mcp-release.json", import.meta.url),
   new URL("help/mcp-release.json", destination),
 );
+const recovery = await readFile(new URL('public/help/tools/windows-recovery-1.mjs', import.meta.url));
+await mkdir(new URL('help/tools/', destination), { recursive: true });
+await writeFile(new URL('help/tools/windows-recovery-1.mjs', destination), recovery);
+await writeFile(new URL('help/tools/windows-recovery-1.json', destination), JSON.stringify({
+  schema: 'HiobWindowsRecoveryDownload.v1', version: 1,
+  sha256: createHash('sha256').update(recovery).digest('hex'), bytes: recovery.length,
+}) + '\n');
 run("npx", [
   "--yes",
   "--package=esbuild@0.28.1",
