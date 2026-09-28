@@ -19,7 +19,7 @@ const commands = {
 const connectPrompt =
   "HIOB MCP의 connection_begin으로 내 Studio 프로젝트 연결을 시작해줘. 내가 브라우저에서 프로젝트와 허용 범위를 확인하고 승인하면 connection_status와 connection_attach로 연결을 확인해줘. 아직 유료 생성은 하지 마.";
 const firstPrompt =
-  "HIOB로 이 자료의 핵심을 이해하고 광고를 만들어줘. 먼저 설치·프로젝트 연결과 project_context의 제작 지침·현재 단계·다음 행동을 확인해줘. 9초 이내 훅, 장면, 대사와 비용을 보여주고 내가 승인한 범위에서만 생성해줘. 첫 결과는 선택한 목소리와 읽기 쉬운 자막이 있는 짧은 편집 시안으로 보여줘. 실제 화면과 소리를 검수하고, 수정할 구간만 바꿔줘. 완성 영상과 다시 열 수 있는 프로젝트까지 저장해줘. 할 수 없는 단계는 정확하게 알려줘.";
+  "HIOB로 이 자료의 핵심을 이해하고 광고를 만들어줘. 먼저 production_check와 project_context로 현재 프로젝트·승인·제작 지침·다음 단계를 확인해줘. 기존 녹음과 선택한 음성 방식을 확인하고, 직접 녹음이면 실제 대사·길이·쉼에 맞춰 장면과 자막을 설계해줘. Typecast나 혼합을 선택한 경우에만 필요한 문장을 합성해줘. 9초 이내 훅, 장면, 대사와 비용을 보여주고 내가 승인한 범위에서만 생성해줘. 첫 결과는 목소리와 자막을 연결한 짧은 편집 시안으로 보여줘. 실제 화면과 소리를 검수하고 수정 구간만 바꿔줘. 완성 영상과 다시 열 수 있는 프로젝트까지 저장하고, 할 수 없는 단계는 정확하게 알려줘.";
 
 export function Command({ text, label, prompt = false }) {
   return (
@@ -69,8 +69,8 @@ export function InstallGuide({ os }) {
             {os === "windows"
               ? "Windows는 설치 경로를 제공하며, 실제 Windows 고객 환경의 최종 검증은 진행 전입니다."
               : os === "macos"
-                ? "Apple Silicon Mac에서 설치·영상·음원 합성을 확인했습니다. Intel Mac은 검증 전입니다."
-                : "Linux ARM64 가상 머신에서 설치·렌더를 확인했습니다. x64·WSL은 검증 전입니다."}{" "}
+                ? "Apple Silicon Mac에서 설치·MCP 통신을 확인했습니다. AWS 최종 제작과 Intel Mac은 별도 검증 대기입니다."
+                : "Linux x64·ARM64의 새 서버 제작 경로는 실기기 검증 대기입니다. 기존 가상 머신 검사는 AWS 최종 제작을 검증하지 않습니다."}{" "}
             <a href="#compatibility">지원 범위 보기</a>
           </p>
           <ol className={styles.steps}>
@@ -83,36 +83,7 @@ export function InstallGuide({ os }) {
                 설치하고 Codex에 로그인하세요. 이미 설치했다면 다음 단계로
                 넘어갑니다.
               </p>
-              {os === "macos" ? (
-                <details>
-                  <summary>Mac 영상 렌더에 필요한 프로그램</summary>
-                  <p>
-                    FFmpeg·FFprobe와 Xcode Command Line Tools가 필요합니다.
-                    Homebrew가 설치되어 있다면 아래 명령을 사용하세요. Xcode
-                    설치 창이 열리면 설치를 마친 뒤 나머지를 실행합니다.
-                  </p>
-                  <Command
-                    text={"xcode-select --install\nbrew install node ffmpeg"}
-                    label="macOS 준비 명령 복사"
-                  />
-                  <a href="https://brew.sh">Homebrew 공식 설치 안내</a>
-                </details>
-              ) : (
-                <p>
-                  최종 영상 합성에는{" "}
-                  {os === "windows" ? (
-                    <a href="https://docs.docker.com/desktop/setup/install/windows-install/">
-                      Docker Desktop
-                    </a>
-                  ) : (
-                    <a href="https://docs.docker.com/engine/install/">
-                      Docker Engine과 Buildx
-                    </a>
-                  )}
-                  도 필요합니다. 설치 후 실행하세요. Windows는 Linux 컨테이너
-                  모드를 사용합니다.
-                </p>
-              )}
+              <p>최종 렌더는 Studio의 Remotion AWS Lambda 작업으로 처리합니다. 고객 컴퓨터에 렌더 엔진을 설치하지 않습니다. 설치한 버전의 서버 렌더 지원은 연결 후 확인합니다.</p>
             </li>
             <li>
               <h2>HIOB 설치 명령 실행하기</h2>
@@ -134,10 +105,10 @@ export function InstallGuide({ os }) {
               </p>
             </li>
             <li>
-              <h2>Codex 등록과 렌더 준비하기</h2>
+              <h2>Codex에 HIOB 연결하기</h2>
               {os === "macos" ? (
                 <p>
-                  설치가 Codex 등록과 렌더 준비를 함께 처리합니다. 기존 hiob
+                  설치가 Codex 등록을 처리합니다. 기존 hiob
                   등록 때문에 멈췄다면 <a href="#update">업데이트 안내</a>를
                   확인하세요.
                 </p>
@@ -145,15 +116,12 @@ export function InstallGuide({ os }) {
                 <>
                   <p>
                     설치가 끝나면 터미널에 표시되는{" "}
-                    <strong>Codex 등록 명령</strong>과{" "}
-                    <strong>setup-renderer 명령</strong>을 순서대로 복사해
-                    실행하세요. 첫 렌더 준비는 수 분 걸릴 수 있습니다.
+                    <strong>Codex 등록 명령</strong>을 복사해 실행하세요.
                   </p>
                   <details>
                     <summary>출력에서 어떤 명령을 찾나요?</summary>
                     <p>
-                      등록 명령에는 <code>mcp add hiob</code>, 렌더 준비
-                      명령에는 <code>setup-renderer</code>가 포함됩니다. 경로는
+                      등록 명령에는 <code>mcp add hiob</code>가 포함됩니다. 경로는
                       컴퓨터마다 다르므로 설치 결과에 출력된 명령 전체를
                       사용하세요.
                     </p>
@@ -265,9 +233,8 @@ export function HelpArticle({ id }) {
           <div className={styles.callout}>
             <strong>유료 생성은 별도로 허용합니다</strong>
             <p>
-              생성 상한의 기본값은 0입니다. 영상·음성을 만들려면 크레딧과 생성
-              상한을 확인하고, 음성 생성도 별도로 허용하세요. 연결은 24시간 후
-              만료되며 <Link href="/mcp">연결 관리</Link>에서 해제할 수
+              생성 상한의 기본값은 0입니다. 새 영상 생성·Typecast 합성에는 크레딧과 생성
+              상한을 확인하고, Typecast 합성만 별도로 허용하세요. 직접 녹음에는 이 합성 허용이 필요하지 않습니다. 연결은 기본 24시간이며 1시간·3일·7일도 직접 선택할 수 있습니다. 만료 전에도 <Link href="/mcp">연결 관리</Link>에서 해제할 수
               있습니다.
             </p>
           </div>
@@ -277,6 +244,14 @@ export function HelpArticle({ id }) {
     case "create":
       return (
         <>
+          <h2>목소리부터 선택하세요</h2>
+          <ul>
+            <li><strong>직접 녹음:</strong> WAV·MP3·M4A 녹음을 자료 폴더에 넣으세요. 실제 말과 길이·쉼을 기준으로 장면과 자막을 만듭니다.</li>
+            <li><strong>Typecast:</strong> 원하는 AI 목소리의 문장별 후보를 확인하고 선택합니다.</li>
+            <li><strong>혼합:</strong> 내 녹음을 유지하고 필요한 문장만 AI 음성으로 보완합니다.</li>
+          </ul>
+          <p>직접 녹음에는 Typecast 합성 권한·비용이 필요하지 않습니다. 영상 생성과 최종 렌더 비용은 별도입니다. 전사한 문구는 실제 녹음과 대조하고 원본은 보존합니다.</p>
+          <Command prompt label="내 녹음으로 제작 요청 복사" text="이 녹음을 기준으로 HIOB 영상을 만들어줘. 먼저 원본 파일을 보존하고 실제 발화·길이·쉼을 확인해. plan_save의 narrationSource는 recording으로 저장하고, 녹음에 맞춰 장면과 구절 자막을 설계해 audio_set으로 연결해. Typecast로 대체 합성하지 마. 녹음 끝을 자르거나 일괄 배속하지 말고, 전사나 타이밍이 불확실하면 검수 대상으로 남겨. 기존 프로젝트의 승인과 자산을 재사용하고 최종 영상은 AWS 서버로 렌더해." />
           <ol className={styles.steps}>
             <li>
               <h2>제품 자료를 준비하세요</h2>
@@ -309,7 +284,7 @@ export function HelpArticle({ id }) {
           </ol>
           <p>{MCP_RELEASE.version}은 AI에게 현재 제작 단계와 다음 작업을 안내하고, 미리보기 검수와 완성본 검수를 구분합니다. 편집을 바꾸면 이전 검수를 다시 확인합니다. <a href={`/help/skills/production-guide-${MCP_RELEASE.version}.md`}>전체 제작 매뉴얼 보기</a>. 화면과 목소리의 실제 품질은 시안으로 확인하세요.</p>
           <h2>Windows에서 처음 사용할 때</h2>
-          <p>설치한 뒤 Codex 또는 Aside에서 위 요청을 보내세요. 작업이 막히면 “현재 단계, 부족한 자료와 다음 행동을 알려줘”라고 요청하면 됩니다. Windows 실기기 검증은 아직 대기 중이며, 현재 최종 렌더에는 로컬 Docker가 필요합니다. 설치 성공만으로 광고 제작 성공이 확인되는 것은 아닙니다.</p>
+          <p>설치한 뒤 Codex 또는 Aside에서 위 요청을 보내세요. 작업이 막히면 “현재 단계, 부족한 자료와 다음 행동을 알려줘”라고 요청하면 됩니다. Windows 실기기 검증은 아직 대기 중이며, 서버 렌더 지원·권한과 실제 작업 성공은 별도로 확인합니다. 설치 성공만으로 광고 제작 성공이 확인되는 것은 아닙니다.</p>
           <Next href="#restore">다음: 결과 저장과 이어서 작업</Next>
         </>
       );
@@ -322,18 +297,17 @@ export function HelpArticle({ id }) {
             프로젝트를 저장하도록 요청하세요. Studio 저장 결과와 복원 가능한
             자료 목록을 확인합니다.
           </p>
-          <h2>다른 컴퓨터 또는 새 세션에서</h2>
+          <h2>다른 컴퓨터·새 세션에서 이어서 만들기</h2>
           <ol>
-            <li>그 컴퓨터에 HIOB MCP를 설치하세요.</li>
+            <li>같은 컴퓨터의 새 세션은 기존 프로젝트를 찾고 connection_resume으로 유효한 연결을 재사용하세요. 단계마다 새 승인은 필요하지 않습니다.</li>
             <li>
-              같은 Studio 계정으로 로그인하고 같은 프로젝트에 새 연결을
-              승인하세요.
+              새 컴퓨터라면 MCP 설치 후 같은 Studio 계정의 프로젝트를 처음 연결하세요. 기존 연결이 만료·철회된 때도 이때만 승인을 갱신합니다.
             </li>
             <li>
               Codex에 승인된 프로젝트를 복원하고 원본·음원 누락 여부를
               확인하도록 요청하세요.
             </li>
-            <li>짧게 미리보기한 뒤 편집을 이어가세요.</li>
+            <li>기존 서버 결과와 원본·선택 음원을 확인한 뒤 편집을 이어가세요. 재진입 때문에 전체를 재생성하지 않습니다.</li>
           </ol>
           <div className={styles.callout}>
             <strong>연결 키는 복사하지 마세요</strong>
@@ -351,7 +325,7 @@ export function HelpArticle({ id }) {
     case "payment":
       return <><p>카드 결제는 준비 중입니다. 계좌이체 요청은 웹에 저장되며 운영자가 실제 입금을 확인한 후 크레딧에 반영합니다.</p><ol className={styles.steps}><li><h2>내 정보 확인</h2><p><Link href="/account">내 정보</Link>에서 이름을 확인하고 업체명·연락처를 수정할 수 있습니다. 전화번호는 선택 항목입니다. 가입 이메일과 입금자명을 정확히 확인하세요.</p></li><li><h2>충전 요청 저장</h2><p><Link href="/billing">크레딧 · 충전</Link>에서 브랜드, 금액, 입금자명을 입력하고 ‘충전 요청 저장’을 누릅니다. ‘계좌이체 안내를 준비 중’이면 아직 송금하지 마세요.</p></li><li><h2>표시된 계좌로 입금</h2><p>저장된 요청에 표시되는 은행·계좌번호·예금주를 확인하고 요청 금액을 송금하세요. 이메일에만 있는 다른 계좌로 송금하지 마세요. 이미 입금했다면 다시 입금하지 않습니다.</p></li><li><h2>이메일로 입금 확인 요청</h2><p>‘입금 확인 요청 이메일 작성’을 누르면 요청 번호·가입 이메일·금액·입금자명이 채워집니다. 입금 시각을 적고 직접 발송하세요. 이메일 앱이 없으면 ‘요청 내용 복사’ 후 웹메일에서 요청에 표시된 수신 주소로 보냅니다.</p></li><li><h2>반영된 잔액 확인</h2><p>‘입금 처리 · 잔액 새로고침’을 누릅니다. 운영자가 입금을 확인하면 ‘크레딧 반영’으로 바뀝니다. 대기 중에는 추가 송금하지 마세요. 금액·입금자 불일치, 환불 요청은 요청 번호와 함께 운영자에게 문의하세요.</p></li></ol><Next href="#create">기획을 확인하고 제작하기</Next></>;
     case "skills":
-      return <><p>HIOB MCP는 프로젝트·소재·음성·렌더 도구를 연결합니다. 제작 스킬은 Codex가 어떤 순서로 기획하고 검수할지 설명합니다. 두 가지를 함께 사용하세요.</p><ol className={styles.steps}><li><h2>제작 스킬 받기</h2><p><a href="/help/hiob-video-skill-1.1.0.zip" download>HIOB 영상 제작 스킬 1.1.0 다운로드</a> · <a href="/help/skills/hiob-video-1.1.0/SKILL.md">내용 먼저 보기</a></p><p>압축을 풀면 hiob-video 폴더가 나옵니다. 이 파일에는 개인 계정 정보나 공급자 API 키가 없습니다.</p></li><li><h2>Codex에 설치 요청</h2><Command prompt text={"다운로드한 hiob-video-skill-1.1.0.zip의 내용을 먼저 읽고 HIOB 영상 제작 스킬을 내 Codex 사용자 스킬 폴더에 설치해줘. 기존 hiob-video 스킬이 있다면 덮어쓰기 전에 차이를 보여줘. 다른 설정과 파일은 변경하지 마."} label="스킬 설치 요청 복사"/><p>압축 파일을 Codex에 첨부하거나 다운로드 경로를 지정합니다. 설치 후 새 대화에서 스킬이 보이는지 확인하세요. 앱에 스킬 설치 기능이 없다면 SKILL.md를 읽어 달라고 요청할 수 있습니다.</p></li><li><h2>스킬을 지정해 제작 요청</h2><Command prompt text={"hiob-video 스킬을 사용해 첨부 자료로 첫 영상을 기획해줘. HIOB MCP 연결과 렌더 환경부터 확인하고, 9초 이내 훅·대본·목소리 후보·장면·자막·견적을 먼저 보여줘. 목소리를 들어보고 승인한 뒤 필요한 소재만 생성해줘."} label="스킬 사용 요청 복사"/></li></ol><h2>어떻게 만들어지나요?</h2><p>자료 검토 → 훅·장면 설계 → 짧은 목소리 비교 → 비용 승인 → 이미지·영상 소재 생성 → 실제 발화에 맞춘 편집 → 화면·소리 검수 → Studio 저장 순서입니다. 고칠 때는 해당 문장이나 컷만 바꿉니다.</p><p>이미지 생성은 사용하는 AI 앱의 도구와 이용권에 따라 다릅니다. HIOB 설치가 Codex 구독이나 이미지 생성 권한을 포함하지는 않습니다. 최종 청취와 제품 사실 확인은 반드시 진행하세요.</p><Next href="#create">첫 영상 요청 예시 보기</Next></>;
+      return <><p>HIOB MCP는 프로젝트·소재·음성·렌더 도구를 연결합니다. 제작 스킬은 Codex가 어떤 순서로 기획하고 검수할지 설명합니다. 두 가지를 함께 사용하세요.</p><ol className={styles.steps}><li><h2>제작 스킬 받기</h2><p><a href="/help/hiob-video-skill-1.2.0.zip" download>HIOB 영상 제작 스킬 1.2.0 다운로드</a> · <a href="/help/skills/hiob-video-1.2.0/SKILL.md">내용 먼저 보기</a></p><p>압축을 풀면 hiob-video 폴더가 나옵니다. 이 파일에는 개인 계정 정보나 공급자 API 키가 없습니다.</p></li><li><h2>Codex에 설치 요청</h2><Command prompt text={"다운로드한 hiob-video-skill-1.2.0.zip의 내용을 먼저 읽고 HIOB 영상 제작 스킬을 내 Codex 사용자 스킬 폴더에 설치해줘. 기존 hiob-video 스킬이 있다면 덮어쓰기 전에 차이를 보여줘. 다른 설정과 파일은 변경하지 마."} label="스킬 설치 요청 복사"/><p>압축 파일을 Codex에 첨부하거나 다운로드 경로를 지정합니다. 설치 후 새 대화에서 스킬이 보이는지 확인하세요. 앱에 스킬 설치 기능이 없다면 SKILL.md를 읽어 달라고 요청할 수 있습니다.</p></li><li><h2>스킬을 지정해 제작 요청</h2><Command prompt text={"hiob-video 스킬을 사용해 첨부 자료로 첫 영상을 기획해줘. HIOB MCP 연결과 렌더 환경부터 확인하고, 9초 이내 훅·대본·목소리 후보·장면·자막·견적을 먼저 보여줘. 직접 녹음이 있으면 그 음성의 대사·길이·쉼부터 장면과 자막에 맞춰줘. 새 AI 음성이 필요한 경우만 후보를 비교하고, 기존 승인 범위 안에서 필요한 소재만 생성해줘."} label="스킬 사용 요청 복사"/></li></ol><h2>어떻게 만들어지나요?</h2><p>자료 검토 → 훅·장면 설계 → 직접 녹음 또는 AI 목소리 선택 → 비용 확인 → 이미지·영상 소재 생성 → 실제 발화에 맞춘 편집 → 화면·소리 검수 → Studio 저장 순서입니다. 고칠 때는 해당 문장이나 컷만 바꿉니다.</p><p>이미지 생성은 사용하는 AI 앱의 도구와 이용권에 따라 다릅니다. HIOB 설치가 Codex 구독이나 이미지 생성 권한을 포함하지는 않습니다. 최종 청취와 제품 사실 확인은 반드시 진행하세요.</p><Next href="#create">첫 영상 요청 예시 보기</Next></>;
     case "privacy":
       return <><h2>계정과 연락처</h2><p>이메일은 가입 인증·계정 식별에 사용합니다. 이름은 작업 공간 설정에 필요하고, 업체명은 업체·팀으로 사용할 때 필요합니다. 전화번호는 선택 항목이며 동의 후 저장합니다. <Link href="/account">내 정보</Link>에서 정보를 변경할 수 있으며 선택 연락처는 비워서 삭제할 수 있습니다.</p><h2>프로젝트와 콘텐츠</h2><p>HIOB에 저장한 프로젝트 제목·키워드·완성본은 제작 지원과 서비스 운영을 위해 관리자에게 표시됩니다. 별도 키워드가 없으면 제목의 단어를 표시하며 추출 출처를 구분합니다. 공유 브랜드에서는 팀이 같은 콘텐츠와 크레딧을 사용합니다.</p><h2>계좌이체와 지원</h2><p>충전 요청에는 가입 계정, 브랜드, 요청 금액, 입금자명, 요청 시각과 처리 내역을 저장합니다. 은행 비밀번호·카드번호를 입력하지 않습니다. 결제 및 서비스 기록의 보관·삭제 요청은 운영 이메일로 문의하세요.</p><h2>기기 안의 자료</h2><p>HIOB에 저장하지 않은 컴퓨터의 다른 폴더, 개인 계정 인증 파일, Codex 대화는 이 고객 관리 기능에서 수집하지 않습니다. 스킬은 자료의 사용 범위와 업로드 대상을 먼저 확인하게 합니다.</p><p><a href="https://hi-ob.com/privacy">개인정보 처리방침</a> · <a href="mailto:hiob4515@gmail.com">운영자에게 문의하기</a></p></>;
     case "windows-test":
@@ -369,7 +343,7 @@ export function HelpArticle({ id }) {
             </li>
             <li>
               <h2>Windows에 설치하고 Codex 연결</h2>
-              <p><a href="#windows">Windows 안내</a>에 따라 Codex·Node·Docker를 준비하고 HIOB를 설치합니다. 도구 목록과 runtime_check가 통과한 뒤 <a href="#connect">만든 프로젝트를 Codex에 연결</a>하세요. 브라우저 승인 후 실제 프로젝트 접근까지 확인합니다.</p>
+              <p><a href="#windows">Windows 안내</a>에 따라 Codex·Node를 준비하고 HIOB를 설치합니다. 도구 목록과 runtime_check가 통과한 뒤 <a href="#connect">만든 프로젝트를 Codex에 연결</a>하세요. 브라우저 승인 후 실제 프로젝트 접근까지 확인합니다.</p>
             </li>
             <li>
               <h2>소액 충전 요청</h2>
@@ -424,97 +398,35 @@ export function HelpArticle({ id }) {
         </>
       );
     case "renderer":
-      return (
-        <>
-          <p>
-            Windows·Linux의 최종 영상 합성은 로컬 Docker Linux 엔진을
-            사용합니다. Mac 기본 렌더에는 FFmpeg·FFprobe와 Xcode Command Line
-            Tools가 필요합니다.
-          </p>
-          <h2>Windows에서 한 번에 점검·복구하기</h2>
-          <p>현재 설치한 MCP를 유지하면서 Docker 엔진과 렌더 환경을 확인합니다. 아래 명령은 해시를 확인한 복구 도구를 실행하고, 필요한 경우 Docker Desktop 시작과 렌더 이미지 준비만 수행합니다. 프로젝트·권한·크레딧을 변경하거나 유료 영상을 생성하지 않습니다.</p>
-          <Command text={[
-            "$base = 'https://hi-ob.com/help/tools'",
-            "$meta = Invoke-RestMethod -Uri ($base + '/windows-recovery-1.json')",
-            "if ($meta.schema -ne 'HiobWindowsRecoveryDownload.v1' -or $meta.sha256 -notmatch '^[a-f0-9]{64}$') { throw '복구 도구 정보를 확인할 수 없습니다.' }",
-            "$file = Join-Path $env:TEMP ('hiob-recovery-' + [guid]::NewGuid().ToString() + '.mjs')",
-            "Invoke-WebRequest -Uri ($base + '/windows-recovery-1.mjs') -OutFile $file",
-            "if ((Get-FileHash -Algorithm SHA256 $file).Hash.ToLowerInvariant() -ne $meta.sha256) { throw '파일 무결성 검사 실패. 실행하지 않습니다.' }",
-            'node $file --repair',
-          ].join('\n')} label="Windows 복구 명령 복사" />
-          <p>PowerShell에서 실행하세요. Node.js 22.18 이상과 기존 HIOB 관리형 설치가 필요합니다. 사용자 지정 설치는 마지막 줄에 <code>{"--install-dir 'C:\\설치 폴더'"}</code>를 추가합니다. 진단만 하려면 <code>--repair</code>를 빼세요. 최초 준비는 수 분 걸릴 수 있습니다.</p>
-          <p><code>ready: true</code>는 이 터미널의 렌더 환경 점검 통과입니다. 같은 Windows AI 앱에서 <code>runtime_check</code>를 다시 실행하고 실제 영상으로 검증하세요. Windows 실기기 최종 검증은 아직 진행 전입니다.</p>
-          <details><summary>복구 도구가 멈춘 위치 확인하기</summary>
-            <ul>
-              <li><code>DOCKER_CLI_UNAVAILABLE</code>: Docker Desktop 설치 또는 PATH 확인.</li>
-              <li><code>DOCKER_START_FAILED</code>: Docker Desktop을 직접 열고 약관·WSL·가상화 안내 확인. 구버전에는 시작 명령이 없을 수 있습니다.</li>
-              <li><code>LOCAL_DOCKER_REQUIRED</code> · <code>LINUX_CONTAINERS_REQUIRED</code>: 로컬 Linux 엔진 선택. 원격 엔진이나 기존 컨테이너 설정은 자동 변경하지 않습니다.</li>
-              <li><code>MCP_INSTALL_NOT_FOUND</code>: 사용자 지정 설치 경로 또는 <a href="#update">한 번의 관리형 설치 전환</a> 확인.</li>
-              <li><code>RENDERER_SETUP_FAILED</code>: Docker의 네트워크·디스크·빌드 상태 확인.</li>
-            </ul>
-          </details>
-          <Command prompt text="이 Windows PC에서 HIOB 제작 환경을 복구해줘. https://hi-ob.com/help/troubleshooting/renderer 의 공식 복구 도구와 해시 검증 명령을 사용해줘. 다른 컴퓨터의 성공으로 대신하지 말고, 현재 프로젝트를 보존하고 진단 후 필요하면 --repair로 Docker와 설치된 버전의 렌더 환경을 준비해. 같은 MCP에서 runtime_check를 다시 확인해. 계정 권한은 connection_diagnose와 connection_status로 별도 확인하고, 영상·음성·편집·저장·복원 중 막힌 기능을 구분해. 필요한 프로젝트 연결은 내가 전체 제작 범위와 예산을 확인하는 승인 화면으로 안내하고 임의 승인·유료 실행은 하지 마." label="Windows AI에 복구 요청 복사" />
-          <h2>Docker를 사용하는 경우</h2>
-          <ol>
-            <li>Docker를 실행하고 아래 명령을 확인하세요.</li>
-            <li>
-              운영체제 결과가 <code>linux</code>인지 확인하세요. 원격 Docker와
-              Windows 컨테이너 모드는 지원하지 않습니다.
-            </li>
-            <li>
-              설치 마지막에 출력된 <code>setup-renderer</code> 명령을 터미널에서
-              실행하세요.
-            </li>
-            <li>
-              완료 후 Codex에서 <code>runtime_check</code>를 요청하고{" "}
-              <code>ready=true</code>인지 확인하세요.
-            </li>
-          </ol>
-          <Command
-            text={
-              'docker version\ndocker info --format "{{.OSType}}"\ndocker buildx version'
-            }
-            label="Docker 점검 명령 복사"
-          />
-          <details>
-            <summary>첫 빌드가 오래 걸리거나 시간 초과돼요</summary>
-            <p>
-              최초 준비는 수 분 걸립니다. AI 앱에서 시간 초과되면 설치가 출력한
-              명령을 터미널에서 실행하세요. 최소 2 CPU·4GB 메모리와 이미지·소재
-              저장 공간이 필요합니다. Buildx가 없으면 Docker Desktop을
-              업데이트하거나 Linux의 docker-buildx-plugin을 설치하세요.
-            </p>
-          </details>
-          <details>
-            <summary>자료 폴더를 읽지 못해요</summary>
-            <p>
-              Docker의 폴더 공유를 확인하세요. Colima에서는 macOS 시스템 임시
-              폴더 대신 사용자 폴더의 전용 하위 폴더를 사용합니다. 설치·자료
-              경로에 쉼표가 있다면 쉼표 없는 경로를 사용하세요. WSL은 Docker
-              Desktop에서 해당 배포판의 연결을 켜야 합니다.
-            </p>
-          </details>
-          <p>
-            새 MCP 버전이나 변경된 소스로 업데이트한 뒤에는 렌더 준비를 다시
-            실행하세요. <code>ready=false</code>이면 표시된 원인을 해결하고
-            재점검합니다. 보호 설정을 해제하지 마세요.
-          </p>
-          <Next href="#install">운영체제별 준비 단계 보기</Next>
-        </>
-      );
+      return <>
+        <h2>서버 렌더 상태부터 확인하세요</h2>
+        <p>최종 영상은 Studio → Hephaestus → Remotion AWS Lambda로 처리합니다. 로컬 엔진 설치로 서버 권한이나 운영 한도 문제를 해결하지 않습니다.</p>
+        <ol><li><code>release_check</code>로 실제 실행 버전을 확인합니다. <code>render_status</code>가 없는 구버전이면 서버 렌더를 사용할 수 없습니다. 공개 업데이트 상태를 먼저 확인하세요.</li>
+        <li><code>production_check</code>와 <code>render_status</code>로 프로젝트 지원, 연결과 한도를 확인합니다. <code>runtime_check</code> 성공만으로 서버 렌더 성공을 판단하지 않습니다.</li>
+        <li>유효한 연결은 그대로 사용합니다. 서버 장애를 새 프로젝트 승인으로 해결하지 않습니다.</li>
+        <li>진행 중 작업은 같은 ID로 조회합니다. 접수 여부가 불명확하면 새 유료 작업을 만들지 않습니다.</li>
+        <li>완료된 작업은 <code>render_download</code>로 받아 실제 화면·음성을 검수합니다.</li></ol>
+        <Command prompt text="HIOB의 기존 프로젝트와 연결을 찾아 production_check와 render_status로 확인해줘. 유효한 승인과 접수된 작업을 재사용해. 같은 작업을 다시 결제하거나 로컬 final로 대체하지 마. 새 권한이 필요한 이유와 서버 장애를 구분하고, 설치 버전에 서버 렌더 도구가 없으면 현재 공개 업데이트 상태를 알려줘." label="서버 렌더 점검 요청 복사" />
+        <p>예전 Windows 엔진 복구 도구는 종료했습니다. 기존 프로젝트·설치 파일은 삭제하지 않습니다.</p>
+        <Next href="#update">설치 버전과 업데이트 확인</Next>
+      </>;
     case "voice":
       return (
         <>
           <h2>영상·음성을 모두 만들 수 있게 연결하기</h2>
           <p>크레딧 충전과 AI 연결의 사용 허용은 별개입니다. 영상은 생성됐는데 음성이 막히면 연결의 생성 상한, 음성 허용과 만료를 먼저 확인하세요. 잔액이 있어도 음성 미허용이나 연결 상한 소진이면 요청이 차단됩니다.</p>
+          <p>직접 녹음과 Typecast 중 선택한 방식부터 확인하세요. 녹음 파일을 사용하는 경우 Typecast 음성 생성 권한은 필요하지 않습니다. 생성 권한 오류를 해결하려고 내 녹음을 다시 합성하지 마세요.</p>
           <ol>
-            <li>제작 중인 Windows AI에서 현재 프로젝트의 연결 상태를 확인하고 같은 프로젝트의 새 승인 화면을 여세요.</li>
+            <li>현재 프로젝트의 연결 상태를 확인하세요. 유효한 승인 범위 안에서는 그대로 제작하고, 권한을 추가할 때만 새 승인 화면을 엽니다.</li>
             <li>Studio에서 <strong>전체 제작 설정</strong>을 누르면 현재 사용 가능한 크레딧으로 영상·Typecast·편집·저장·복원 설정을 함께 준비합니다.</li>
-            <li>프로젝트, 생성 요청 상한과 24시간 유효기간을 확인하고 <strong>이 프로젝트 연결 허용</strong>을 누르세요. 설정 버튼만으로 권한이 바뀌거나 크레딧이 차감되지 않습니다.</li>
+            <li>프로젝트, 생성 요청 상한과 선택한 유효기간(기본 24시간)을 확인하고 <strong>이 프로젝트 연결 허용</strong>을 누르세요. 설정 버튼만으로 권한이 바뀌거나 크레딧이 차감되지 않습니다.</li>
             <li>같은 Windows AI로 돌아가 <code>connection_status</code> → <code>connection_attach</code> → <code>connection_diagnose</code>로 실제 연결을 확인하세요. 기존 영상과 사용할 수 있는 음원은 재생성하지 않습니다.</li>
           </ol>
-          <p>현재 공개 MCP의 최종 렌더는 컴퓨터에서 실행하므로, <a href="#renderer">Windows Docker 준비</a>는 별도 확인합니다. 서버 렌더 권한 숫자만 올려도 지원되지 않는 프로젝트에서 AWS 렌더가 켜지는 것은 아닙니다.</p>
-          <h2>아래 순서로 확인하세요</h2>
+          <p><a href="#renderer">서버 렌더 지원과 현재 작업 상태</a>를 확인합니다. 서버 렌더 권한 숫자만 올려도 지원되지 않는 프로젝트에서 AWS 렌더가 켜지는 것은 아닙니다.</p>
+          <h2>AI가 먼저 한 번에 점검합니다</h2>
+          <p><code>production_check</code>는 크레딧, 현재 연결에 남은 생성 한도, 선택한 방식의 제공사 상태, 가격표와 서버 렌더 지원을 함께 확인합니다. Typecast 구독·허용은 합성을 선택한 때만 필요하며 직접 녹음을 막지 않습니다. 검사 자체로 생성하거나 차감하지 않습니다.</p>
+          <p>만료된 연결은 <code>connection_resume</code>로 기존 프로젝트를 유지합니다. 같은 승인 주소를 재사용하고, 웹 승인이 확인되면 AI가 연결을 마칩니다. 유효한 연결에 권한을 추가하려면 새 범위를 직접 승인해야 합니다.</p>
+          <h2>소리가 빠졌다면 확인할 항목</h2>
           <ol>
             <li>
               <strong>파일:</strong> 해당 문장의 음원이 생성·저장되었고 현재
@@ -525,7 +437,7 @@ export function HelpArticle({ id }) {
               음소거·볼륨·트림 때문에 들리지 않는지 확인합니다.
             </li>
             <li>
-              <strong>권한:</strong> 아직 생성되지 않은 음성이라면 Studio 연결의
+              <strong>권한:</strong> Typecast로 새로 생성할 음성일 때만 Studio 연결의
               음성 허용, 생성 상한, 크레딧을 확인합니다.
             </li>
             <li>
@@ -534,7 +446,7 @@ export function HelpArticle({ id }) {
             </li>
           </ol>
           <Command
-            text="HIOB MCP에서 목소리가 빠진 원인을 확인해줘. 문장별 음원 파일, 복원 상태, 타임라인 배치, 음소거와 트림, 생성 권한을 점검해줘. 빠진 음성을 무음으로 대체하지 말고 수정할 부분과 비용을 먼저 알려줘."
+            text="HIOB MCP에서 목소리가 빠진 원인을 확인해줘. 직접 녹음인지 Typecast 합성인지 먼저 확인하고, 녹음에는 합성 권한을 요구하지 마. 문장별 음원 파일, 복원 상태, 타임라인 배치, 음소거와 트림, 생성 권한을 점검해줘. 빠진 음성을 무음으로 대체하지 말고 수정할 부분과 비용을 먼저 알려줘."
             label="음성 점검 요청 복사"
             prompt
           />

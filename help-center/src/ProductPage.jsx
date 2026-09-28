@@ -237,15 +237,15 @@ export default function ProductPage({ media }) {
             <a href="/help/install/macos">
               <strong>macOS ↗</strong>
               <span>
-                Apple Silicon 설치·짧은 영상 합성 확인
+                Apple Silicon 설치·MCP 통신 확인
                 <br />
-                Intel 검증 대기
+                AWS 최종 제작·Intel 검증 대기
               </span>
             </a>
             <a href="/help/install/windows">
               <strong>Windows ↗</strong>
               <span>
-                PowerShell·Docker 설치 경로 제공
+                PowerShell 설치 · 서버 렌더 상태 확인
                 <br />
                 실제 고객 기기 검증 대기
               </span>
@@ -253,9 +253,9 @@ export default function ProductPage({ media }) {
             <a href="/help/install/linux">
               <strong>Linux ↗</strong>
               <span>
-                ARM64 가상 머신 렌더 확인
+                서버 렌더 경로 준비 중
                 <br />
-                x64·WSL 검증 대기
+                x64·ARM64 실기기 검증 대기
               </span>
             </a>
           </div>

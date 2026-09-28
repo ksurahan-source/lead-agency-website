@@ -92,17 +92,17 @@ export const HELP_ARTICLES = [
   {
     id: "renderer",
     topic: "fix",
-    title: "Docker 준비 · 영상 렌더가 멈췄어요",
-    summary: "렌더 환경 점검과 첫 빌드 오류를 해결합니다.",
+    title: "서버 영상 렌더가 멈췄어요",
+    summary: "서버 렌더 지원·권한·진행 상태와 결과를 확인합니다.",
     keywords:
-      "ready=false runtime_check setup-renderer Buildx timeout 시간 초과 linux 엔진 경로 쉼표 Colima",
+      "render_status render_quote AWS Lambda 권한 만료 서버 한도 접수 조회 다운로드",
   },
   {
     id: "voice",
     topic: "fix",
     title: "영상에 목소리가 빠져요",
     summary: "음원 복원, 배치, 생성 권한을 확인합니다.",
-    keywords: "무음 소리 음성 Typecast 나레이터 오디오 나레이션",
+    keywords: "무음 소리 음성 Typecast 나레이터 오디오 나레이션 직접 녹음 WAV MP3 M4A 혼합",
   },
   {
     id: "update",

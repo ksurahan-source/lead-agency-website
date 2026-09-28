@@ -198,7 +198,7 @@ test("update help explains diagnosis without claiming account or creative succes
   const update = documents.get("/help/troubleshooting/update");
   assert.ok(update, "update route must exist");
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
-  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.1.0.zip"));
+  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.2.0.zip"));
 });
 
 test("every linked skill download and its references are served by the worker", async () => {
@@ -250,7 +250,7 @@ test("public release manifest is served as JSON and matches installation instruc
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/missing-release.json'), env)).status, 404);
 });
 
-test('Windows recovery download is complete, hash-bound, served with the correct MIME and documented separately from consent',async()=>{
+test('retired Windows recovery stays hash-bound while current guidance uses server status without local repair',async()=>{
   const descriptor=await worker.fetch(new Request(ORIGIN+'/help/tools/windows-recovery-1.json'),env);
   assert.equal(descriptor.status,200);
   assert.match(descriptor.headers.get('content-type'),/^application\/json/);
@@ -263,9 +263,11 @@ test('Windows recovery download is complete, hash-bound, served with the correct
   assert.equal(bytes.length,receipt.bytes);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),receipt.sha256);
   const renderer=decode(documents.get('/help/troubleshooting/renderer'));
-  assert.ok(renderer.includes('Get-FileHash -Algorithm SHA256'));
-  assert.ok(renderer.includes('node $file --repair'));
-  assert.ok(renderer.includes('Windows 실기기 최종 검증은 아직 진행 전'));
+  assert.ok(renderer.includes('예전 Windows 엔진 복구 도구는 종료'));
+  assert.ok(renderer.includes('Remotion AWS Lambda'));
+  assert.ok(renderer.includes('render_status'));
+  assert.ok(!renderer.includes('node $file --repair'));
+  assert.ok(!renderer.includes('docker version'));
   const voice=documents.get('/help/troubleshooting/voice');
   assert.ok(voice.includes('전체 제작 설정'));
   assert.ok(voice.includes('connection_attach'));
