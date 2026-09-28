@@ -8,24 +8,24 @@ export function verifyInstallDescriptor(descriptor) {
       "Public installer differs from documentation: " + key,
     );
 }
-export function verifyCompatibility(manifest) {
+export function verifyCompatibility(manifest, release = MCP_RELEASE) {
   assert.equal(
     manifest.version,
-    MCP_RELEASE.version,
+    release.version,
     "Public release version differs from installation guide",
   );
   assert.equal(
     manifest.packageSha256,
-    MCP_RELEASE.sha256,
+    release.sha256,
     "Public package hash differs from installation guide",
   );
-  for (const platform of MCP_RELEASE.platforms) {
+  for (const platform of release.platforms) {
     assert.ok(
       manifest.results?.some(
         (row) =>
           row.platform + "-" + row.arch === platform &&
-          row.version === MCP_RELEASE.version &&
-          row.packageSha256 === MCP_RELEASE.sha256 &&
+          row.version === release.version &&
+          row.packageSha256 === release.sha256 &&
           row.result === "passed" &&
           row.tests?.renderAndReview === "passed" &&
           row.tests?.audioBinding === "passed",
