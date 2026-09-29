@@ -1,10 +1,10 @@
 // Canonical editorial source for the visible manual and its AI-readable download.
 export const playbook = {
-  version: '2026-09-30.4', reviewedFor: 'HIOB MCP 0.9.14 beta',
+  version: '2026-09-30.5', reviewedFor: 'HIOB MCP 0.9.18 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',
   principle: '컷 수보다 전달되는 이유가 중요합니다. 한 시청자의 상황 → 제품을 선택할 근거 → 실행할 행동이 이어져야 합니다. 화려한 화면, 놀라는 표정, 빠른 음악은 이 연결을 돕는 연출입니다. 이 설명서는 제작 기준이며 매출·바이럴·시청 지속을 보장하지 않습니다.',
-  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 model_catalog로 지원 모델을 찾고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.14의 첫 project_context.creativeVault.notes에 전체가 전달돼.
+  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 model_catalog로 지원 모델을 찾고 creative_catalog의 사운드·제목·반응 편집 스킬과 실제 지원 범위를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.18의 첫 project_context.creativeVault.notes에 전체가 전달돼.
 1. 시청자 한 부류, 구체적 상황 하나, 제품을 선택할 근거 하나, CTA 하나를 정리해. 모든 제품 주장은 파일·페이지·URL 근거와 연결하고 모르는 내용은 만들지 마.
 2. 기획 3안을 짧게 비교하고 추천 이유를 설명해. 선택된 방향을 시간별 화면·대사·음원·자막·제품 근거가 있는 AV 기획서로 만들어. 첫 3초에 상황이 보이고 9초 안에 훅의 약속이 전달되게 설계하되 길이는 실제 발화로 검증해.
 3. 사용 가능한 인물 참조, 인물카드와 표정 변화, 제품·소품카드를 먼저 정리해. 승인된 얼굴·제품을 바꾸지 말고 인물과 제품이 함께 있는 장면 이미지를 만든 뒤 움직임을 설계해. 기획서 전체를 영상 프롬프트로 넣지 마.
@@ -120,7 +120,7 @@ CHAR_01 + PROP_PRODUCT_01 + [같은 장소/시간대] + [한 행동의 시작 �
 표: [실제 시작·끝 | 화자/원본 파일 | 문장 | 발화 강도·속도 의도 | 음악 구간·감쇠 | 효과음과 화면 사건 | 의도한 쉼].
 recording이면 원본을 보존하고 실제 발화와 전사 문구를 대조해. Typecast를 대신 호출하지 마. typecast 또는 mixed일 때만 허용된 문장을 합성하고 기존 음원과 비교해.
 말이 길면 차이를 표시하고 문장·속도·장면 길이 중 무엇을 바꿀지 제안해. 끝 음절을 잘라 길이를 맞추지 마. 음악이 작으면 원본·클립·트랙·감쇠를 분리 점검하고 실제 믹스를 들어서 조정해.`,
-      action: '지원되는 audio_inspect·audio_inspection_status로 음원 검사를 조회하고 audio_set으로 필요한 트랙을 연결합니다. 검사 수치만으로 발음·감정이 좋다고 판단하지 않습니다. 원본 대사 사용 컷은 원본 소리를 명시적으로 연결합니다.',
+      action: 'sound_library로 HIOB 음악·효과음을 검색하고 sound_import로 선택 파일을 가져옵니다. audio_set은 전체 tracks 교체이므로 기존 발화를 보존합니다. 현재 MCP V1에는 fade/ducking envelope 입력이 없으며 임의 필드를 추가하지 않습니다. 지원되는 audio_inspect·audio_inspection_status로 음원 검사를 조회하고 audio_set으로 필요한 트랙을 연결합니다. 검사 수치만으로 발음·감정이 좋다고 판단하지 않습니다. 원본 대사 사용 컷은 원본 소리를 명시적으로 연결합니다.',
       output: '검수된 음원·실제 문장별 시간 + 오디오 큐시트 + 원본과 수정본.',
       pass: '모바일에서도 말을 알아듣고, 음악은 느껴지며 말을 덮지 않는다. 나레이션 끝이 잘리지 않고 설명과 화면 사건이 맞는다.',
       repair: '전부 다시 합성하지 말고 문제 문장·음원·믹스만 고칩니다. 음원 검사나 전사가 불확실한 구간은 미검수로 남깁니다.', sources: ['tiktok']
@@ -132,6 +132,7 @@ recording이면 원본을 보존하고 실제 발화와 전사 문구를 대조�
         '화면 변화는 새 정보·반응·제품 근거를 전달할 때 만듭니다. 같은 원본의 필요한 구간과 다른 구도를 활용해 리듬을 만들 수 있으므로 24개 편집 컷이 24번의 유료 생성과 같지는 않습니다. 빠르게 자르더라도 제품이나 자막을 읽을 시간은 남깁니다.',
         '제목은 구간의 관점을, 자막은 실제 발화를 담당합니다. 상단 제목·중간 정보·하단 대사처럼 역할을 나누고 같은 문장을 두 번 표시하지 않습니다. 겹치는 시간 자체보다 실제 글자 영역 충돌과 읽는 순서가 중요합니다.',
         '브레인의 Black Han Sans, 1080×1920 기준 제목 88px·주 자막 72px는 디자인 기준입니다. 크게 프리셋은 1.15배로 검토하되 실제 편집기·렌더 계약에서 적용되는 값을 확인합니다. 가로 화면에 세로 좌표를 그대로 쓰지 않습니다. 긴 문장은 무조건 축소하지 말고 의미 단위 1–2줄로 나눕니다.',
+        '반응 GIF·스티커는 reaction_search로 KLIPY/GIPHY에서 찾아볼 수 있습니다. 고객 MCP 실행 환경에 공식 API 키가 필요하며, 검색 결과는 미리보기용입니다. 광고 MP4 삽입·미디어 저장 권한과 별도입니다. creative_catalog와 hiob://skills/creative-edit 스킬에서 사용 순서를 확인하세요.',
         '현재 공개 V1은 1080×1920 또는 1920×1080, 30fps, 최대 90초, 원본 영상 최대 24개와 편집 컷 최대 120개를 기준으로 안내합니다. 제목·구절 자막·음원은 지원 필드로 조립합니다. 임의의 TSX·CSS·자유 좌표·커스텀 애니메이션을 최종 AWS 렌더에 넣을 수 있다고 가정하지 않습니다.'
       ],
       prompt: `실제 음원 시간을 기준으로 HIOB 편집안을 만들어줘. 각 컷은 정보·반응·근거·행동 중 역할을 가져야 해.
