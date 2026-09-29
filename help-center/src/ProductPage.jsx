@@ -57,6 +57,7 @@ export default function ProductPage({ media }) {
           <a href="#what">MCP란?</a>
           <a href="#workflow">만드는 과정</a>
           <a href="#example">요청 예시</a>
+          <a href="/help/create">지원하는 편집</a>
           <a href="#cost">비용과 권한</a>
           <a href="#start">시작하기</a>
         </nav>
