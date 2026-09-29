@@ -38,8 +38,8 @@ export default function CreativeVault({Command}) {
     <p>3–5초는 장면 묶음의 기본 설계 단위입니다. 그 안에서 손→제품→반응으로 컷을 나누고 나레이터의 문장은 이어갈 수 있습니다. 실제 발화·제품 작동·자막 읽기에 필요한 시간에 맞춰 조정합니다.</p>
     <dl><dt>의미 묶음</dt><dd>질문·행동·납득 중 한 가지를 완결합니다. 3–5초부터 설계합니다.</dd><dt>편집 컷</dt><dd>묶음 안에서 시점·정보·행동이 바뀌는 구간입니다. 같은 길이로 자르지 않습니다.</dd><dt>생성 원본</dt><dd>현재 H3·Seedance 경로의 5–15초 소재입니다. 필요한 구간을 골라 쓰므로 묶음 수만큼 생성하지 않습니다.</dd></dl>
     <h2>AI가 필요한 노트를 읽게 하기</h2>
-    <p>MCP 0.9.5의 첫 project_context는 핵심 노트와 목차를 전달합니다. creative_vault 도구나 hiob://creative-vault 리소스로 필요한 노트를 더 읽습니다. Obsidian은 선택 사항이며 새 유료 생성이나 권한을 요구하지 않습니다. 기존 버전은 아래 웹 문서로도 읽을 수 있습니다.</p>
-    <Command prompt label="Vault 기반 제작 요청 복사" text={'HIOB 제작 Vault를 적용해줘. project_context의 creativeVault부터 읽고, creative_vault의 index→beat-groups→현재 문제에 맞는 topic을 읽어. 도구가 없는 버전이면 https://hi-ob.com/help/creative-vault 의 노트를 읽어. 대본을 3–5초 의미 묶음으로 설계하고 내부 컷·실제 발화·생성 원본을 구분해. 각 묶음의 새 정보, 시작→변화→끝, 소리 연결, 제품 근거, 적용한 규칙과 예외 이유를 기록해. 실제 스키마와 기존 권한·예산을 따르고 변경 없는 소재를 재생성하지 마.'} />
+    <p>MCP 0.9.6의 첫 project_context는 12개 노트 전문을 모두 전달합니다. 전체 문서 전달 전에는 기획·생성·편집·렌더를 실행할 수 없습니다. 같은 세션에서는 반복 전송하지 않으며 새 세션·프로젝트에서는 다시 전달합니다. creative_vault 도구는 이후 개별 노트 재조회에 사용합니다. Obsidian은 선택 사항이며 새 유료 생성이나 권한을 요구하지 않습니다. 기존 버전은 아래 웹 문서로도 읽을 수 있습니다.</p>
+    <Command prompt label="Vault 기반 제작 요청 복사" text={'HIOB 제작 Vault를 적용해줘. project_context의 creativeVault.notes에 있는 12개 노트 전문을 먼저 모두 읽어. 이후 creative_vault로 현재 문제에 맞는 topic을 다시 확인해. 도구가 없는 버전이면 https://hi-ob.com/help/creative-vault 의 노트를 읽어. 대본을 3–5초 의미 묶음으로 설계하고 내부 컷·실제 발화·생성 원본을 구분해. 각 묶음의 새 정보, 시작→변화→끝, 소리 연결, 제품 근거, 적용한 규칙과 예외 이유를 기록해. 실제 스키마와 기존 권한·예산을 따르고 변경 없는 소재를 재생성하지 마.'} />
     <h2>상황별 노트</h2>
     <p>필요한 노트만 펼쳐 읽으세요. 만드는 순서·프롬프트·예시·통과 기준이 함께 있습니다.</p>
     {vault.notes.map(note=><details key={note.topic} id={'vault-'+note.topic}><summary>{note.title}</summary><p><strong>언제 읽나요?</strong> {note.when}</p><p><code>{note.topic}</code> · <a href={vault.noteBase+note.file}>이 노트 Markdown 읽기</a></p><Note text={note.text}/><p>관련: {note.related.map((topic,i)=><span key={topic}>{i>0?' · ':''}<a href={'#vault-'+topic}>{vault.notes.find(n=>n.topic===topic).title}</a></span>)}</p></details>)}
