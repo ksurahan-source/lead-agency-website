@@ -1,3 +1,4 @@
+import AdvertisingGuide from './AdvertisingGuide';
 import Link from "./StudioLink";
 import {
   MCP_RELEASE,
@@ -241,9 +242,12 @@ export function HelpArticle({ id }) {
           <Next href="#create">다음: 첫 영상 제작 요청</Next>
         </>
       );
+    case "advertising":
+      return <AdvertisingGuide Command={Command} />;
     case "create":
       return (
         <>
+          <p><a href="/help/advertising">광고 기획·인물카드·제품·편집 프롬프트: HIOB 광고 사용설명서</a></p>
           <h2>목소리부터 선택하세요</h2>
           <ul>
             <li><strong>직접 녹음:</strong> WAV·MP3·M4A 녹음을 자료 폴더에 넣으세요. 실제 말과 길이·쉼을 기준으로 장면과 자막을 만듭니다.</li>

@@ -27,6 +27,7 @@ export const HELP_TOPICS = [
 ];
 // Each article has one task category. Other articles cross-link to that source.
 export const HELP_ARTICLES = [
+  {id:"advertising",topic:"production",title:"HIOB 사용설명서: 효과적인 광고 만들기",summary:"기획서·인물카드·소품·장면·목소리·편집·검수까지 바로 따라 하는 프롬프트와 기준입니다.",keywords:"광고 제작 방법 best practice 인물카드 소품 제품 기획서 표정 육도 유튜브 프롬프트 설명서"},
   {id:"skills",topic:"production",title:"영상 제작 스킬 설치하고 사용하기",summary:"기획·목소리·편집·검수 순서를 Codex에 연결합니다.",keywords:"스킬 skill SKILL.md 다운로드 코덱스 이미지 나레이션"},
   {id:"payment",topic:"billing",title:"계좌이체로 충전하고 이메일 요청하기",summary:"요청 저장·실제 입금·운영자 확인·잔액 반영 순서입니다.",keywords:"계좌 이체 결제 입금 이메일 Gmail 크레딧 환불"},
   {id:"privacy",topic:"account",title:"내 정보와 제작 정보 수집 범위 확인하기",summary:"연락처 수정과 프로젝트 제목·키워드·완성본 활용 범위입니다.",keywords:"개인정보 전화번호 이름 업체명 이메일 콘텐츠 삭제"},

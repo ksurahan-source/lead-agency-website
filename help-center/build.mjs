@@ -1,3 +1,4 @@
+import { markdownPath, playbookMarkdown } from './src/advertisingPlaybook.mjs';
 import { cp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -37,6 +38,7 @@ await cp(
   new URL("public/help/mcp-release.json", import.meta.url),
   new URL("help/mcp-release.json", destination),
 );
+await writeFile(new URL("." + markdownPath, destination), playbookMarkdown());
 const recovery = await readFile(new URL('public/help/tools/windows-recovery-1.mjs', import.meta.url));
 await mkdir(new URL('help/tools/', destination), { recursive: true });
 await writeFile(new URL('help/tools/windows-recovery-1.mjs', destination), recovery);

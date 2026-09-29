@@ -25,7 +25,7 @@ const helpWorker = {
       url.pathname = canonical;
       return Response.redirect(url.toString(), 308);
     }
-    const asset =
+    const asset = url.pathname === "/help/skills/advertising-playbook-2026-09-29.md" ||
       /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-0\.(?:6\.[1234]|9\.[0124])\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
         url.pathname,
       );
@@ -58,6 +58,7 @@ const helpWorker = {
       headers.set('Content-Type', 'text/javascript; charset=utf-8');
       headers.set('Content-Disposition', 'attachment; filename="windows-recovery-1.mjs"');
     }
+    if (known && url.pathname.endsWith(".md")) headers.set("Content-Type", "text/markdown; charset=utf-8");
     if (url.pathname.endsWith(".zip")) {
       headers.set("Content-Type", "application/zip");
       headers.set(
