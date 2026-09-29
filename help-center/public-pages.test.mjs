@@ -234,7 +234,8 @@ test("new-customer entries return to the welcome hub and explain setup before Co
     '첫 프로젝트 준비하기', 'Codex에 연결 요청하기', '연결된 프로젝트 확인하기',
   ]);
   assert.ok(connect.includes('Codex 로그인과 HIOB 계정은 별개'));
-  assert.ok(connect.includes('connection_status와 connection_attach'));
+  assert.ok(connect.includes('connection_ensure()'));
+  assert.ok(connect.includes('사이트 재방문 없이'));
   assert.ok(connect.includes('실제로 접근하면'));
   const windows = documents.get('/help/windows-test');
   assert.ok(windows.indexOf('다른 이메일로 회원가입하고 확인하기') < windows.indexOf('Windows에 설치하고 Codex 연결'));
