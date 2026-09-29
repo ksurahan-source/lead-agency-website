@@ -274,3 +274,8 @@ test('retired Windows recovery stays hash-bound while current guidance uses serv
   assert.ok(voice.includes('connection_attach'));
   assert.equal((await worker.fetch(new Request(ORIGIN+'/help/tools/not-a-tool.mjs'),env)).status,404);
 });
+
+test('original video preservation skill is downloadable for the current release',async()=>{
+ const response=await worker.fetch(new Request(ORIGIN+'/help/skills/hiob-creative-edit-1.1.0/SKILL.md'),env);
+ assert.equal(response.status,200);assert.match(await response.text(),/audio_export_download/);
+});
