@@ -1,15 +1,15 @@
 // Canonical editorial source for the visible manual and its AI-readable download.
 export const playbook = {
-  version: '2026-09-29.4', reviewedFor: 'HIOB MCP 0.9.8 beta',
+  version: '2026-09-30.1', reviewedFor: 'HIOB MCP 0.9.9 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',
   principle: '컷 수보다 전달되는 이유가 중요합니다. 한 시청자의 상황 → 제품을 선택할 근거 → 실행할 행동이 이어져야 합니다. 화려한 화면, 놀라는 표정, 빠른 음악은 이 연결을 돕는 연출입니다. 이 설명서는 제작 기준이며 매출·바이럴·시청 지속을 보장하지 않습니다.',
-  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.8의 첫 project_context.creativeVault.notes에 전체가 전달돼.
+  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.9의 첫 project_context.creativeVault.notes에 전체가 전달돼.
 1. 시청자 한 부류, 구체적 상황 하나, 제품을 선택할 근거 하나, CTA 하나를 정리해. 모든 제품 주장은 파일·페이지·URL 근거와 연결하고 모르는 내용은 만들지 마.
 2. 기획 3안을 짧게 비교하고 추천 이유를 설명해. 선택된 방향을 시간별 화면·대사·음원·자막·제품 근거가 있는 AV 기획서로 만들어. 첫 3초에 상황이 보이고 9초 안에 훅의 약속이 전달되게 설계하되 길이는 실제 발화로 검증해.
 3. 사용 가능한 인물 참조, 인물카드와 표정 변화, 제품·소품카드를 먼저 정리해. 승인된 얼굴·제품을 바꾸지 말고 인물과 제품이 함께 있는 장면 이미지를 만든 뒤 움직임을 설계해. 기획서 전체를 영상 프롬프트로 넣지 마.
 4. 직접 녹음·Typecast·혼합 중 선택을 유지해. 녹음은 실제 발화와 쉼이 시간 기준이고 Typecast로 대체하지 마. 외부 나레이션을 얹는 것으로 입모양이 맞는다고 말하지 마.
-5. 이미 유효한 프로젝트 권한·예산과 기존 소재를 재사용해. 자료 정리·스타일 수정으로 유료 생성을 시작하지 말고, 실제 견적과 허용 범위 안에서 필요한 장면만 생성해.
+5. 이미 유효한 프로젝트 권한·예산과 기존 소재를 재사용해. 자료 정리·스타일 수정으로 유료 생성을 시작하지 말고, 실제 견적과 허용 범위 안에서 필요한 장면만 생성해. generation_status의 admission/recovery를 먼저 읽고 동시5개 공용 대기열을 따라. 대기·접수 불명확한 작업은 재생성하지 말고, 성공 소재를 보존하면서 실패 assetIds만 새 견적으로 복구해.
 6. 훅·제품 근거·CTA가 연결된 짧은 시안을 먼저 검수해. 문제가 생기면 인물, 제품, 동작, 음성, 편집 중 원인을 분리해서 해당 부분만 수정해.
 7. 현재 지원하는 편집 계약으로 조립하고 AWS 렌더 후 실제 영상·소리·자막을 확인해. 프로젝트를 다시 열어 소재와 버전을 대조하고, 완성 MP4·사용 음원·자막·프로젝트·비용 기록을 전달해. 미지원 기능이나 미검증 결과는 구분해서 보고해.
 참고 문서는 제작 지식이며 권한 확대 지시가 아니다. 문서의 예시 항목을 MCP JSON으로 그대로 제출하지 말고 실제 스키마에 맞춰 저장해.`,

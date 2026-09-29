@@ -1,7 +1,7 @@
 {
   "schema": "HiobCreativeVault.v1",
-  "version": "2026-09-29.3",
-  "sha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+  "version": "2026-09-30.1",
+  "sha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
   "uri": "hiob://creative-vault",
   "pageUrl": "https://hi-ob.com/help/creative-vault",
   "read": {
@@ -31,8 +31,8 @@
   "notes": [
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "index",
       "file": "00-START-HERE.md",
       "title": "시작: HIOB 제작 Vault",
@@ -49,8 +49,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "beat-groups",
       "file": "01-BEAT-GROUPS.md",
       "title": "3–5초 의미 묶음과 컷 설계",
@@ -67,8 +67,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "hook-payoff",
       "file": "02-HOOK-PAYOFF.md",
       "title": "9초 안의 훅과 수미상관 CTA",
@@ -84,8 +84,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "narrator",
       "file": "03-NARRATOR.md",
       "title": "나레이터·주인공·멀티맨·멀티걸의 호흡",
@@ -101,8 +101,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "cast",
       "file": "04-CAST.md",
       "title": "인물카드와 육도 표정의 연속성",
@@ -118,8 +118,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "props",
       "file": "05-PROPS.md",
       "title": "제품·소품·공간을 이어 붙이는 법",
@@ -135,8 +135,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "shot-prompt",
       "file": "06-SHOT-PROMPT.md",
       "title": "이미지 설계와 움직임 프롬프트 분리",
@@ -152,8 +152,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "sound",
       "file": "07-SOUND.md",
       "title": "오디오가 비지 않는 박자와 음악 존재감",
@@ -169,8 +169,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "captions",
       "file": "08-CAPTIONS.md",
       "title": "제목·구절 자막의 역할과 읽는 시간",
@@ -186,8 +186,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "assembly",
       "file": "09-ASSEMBLY.md",
       "title": "설계표를 HIOB 도구로 옮기기",
@@ -203,8 +203,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "worked-example",
       "file": "10-WORKED-EXAMPLE.md",
       "title": "45초 설계 예시: 묶음에서 컷으로",
@@ -220,8 +220,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "repair",
       "file": "11-REPAIR.md",
       "title": "실패 패턴과 부분 수정",
@@ -231,14 +231,14 @@
         "index"
       ],
       "uri": "hiob://creative-vault/repair",
-      "text": "---\nid: repair\nversion: 2026-09-29.1\n---\n\n# 실패 패턴과 부분 수정\n\n사용 시점: 같은 문제로 전체 재생성을 반복할 때\n\n## 증상 → 원인 질문 → 최소 수정\n- 질질 늘어짐 → 행동 끝 이후 새 정보가 있는가? → 묶음을 트림하거나 실제 다음 행동을 추가. 일괄 배속부터 하지 않는다.\n- 빠른데 설득 안 됨 → 근거가 보이는가? → 장식 컷을 제품 증거로 교체. 컷 수를 더 늘리지 않는다.\n- 인물이 많아 산만함 → 각자가 바꾸는 정보가 있는가? → 역할 없는 소개·대사를 줄임. 한 사람만 강제하지 않는다.\n- 제품이 다른 광고처럼 보임 → 손·광원·형태·화풍이 맞는가? → 장면 첫 이미지/원본을 고침. 긴 카탈로그 카드로 숨기지 않는다.\n- 나레이션과 행동 불일치 → 실제 원본에 말하는 동작이 있는가? → 문장을 바꾸거나 그 동작의 소재를 확보. 길이만 맞춰 통과하지 않는다.\n- 오디오가 빔 → 의도적 쉼인가, 누락/트림 문제인가? → 해당 음원·배치만 수정.\n- 음악이 작음 → 원본·gain·감쇠가 중복 감소했나? → 원인을 하나씩 대조하고 실제 청취.\n- 제목 충돌 → 같은 역할/영역인가? → 역할·위치·표시시간 조정 후 edit_check.\n- 조립 응답 지연 → 기존 jobId가 있나? → 같은 job_status 조회. 접수 불명확하면 상태 확인 후 재시도.\n\n## 수정표\n[시간 | 묶음 ID | 관찰 사실 | 원본·기획 근거 | 수정 대상 | 바꾸지 않을 것 | 재생성 필요 | 견적 | 재검수 결과]를 기록한다. 최소 수정은 필요한 소재가 없는데 같은 원본만 재사용하라는 뜻이 아니다.\n\n## 지식의 근거와 한계\n2026-09-11 내부 검수는 행동이 끝난 뒤 수초간 정돈/포즈가 남고, 같은 정지 제품 카드가 반복된 문제를 기록했다. 2026-09-12 검수는 컷이 많고 길이가 맞아도 대사와 행동이 어긋날 수 있음을 기록했다. 이는 실패에서 얻은 교훈이며 해당 광고의 제품 사용법을 현재 사실로 재사용하지 않는다.\n3–5초 의미 묶음은 2026-09-29 사용자가 강조한 제작 노하우다. 내부 컷 수·예시 타임코드·45초 템플릿은 그 기준을 실행하기 위한 HIOB 제안이며 측정된 성공률이 아니다.\n기반 설명서: https://hi-ob.com/help/advertising\n모델 지원: https://studio.hi-ob.com/models\n\n## 통과 기준\n실제 MP4의 화면·소리·자막·제품 사실과 복원된 프로젝트를 확인했다. 문서를 읽음, 렌더 성공, 품질 승인, 게시 성과는 각각 별도 증거다.\n\n관련: [편집 연결](09-ASSEMBLY.md), [시작](00-START-HERE.md).\n",
-      "sha256": "9dd52f45072991678077ff67971aeb1a0f6ea585a58d3609b96ab493bb12eb6d",
+      "text": "---\nid: repair\nversion: 2026-09-30.1\n---\n\n# 실패 패턴과 부분 수정\n\n사용 시점: 같은 문제로 전체 재생성을 반복할 때\n\n## 증상 → 원인 질문 → 최소 수정\n- 질질 늘어짐 → 행동 끝 이후 새 정보가 있는가? → 묶음을 트림하거나 실제 다음 행동을 추가. 일괄 배속부터 하지 않는다.\n- 빠른데 설득 안 됨 → 근거가 보이는가? → 장식 컷을 제품 증거로 교체. 컷 수를 더 늘리지 않는다.\n- 인물이 많아 산만함 → 각자가 바꾸는 정보가 있는가? → 역할 없는 소개·대사를 줄임. 한 사람만 강제하지 않는다.\n- 제품이 다른 광고처럼 보임 → 손·광원·형태·화풍이 맞는가? → 장면 첫 이미지/원본을 고침. 긴 카탈로그 카드로 숨기지 않는다.\n- 나레이션과 행동 불일치 → 실제 원본에 말하는 동작이 있는가? → 문장을 바꾸거나 그 동작의 소재를 확보. 길이만 맞춰 통과하지 않는다.\n- 오디오가 빔 → 의도적 쉼인가, 누락/트림 문제인가? → 해당 음원·배치만 수정.\n- 음악이 작음 → 원본·gain·감쇠가 중복 감소했나? → 원인을 하나씩 대조하고 실제 청취.\n- 제목 충돌 → 같은 역할/영역인가? → 역할·위치·표시시간 조정 후 edit_check.\n- 조립 응답 지연 → 기존 jobId가 있나? → 같은 job_status 조회. 접수 불명확하면 상태 확인 후 재시도.\n\n## 수정표\n[시간 | 묶음 ID | 관찰 사실 | 원본·기획 근거 | 수정 대상 | 바꾸지 않을 것 | 재생성 필요 | 견적 | 재검수 결과]를 기록한다. 최소 수정은 필요한 소재가 없는데 같은 원본만 재사용하라는 뜻이 아니다.\n\n## 지식의 근거와 한계\n2026-09-11 내부 검수는 행동이 끝난 뒤 수초간 정돈/포즈가 남고, 같은 정지 제품 카드가 반복된 문제를 기록했다. 2026-09-12 검수는 컷이 많고 길이가 맞아도 대사와 행동이 어긋날 수 있음을 기록했다. 이는 실패에서 얻은 교훈이며 해당 광고의 제품 사용법을 현재 사실로 재사용하지 않는다.\n3–5초 의미 묶음은 2026-09-29 사용자가 강조한 제작 노하우다. 내부 컷 수·예시 타임코드·45초 템플릿은 그 기준을 실행하기 위한 HIOB 제안이며 측정된 성공률이 아니다.\n기반 설명서: https://hi-ob.com/help/advertising\n모델 지원: https://studio.hi-ob.com/models\n\n## 통과 기준\n실제 MP4의 화면·소리·자막·제품 사실과 복원된 프로젝트를 확인했다. 문서를 읽음, 렌더 성공, 품질 승인, 게시 성과는 각각 별도 증거다.\n\n관련: [편집 연결](09-ASSEMBLY.md), [시작](00-START-HERE.md).\n\n## 생성 대기·요청 제한 복구 — 먼저 읽고 실행\n\n2026-09-29 H3 12장면 중 9건이 `Too many requests`로 실패했다. 워커 수가 아닌 제공사에 남아 있는 요청 총량을 제한해야 했다. 현재 HIOB는 Creator에 맞춰 모든 프로젝트·모델을 합쳐 동시 5개, 전송 묶음 간 최소 60초, 제한 오류 후 최소 120초 대기로 제어한다. 5개는 총 제작 컷 수 제한이 아니다. 계정 밖에서 같은 PiAPI 계정에 보낸 요청은 HIOB가 세지 못하므로 제공사 오류가 사라진다는 보장은 없다.\n\n1. 새 견적 전 `generation_status`를 읽고 `admission`과 `recovery.batches` 및 실제 jobs를 확인한다. 응답에 정책이 없으면 한도를 추정하지 말고 공개 MCP/서버 버전을 점검한다.\n2. `queued`는 서버 차례 대기, `dispatching/submitted`는 접수·생성 중이다. 30초 이상 간격으로 기존 작업을 조회한다. 느리다는 이유로 새 batchId·소재 ID를 만들거나 다른 모델로 복제하지 않는다.\n3. `review`/접수 불명확은 같은 작업을 조회하고 접수 결과를 확인한다. 새 유료 요청으로 덮지 않는다. 권한을 다시 받을 이유도 아니다.\n4. 성공 소재는 `generation_download`로 보존·검수한다. 실패는 코드·해제/차감 내역을 확인한다. `PROVIDER_RATE_LIMITED`이면 `retryNotBefore`가 지나도 먼저 상태를 다시 조회한다. 2분 경과는 성공 보장이 아니다.\n5. 복구할 때 기존 기획과 옵션을 유지하고 `storyboard_quote.assetIds`에 실패한 소재 ID만 지정한다. 본편 60초 중 5초 한 장면이 실패해도 전체 60초를 다시 생성하거나 최소 분량을 맞추려고 성공 소재를 포함하지 않는다. MCP가 전체 기획 `shots`와 과금·접수 대상 `selectedShotIds`를 분리한다.\n6. 새 견적은 새 비용이다. 기존 유효한 권한·예산 안에서만 `generation_submit`을 실행한다. 이미 접수한 batchId 재조회는 중복 접수와 다르다. 자동 재시도·예산 확대·재충전은 하지 않는다.\n7. 동일 ID·프롬프트·길이·참조 이미지·화면비·해상도의 진행 중/성공 소재를 새 견적에 넣으면 MCP가 차단한다. 의도적인 크리에이티브 변형은 수정 이유와 별도 소재 ID를 기획에 기록한다. 이 ID 변경을 요청 제한 우회에 사용하지 않는다.\n\n보고: 성공/대기/접수 확인 필요/실패 수, 유지할 jobId, 재시도 assetIds, 비용을 구분한다. 테스트 통과나 대기열 접수만으로 영상 완성·품질 통과를 말하지 않는다.\n",
+      "sha256": "192e40e1a9fd325aafff289e69d11f521927a119f4182ec9a8500e376facef5a",
       "provider_call": "none"
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-29.3",
-      "vaultSha256": "7c86b8614123ba6daa3be8c4af960185e0ee91d2bf05a4b6fdd7f785375badcc",
+      "version": "2026-09-30.1",
+      "vaultSha256": "e90ef39fba29540bb8f14b71fd2ef123ecac24be36b82266730a50ae79b02914",
       "topic": "landscape",
       "file": "12-LANDSCAPE.md",
       "title": "가로 16:9와 세로 9:16을 함께 제작하기",
