@@ -26,7 +26,7 @@ const helpWorker = {
       return Response.redirect(url.toString(), 308);
     }
     const asset =
-      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-0\.(?:6\.[1234]|9\.[01])\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
+      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-0\.(?:6\.[1234]|9\.[012])\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
         url.pathname,
       );
     const known =
