@@ -2,7 +2,7 @@ import { playbook, markdownPath } from './advertisingPlaybook.mjs';
 import styles from './install.module.css';
 export default function AdvertisingGuide({ Command }) {
   return <>
-    <p>{playbook.intro}</p>
+    <p>{playbook.intro}</p><p><a href="/help/creative-vault">3–5초 장면 묶음과 연출을 자세히 배우는 HIOB 제작 Vault</a></p>
     <div className={styles.callout}><strong>한 편에서 하나의 선택 이유를 전달하세요.</strong><p>{playbook.principle}</p></div>
     <p>검토 기준: {playbook.reviewedFor} · 설명서 {playbook.version}. <a href={markdownPath}>AI용 전체 설명서 다운로드·읽기</a> · <a href="https://studio.hi-ob.com/models">모델별 기능과 제약</a></p>
     <h2>AI에게 처음 요청하기</h2>

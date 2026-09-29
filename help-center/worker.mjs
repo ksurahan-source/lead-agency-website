@@ -25,8 +25,8 @@ const helpWorker = {
       url.pathname = canonical;
       return Response.redirect(url.toString(), 308);
     }
-    const asset = url.pathname === "/help/skills/advertising-playbook-2026-09-29.md" ||
-      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-0\.(?:6\.[1234]|9\.[0124])\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
+    const asset = /^\/help\/skills\/creative-vault-2026-09-29(?:\.zip|\/(?:[0-9]{2}-[A-Z-]+\.md|manifest\.json))$/.test(url.pathname) || url.pathname === "/help/skills/advertising-playbook-2026-09-29.md" ||
+      /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-0\.(?:6\.[1234]|9\.[01245])\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
         url.pathname,
       );
     const known =

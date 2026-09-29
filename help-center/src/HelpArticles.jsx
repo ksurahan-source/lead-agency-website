@@ -1,3 +1,4 @@
+import CreativeVault from './CreativeVault';
 import AdvertisingGuide from './AdvertisingGuide';
 import Link from "./StudioLink";
 import {
@@ -242,6 +243,8 @@ export function HelpArticle({ id }) {
           <Next href="#create">다음: 첫 영상 제작 요청</Next>
         </>
       );
+    case "creative-vault":
+      return <CreativeVault Command={Command} />;
     case "advertising":
       return <AdvertisingGuide Command={Command} />;
     case "create":

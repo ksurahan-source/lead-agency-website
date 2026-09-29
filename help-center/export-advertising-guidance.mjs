@@ -2,6 +2,7 @@
 // Usage: node help-center/export-advertising-guidance.mjs <Studio data JSON path>
 import { writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import vault from './src/creativeVault.generated.json' with {type:'json'};
 import { resolve } from 'node:path';
 import { playbook, markdownPath, playbookMarkdown } from './src/advertisingPlaybook.mjs';
 const destination = process.argv[2];
@@ -14,6 +15,10 @@ const brief = {
   masterPrompt: playbook.masterPrompt,
   workflow: playbook.steps.map(s => ({ id: s.id, title: s.title, input: s.input, output: s.output, acceptance: s.pass, repair: s.repair })),
   promptTemplates: Object.fromEntries(playbook.steps.filter(s => ['brief', 'script', 'cast', 'props'].includes(s.id)).map(s => [s.id, s.prompt])),
+  creativeVault: {version: vault.version, sha256: vault.sha256, pageUrl: vault.pageUrl,
+    minimumMcpVersion: '0.9.5', read: vault.read,
+    principle: '3–5초 의미 묶음과 내부 편집 컷, 5–15초 생성 원본을 구분한다. 실제 발화와 제품 동작에 따라 예외를 기록한다.',
+    fallback: 'creative_vault 도구가 없으면 pageUrl의 공개 본문을 읽는다.'},
   providerCall: 'none'
 };
 await writeFile(resolve(destination), JSON.stringify(brief, null, 2) + '\n');
