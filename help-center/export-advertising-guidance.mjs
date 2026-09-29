@@ -16,7 +16,7 @@ const brief = {
   workflow: playbook.steps.map(s => ({ id: s.id, title: s.title, input: s.input, output: s.output, acceptance: s.pass, repair: s.repair })),
   promptTemplates: Object.fromEntries(playbook.steps.filter(s => ['brief', 'script', 'cast', 'props'].includes(s.id)).map(s => [s.id, s.prompt])),
   creativeVault: {version: vault.version, sha256: vault.sha256, pageUrl: vault.pageUrl,
-    minimumMcpVersion: '0.9.6', readingPolicy: 'all_notes_before_production', read: vault.read,
+    minimumMcpVersion: '0.9.8', readingPolicy: 'all_notes_before_production', read: vault.read,
     principle: '3–5초 의미 묶음과 내부 편집 컷, 5–15초 생성 원본을 구분한다. 실제 발화와 제품 동작에 따라 예외를 기록한다.',
     fallback: 'creative_vault 도구가 없으면 pageUrl의 공개 본문을 읽는다.'},
   providerCall: 'none'

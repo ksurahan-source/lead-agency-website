@@ -1,6 +1,6 @@
 {
   "schema": "HiobCreativeVault.v1",
-  "version": "2026-09-29.2",
+  "version": "2026-09-29.3",
   "coreTopic": "beat-groups",
   "notes": [
     {
@@ -123,6 +123,19 @@
       "related": [
         "assembly",
         "index"
+      ]
+    },
+    {
+      "topic": "landscape",
+      "file": "12-LANDSCAPE.md",
+      "title": "가로 16:9와 세로 9:16을 함께 제작하기",
+      "when": "가로 광고·설명 영상 또는 두 화면비 납품",
+      "related": [
+        "beat-groups",
+        "cast",
+        "props",
+        "captions",
+        "assembly"
       ]
     }
   ]
