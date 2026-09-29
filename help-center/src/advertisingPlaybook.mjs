@@ -1,10 +1,10 @@
 // Canonical editorial source for the visible manual and its AI-readable download.
 export const playbook = {
-  version: '2026-09-30.1', reviewedFor: 'HIOB MCP 0.9.9 beta',
+  version: '2026-09-30.2', reviewedFor: 'HIOB MCP 0.9.10 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',
   principle: '컷 수보다 전달되는 이유가 중요합니다. 한 시청자의 상황 → 제품을 선택할 근거 → 실행할 행동이 이어져야 합니다. 화려한 화면, 놀라는 표정, 빠른 음악은 이 연결을 돕는 연출입니다. 이 설명서는 제작 기준이며 매출·바이럴·시청 지속을 보장하지 않습니다.',
-  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.9의 첫 project_context.creativeVault.notes에 전체가 전달돼.
+  masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. MCP 0.9.10의 첫 project_context.creativeVault.notes에 전체가 전달돼.
 1. 시청자 한 부류, 구체적 상황 하나, 제품을 선택할 근거 하나, CTA 하나를 정리해. 모든 제품 주장은 파일·페이지·URL 근거와 연결하고 모르는 내용은 만들지 마.
 2. 기획 3안을 짧게 비교하고 추천 이유를 설명해. 선택된 방향을 시간별 화면·대사·음원·자막·제품 근거가 있는 AV 기획서로 만들어. 첫 3초에 상황이 보이고 9초 안에 훅의 약속이 전달되게 설계하되 길이는 실제 발화로 검증해.
 3. 사용 가능한 인물 참조, 인물카드와 표정 변화, 제품·소품카드를 먼저 정리해. 승인된 얼굴·제품을 바꾸지 말고 인물과 제품이 함께 있는 장면 이미지를 만든 뒤 움직임을 설계해. 기획서 전체를 영상 프롬프트로 넣지 마.
@@ -102,7 +102,7 @@ CHAR_01 + PROP_PRODUCT_01 + [같은 장소/시간대] + [한 행동의 시작 �
 “인물이 [한 동작]을 하고, [관찰 가능한 짧은 반응]을 보인다. 카메라는 [고정 또는 한 이동]. 배경의 [최소 움직임]. 끝에서는 [편집에 필요한 마지막 자세].”
 예: “인물이 병을 들어 라벨을 확인한다. 시선이 병에서 카메라로 옮겨가며 살짝 고개를 끄덕인다. 카메라는 고정된 상반신 구도. 끝에서 병을 가슴 앞에 안정적으로 든다.”
 모델별 실제 지원 입력과 길이를 확인하고 대사·음악·CTA 지시를 움직임 프롬프트에 한꺼번에 섞지 마. 견적·승인 범위와 재사용할 원본을 먼저 확인해.`,
-      action: '모델 가이드 → production_check → 유효한 승인·견적 확인 → 지원되는 생성 도구 순서로 진행합니다. 실제 도구 이름과 입력은 연결된 MCP 스키마를 따릅니다. 생성 후 프레임·제품·동작·원본 오디오를 검수합니다.',
+      action: '모델 가이드 → production_check → 유효한 승인·견적 확인 → 지원되는 생성 도구 순서로 진행합니다. 실제 도구 이름과 입력은 연결된 MCP 스키마를 따릅니다. 생성 완료 jobId는 generation_inspect로 원본 다운로드 전에 시간순 이미지를 봅니다. 불명확한 동작만 profile=motion과 최대 15초 range로 확인합니다. 선택된 소재만 다운로드 후 material_inspect·material_review로 전체 동작과 현재 연출을 검수합니다. 요약 이미지는 전체 동작·입모양 합격이 아닙니다.',
       output: '검수된 장면 이미지 + 원본별 움직임 프롬프트·모델·길이 + 생성 결과와 검수 기록.',
       pass: '첫 이미지와 결과의 인물·제품이 일치하고 동작이 완결된다. 컷 사이 연결과 음성 방식이 기획과 같다.',
       repair: '첫 이미지가 틀리면 이미지 단계로, 움직임만 틀리면 동작 지시로 돌아갑니다. 같은 전체 요청을 반복하지 않습니다.', sources: ['motion', 'piapi']
