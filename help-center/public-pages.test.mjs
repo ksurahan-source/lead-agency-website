@@ -198,13 +198,16 @@ test("update help explains diagnosis without claiming account or creative succes
   const update = documents.get("/help/troubleshooting/update");
   assert.ok(update, "update route must exist");
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
-  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.2.0.zip"));
+  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.1.zip"));
 });
 
 test("every linked skill download and its references are served by the worker", async () => {
   const paths = new Set([...documents.get('/help/skills').matchAll(/href="(\/help\/(?:skills\/|hiob-video-skill-)[^"]+)"/g)].map(m => m[1]));
   for (const m of documents.get('/help/create').matchAll(/href="(\/help\/skills\/[^"]+)"/g)) paths.add(m[1]);
   paths.add('/help/hiob-video-skill-1.0.0.zip');
+  paths.add('/help/skills/hiob-video-1.3.1/references/inspection-guide.md');
+  paths.add('/help/skills/hiob-video-1.3.1/references/production-workflow.md');
+  paths.add('/help/skills/inspection-guide-1.3.1.md');
   paths.add('/help/skills/hiob-video-1.1.0/references/production-workflow.md');
   assert.ok(paths.size >= 4);
   for (const path of paths) {
