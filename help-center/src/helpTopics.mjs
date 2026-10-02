@@ -71,6 +71,13 @@ export const HELP_ARTICLES = [
     keywords: "프롬프트 대본 자막 나레이션 후킹 9초 소리 MP4",
   },
   {
+    id: "assets",
+    topic: "production",
+    title: "프로젝트 사이에서 애셋 공유·이동하기",
+    summary: "계정의 프로젝트 폴더를 탐색하고 자료를 추가·이동합니다.",
+    keywords: "애셋 소재 공유 폴더 계정 프로젝트 이동 추가 가져오기 asset_browse asset_read",
+  },
+  {
     id: "restore",
     topic: "production",
     title: "저장하고 다른 컴퓨터에서 이어하기",
