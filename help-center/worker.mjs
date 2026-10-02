@@ -26,7 +26,8 @@ const helpWorker = {
       return Response.redirect(url.toString(), 308);
     }
     const inspectionReleaseAsset = /^\/help\/(?:hiob-video-skill-1\.3\.1\.zip|skills\/(?:inspection-guide|production-guide)-1\.3\.1\.md|skills\/hiob-(?:video|creative-edit|creative-refine|scene-planning)-1\.3\.1\/(?:SKILL\.md|references\/(?:production-workflow|inspection-guide|diagnose|treatment-template)\.md))$/.test(url.pathname);
-    const asset = inspectionReleaseAsset || /^\/help\/skills\/creative-vault-2026-09-29(?:\.zip|\/(?:[0-9]{2}-[A-Z-]+\.md|manifest\.json))$/.test(url.pathname) || url.pathname === "/help/skills/advertising-playbook-2026-09-29.md" ||
+    const sharingReleaseAsset = /^\/help\/(?:hiob-video-skill-1\.3\.2\.zip|skills\/(?:asset-library-guide|production-guide)-1\.3\.2\.md|skills\/hiob-video-1\.3\.2\/(?:SKILL\.md|references\/(?:production-workflow|inspection-guide|asset-library-guide)\.md))$/.test(url.pathname);
+    const asset = sharingReleaseAsset || inspectionReleaseAsset || /^\/help\/skills\/creative-vault-2026-09-29(?:\.zip|\/(?:[0-9]{2}-[A-Z-]+\.md|manifest\.json))$/.test(url.pathname) || url.pathname === "/help/skills/advertising-playbook-2026-09-29.md" ||
       /^\/help\/(?:assets\/help-[a-f0-9]{12}\.(?:css|js)|tools\/windows-recovery-1\.(?:mjs|json)|(?:version|mcp-release)\.json|skills\/production-guide-1\.(?:[013]\.0|2\.6)\.md|skills\/production-guide-0\.(?:6\.[1234]|9\.(?:[012456789]|1[0123456789]))\.md|hiob-video-skill-1\.[012]\.0\.zip|skills\/hiob-creative-edit-(?:0\.9\.17|1\.1\.0)\/SKILL\.md|skills\/hiob-video(?:-1\.[12]\.0)?\/(?:SKILL\.md|references\/production-workflow\.md))$/.test(
         url.pathname,
       );
