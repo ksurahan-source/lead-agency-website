@@ -2,6 +2,7 @@
 export const playbook = {
   version: '2026-10-03.1', reviewedFor: 'HIOB MCP 1.3.3 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
+  sourceNote: '한국 릴스 설득 자료는 2026-10-03, 기존 기술 참고는 2026-09-29 확인. 한국 릴스 문법은 국내 자료를 사용하며 해외 도구 문서는 이미지·영상 기술 참고입니다. 아래 자료에서 원리를 참고하고 HIOB 브레인과 현재 도구 지원 범위에 맞춰 작성한 실무 제안입니다. 판매 성과나 전체 영상 시청을 증명하는 목록이 아닙니다.',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',
   principle: '컷 수보다 전달되는 이유가 중요합니다. 한 시청자의 상황 → 제품을 선택할 근거 → 실행할 행동이 이어져야 합니다. 화려한 화면, 놀라는 표정, 빠른 음악은 이 연결을 돕는 연출입니다. 이 설명서는 제작 기준이며 매출·바이럴·시청 지속을 보장하지 않습니다.',
   masterPrompt: `HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 model_catalog로 지원 모델을 찾고 creative_catalog의 사운드·제목·반응 편집 스킬과 실제 지원 범위를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. 첫 project_context.creativeVault.notes에 전체가 전달돼. 한국 릴스는 creative_harness(platform=reels)의 한국 릴스 설득 가이드와 42초 전체 대본·동작표도 읽어.
@@ -118,7 +119,7 @@ export const playbook = {
       action: '공식 원본과 생성 후보를 구분해 저장합니다. 제품 이미지의 시각 검수가 끝나기 전에는 해당 장면의 유료 영상 생성을 시작하지 않습니다.',
       output: '제품·보조 소품 카드 + 공식 원본 + 승인된 제품 참조 + 인물과 제품이 함께 있는 장면 후보.',
       pass: '제품을 실제 상품과 대조할 수 있고 손·크기·사용법이 자연스럽다. 새 인물이나 다른 화풍의 제품 컷이 이유 없이 끼어들지 않는다.',
-      repair: '라벨·손·형태가 틀리면 영상으로 움직이기 전에 이미지를 수정합니다. 제품 검증이 어려운 장면은 각도를 단순화하거나 공식 소재로 대체합니다.', sources: ['reference-media', 'schiffer']
+      repair: '라벨·손·형태가 틀리면 영상으로 움직이기 전에 이미지를 수정합니다. 제품 검증이 어려운 장면은 각도를 단순화하거나 공식 소재로 대체합니다.', sources: ['reference-media']
     },
     {
       id: 'shots', title: '5. 장면 이미지에서 영상으로: 한 컷에 한 동작',
@@ -200,10 +201,6 @@ project_sync 후 render_quote의 금액과 유효한 승인 범위를 확인해 
     { id: 'korean-story', title: '국내 정육 브랜드: 생활 문제와 구매 이유 연결', url: 'https://brunch.co.kr/@experiencejs/23', checked: '2026-10-03 공개 본문', note: '제작자 서술을 참고했습니다. 독립적인 광고 성과 검증이나 원본 영상 전체 재생 증거가 아닙니다.' },
     { id: 'korean-process', title: '국내 작업 과정 영상과 공감 스토리', url: 'https://brunch.co.kr/@experiencejs/19', checked: '2026-10-03 공개 본문', note: '실제 작업 행동 위에 상황과 이야기를 연결하는 사례 설명입니다.' },
     { id: 'korean-structure', title: '국내 제작사의 후킹·문제·해결·증거·반론 구성', url: 'https://www.luckystudio.co.kr/', checked: '2026-10-03 공개 서비스 설명', note: '설득 단계의 참고이며 42초 배분의 실험적 우월성을 증명하지 않습니다.' },
-    { id: 'google', title: 'Google Ads — ABCDs of effective video ads', url: 'https://support.google.com/google-ads/answer/14783551?hl=en', checked: '공식 도움말 본문', note: '주의·브랜드·연결·행동의 관계, 경쟁하는 음성·문구를 피하는 원칙을 참고했습니다.' },
-    { id: 'tiktok', title: 'TikTok for Business — Creative Codes', url: 'https://ads.tiktok.com/business/en/creative-codes', checked: '공식 가이드 본문', note: '훅·본문·마무리 구조와 의미를 전달하는 움직임·소리 설계를 참고했습니다.' },
-    { id: 'schiffer', title: 'Daniel Schiffer — Filming an EPIC Product Commercial at Home!', url: 'https://www.youtube.com/watch?v=zCvYyHLgqmc', checked: 'YouTube 자동 생성 자막 확인', note: '0:30–1:28 브랜드 성격과 제품 조명, 1:48–2:09 라벨 초점, 4:24–4:36 소품 배치, 4:57–6:02 실패한 동작을 별도 촬영·편집으로 보완하는 과정을 참고했습니다. 연출을 실제 효능 증거로 쓰라는 뜻은 아닙니다.' },
-    { id: 'shotlist', title: 'StudioBinder — Intro to Shot Listing / YouTube 튜토리얼', url: 'https://www.studiobinder.com/tutorials/visualize/intro-to-shot-list/', videoUrl: 'https://www.youtube.com/watch?v=ZNRQQi42CZA', checked: '제작자의 공식 강의 페이지·영상 설명', note: '대본을 숏 크기·카메라·움직임·일정으로 나누는 방법을 참고했습니다. 전체 영상 시청 검증은 아닙니다.' },
     { id: 'references', title: 'Runway — Creating with Gen-4 Image References', url: 'https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References', checked: '공식 가이드 본문', note: '중립 표정·고른 빛의 참조로 인물 기준을 잡고 요소별로 반복하는 방법을 참고했습니다. Runway의 복수 참조 입력이 HIOB에서 지원된다는 뜻은 아닙니다.' },
     { id: 'reference-media', title: 'Runway — Reference media', url: 'https://docs.dev.runwayml.com/recipes/reference-media/', checked: '공식 문서 본문', note: '가림 없는 제품과 명확한 각도·얼굴 참조를 준비하는 기준입니다.' },
     { id: 'motion', title: 'Runway — Gen-4 Video Prompting Guide', url: 'https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide', checked: '공식 가이드 본문', note: '입력 이미지와 움직임 지시를 분리하는 원리를 참고했습니다. 모델별 문법·보장 범위를 PiAPI에 그대로 적용하지 않습니다.' },
@@ -217,7 +214,7 @@ export function playbookMarkdown() {
     lines.push(`## ${step.title}`, `준비물: ${step.input}`, ...step.body, '### 복사할 프롬프트', '```text', step.prompt, '```', `HIOB에서: ${step.action}`, `산출물: ${step.output}`, `통과 기준: ${step.pass}`, `실패하면: ${step.repair}`);
     for (const id of step.sources) { const source = playbook.sources.find(s => s.id === id); lines.push(`참고: [${source.title}](${source.url})`); }
   }
-  lines.push('## 출처와 적용 범위', '한국 릴스 설득 자료는 2026-10-03, 기존 기술 참고는 2026-09-29 확인. 한국 릴스 문법은 국내 자료를 사용하며 해외 도구 문서는 이미지·영상 기술 참고입니다. 아래 자료에서 원리를 참고하고 HIOB 브레인과 현재 도구 지원 범위에 맞춰 작성한 실무 제안입니다. 판매 성과나 전체 영상 시청을 증명하는 목록이 아닙니다.');
+  lines.push('## 출처와 적용 범위', playbook.sourceNote);
   for (const s of playbook.sources) lines.push(`- [${s.title}](${s.url}) — ${s.checked}. ${s.note}${s.videoUrl ? ` 영상: ${s.videoUrl}` : ''}`);
   return lines.join('\n\n') + '\n';
 }
