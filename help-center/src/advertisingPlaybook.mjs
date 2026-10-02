@@ -155,7 +155,7 @@ CHAR_01 + PROP_PRODUCT_01 + [같은 장소/시간대] + [한 행동의 시작 �
 제품 자료를 바탕으로 인물 외 장면을 [목적 | 실사/개념/비유/실증 | 근거 | 시작→변화→끝 | 모델별 영상 프롬프트 | 첫 프레임 참조 | 원본 길이 | 실제 사용할 구간]으로 기획해.
 한 원본에 한 주된 변화와 카메라 동작 하나를 먼저 설계해. 모델별 문법과 단일 참조 입력·현재 5–15초 원본 계약을 확인하고 지원되는 direction.assets와 shots[].prompt에 대응해.
 이미지 준비와 움직이는 영상 생성 결과를 구분하고 개념을 실험 증거로 표시하지 마. 기존 성공 소재를 먼저 재사용하고 새 생성은 현재 유효한 권한·견적 안에서만 진행해.`,
-      action: 'project_context·model_catalog → 기획/근거·참조 첫 프레임 → direction_save → storyboard_compile → project_sync → storyboard_quote → 승인 범위의 generation_submit → 실제 원본 검사 → 음성·컷 연결 순서입니다. 비인물 컷은 castIds 빈 배열을 사용할 수 있습니다.',
+      action: 'project_context·model_catalog → 기획/근거·참조 첫 프레임 → direction_save → storyboard_compile → project_sync → job_status(completed) → storyboard_quote → 승인 범위의 generation_submit → 실제 원본 검사 → 음성·컷 연결 순서입니다. 비인물 컷은 castIds 빈 배열을 사용할 수 있습니다.',
       output: '장면 유형·근거·변화 과정 + 모델별 영상 프롬프트 + 검수할 실제 원본과 사용 구간.',
       pass: '제품 동일성과 시간에 따른 변화가 보이고 원리·주장 범위가 맞습니다. 생성 장면과 실제 자료가 구별됩니다.',
       repair: '움직임이 없으면 변화 사건을 구체화하고 형태가 틀리면 참조 첫 프레임을 고칩니다. 원리 자료가 없으면 사용 과정까지만 보여줍니다.', sources: ['skin-science', 'glass-science', 'motion']
