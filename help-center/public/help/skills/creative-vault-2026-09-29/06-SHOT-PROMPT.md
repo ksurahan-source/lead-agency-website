@@ -67,3 +67,7 @@ version: 2026-09-30.3
 5. 쓸 수 있는 컷 수, 원본 생성 비용, 전체 대기·검수·수정 시간, 재생성 횟수로 비교한다. API 호출 수 감소만으로 성공 처리하지 않는다.
 
 참고: [PiAPI Seedance 2.5](https://app.piapi.ai/docs/seedance-api/seedance-25).
+
+## 비인물 제품·과학·생물학 장면
+
+인물 없이도 실제 제품의 제형·표면·접촉·구조, 과학/생물학 개념, 추상 개념의 비유를 영상으로 기획한다. 시작→변화 과정→끝이 있는 사건을 써야 하며 사진 확대만으로 동작을 대신하지 않는다. creative_harness(platform=reels)의 product-science-scenes 문서는 장면별 프롬프트 8개, product-motion-execution 문서는 실제 도구 전달·검사·음성 배속 절차를 제공한다. 생성 원리 장면을 실제 현미경·효능 시험·거래 증거로 소개하지 않는다.
