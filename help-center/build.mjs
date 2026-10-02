@@ -162,7 +162,7 @@ await writeFile(
   new URL("robots.txt", destination),
   "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /agent\nDisallow: /api/\n\nSitemap: https://hi-ob.com/sitemap.xml\nSitemap: https://hi-ob.com/video-sitemap.xml\n",
 );
-for (const [version, folder] of [["1.0.0", "hiob-video"], ["1.1.0", "hiob-video-1.1.0"], ["1.2.0", "hiob-video-1.2.0"]]) {
+for (const [version, folder] of [["1.0.0", "hiob-video"], ["1.1.0", "hiob-video-1.1.0"], ["1.2.0", "hiob-video-1.2.0"], ["1.3.1", "hiob-video-1.3.1"]]) {
   run("python3", ["-c",
     "import pathlib,zipfile,sys; root=pathlib.Path(sys.argv[1]); z=zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED); [z.write(p,pathlib.Path('hiob-video')/p.relative_to(root)) for p in sorted(root.rglob('*')) if p.is_file()]; z.close()",
     "help-center/public/help/skills/" + folder,
@@ -175,7 +175,7 @@ await writeFile(
   JSON.stringify({
     source,
     mcp: MCP_RELEASE.version,
-    skill: "1.2.0",
+    skill: "1.3.1",
     routes: PUBLIC_ROUTES.length,
     assets,
     media,
