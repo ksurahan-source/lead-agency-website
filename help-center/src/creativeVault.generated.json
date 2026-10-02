@@ -1,7 +1,7 @@
 {
   "schema": "HiobCreativeVault.v1",
-  "version": "2026-09-30.3",
-  "sha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+  "version": "2026-10-03.3",
+  "sha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
   "uri": "hiob://creative-vault",
   "pageUrl": "https://hi-ob.com/help/creative-vault",
   "read": {
@@ -31,8 +31,8 @@
   "notes": [
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "index",
       "file": "00-START-HERE.md",
       "title": "시작: HIOB 제작 Vault",
@@ -49,8 +49,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "beat-groups",
       "file": "01-BEAT-GROUPS.md",
       "title": "3–5초 의미 묶음과 컷 설계",
@@ -67,8 +67,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "hook-payoff",
       "file": "02-HOOK-PAYOFF.md",
       "title": "9초 안의 훅과 수미상관 CTA",
@@ -84,8 +84,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "narrator",
       "file": "03-NARRATOR.md",
       "title": "나레이터·주인공·멀티맨·멀티걸의 호흡",
@@ -101,8 +101,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "cast",
       "file": "04-CAST.md",
       "title": "인물카드와 육도 표정의 연속성",
@@ -118,8 +118,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "props",
       "file": "05-PROPS.md",
       "title": "제품·소품·공간을 이어 붙이는 법",
@@ -135,8 +135,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "shot-prompt",
       "file": "06-SHOT-PROMPT.md",
       "title": "이미지 설계와 움직임 프롬프트 분리",
@@ -152,8 +152,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "sound",
       "file": "07-SOUND.md",
       "title": "오디오가 비지 않는 박자와 음악 존재감",
@@ -169,8 +169,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "captions",
       "file": "08-CAPTIONS.md",
       "title": "제목·구절 자막의 역할과 읽는 시간",
@@ -180,14 +180,14 @@
         "assembly"
       ],
       "uri": "hiob://creative-vault/captions",
-      "text": "---\nid: captions\nversion: 2026-09-29.3\n---\n\n# 제목·구절 자막의 역할과 읽는 시간\n\n사용 시점: 제목·대사·정보가 동시에 경쟁할 때\n\n## 역할과 시간\n제목은 구간의 관점, 중간 정보는 제품 조건, 구절 자막은 실제 발화다. 같은 문장을 상단과 하단에 동시에 반복하지 않는다. 제목 두 개의 시간이 겹치는 것과 실제 글자 영역 충돌은 다르다. 현행 top/middle 제목과 lower/middle 자막의 지원 배치를 확인한다.\n\n## 만드는 순서\n실제 대사 → 의미 단위 1–2줄 분할 → 핵심 구절 하나 강조 → 발화 끝까지 시간 확보 → 제품·얼굴·플랫폼 UI와 충돌 확인. 긴 문장은 무조건 작게 만들지 않는다. 정보가 많은 제품 컷은 읽을 만큼 유지한다.\n\n## AI 프롬프트\n제목/정보/발화를 구분한 표시표를 만들어. [문구 | 역할 | 시작·끝 | 배치 | 가려서는 안 될 대상 | 앞뒤 발화]를 기록하고 edit_check의 실제 오류를 수리해. 브레인의 큰 글자 기준을 참고하되 현재 지원 preset과 스키마를 써. 프레임마다 글자를 바꾸거나 단어마다 강조해 시선을 흩뜨리지 마.\n\n## 통과 기준\n무음에서도 흐름을 이해하며, 마지막 음절·제품명·CTA 글자가 잘리지 않는다. 휴대폰 표시 크기로 읽었다.\n\n관련: [의미 묶음](01-BEAT-GROUPS.md), [편집 연결](09-ASSEMBLY.md).\n\n가로/세로를 함께 납품할 때는 [화면비별 제작](12-LANDSCAPE.md)의 구도·재사용·각 출력 검수를 따른다.\n",
-      "sha256": "28f304ba2e84a97d9dc3b99fa847ad02aa59c85bca7579f3380f2565436ba866",
+      "text": "---\nid: captions\nversion: 2026-10-03.3\n---\n\n# 제목·구절 자막의 역할과 읽는 시간\n\n사용 시점: 제목·대사·정보가 동시에 경쟁할 때\n\n## 역할과 시간\n제목은 구간의 관점, 중간 정보는 제품 조건, 구절 자막은 실제 발화다. 같은 문장을 상단과 하단에 동시에 반복하지 않는다. 제목 두 개의 시간이 겹치는 것과 실제 글자 영역 충돌은 다르다. 현행 top/middle 제목과 lower/middle 자막의 지원 배치를 확인한다.\n\n## 만드는 순서\n실제 대사 → 의미 단위 1–2줄 분할 → 핵심 구절 하나 강조 → 발화 끝까지 시간 확보 → 제품·얼굴·플랫폼 UI와 충돌 확인. 긴 문장은 무조건 작게 만들지 않는다. 정보가 많은 제품 컷은 읽을 만큼 유지한다.\n\n## 세이프존 때문에 구도를 망치지 않는다\n세이프존은 게시 UI에 가려지면 안 되는 핵심 자막·제품명·로고·CTA의 배치를 확인하는 기준이다. 배경과 영상 전체를 작은 사각형 안에 넣는 제작 규칙으로 해석하지 않는다. 얼굴·손·제품의 의미 있는 행동과 자연스러운 크기를 보존한다. 모든 요소를 중앙에 몰거나 세이프존 수치만 맞추려고 화면 전체를 축소·재크롭하지 않는다.\n\n광고와 일반 릴스, 실제 노출 위치의 미리보기에서 UI 가림을 확인한다. 하나의 상하좌우 비율을 모든 배치의 고정 정답으로 쓰지 않는다. 인물·제품이 가려지면 해당 자막의 줄바꿈·노출 시간·지원 위치부터 조정하고, 조건 설명은 읽을 시간을 둔 별도 컷으로 나눌 수 있다. 꼭 읽어야 하는 고지·수치·출처를 삭제하거나 읽기 힘들게 축소하는 수리는 하지 않는다.\n\n## MCP에서 어떻게 고칠지\n화면 전체가 좌측 상단으로 이동했다면 자막 여백 문제로 단정하지 않는다. 같은 시각의 원본·편집 미리보기·최종 MP4를 비교해 어느 단계에서 이동했는지 확인하고, 캔버스 비율과 영상 레이어의 위치·크기·변형이 실제 지원 경로에서 어떻게 적용됐는지 조사한다. 텍스트 영역 조정이 영상 레이어의 이동을 자동으로 복구한다고 설명하지 않는다. 확인되지 않은 좌표를 임의로 덮어쓰지 않는다.\n\n`project_context`로 현재 원본과 편집을 읽고 `문제 시각 | 실제 가림 | 원본 구도 | 수정할 문구/컷 | 보존할 내용`을 기록한다. V1의 제목 top/middle, 자막 lower/middle 등 현재 스키마에 있는 선택만 사용한다. 자유 좌표나 세이프존 해제 API를 만들지 않는다. 지원 위치로 해결되지 않으면 문제 컷의 제목 노출 시간을 분리하거나 다른 적합한 원본 구간을 선택한다. 원본에 글자가 이미 박혀 있으면 새 자막 위치 변경으로 그 글자가 이동한다고 설명하지 않는다.\n\n`edit_check` 통과는 박스·글자·입력 검사다. 얼굴·제품·자연스러운 구도의 합격 판정이 아니다. 변경된 구간을 실제 재생하며 원본/수정본과 게시 미리보기를 비교한다. 새 렌더가 필요하면 기존 유효한 권한과 견적 범위에서만 수행한다. 원본과 이전 출력은 보존하고 전체 재생성으로 확대하지 않는다.\n\n## AI 프롬프트\n제목/정보/발화를 구분한 표시표를 만들어. [문구 | 역할 | 시작·끝 | 배치 | 가려서는 안 될 대상 | 앞뒤 발화]를 기록하고 edit_check의 실제 오류를 수리해. 브레인의 큰 글자 기준을 참고하되 현재 지원 preset과 스키마를 써. 프레임마다 글자를 바꾸거나 단어마다 강조해 시선을 흩뜨리지 마.\n\n## 통과 기준\n무음에서도 흐름을 이해하며, 마지막 음절·제품명·CTA 글자가 잘리지 않는다. 휴대폰 표시 크기로 읽었다.\n\n관련: [의미 묶음](01-BEAT-GROUPS.md), [편집 연결](09-ASSEMBLY.md).\n\n가로/세로를 함께 납품할 때는 [화면비별 제작](12-LANDSCAPE.md)의 구도·재사용·각 출력 검수를 따른다.\n",
+      "sha256": "626dc98d6df59802758978654e0620b99c96baa04cfd88f8d47051344dc59623",
       "provider_call": "none"
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "assembly",
       "file": "09-ASSEMBLY.md",
       "title": "설계표를 HIOB 도구로 옮기기",
@@ -203,8 +203,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "worked-example",
       "file": "10-WORKED-EXAMPLE.md",
       "title": "45초 설계 예시: 묶음에서 컷으로",
@@ -220,8 +220,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "repair",
       "file": "11-REPAIR.md",
       "title": "실패 패턴과 부분 수정",
@@ -237,8 +237,8 @@
     },
     {
       "schema": "HiobCreativeVault.v1",
-      "version": "2026-09-30.3",
-      "vaultSha256": "4b4e48b055af1598d75bbe6e056cc7724412b564494cce68b823f2ef20b6051f",
+      "version": "2026-10-03.3",
+      "vaultSha256": "4cffba1245f741595365e17b41839732268b5be2c90e359f5a20098a90836080",
       "topic": "landscape",
       "file": "12-LANDSCAPE.md",
       "title": "가로 16:9와 세로 9:16을 함께 제작하기",
