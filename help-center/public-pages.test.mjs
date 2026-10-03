@@ -198,7 +198,7 @@ test("update help explains diagnosis without claiming account or creative succes
   const update = documents.get("/help/troubleshooting/update");
   assert.ok(update, "update route must exist");
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
-  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.7.zip"));
+  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.8.zip"));
 });
 
 test("every linked skill download and its references are served by the worker", async () => {
@@ -288,4 +288,9 @@ test("asset sharing guide distinguishes placement from editable import", () => {
   assert.ok(page.includes("현재 편집 자료에 가져오기"));
   assert.ok(page.includes("같은 작업공간"));
   assert.ok(page.includes("asset_read"));
+});
+
+test('public manual contains executable one-pain guidance and customer review',()=>{
+ assert.ok(documents.get('/help/advertising').includes('customer-primary-pain.md'));
+ assert.ok(documents.get('/help/advertising').includes('고객의 개인적 고통 하나'));
 });
