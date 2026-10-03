@@ -1,11 +1,12 @@
 // Canonical editorial source for the visible manual and its AI-readable download.
 export const playbook = {
-  version: '2026-10-03.4', reviewedFor: 'HIOB MCP 1.3.6 beta',
+  version: '2026-10-03.5', reviewedFor: 'HIOB MCP 1.3.7 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
   sourceNote: '한국 릴스 설득 자료는 2026-10-03, 기존 기술 참고는 2026-09-29 확인. 한국 릴스 문법은 국내 자료를 사용하며 해외 도구 문서는 이미지·영상 기술 참고입니다. 아래 자료에서 원리를 참고하고 HIOB 브레인과 현재 도구 지원 범위에 맞춰 작성한 실무 제안입니다. 판매 성과나 전체 영상 시청을 증명하는 목록이 아닙니다.',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',
   principle: '컷 수보다 전달되는 이유가 중요합니다. 한 시청자의 상황 → 제품을 선택할 근거 → 실행할 행동이 이어져야 합니다. 화려한 화면, 놀라는 표정, 빠른 음악은 이 연결을 돕는 연출입니다. 이 설명서는 제작 기준이며 매출·바이럴·시청 지속을 보장하지 않습니다.',
   masterPrompt: `한 명의 화자가 훅부터 CTA까지 모든 설명을 끝까지 맡아. 나레이터 대본 전문을 고객에게 토씨 하나 바꾸지 않고 보여줘. 요약 한 문장이 아니다. 고객이 컨펌하지 않아도 수정 의견을 기록하고 새 대본 버전에 반영해. 생성된 실제 발화는 원문과 대조하고 의역·누락·추가가 있으면 통과시키지 마. 감독의 논리 판단과 목표 고객의 구매 이유 판단을 나눠 검수해. AI 검토를 실제 고객 구매·승인으로 보고하지 마.
+사회적 증거·원리 자료화면에는 실제 참고 이미지와 새 생성용 첫 프레임 참조 이미지를 필수로 포함하고 고객에게 미리보기를 보여줘. URL·프롬프트만으로 이미지 준비 완료라고 하지 마. 이미지가 없으면 해당 자료화면의 준비 완료로 표시하지 말고 이미지 확보 단계로 이어가. 최종 자료화면은 움직이는 영상으로 만들어.
 HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/advertising 와 https://hi-ob.com/help/skills/advertising-playbook-2026-09-29.md 를 읽고 model_catalog로 지원 모델을 찾고 creative_catalog의 사운드·제목·반응 편집 스킬과 실제 지원 범위를 읽고 현재 production_check, project_context, 모델 가이드와 실제 도구 스키마를 확인해. 제작 Vault https://hi-ob.com/help/creative-vault 의 전체 노트 전문을 모두 읽어. 첫 project_context.creativeVault.notes에 전체가 전달돼. 한국 릴스는 creative_harness(platform=reels)의 한국 릴스 설득 가이드와 42초 전체 대본·동작표도 읽어. product-science-scenes의 장면 제작법과 product-motion-execution의 MCP 실행 절차를 나눠 읽고, 제품 매크로·과학·생물학 장면은 첫 상태→동작→변화→끝으로 설계해. 느린 외부 나레이션은 1.05–1.2배를 비교하고 실제 청취·재검사·자막 재조정을 진행해. 현재 MCP의 영상 컷 배속은 미지원이므로 입모양이 있는 영상의 음성만 가속하지 마.
 1. 시청자 한 부류, 구체적 상황 하나, 제품을 선택할 근거 하나, CTA 하나를 정리해. 모든 제품 주장은 파일·페이지·URL 근거와 연결하고 모르는 내용은 만들지 마.
 2. 기획 3안을 짧게 비교하고 추천 이유를 설명해. 선택된 방향을 시간별 화면·대사·음원·자막·제품 근거가 있는 AV 기획서로 만들어. 고객이 지정한 본편 길이를 보존해. 길이 미지정 설명·구매형 한국 릴스에는 42초 안(0–3 후킹 / 3–12 공감 / 12–27 제품 차이·원리·이점 / 27–37 근거·구매 질문 / 37–42 CTA)을 먼저 제안하고 실제 발화로 검증해. 유명인 발언은 원본·맥락·제품 추천 여부를 확인하고 고객 문제에서 제품 구매 이유로 연결해.
@@ -72,16 +73,21 @@ HIOB로 첨부 자료의 광고를 만들어줘. 먼저 https://hi-ob.com/help/a
     },
     {
       id: 'product-reason', title: '2-2. 우리 제품이 왜 좋은지 설명하고 입증하기',
+      images: [
+        {src:'/help/assets/broll-biological-cutaway-1.3.7.jpg', height:623, alt:'피부 표면의 확대 위치와 3D 단면·제형을 연결한 참고 프레임', source:'3DVIEW 셀리맥스 제작 쇼츠', sourceUrl:'https://www.youtube.com/shorts/M2H4r3YbCmo', caption:'약 2.78초, 2026-10-03 관찰. 표면→확대 단면→작용 과정의 영상 표현 참고입니다. 제품 효능 증거는 별도 자료로 확인합니다.'},
+        {src:'/help/assets/broll-test-products-1.3.7.jpg', height:630, alt:'같은 테이블에 놓인 실제 우양산 비교 대상 제품들', source:'한국소비자원 공식 우양산 비교 쇼츠', sourceUrl:'https://www.youtube.com/shorts/pKTybSs0bIg', caption:'약 40.7초, 2026-10-03 관찰. 비교 대상·조건·결과를 실물과 연결하는 자료화면입니다. 다른 제품의 인증으로 바꾸지 않습니다.'},
+      ],
       input: '실제 사양·사용법·구조·동일 조건 시연·원문 후기 중 확인 가능한 자료.',
       body: [
         '고객의 불편 → 기존 대처의 한계 → 제품의 확인된 차이 → 어떻게 작동하는가 → 고객이 덜 하거나 쉽게 하는 일 → 적합한 조건의 여섯 단계로 핵심 구매 이유 하나를 씁니다. 프리미엄·첨단·인생템이라는 형용사만으로 설명을 끝내지 않습니다.',
         '문장 틀: 이 상황에서는 이런 불편이 생겨요. 이 제품은 확인된 특징으로 이런 사용 방식을 만들어요. 그래서 근거 범위 안에서 이런 이점이 있어요. 실제 자료로 확인하고 내 조건에 맞는지 살펴보세요. 브랜드 말투로 다듬고 확인되지 않은 원리·효능·수치는 채우지 않습니다.',
         '“프리미엄이라 편리해요”보다 “칸이 나뉘어 있어 물건마다 둘 자리를 정할 수 있어요”처럼 구조와 행동을 연결합니다. 실제 규격과 사용 과정을 보여 주고 내 물건이 들어가는지라는 구매 질문에 답합니다. 이는 가상 정리함 예시이며 실제 제품 사실은 자료로 교체해야 합니다.',
+        '자료화면별 실제 참고 이미지와 새 영상의 첫 프레임 참조 이미지를 필수로 포함해 고객에게 보여주세요. 출처·관찰 시각·이미지 역할·해당 원문 발화와의 연결·시작→행동→변화→끝을 함께 씁니다. 기존 원본을 재사용하면 대표 프레임을 사용합니다. 이미지가 없으면 해당 자료화면의 준비 완료로 표시하지 말고 이미지 확보 단계로 이어갑니다.',
         '후기가 없으면 사회적 증거를 만들지 않습니다. 제품 사양·실제 시연으로 증거 유형을 바꾸거나 자료 미확보로 남깁니다. AI 사용 연출은 실제 효능 실험이 아닙니다. 시험 조건과 후기의 사용 맥락을 보존합니다.'
       ],
       prompt: `제품의 구매 이유 하나를 [고객 행동·불편 | 기존 대처의 한계 | 확인된 제품 차이 | 작동 방식 | 고객 이점 | 근거·조건 | 가장 큰 구매 질문]으로 써줘.
 12–27초에는 원인 설명만 하지 말고 제품의 차이→동작→이점을 보여줘. 27–37초에는 실제 근거와 구매 질문 하나를 해결해. 자료가 없으면 빈칸과 확보할 자료를 표시해.
-화면은 시작 상태→실제 행동→끝 상태로 적고 참조 이미지와 사용할 동영상 원본을 구분해.`,
+화면은 시작 상태→실제 행동→끝 상태로 적고 참조 이미지와 사용할 동영상 원본을 구분해. 각 자료화면에는 실제 참고 이미지를 표시하고 새 생성에는 첫 프레임 참조도 준비해. 출처·관찰 시각·파일·해시·연결 장면을 기록해. 프롬프트만으로 이미지 준비 완료라고 하지 마.`,
       action: 'plan.durationSec·beats의 본편 시간을 보존하고, 기획표의 제품 근거와 실제 동영상 원본·사용 구간을 지원되는 plan_save·direction_save 필드에 대응합니다.',
       output: '제품 구매 이유 1개 + 원리·근거·반론 대본 + 동작표.',
       pass: '처음 보는 사람이 이 제품의 어떤 차이가 자신의 어떤 행동을 돕는지 설명할 수 있다.',
@@ -258,6 +264,7 @@ export function playbookMarkdown() {
   const lines = [`# ${playbook.title}`, `버전 ${playbook.version} · ${playbook.reviewedFor}`, playbook.intro, playbook.principle, '## AI에게 처음 요청하기', '```text', playbook.masterPrompt, '```'];
   for (const step of playbook.steps) {
     lines.push(`## ${step.title}`, `준비물: ${step.input}`, ...step.body, '### 복사할 프롬프트', '```text', step.prompt, '```', `HIOB에서: ${step.action}`, `산출물: ${step.output}`, `통과 기준: ${step.pass}`, `실패하면: ${step.repair}`);
+    for (const image of step.images || []) lines.push(`![${image.alt}](https://hi-ob.com${image.src})`, `[${image.source}](${image.sourceUrl}) — ${image.caption}`);
     for (const id of step.sources) { const source = playbook.sources.find(s => s.id === id); lines.push(`참고: [${source.title}](${source.url})`); }
   }
   lines.push('## 출처와 적용 범위', playbook.sourceNote);
