@@ -198,7 +198,7 @@ test("update help explains diagnosis without claiming account or creative succes
   const update = documents.get("/help/troubleshooting/update");
   assert.ok(update, "update route must exist");
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
-  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.8.zip"));
+  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.11.zip"));
 });
 
 test("every linked skill download and its references are served by the worker", async () => {
