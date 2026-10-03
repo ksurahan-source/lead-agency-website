@@ -63,11 +63,11 @@
 
 ### 실제 자료화면 이미지와 영상 전개
 
-![국내 브랜드의 피부 표면 확대 단면 참고 프레임](https://hi-ob.com/help/assets/broll-biological-cutaway-1.3.11.jpg)
+![국내 브랜드의 피부 표면 확대 단면 참고 프레임](https://hi-ob.com/help/assets/broll-biological-cutaway-1.3.7.jpg)
 
 [3DVIEW 셀리맥스 제작 쇼츠](https://www.youtube.com/shorts/M2H4r3YbCmo), 약 2.78초 프레임, 2026-10-03 관찰. 표면에서 확대 단면으로 전환해 제형과 내부 구조를 보여준다. 이 이미지는 영상 표현의 참고이며 우리 제품의 실제 효능 근거나 생성용 참조 사용 승인이 아니다. 새 제품에는 실제 자료에 맞는 첫 프레임을 따로 준비한다.
 
-![한국소비자원 공식 비교 쇼츠의 실물 대상 제품 프레임](https://hi-ob.com/help/assets/broll-test-products-1.3.11.jpg)
+![한국소비자원 공식 비교 쇼츠의 실물 대상 제품 프레임](https://hi-ob.com/help/assets/broll-test-products-1.3.7.jpg)
 
 [한국소비자원 우양산 비교 쇼츠](https://www.youtube.com/shorts/pKTybSs0bIg), 약 40.7초 프레임, 2026-10-03 관찰. 비교 제품을 같은 구도에 놓고 읽을 수 있는 분류와 실제 물건을 연결한다. 기관명을 장식이나 다른 제품의 인증으로 붙이지 않는다. 실제 시험 근거와 원리 설명용 생성 장면을 구분한다.
 
