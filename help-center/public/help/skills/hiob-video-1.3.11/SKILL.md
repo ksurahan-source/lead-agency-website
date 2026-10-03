@@ -72,6 +72,6 @@ project_sync → render_quote → 승인 범위 안의 render_start(final, quote
 [고객 고통 선택 실행 지침](references/customer-primary-pain.md) 전문을 읽고 primaryPain·모든 beat.painLink를 저장한다. 고객에게 선택된 고통과 정확한 대본 전문을 보여주고 확인 전에도 피드백을 반영한다.
 
 
-## 本能 설득과 상식 전복
+## 본능 설득과 상식 전복
 
 고객 욕구와 구매 반론을 먼저 분석하고, 초반 전복 또는 후반 재해석을 제품 차이·근거·조건·CTA로 회수한다. [조사·작성·검수 기준](references/research-foundation.md)의 HIOB 광고 절과 [제작 실행 지침](references/production-workflow.md)을 읽는다. 한 나레이터와 고객에게 보여줄 정확한 대본 전문을 유지하고 기존 승인 원문을 자동 변경하지 않는다.
