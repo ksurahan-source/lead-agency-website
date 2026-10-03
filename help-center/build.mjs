@@ -8,7 +8,7 @@ import { MCP_RELEASE } from "./src/mcpInstall.mjs";
 
 // Product examples and human-readable support summaries were reviewed against this release.
 // Updating the installer descriptor requires re-reviewing that editorial copy too.
-if (MCP_RELEASE.version !== "1.4.0") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
+if (MCP_RELEASE.version !== "1.4.1") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const destination = new URL("./dist/", import.meta.url);
@@ -165,12 +165,16 @@ await writeFile(
   new URL("robots.txt", destination),
   "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /agent\nDisallow: /api/\n\nSitemap: https://hi-ob.com/sitemap.xml\nSitemap: https://hi-ob.com/video-sitemap.xml\n",
 );
-for (const [version, folder] of [["1.0.0", "hiob-video"], ["1.1.0", "hiob-video-1.1.0"], ["1.2.0", "hiob-video-1.2.0"], ["1.3.1", "hiob-video-1.3.1"], ["1.3.2", "hiob-video-1.3.2"], ["1.3.3", "hiob-video-1.3.3"], ["1.3.4", "hiob-video-1.3.4"], ["1.3.5", "hiob-video-1.3.5"], ["1.3.6", "hiob-video-1.3.6"], ["1.3.7", "hiob-video-1.3.7"], ["1.3.8", "hiob-video-1.3.8"], ["1.3.11", "hiob-video-1.3.11"], ["1.4.0", "hiob-video-1.4.0"]]) {
-  run("python3", ["-c",
-    "import pathlib,zipfile,sys; root=pathlib.Path(sys.argv[1]); z=zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED); [z.write(p,pathlib.Path('hiob-video')/p.relative_to(root)) for p in sorted(root.rglob('*')) if p.is_file()]; z.close()",
-    "help-center/public/help/skills/" + folder,
-    "help-center/dist/help/hiob-video-skill-" + version + ".zip",
-  ]);
+// Published versioned archives are immutable, including their ZIP metadata.
+// Rebuilding identical Markdown with checkout-dependent mtimes changes bytes.
+const videoArchives = JSON.parse(await readFile(new URL("immutable-video-archives.json", import.meta.url), "utf8"));
+for (const archive of videoArchives.archives) {
+  const file = `hiob-video-skill-${archive.version}.zip`;
+  const bytes = await readFile(new URL("public/release-archives/" + file, import.meta.url));
+  if (createHash("sha256").update(bytes).digest("hex") !== archive.sha256) {
+    throw new Error("Immutable video skill archive changed: " + file);
+  }
+  await writeFile(new URL("help/" + file, destination), bytes);
 }
 const source = run("git", ["rev-parse", "HEAD"], true);
 await writeFile(
@@ -178,7 +182,7 @@ await writeFile(
   JSON.stringify({
     source,
     mcp: MCP_RELEASE.version,
-    skill: "1.4.0",
+    skill: MCP_RELEASE.version,
     routes: PUBLIC_ROUTES.length,
     assets,
     media,

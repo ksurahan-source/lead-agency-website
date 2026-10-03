@@ -1,6 +1,6 @@
 // Canonical editorial source for the visible manual and its AI-readable download.
 export const playbook = {
-  version: '2026-10-04.2', reviewedFor: 'HIOB MCP 1.4.0 beta',
+  version: '2026-10-04.3', reviewedFor: 'HIOB MCP 1.4.1 beta',
   title: 'HIOB 사용설명서: 효과적인 광고 만들기',
   sourceNote: '한국 릴스 설득 자료는 2026-10-03, 기존 기술 참고는 2026-09-29 확인. 한국 릴스 문법은 국내 자료를 사용하며 해외 도구 문서는 이미지·영상 기술 참고입니다. 아래 자료에서 원리를 참고하고 HIOB 브레인과 현재 도구 지원 범위에 맞춰 작성한 실무 제안입니다. 판매 성과나 전체 영상 시청을 증명하는 목록이 아닙니다.',
   intro: '제품 자료를 설득력 있는 광고로 바꾸는 실무 순서입니다. 고객은 방향을 선택하고, 로컬 AI는 자료 이해·기획·수정 판단을 맡습니다. HIOB는 프로젝트·소재·비용을 연결하고 최종 영상은 Remotion AWS Lambda에서 렌더합니다.',

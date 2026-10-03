@@ -2,12 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from './worker.mjs';
+import { MCP_RELEASE } from './src/mcpInstall.mjs';
 
 const root = fileURLToPath(new URL('./', import.meta.url));
-const version = '1.4.0';
+const version = MCP_RELEASE.version;
 const skillNames = [
   'hiob-video', 'hiob-creative-harness', 'hiob-visual-direction',
   'hiob-reference-cards', 'hiob-scene-planning', 'hiob-creative-refine',
@@ -25,7 +27,7 @@ async function filesIn(folder) {
   return files.sort();
 }
 
-test('every 1.4.0 skill and relative Markdown reference is complete', async () => {
+test(`every ${version} skill and relative Markdown reference is complete`, async () => {
   for (const name of skillNames) {
     const folder = path.join(root, 'public/help/skills', `${name}-${version}`);
     const skill = await readFile(path.join(folder, 'SKILL.md'), 'utf8');
@@ -43,7 +45,7 @@ test('every 1.4.0 skill and relative Markdown reference is complete', async () =
   }
 });
 
-test('1.4.0 video ZIP contains the exact public skill with only reviewed Markdown files', async () => {
+test(`${version} video ZIP contains the exact public skill with only reviewed Markdown files`, async () => {
   const folder = path.join(root, 'public/help/skills', `hiob-video-${version}`);
   const archive = path.join(root, 'dist/help', `hiob-video-skill-${version}.zip`);
   const files = await filesIn(folder);
@@ -82,9 +84,30 @@ test('worker serves all current skill assets and rejects executable or unreviewe
     assert.match(response.headers.get('content-type'), asset.endsWith('.zip') ? /zip/ : /markdown/);
   }
   for (const asset of [
-    '/help/skills/hiob-reference-cards-1.4.0/prepare.py',
-    '/help/skills/hiob-video-1.4.0/.env',
-    '/help/skills/hiob-video-1.4.0/references/private.json',
+    `/help/skills/hiob-reference-cards-${version}/prepare.py`,
+    `/help/skills/hiob-video-${version}/.env`,
+    `/help/skills/hiob-video-${version}/references/private.json`,
+    '/help/skills/hiob-reference-cards-1.4.2/SKILL.md',
     '/help/skills/hiob-reference-cards-9.9.9/SKILL.md',
   ]) assert.equal((await worker.fetch(new Request('https://hi-ob.com' + asset), env)).status, 404, asset);
+});
+
+test('all immutable 1.4.0 asset URLs retain the exact original bytes', async () => {
+  const manifest = JSON.parse(await readFile(path.join(root, 'immutable-assets-1.4.0.json'), 'utf8'));
+  assert.equal(manifest.version, '1.4.0');
+  assert.equal(manifest.assets.length, 61, '60 reviewed Markdown assets and one ZIP');
+  const env = {
+    ASSETS: {
+      fetch: async request => {
+        try { return new Response(await readFile(path.join(root, 'dist', new URL(request.url).pathname))); }
+        catch { return new Response('missing', { status: 404 }); }
+      },
+    },
+  };
+  for (const asset of manifest.assets) {
+    const response = await worker.fetch(new Request('https://hi-ob.com' + asset.path), env);
+    assert.equal(response.status, 200, asset.path);
+    const hash = createHash('sha256').update(Buffer.from(await response.arrayBuffer())).digest('hex');
+    assert.equal(hash, asset.sha256, asset.path);
+  }
 });
