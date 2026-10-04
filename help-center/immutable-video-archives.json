@@ -195,6 +195,10 @@
       "sha256": "2aafe2a750ab7509077dc46fb56e823d28fc7bf5f61816de68cef261761c3f10",
       "source": "unchanged_reviewed_1.5.1_guidance_for_1.5.2_client",
       "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.5.2.zip"
+    },
+    {
+      "version": "1.8.1",
+      "sha256": "1553c70a1ca49f2dfaca012880f06821470d58cdaa99e9c59498e022ea6cc400"
     }
   ]
 }

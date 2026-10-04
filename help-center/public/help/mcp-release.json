@@ -1,53 +1,53 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.5.2",
+  "version": "1.8.1",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.5.2.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.8.1.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
       "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·MCP 94개 도구·정적 스킬 import·별도 프로세스 재진입 통과",
+      "toolsLabel": "설치·MCP 103개 도구·정적 스킬 import·별도 프로세스 재진입 통과",
       "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
     },
     {
       "platform": "darwin-x64",
       "label": "macOS · Intel (실험적)",
-      "toolsLabel": "1.5.2 실기기 검증 대기",
+      "toolsLabel": "1.7.0 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-x64",
       "label": "Windows · x64",
-      "toolsLabel": "1.5.2 실기기 검증 대기",
+      "toolsLabel": "1.7.0 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-arm64",
       "label": "Windows · ARM64 (실험적)",
-      "toolsLabel": "1.5.2 실기기 검증 대기",
+      "toolsLabel": "1.7.0 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-x64",
       "label": "Linux · x64 (실험적)",
-      "toolsLabel": "1.5.2 실기기 검증 대기",
+      "toolsLabel": "1.7.0 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-arm64",
       "label": "Linux · ARM64 (실험적)",
-      "toolsLabel": "1.5.2 실기기 검증 대기",
+      "toolsLabel": "1.7.0 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.5.2.tgz",
-  "sha256": "ab256fc30d2d7d97c7b2811cd023e9c0a302080ec98fd2c08abb35578765b32b",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.5.2.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.5.2.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.8.1.tgz",
+  "sha256": "1113871f82784fc5dbd2c9a5af10c00cab753c179d7369cd99392b6b104dcfd5",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.8.1.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.8.1.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
