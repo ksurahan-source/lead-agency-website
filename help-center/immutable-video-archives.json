@@ -167,6 +167,10 @@
     {
       "version": "1.4.5",
       "sha256": "4a2f612b14567e759d53168f15e5ac1d4661740f3e40918d5d268be5559814be"
+    },
+    {
+      "version": "1.4.6",
+      "sha256": "992f1cd43ab5f28694024553bb0d0ca7a1143cb9d040b1bbdfc5e55ebcb0bd84"
     }
   ]
 }
