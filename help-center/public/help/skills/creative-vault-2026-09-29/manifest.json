@@ -1,0 +1,142 @@
+{
+  "schema": "HiobCreativeVault.v1",
+  "version": "2026-10-03.4",
+  "coreTopic": "beat-groups",
+  "notes": [
+    {
+      "topic": "index",
+      "file": "00-START-HERE.md",
+      "title": "시작: HIOB 제작 Vault",
+      "when": "새 프로젝트·다른 AI 앱·제작 재개",
+      "related": [
+        "beat-groups",
+        "worked-example",
+        "repair"
+      ]
+    },
+    {
+      "topic": "beat-groups",
+      "file": "01-BEAT-GROUPS.md",
+      "title": "3–5초 의미 묶음과 컷 설계",
+      "when": "기획·편집 박자가 늘어질 때",
+      "related": [
+        "narrator",
+        "sound",
+        "repair"
+      ]
+    },
+    {
+      "topic": "hook-payoff",
+      "file": "02-HOOK-PAYOFF.md",
+      "title": "9초 안의 훅과 수미상관 CTA",
+      "when": "처음은 화려한데 구매 이유가 남지 않을 때",
+      "related": [
+        "beat-groups",
+        "props"
+      ]
+    },
+    {
+      "topic": "narrator",
+      "file": "03-NARRATOR.md",
+      "title": "나레이터·주인공·멀티맨·멀티걸의 호흡",
+      "when": "대사가 비거나 여러 인물이 드라마처럼 늘어질 때",
+      "related": [
+        "cast",
+        "sound"
+      ]
+    },
+    {
+      "topic": "cast",
+      "file": "04-CAST.md",
+      "title": "인물카드와 육도 표정의 연속성",
+      "when": "얼굴·복장·감정이 컷마다 달라질 때",
+      "related": [
+        "props",
+        "shot-prompt"
+      ]
+    },
+    {
+      "topic": "props",
+      "file": "05-PROPS.md",
+      "title": "제품·소품·공간을 이어 붙이는 법",
+      "when": "제품 설명만 갑자기 카탈로그나 다른 화풍이 될 때",
+      "related": [
+        "shot-prompt",
+        "repair"
+      ]
+    },
+    {
+      "topic": "shot-prompt",
+      "file": "06-SHOT-PROMPT.md",
+      "title": "이미지 설계와 움직임 프롬프트 분리",
+      "when": "모델에 기획 전체를 넣어 엉뚱한 영상이 나올 때",
+      "related": [
+        "beat-groups",
+        "assembly"
+      ]
+    },
+    {
+      "topic": "sound",
+      "file": "07-SOUND.md",
+      "title": "오디오가 비지 않는 박자와 음악 존재감",
+      "when": "목소리가 늘어지거나 음악이 작거나 공백이 생길 때",
+      "related": [
+        "narrator",
+        "captions"
+      ]
+    },
+    {
+      "topic": "captions",
+      "file": "08-CAPTIONS.md",
+      "title": "제목·구절 자막의 역할과 읽는 시간",
+      "when": "제목·대사·정보가 동시에 경쟁할 때",
+      "related": [
+        "beat-groups",
+        "assembly"
+      ]
+    },
+    {
+      "topic": "assembly",
+      "file": "09-ASSEMBLY.md",
+      "title": "설계표를 HIOB 도구로 옮기기",
+      "when": "좋은 기획이 저장·조립 단계에서 바뀔 때",
+      "related": [
+        "repair",
+        "worked-example"
+      ]
+    },
+    {
+      "topic": "worked-example",
+      "file": "10-WORKED-EXAMPLE.md",
+      "title": "45초 설계 예시: 묶음에서 컷으로",
+      "when": "처음부터 전체 기획표를 따라 만들 때",
+      "related": [
+        "beat-groups",
+        "hook-payoff"
+      ]
+    },
+    {
+      "topic": "repair",
+      "file": "11-REPAIR.md",
+      "title": "실패 패턴과 부분 수정",
+      "when": "같은 문제로 전체 재생성을 반복할 때",
+      "related": [
+        "assembly",
+        "index"
+      ]
+    },
+    {
+      "topic": "landscape",
+      "file": "12-LANDSCAPE.md",
+      "title": "가로 16:9와 세로 9:16을 함께 제작하기",
+      "when": "가로 광고·설명 영상 또는 두 화면비 납품",
+      "related": [
+        "beat-groups",
+        "cast",
+        "props",
+        "captions",
+        "assembly"
+      ]
+    }
+  ]
+}

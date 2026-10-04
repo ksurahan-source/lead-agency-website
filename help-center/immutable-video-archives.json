@@ -1,0 +1,156 @@
+{
+  "schema": "HIOB.ImmutablePublicArchives.v1",
+  "archives": [
+    {
+      "version": "1.0.0",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.0.0.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 9020,
+      "sha256": "b4d5d3ba9de3411e9ecd161e948bedb1ca0dd5f8cf9af9075c3d438ea0a30e01",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.0.0.zip"
+    },
+    {
+      "version": "1.1.0",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.1.0.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 10530,
+      "sha256": "4fb7c0c333b889c94fe8b3364fda43068a88a5418fc86231c4f216401785f669",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.1.0.zip"
+    },
+    {
+      "version": "1.2.0",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.2.0.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 13044,
+      "sha256": "868f265c611123f50ad2c3f43460fcafd2aeba44498d8bcfb6ae5e21e41eeca7",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.2.0.zip"
+    },
+    {
+      "version": "1.3.1",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.1.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 25875,
+      "sha256": "22e58135e0c69c4a2bff38708fab76482ac870303000c847013a07e57ad63071",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.1.zip"
+    },
+    {
+      "version": "1.3.2",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.2.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 29639,
+      "sha256": "d2e58e59108955f59bcfa78ab59ca6a2acb6b93dd121d1e044f1ff302f61d2b1",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.2.zip"
+    },
+    {
+      "version": "1.3.3",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.3.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 69024,
+      "sha256": "3bfb1356dbceb3ec88a9d3c42958db95ea793b7a884d0585f9863c3d0c79526c",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.3.zip"
+    },
+    {
+      "version": "1.3.4",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.4.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 81286,
+      "sha256": "db81702979928d8c248fdc833928e93199bc76ffe2c92e09733660ceca6bda31",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.4.zip"
+    },
+    {
+      "version": "1.3.5",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.5.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 82194,
+      "sha256": "2c92560eb1e621116f30ce4dbbc0c03ee7f338b4df73c7242889eca02ef422ac",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.5.zip"
+    },
+    {
+      "version": "1.3.6",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.6.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 83827,
+      "sha256": "d09cbb182960fb1f85b7b966e1733af3e131bbbe73898c95b4c542939f284c31",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.6.zip"
+    },
+    {
+      "version": "1.3.7",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.7.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 87363,
+      "sha256": "9494ece49078c537b5743b916b5fc80b71cae6555333a884895650fcca58f1e7",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.7.zip"
+    },
+    {
+      "version": "1.3.8",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.8.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 91114,
+      "sha256": "04aeb0a2a2755ff507eb52ad3b0e2fe0e89fe7f8333cf7300a0f5ad7cd45403b",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.8.zip"
+    },
+    {
+      "version": "1.3.11",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.3.11.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 125306,
+      "sha256": "474540bccbe41703e66491c95d72571f20d53e2446216fc6d3405201bbc9dc01",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.3.11.zip"
+    },
+    {
+      "version": "1.4.0",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.4.0.zip",
+      "status": 200,
+      "contentType": "application/zip",
+      "bytes": 145539,
+      "sha256": "1ce6dd2f6eadeb963eac5c76b7ee54d04c944c7643974da210de79e59deb14c0",
+      "source": "existing_public_url",
+      "tlsVerified": true,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.4.0.zip"
+    },
+    {
+      "version": "1.4.1",
+      "source": "reviewed_new_archive",
+      "path": "/help/hiob-video-skill-1.4.1.zip",
+      "sha256": "a273ec55f11345745b5b4a5c8b86137140eac127e2ea4fa0839cdb39fb1a7685",
+      "bytes": 145539,
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.4.1.zip"
+    }
+  ]
+}

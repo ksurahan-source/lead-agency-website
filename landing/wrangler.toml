@@ -1,0 +1,10 @@
+name = "hiob-creative-landing"
+main = "worker.mjs"
+compatibility_date = "2026-09-23"
+workers_dev = false
+routes = [ { pattern = "hi-ob.com/", zone_name = "hi-ob.com" }, { pattern = "hi-ob.com/site/*", zone_name = "hi-ob.com" } ]
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+html_handling = "none"

@@ -1,0 +1,39 @@
+name: Public website and MCP documentation
+on:
+  pull_request:
+    paths:
+      [
+        "help-center/**",
+        "landing/**",
+        "scripts/check-public-site.mjs",
+        "scripts/preview-public.mjs",
+        "package*.json",
+        ".github/workflows/public-docs.yml",
+      ]
+  push:
+    branches: [main, "codex/**"]
+    paths:
+      [
+        "help-center/**",
+        "landing/**",
+        "scripts/check-public-site.mjs",
+        "scripts/preview-public.mjs",
+        "package*.json",
+        ".github/workflows/public-docs.yml",
+      ]
+permissions:
+  contents: read
+jobs:
+  public-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run public:test
+      - run: npx eslint help-center/src/*.jsx help-center/src/*.mjs help-center/*.mjs scripts/check-public-site.mjs scripts/preview-public.mjs landing/src/*.mjs landing/src/landing.js landing/*.test.mjs
+      - run: npm run help:release-check
