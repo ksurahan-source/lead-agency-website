@@ -179,6 +179,14 @@
       "sha256": "d0f1d8fdddfac8706df13be101c01a798e51d1ec2372cac85bd42c7ef4374752",
       "source": "reviewed_local_candidate",
       "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.4.9.zip"
+    },
+    {
+      "version": "1.5.1",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.5.1.zip",
+      "bytes": 155635,
+      "sha256": "2aafe2a750ab7509077dc46fb56e823d28fc7bf5f61816de68cef261761c3f10",
+      "source": "reviewed_local_candidate",
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.5.1.zip"
     }
   ]
 }
