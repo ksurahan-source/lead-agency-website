@@ -159,6 +159,10 @@
       "sha256": "113fe1e745f22579018669ecc85ae983f3c044bf999776772d16970f09cd32f1",
       "bytes": 146004,
       "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.4.3.zip"
+    },
+    {
+      "version": "1.4.4",
+      "sha256": "beb251cf76c247780d0874268405da7fb9cb7d6ba2cf17a1ce12561e3295616d"
     }
   ]
 }
