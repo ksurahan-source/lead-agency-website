@@ -524,9 +524,12 @@ export function HelpArticle({ id }) {
           <ol>
             <li>현재 운영체제의 설치 명령을 다시 실행하세요. 기존 버전 폴더를 지우지 마세요.</li>
             <li>AI에게 <code>update_status</code>와 <code>release_check</code>를 요청하세요.</li>
-            <li>실행 버전과 설치 버전이 같고 <code>current</code>이면 계속 작업하세요.</li>
+            <li>실행 버전과 설치 버전이 같은지 확인한 뒤, 필요한 도구도 AI의 연결 도구 목록에 보이는지 확인하세요.</li>
             <li><code>waiting_for_calls</code>는 호출 종료를 기다리는 상태입니다. <code>update_blocked</code>면 기존 버전을 유지하므로 오류 문구를 확인하세요.</li>
           </ol>
+          <p><code>current</code>는 실행 버전 확인입니다. 새 도구가 AI에 표시됐다는 뜻은 아닙니다. <code>update_status</code>의 <code>toolDiscovery</code>에서 호스트 도구 목록 갱신이 필요하다고 나오거나 <code>reference_prepare</code>·<code>capability_list</code>·<code>capability_prepare</code>·<code>capability_execute</code>가 보이지 않으면, 진행 중인 도구 호출이 끝난 뒤 AI 앱에서 HIOB 연결만 다시 연결하세요. 이미 접수한 제작은 같은 작업 ID로 조회하며 새로 접수하지 않습니다.</p>
+          <h2>업데이트 후 참조 준비를 다시 이어가려면</h2>
+          <p>기존 기획·참조 이미지·선택을 보존하고 <code>reference_prepare</code>를 이어가세요. 로컬 영수증이 없거나 구버전으로 복원됐어도 완료 기록이 있으면 같은 요청 ID와 서버 버전으로 영수증을 다시 받습니다. 확인 중 시간이 초과되면 같은 요청 ID로 조회하며 새 이미지나 영상을 생성하지 않습니다. 기획이나 이미지가 바뀌었다면 변경된 입력을 먼저 확인해야 합니다. 참조 준비는 고객 승인이나 유료 실행 승인이 아닙니다.</p>
           <h2>예전 설치를 쓰고 있다면 — 한 번만 전환</h2>
           <p>
             <code>codex mcp get hiob --json</code>의 경로에 <code>releases/버전/.../cli.mjs</code>가 있거나
