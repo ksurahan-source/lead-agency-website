@@ -543,7 +543,7 @@ export function HelpArticle({ id }) {
           <ol>
             <li><code>config.toml</code>을 백업하고 새 설치 파일을 실행하세요. 예전 Mac 등록이 있으면 위 전환 명령을 사용하세요.</li>
             <li>설치가 만든 <code>codex-{MCP_RELEASE.version}.toml</code>을 열어 기존 <code>[mcp_servers.hiob]</code>의 command·args만 교체하세요. 작업 폴더·환경변수·다른 MCP는 보존하세요.</li>
-            <li>경로가 <code>launcher-v1.mjs</code>로 바뀌었는지 확인하고, 앱이 제공하는 HIOB MCP 재연결 또는 새 대화로 설정을 반영하세요.</li>
+            <li>경로가 <code>launcher-v3.mjs</code>로 바뀌었는지 확인하고, 앱이 제공하는 HIOB MCP 재연결 또는 새 대화로 설정을 반영하세요.</li>
           </ol>
           <p>
             앱이 연결 새로 고침을 제공하지 않으면 이 최초 전환 때만 앱 재실행이 필요할 수 있습니다.
@@ -622,7 +622,7 @@ export function HelpArticle({ id }) {
               설치가 출력한 <code>mcpServers</code> JSON을 해당 앱의 MCP 설정에
               추가하세요. Codex는 TOML을 사용하므로 command, args, env.PATH 값을
               같은 이름의 항목으로 옮깁니다. command는 Node 실행 파일, args의 첫
-              항목은 launcher-v1.mjs입니다. 모두 출력된 절대 경로를 사용하세요.
+              항목은 launcher-v3.mjs입니다. 모두 출력된 절대 경로를 사용하세요.
             </p>
             <p>
               Windows·Linux도 설치가 출력한 앱별 설정을 사용합니다. 앱마다
