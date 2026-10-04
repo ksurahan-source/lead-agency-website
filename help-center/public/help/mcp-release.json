@@ -1,10 +1,10 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.4.1",
+  "version": "1.4.3",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.4.1.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.4.3.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
@@ -15,39 +15,39 @@
     {
       "platform": "darwin-x64",
       "label": "macOS · Intel (실험적)",
-      "toolsLabel": "1.4.1 실기기 검증 대기",
+      "toolsLabel": "1.4.3 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-x64",
       "label": "Windows · x64",
-      "toolsLabel": "1.4.1 실기기 검증 대기",
+      "toolsLabel": "1.4.3 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-arm64",
       "label": "Windows · ARM64 (실험적)",
-      "toolsLabel": "1.4.1 실기기 검증 대기",
+      "toolsLabel": "1.4.3 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-x64",
       "label": "Linux · x64 (실험적)",
-      "toolsLabel": "1.4.1 실기기 검증 대기",
+      "toolsLabel": "1.4.3 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-arm64",
       "label": "Linux · ARM64 (실험적)",
-      "toolsLabel": "1.4.1 실기기 검증 대기",
+      "toolsLabel": "1.4.3 실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.4.1.tgz",
-  "sha256": "bc2e0b91ea0a2010d03d47d42c849fb911655cabb95c7b05df969044a7307f40",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.4.1.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.4.1.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.4.3.tgz",
+  "sha256": "d60fc9180b24fd668e911973067d14f3a95934736f3d5c1d3726e6c8b70b77f4",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.4.3.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.4.3.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",

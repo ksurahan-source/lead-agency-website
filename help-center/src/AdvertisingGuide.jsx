@@ -5,10 +5,10 @@ export default function AdvertisingGuide({ Command }) {
     <p>{playbook.intro}</p><p><a href="/help/creative-vault">3–5초 장면 묶음과 연출을 자세히 배우는 HIOB 제작 Vault</a></p>
     <div className={styles.callout}><strong>한 편에서 하나의 선택 이유를 전달하세요.</strong><p>{playbook.principle}</p></div>
     <p>검토 기준: {playbook.reviewedFor} · 설명서 {playbook.version}. <a href={markdownPath}>AI용 전체 설명서 다운로드·읽기</a> · <a href="https://studio.hi-ob.com/models">모델별 기능과 제약</a></p>
-    <p><a href="/help/skills/hiob-creative-harness-1.4.1/references/korean-reels-grammar.md">한국 릴스 설득 가이드 MD</a> · <a href="/help/skills/hiob-creative-harness-1.4.1/references/42s-persuasion-example.md">42초 전체 대본·동작표 MD</a></p>
-    <p><a href="/help/skills/hiob-creative-harness-1.4.1/references/product-motion-execution.md">MCP 실행 지침: 어떻게 실행할지</a> · <a href="/help/skills/hiob-creative-harness-1.4.1/references/product-science-scenes.md">장면 제작 가이드: 어떻게 만들지·프롬프트 8개</a></p>
-    <p><a href="/help/skills/hiob-creative-harness-1.4.1/references/research-foundation.md">본능 설득·상식 전복: 조사와 작성·검수 기준</a></p>
-    <p><a href="/help/skills/hiob-creative-harness-1.4.1/references/customer-primary-pain.md">고객의 개인적 고통 하나: 선택 방법·MCP 실행 지침</a></p>
+    <p><a href="/help/skills/hiob-creative-harness-1.4.3/references/korean-reels-grammar.md">한국 릴스 설득 가이드 MD</a> · <a href="/help/skills/hiob-creative-harness-1.4.3/references/42s-persuasion-example.md">42초 전체 대본·동작표 MD</a></p>
+    <p><a href="/help/skills/hiob-creative-harness-1.4.3/references/product-motion-execution.md">MCP 실행 지침: 어떻게 실행할지</a> · <a href="/help/skills/hiob-creative-harness-1.4.3/references/product-science-scenes.md">장면 제작 가이드: 어떻게 만들지·프롬프트 8개</a></p>
+    <p><a href="/help/skills/hiob-creative-harness-1.4.3/references/research-foundation.md">본능 설득·상식 전복: 조사와 작성·검수 기준</a></p>
+    <p><a href="/help/skills/hiob-creative-harness-1.4.3/references/customer-primary-pain.md">고객의 개인적 고통 하나: 선택 방법·MCP 실행 지침</a></p>
     <h2>AI에게 처음 요청하기</h2>
     <p>제품 자료와 함께 아래 문장을 붙여넣으세요. 선택한 방향을 유지하면서 필요한 단계만 요청할 수도 있습니다.</p>
     <Command prompt text={playbook.masterPrompt} label="광고 제작 전체 요청 복사" />
