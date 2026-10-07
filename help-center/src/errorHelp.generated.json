@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
-  "reviewedAt": "2026-10-07",
-  "version": "1.9.9",
-  "codeCount": 1983,
+  "reviewedAt": "2026-10-08",
+  "version": "1.9.10",
+  "codeCount": 1988,
   "groups": [
     {
       "id": "approval",
@@ -16,7 +16,7 @@
       "successCriteria": [
         "현재 요청과 실제 승인 근거의 대상·범위·유효기간이 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_XL_APPROVAL_NOT_REPLAYABLE",
@@ -140,7 +140,7 @@
       "successCriteria": [
         "소재를 현재 권한으로 읽을 수 있고 버전·SHA·기획 연결이 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ASSET_NOT_FOUND",
@@ -364,7 +364,7 @@
       "successCriteria": [
         "검사에 필요한 유효 신호·형식·구간이 존재하고 승인 음성과 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "AUDIO_DURATION_INVALID",
@@ -540,7 +540,7 @@
       "successCriteria": [
         "같은 프로젝트의 유효한 권한으로 서버 조회가 성공한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ADMIN_CREDIT_FORBIDDEN",
@@ -911,16 +911,8 @@
       "successCriteria": [
         "서버 장부·견적·승인 범위가 일치하고 필요한 잔액/예산이 유효하다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
-        {
-          "code": "ADMIN_CREDIT_INVALID",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
         {
           "code": "ADMIN_CREDIT_READ_UNAVAILABLE",
           "recoveryVerification": "not_verified",
@@ -1106,7 +1098,7 @@
       "successCriteria": [
         "현재 프로젝트의 등록·화자·권리·샘플 승인·실제 비용 조건이 모두 확인된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "CLONE_AUDIO_DURATION_INVALID",
@@ -1552,7 +1544,7 @@
       "successCriteria": [
         "현재 계정에서 등록 API와 유효 비용이 확인되고 필요한 승인이 자료에 묶여 있다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "CLONE_PRICING_UNAVAILABLE",
@@ -1606,7 +1598,7 @@
       "successCriteria": [
         "운영자가 해당 발생 조건 해제와 올바른 배포 버전을 확인한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ALREADY_INITIALIZED",
@@ -1962,6 +1954,50 @@
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "HIOB_PROTOCOL_TOOL_FAILURE",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "MCP 도구 요청이 SDK 경계에서 실패했습니다. 도구 이름·활성 상태·프로토콜 응답을 확인해야 합니다.",
+          "checkFields": [],
+          "steps": [
+            "tools/list로 설치된 도구 이름과 활성 여부를 확인하고 release_check의 설치 버전을 대조한다. 실패한 요청의 도구와 사건 번호를 보존한다.",
+            "현재 공개 도구로 호출을 수정한다. 핸들러 실행 여부가 불명확한 쓰기 작업은 해당 status로 접수부터 확인한다."
+          ],
+          "successCriteria": [
+            "실제 등록된 도구로 요청이 전달되고 결과의 코드·사건 번호를 읽을 수 있다."
+          ],
+          "resume": "실패 원인을 수정한 뒤 같은 프로젝트와 기존 작업의 실패 단계부터 재개한다.",
+          "retry": {
+            "policy": "diagnose_then_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "미등록 도구를 반복 호출하지 말고 설치 버전과 호스트의 도구 목록을 갱신한다."
+        },
+        {
+          "code": "HIOB_TOOL_OUTPUT_INVALID",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "도구 실행 후 반환값이 공개된 출력 스키마와 맞지 않습니다. 실행이 없었다고 판단하면 안 됩니다.",
+          "checkFields": [],
+          "steps": [
+            "error_gateway와 해당 status에서 기존 작업 ID의 접수·결과를 확인한다. 동일 유료 작업을 다시 접수하지 않는다.",
+            "운영자가 설치 버전의 outputSchema와 반환값을 비교해 응답 변환 또는 스키마를 고친 뒤 같은 저장 결과를 다시 읽는다."
+          ],
+          "successCriteria": [
+            "기존 작업의 반환값이 현재 공개 스키마를 통과하고 동일 작업 ID와 결과가 보존된다."
+          ],
+          "resume": "실패 원인을 수정한 뒤 같은 프로젝트와 기존 작업의 실패 단계부터 재개한다.",
+          "retry": {
+            "policy": "diagnose_then_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "접수 여부가 불명확하면 status/receipt 조정이 끝날 때까지 유료 재실행을 멈춘다."
         },
         {
           "code": "IMAGE_PROVIDER_TASK_RECORDER_UNAVAILABLE",
@@ -2379,7 +2415,7 @@
         "같은 API 또는 예약 정리 함수가 정상 응답하며 실패가 재발하지 않는지 확인한다.",
         "생성 성공·렌더 성공은 해당 job 상태와 실제 결과를 별도로 검수한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "PGRST002",
@@ -2403,7 +2439,7 @@
       "successCriteria": [
         "저장된 문서에 양쪽의 필요한 변경이 보존되고 반환 해시가 현재 파일과 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HIOB_DOCUMENT_CONFLICT",
@@ -2435,7 +2471,7 @@
       "successCriteria": [
         "편집 검사가 해당 필드의 오류를 반환하지 않고 실제 프리뷰에서 의도한 결과를 확인한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "EDIT_ASSET_BINDING_MISSING",
@@ -2972,7 +3008,7 @@
       "successCriteria": [
         "같은 프로젝트·run의 최신 revision과 실제 고객 선택 근거로 다음 단계가 진행된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "GUIDED_ACTION_FORBIDDEN",
@@ -3082,8 +3118,30 @@
       "successCriteria": [
         "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
+        {
+          "code": "ADMIN_CREDIT_INVALID",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "관리자 지급 요청의 requestId·accountId·brandSlug가 없거나, 금액이 정수 1~1,000,000원이 아니거나, 앞뒤 공백을 뺀 사유가 2~500자가 아닙니다.",
+          "checkFields": [],
+          "steps": [
+            "관리자가 /admin/customers의 실제 대상 계정·브랜드와 지급 요청 requestId를 확인한다. 금액은 정수 1~1,000,000원, 사유는 공백 제거 후 2~500자로 맞춘다.",
+            "/api/admin/credit/topup 응답과 같은 requestId의 기존 지급 영수증을 확인한다. 영수증이 이미 있으면 같은 내용만 재사용하고 다른 내용으로 덮어쓰지 않는다. 미접수 형식 오류만 고쳐 기존 승인 지급을 재시도한다."
+          ],
+          "successCriteria": [
+            "현재 관리자 세션과 정식 수신 계정에 대한 요청 검증이 통과하고 같은 requestId의 영수증이 하나만 존재한다."
+          ],
+          "resume": "관리자 지급 영수증과 실제 장부 반영을 확인한 뒤 고객의 기존 실패 단계를 재개한다.",
+          "retry": {
+            "policy": "after_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "유효한 관리자 세션 또는 대상 계정 권한이 없으면 관리자 로그인/수신 계정 연결을 먼저 복구한다. 새 지급 권한을 만들지 않는다."
+        },
         {
           "code": "ADMIN_STORAGE_INVALID",
           "recoveryVerification": "not_verified",
@@ -5096,6 +5154,28 @@
           ]
         },
         {
+          "code": "HIOB_PROTOCOL_INVALID",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "MCP 전송 메시지가 파싱되지 않아 신뢰할 프로젝트·요청 ID를 얻지 못했습니다.",
+          "checkFields": [],
+          "steps": [
+            "호스트 MCP 로그에서 JSON-RPC 형식과 잘린 메시지·잘못된 인코딩을 확인한다. 이 사건에는 프로젝트나 job ID를 발명하지 않는다.",
+            "클라이언트 직렬화를 고치고 서버 재연결 후 tools/list를 조회한다. 중단된 작업은 기존 ID의 상태 조회로 재개한다."
+          ],
+          "successCriteria": [
+            "JSON-RPC 요청과 응답이 정상 파싱되고 같은 세션에서 tools/list가 반환된다."
+          ],
+          "resume": "실패 원인을 수정한 뒤 같은 프로젝트와 기존 작업의 실패 단계부터 재개한다.",
+          "retry": {
+            "policy": "diagnose_then_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "유실된 쓰기 요청은 미접수로 단정하지 않고 기존 서버 상태를 먼저 대조한다."
+        },
+        {
           "code": "HIOB_REFERENCE_ASSET_BINDING_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -5330,6 +5410,28 @@
           "checkFields": [
             "body.getReader"
           ]
+        },
+        {
+          "code": "HIOB_TOOL_INPUT_INVALID",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "도구의 필수 필드·타입·허용 값 검증이 실행 전에 실패했습니다.",
+          "checkFields": [],
+          "steps": [
+            "tools/list에서 해당 도구의 현재 inputSchema와 실패 응답의 필드 경로를 읽는다. 기존 프로젝트 문서와 실제 receipt에서 누락 입력을 파생한다.",
+            "잘못된 타입·필수 필드만 수정한 후 같은 작업 ID로 호출한다. 고객에게 JSON이나 예산 숫자를 작성하게 하지 않는다."
+          ],
+          "successCriteria": [
+            "현재 도구 스키마를 통과해 핸들러가 실행되고 원래 작업의 다음 단계 또는 구체적인 업무 오류를 반환한다."
+          ],
+          "resume": "실패 원인을 수정한 뒤 같은 프로젝트와 기존 작업의 실패 단계부터 재개한다.",
+          "retry": {
+            "policy": "diagnose_then_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "기존 자료로 필요한 고객 선택을 확정할 수 없으면 그 선택만 확인한다."
         },
         {
           "code": "HIOB_VISUAL_PROMPT_REQUIRED",
@@ -7284,7 +7386,7 @@
       "successCriteria": [
         "같은 원본 SHA의 검사 결과가 저장되고 현재 입력과 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_MEDIA_FAILED",
@@ -7535,7 +7637,7 @@
       "successCriteria": [
         "검사 워커가 기존 요청을 처리하고 결과 receipt가 기록된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_MEDIA_DISPATCH_UNAVAILABLE",
@@ -7566,7 +7668,7 @@
       "successCriteria": [
         "UTC 한도가 초기화되고 동일 검사 접수 또는 기존 완료 결과가 확인된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_MEDIA_DAILY_LIMIT",
@@ -7589,7 +7691,7 @@
       "successCriteria": [
         "기존 검사 완료로 용량이 확보되고 동일 요청을 접수할 수 있다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_MEDIA_PENDING_LIMIT",
@@ -7612,7 +7714,7 @@
       "successCriteria": [
         "재시작 후 같은 incidentId와 jobId가 조회되고 복구 시도가 남는다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HIOB_ERROR_INCIDENT_MISMATCH",
@@ -7668,7 +7770,7 @@
       "successCriteria": [
         "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ADMIN_STORAGE_CONFLICT",
@@ -9986,6 +10088,28 @@
           "resolution": "operator_diagnosis_required",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "HIOB_UNCLASSIFIED_BLOCKED",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "상태 점검은 blocked인데 오류 코드가 없거나 유효하지 않습니다. 차단 사실과 입력 버전은 기록했지만 원인 분류가 필요합니다.",
+          "checkFields": [],
+          "steps": [
+            "error_gateway(historyOnly=true)의 사건 번호와 원래 점검의 assetId·causes·inputVersion을 대조한다.",
+            "운영자가 해당 점검 생산자의 실제 실패 조건을 확인해 코드와 원인별 복구를 추가한다. 동일 입력의 차단을 임의 pass로 바꾸지 않는다."
+          ],
+          "successCriteria": [
+            "동일 재현이 구체적인 등록 코드·원인·유효한 복구 다음 행동을 반환한다."
+          ],
+          "resume": "실패 원인을 수정한 뒤 같은 프로젝트와 기존 작업의 실패 단계부터 재개한다.",
+          "retry": {
+            "policy": "diagnose_then_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "원인이 확인되기 전에는 모델 교체·유료 재접수로 우회하지 않는다."
         },
         {
           "code": "HIOB_VAULT_TOPIC_UNKNOWN",
@@ -14280,7 +14404,7 @@
       "successCriteria": [
         "realpath와 허용된 프로젝트 경로가 일치하고 필요한 파일을 안전하게 읽거나 쓸 수 있다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "AUDIO_GAIN_PATH_INVALID",
@@ -14489,7 +14613,7 @@
       "successCriteria": [
         "기존 접수의 최종 상태와 결과·결제 처리 여부가 확인된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_PROVIDER_OUTCOME_UNKNOWN",
@@ -14713,7 +14837,7 @@
       "successCriteria": [
         "정식 장부의 상태가 확인되고 같은 요청이 중복 없이 읽기/저장된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_SCRIPT_DISPATCH_LEDGER_UNAVAILABLE",
@@ -14889,7 +15013,7 @@
       "successCriteria": [
         "현재 revision에 필요한 기획 자료가 연결되고 정확한 원문과 실제 승인 이력이 보존된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_HOOK_REQUIRED",
@@ -15088,7 +15212,7 @@
       "successCriteria": [
         "기존 작업과 결제 상태가 확정되고 제공사 실패 원인이 해소된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "PROVIDER_CONTENT_RESTRICTED",
@@ -15204,7 +15328,7 @@
       "successCriteria": [
         "견적 입력과 현재 revision이 같고 유효기간·정확한 실행 승인 범위가 유효하다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "CREDIT_QUOTE_STALE",
@@ -15297,7 +15421,7 @@
       "successCriteria": [
         "지원되는 검색어·제공사 설정으로 소재 검색 결과가 반환된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "REACTION_QUERY_INVALID",
@@ -15325,7 +15449,7 @@
       "successCriteria": [
         "요청 ID가 현재 권한 범위의 정식 레코드에 연결되고 최신 조회가 성공한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "BRAND_ACCESS_REQUIRED",
@@ -15745,7 +15869,7 @@
         "유효 영수증 연결은 성공하고 다른 프로젝트·만료·다른 입력 및 접수 후 변경은 거절된다.",
         "현재 견적이 저장된 뒤 기존 승인 범위에서 접수할 수 있다. AWS 결과 성공은 별도 확인한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_RENDER_INTENT_IMMUTABLE",
@@ -15769,7 +15893,7 @@
       "successCriteria": [
         "현재 결과 파일에 실제 관찰한 검수와 타이밍별 근거가 연결된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HUMAN_FACE_INTEGRITY_REVIEW_REQUIRED",
@@ -15849,7 +15973,7 @@
       "successCriteria": [
         "입력 revision과 실제 파일 SHA가 같고 해당 버전에 묶인 검수·승인이 유효하다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_XL_CANDIDATE_DIGEST_MISMATCH",
@@ -17121,7 +17245,7 @@
       "successCriteria": [
         "현재 전문·필수 발화·화자·타이밍이 유효한 원문/실제 수정 승인과 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_PRODUCTION_SOURCE_AMENDMENT_INVALID",
@@ -17179,7 +17303,7 @@
       "successCriteria": [
         "얼굴 없는 실제 입력·역할·해시가 현재 모델 스키마와 맞고 기존 승인 선택이 유지된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_GENERATION_SEEDANCE_INPUT_MODEL_MISMATCH",
@@ -17415,7 +17539,7 @@
       "successCriteria": [
         "선택 원본의 출처·SHA와 현재 기획 입력이 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HUMAN_GENERATION_SOURCE_REQUIRED",
@@ -17465,7 +17589,7 @@
       "successCriteria": [
         "모든 입력 원인이 해소된다. 실제 원본·음성·얼굴·입모양 검수는 별도로 통과해야 한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "DESKTOP_GENERATION_LIPSYNC_SOURCE_INVALID",
@@ -17833,7 +17957,7 @@
       "successCriteria": [
         "현재 프로젝트의 run과 revision이 존재하고 서버 저장본과 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HIOB_CAPABILITY_SYNC_REQUIRED",
@@ -17890,7 +18014,7 @@
       "successCriteria": [
         "선택 경로가 현재 배포 어댑터와 실제 입력·권한·승인 범위에서 지원된다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "ARES_V3_REDISPATCH_DISABLED",
@@ -18172,7 +18296,7 @@
       "successCriteria": [
         "실제 파일과 서버 receipt의 크기·형식·SHA가 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "MATERIAL_BYTES_EMPTY",
@@ -18310,7 +18434,7 @@
       "successCriteria": [
         "정확한 전문과 voiceId, 선택된 성공 음원 receipt·SHA가 일치한다."
       ],
-      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
           "code": "HUMAN_AUTHENTIC_FULL_VOICE_REQUIRED",
