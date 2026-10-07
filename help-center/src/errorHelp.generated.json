@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.14",
-  "codeCount": 1996,
+  "version": "1.9.15",
+  "codeCount": 2000,
   "groups": [
     {
       "id": "approval",
@@ -7504,6 +7504,110 @@
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "EMOTION_REVIEW_CONFLICT",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "같은 감정 관찰 requestId에 다른 내용이 제출됐습니다. 이전 기록은 변경하지 않았습니다.",
+          "checkFields": [],
+          "steps": [
+            "emotion_review(projectId)로 현재 plan/direction SHA, 인물 분류, 컷 원본 구간과 기존 관찰 ID를 읽는다.",
+            "응답 유실이면 원래 requestId와 원래 입력 그대로 재조회/재전송한다. 실제 새 관찰이면 새 requestId를 쓰고 이전 문제의 중앙 reviewId/category를 resolves로 연결한다.",
+            "emotion_review_save를 실제 관찰 입력으로 수행하고 feedback_list로 같은 requestId의 중앙 수신을 확인한다. 원본·음원·기존 accepted 검수와 render input SHA는 보존한다."
+          ],
+          "successCriteria": [
+            "해당 오류 없이 동일 파일·구간에 묶인 append-only 관찰을 반환하고, 재시도는 같은 관찰 ID를 재사용한다.",
+            "실제 중앙 receipt 또는 pending 원인이 보이고 기존 렌더 입력은 바뀌지 않는다. 계약 검증은 실제 감정 품질 또는 전체 광고 완료가 아니다."
+          ],
+          "resume": "저장 후 emotion_review에서 현재 관찰과 다음 미관찰 단계(원본→립싱크→최종)를 읽고 기존 작업 ID로 이어간다.",
+          "retry": {
+            "policy": "after_evidence_or_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "파일·권한·승인 연출·비교 원본·실제 motion 관찰이 확인되지 않으면 해당 품질 pass를 중단하고 unverified를 보존한다. 기존 읽기·다운로드·복구·편집은 무효화하지 않는다."
+        },
+        {
+          "code": "EMOTION_REVIEW_EVIDENCE_UNAVAILABLE",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "기존 기획·연출·검사·미디어 또는 관찰 이력이 없거나 손상·링크 상태여서 관찰의 근거를 확인할 수 없습니다.",
+          "checkFields": [],
+          "steps": [
+            "emotion_review(projectId)로 현재 plan/direction SHA, 인물 분류, 컷 원본 구간과 기존 관찰 ID를 읽는다.",
+            "emotion_review의 issue에 나온 파일을 같은 프로젝트/run/job에서 복원한다. 소재는 material_inspect, 최종은 review_evidence의 기존 결과/상태를 재사용한다. 검사 pending은 같은 ID로 조회하며 유료 재생성이나 빈 pass로 우회하지 않는다.",
+            "emotion_review_save를 실제 관찰 입력으로 수행하고 feedback_list로 같은 requestId의 중앙 수신을 확인한다. 원본·음원·기존 accepted 검수와 render input SHA는 보존한다."
+          ],
+          "successCriteria": [
+            "해당 오류 없이 동일 파일·구간에 묶인 append-only 관찰을 반환하고, 재시도는 같은 관찰 ID를 재사용한다.",
+            "실제 중앙 receipt 또는 pending 원인이 보이고 기존 렌더 입력은 바뀌지 않는다. 계약 검증은 실제 감정 품질 또는 전체 광고 완료가 아니다."
+          ],
+          "resume": "저장 후 emotion_review에서 현재 관찰과 다음 미관찰 단계(원본→립싱크→최종)를 읽고 기존 작업 ID로 이어간다.",
+          "retry": {
+            "policy": "after_evidence_or_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "파일·권한·승인 연출·비교 원본·실제 motion 관찰이 확인되지 않으면 해당 품질 pass를 중단하고 unverified를 보존한다. 기존 읽기·다운로드·복구·편집은 무효화하지 않는다."
+        },
+        {
+          "code": "EMOTION_REVIEW_INVALID",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "감정 관찰의 구간·실제 분류·motion 여부·시작/행동/반응 또는 파생 비교 ID가 현재 스키마와 맞지 않습니다.",
+          "checkFields": [
+            "metadata?.duration",
+            "metadata.duration"
+          ],
+          "steps": [
+            "emotion_review(projectId)로 현재 plan/direction SHA, 인물 분류, 컷 원본 구간과 기존 관찰 ID를 읽는다.",
+            "실제로 본 종류와 구간으로 수정한다. frames/none이면 unverified 또는 관찰한 실패를 기록하며 motion pass를 발명하지 않는다. hands_only/absent를 현재 화면과 대조한다.",
+            "emotion_review_save를 실제 관찰 입력으로 수행하고 feedback_list로 같은 requestId의 중앙 수신을 확인한다. 원본·음원·기존 accepted 검수와 render input SHA는 보존한다."
+          ],
+          "successCriteria": [
+            "해당 오류 없이 동일 파일·구간에 묶인 append-only 관찰을 반환하고, 재시도는 같은 관찰 ID를 재사용한다.",
+            "실제 중앙 receipt 또는 pending 원인이 보이고 기존 렌더 입력은 바뀌지 않는다. 계약 검증은 실제 감정 품질 또는 전체 광고 완료가 아니다."
+          ],
+          "resume": "저장 후 emotion_review에서 현재 관찰과 다음 미관찰 단계(원본→립싱크→최종)를 읽고 기존 작업 ID로 이어간다.",
+          "retry": {
+            "policy": "after_evidence_or_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "파일·권한·승인 연출·비교 원본·실제 motion 관찰이 확인되지 않으면 해당 품질 pass를 중단하고 unverified를 보존한다. 기존 읽기·다운로드·복구·편집은 무효화하지 않는다."
+        },
+        {
+          "code": "EMOTION_REVIEW_STALE",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "관찰의 기획·연출·미디어·검사·부모 원본·최종 편집 해시 또는 부모가 관찰한 시간 범위가 현재 자료와 다릅니다.",
+          "checkFields": [
+            "plan.value.creativeDirection?.sha256",
+            "direction.sha256",
+            "input.sha256",
+            "project.cloud?.runId"
+          ],
+          "steps": [
+            "emotion_review(projectId)로 현재 plan/direction SHA, 인물 분류, 컷 원본 구간과 기존 관찰 ID를 읽는다.",
+            "emotion_review의 버전과 기존 관찰을 읽고 같은 job의 파일/검사를 복원한다. 실제 변경된 부분만 재관찰하며 해시를 덮어쓰거나 원본을 재생성하지 않는다. 부모 관찰의 파일 SHA와 cut.sourceInSec 범위를 대조한다.",
+            "emotion_review_save를 실제 관찰 입력으로 수행하고 feedback_list로 같은 requestId의 중앙 수신을 확인한다. 원본·음원·기존 accepted 검수와 render input SHA는 보존한다."
+          ],
+          "successCriteria": [
+            "해당 오류 없이 동일 파일·구간에 묶인 append-only 관찰을 반환하고, 재시도는 같은 관찰 ID를 재사용한다.",
+            "실제 중앙 receipt 또는 pending 원인이 보이고 기존 렌더 입력은 바뀌지 않는다. 계약 검증은 실제 감정 품질 또는 전체 광고 완료가 아니다."
+          ],
+          "resume": "저장 후 emotion_review에서 현재 관찰과 다음 미관찰 단계(원본→립싱크→최종)를 읽고 기존 작업 ID로 이어간다.",
+          "retry": {
+            "policy": "after_evidence_or_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "파일·권한·승인 연출·비교 원본·실제 motion 관찰이 확인되지 않으면 해당 품질 pass를 중단하고 unverified를 보존한다. 기존 읽기·다운로드·복구·편집은 무효화하지 않는다."
         },
         {
           "code": "INSPECTION_TIMEOUT",
