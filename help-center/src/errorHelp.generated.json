@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.19",
+  "version": "1.9.20",
   "codeCount": 2001,
   "groups": [
     {
@@ -15781,11 +15781,60 @@
         },
         {
           "code": "PROVIDER_INTERNAL_ERROR",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "제공사10000 또는 Internal error를수신했습니다. 이일반메시지만으로입력불량·환불·모델미지원·재시도성공을확정할수없습니다. 더구체적인얼굴/참조/제한사유가함께있으면그원인을먼저처리합니다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "reuse_matching_result",
+              "description": "같은 프로젝트의 기존 성공 원본·파생본을 먼저 대조합니다.",
+              "conditions": [
+                "원래assetId·입력SHA·모델·발화경로·승인 대본/목소리/타이밍과 실제 성공receipt가 일치",
+                "이름이나 같은assetId만으로 다른H3/Seedance/native/lip-sync 결과를 대체하지 않음",
+                "다운로드/재사용 전에 현재권한·실제영상/음성검수를 확인하며 새품질pass를 발명하지 않음"
+              ]
+            },
+            {
+              "id": "independent_material_work",
+              "description": "영향받지 않는 기존 소재 조회·관찰을 이어갑니다.",
+              "conditions": [
+                "같은run generation_status(view=jobs)와 현재연출로 독립성을 확인",
+                "원본·음원·검수이력·진행중작업을 보존",
+                "이대안은 새유료접수나 전체장면재생성을 허용하지 않음"
+              ]
+            },
+            {
+              "id": "reconcile_original_task",
+              "description": "기존 제공사 작업의 영수증·결과를 읽기 전용으로 대조합니다.",
+              "conditions": [
+                "실제원래provider_task_id와현재승인된제공사연결사용",
+                "불확실접수·404·조회만료를미접수로간주하지않음",
+                "GET결과는회수판단자료이며새POST·환불·검수pass허가가아님"
+              ]
+            }
+          ],
+          "steps": [
+            "generation_status(view=jobs) 또는해당voice/lipsync/image/render status로원래 jobId·provider_task_id·run·incidentId·마지막receipt를대조합니다. 이름이나같은assetId만으로새작업을만들지않습니다.",
+            "media_metadata.providerError.reasons에서person_reference_restricted/reference_unreadable/rate_limited같은구체사유를확인합니다. 내부오류와함께있으면해당exact사전으로입력또는제공사조건을복구합니다. 원문과키·서명URL·고객대본은분리해보존하며공개로그로전송하지않습니다.",
+            "운영자가기존 provider_task_id의GET 상태/영수증과서버job을대조합니다. review/dispatch_unknown/receipt누락은성공여부불명확이므로동일task를조회하고POST를반복하지않습니다. 제공사조회404/만료/인증실패도미접수나재시도허가가아닙니다.",
+            "Kling립싱크는실제원본videoHash·승인전문해당audioHash·발화·길이·해상도·화자와기존성공파생본을대조합니다. 같은assetId의다른원본/다른음성결과를대체하지않고 현재선택이native이면옛립싱크재생성을자동재개하지않습니다.",
+            "호스트가 connection_diagnose/production_check와해당status/quote, 서버결제원장으로잔액·보류·정산을확인합니다. amount_krw·cost_milliusd=0·제공사consume/frozen=0만으로고객환불을말하지않고 고객에게예산숫자를묻지않습니다.",
+            "실제결과가있으면동일작업회수/검수를우선합니다. 확정실패라면원인변화·기존중복없음·현재지원입력·정확한견적과기존승인범위를확인해실패단계만선택적으로이어갑니다. 무변화동일재시도·모델/목소리자동변경·전체소재재생성은하지않습니다. 해결근거가없으면같은incident에차단과다음독립작업을기록합니다."
+          ],
+          "successCriteria": [
+            "기존task의제공사상태와서버job/입력/현재선택/원장상태가구체적으로대조됨",
+            "회수한실제결과또는확인된입력/제공사원인변화가있고중복접수없음",
+            "same incident의실제resultId근거·중앙수신이있을때만resolved를기록함"
+          ],
+          "resume": "원래job/task의회수가능한상태부터이어갑니다. 확정실패의새접수는현재지원·견적·기존승인범위와달라진원인근거를확인한뒤해당단계에만적용합니다.",
+          "retry": {
+            "policy": "reconcile_original_then_observe_changed_condition",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "제공사접수/원장/원본입력상태가불명확하거나같은원인에변화가없으면새유료POST를하지않습니다."
         },
         {
           "code": "PROVIDER_NOT_CONFIGURED",
@@ -17934,11 +17983,60 @@
         },
         {
           "code": "PROVIDER_PERSON_REFERENCE_RESTRICTED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "제공사 원문 또는 로그의 Input image may contain a real person을 서버가 person_reference_restricted로 분류했습니다. 상위 오류10000/Internal error가 함께 있어도 이 입력 제한 사유를 지우지 않습니다. 제공사 감지는 실제 파일 관찰과 구분하며 출력 얼굴 금지를 뜻하지 않습니다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "reuse_matching_result",
+              "description": "같은 프로젝트의 기존 성공 원본·파생본을 먼저 대조합니다.",
+              "conditions": [
+                "원래assetId·입력SHA·모델·발화경로·승인 대본/목소리/타이밍과 실제 성공receipt가 일치",
+                "이름이나 같은assetId만으로 다른H3/Seedance/native/lip-sync 결과를 대체하지 않음",
+                "다운로드/재사용 전에 현재권한·실제영상/음성검수를 확인하며 새품질pass를 발명하지 않음"
+              ]
+            },
+            {
+              "id": "independent_material_work",
+              "description": "영향받지 않는 기존 소재 조회·관찰을 이어갑니다.",
+              "conditions": [
+                "같은run generation_status(view=jobs)와 현재연출로 독립성을 확인",
+                "원본·음원·검수이력·진행중작업을 보존",
+                "이대안은 새유료접수나 전체장면재생성을 허용하지 않음"
+              ]
+            },
+            {
+              "id": "supported_face_free_input",
+              "description": "관찰한 얼굴 없는 소품·배경과 승인된 CHARACTER로 입력 패키지를 준비합니다.",
+              "conditions": [
+                "현재모델스키마가실제다중참조또는text-only 경로를지원",
+                "모든실제업로드파일의얼굴없음관찰·SHA·역할과정확한150단어인물기술",
+                "외부패키지준비는내부유료접수나동일얼굴/품질보장이아님"
+              ]
+            }
+          ],
+          "steps": [
+            "generation_status(view=jobs)와 error_gateway에서 원래 jobId·provider_task_id·incidentId·현재run을 보존합니다. 같은 실패를 새요청으로 반복하거나 taskId가 없다고 발명하지 않습니다.",
+            "media_metadata.providerError의 원문·reason code와 원래 shot.referenceHash/seedanceInput을 대조합니다. person_reference_restricted와 internal_error가 함께 있으면 얼굴 참조 제한부터 조사합니다. 실패 상태나 providerConsumedPoints=0만으로 고객 원장 환불을 확정하지 않습니다.",
+            "model_catalog와 현재 고객의 모델·순정/립싱크 선택을 확인합니다. Seedance2/2.5 입력 파일은 직접얼굴·실사형AI·포장·포스터·화면·유리/거울반사까지 실제 관찰하고 파일경로·SHA·역할을 기록합니다. 얼굴포함·미관찰·판단불가 자료는 전송하지 않고 원본을 보존한 얼굴없는 소품/배경 자료를 준비합니다.",
+            "승인된 새가상인물의 CHARACTER만 영어공백기준 정확히150단어로 유지합니다. 계획용13구도·6표정카드를 provider입력에 넣거나 제품참조를firstFrame으로 둔갑시키지 않습니다. No face reference문장·파일명변경·noCharacterReason만으로 검수를 통과시키지 않습니다.",
+            "현재지원seedanceInput으로 direction_save/reference_prepare/storyboard_compile 결과와 실제face-free 관찰을 대조합니다. 내부스키마가표현하지못하면 지원되는외부입력패키지를 준비해 제한을설명합니다. 모델/음성경로·전문·타이밍변경은기존선택으로허가되지 않습니다.",
+            "입력수정만으로실패job을성공이나incident resolved로바꾸지 않습니다. 기존review/성공작업부터확인하고 실제지원견적·현재잔액/보류·기존승인범위가맞을때 해당미접수단계만재개합니다. 새유료접수와품질완료는별도증거로기록합니다."
+          ],
+          "successCriteria": [
+            "실제참조관찰·SHA·역할·150단어CHARACTER와현재지원입력/고객선택이일치함",
+            "기존job/task/incident및성공원본이보존되고중앙작업계보수신확인",
+            "생성성공은해당실제provider receipt와영상검수로별도증명하며입력수정만으로완료처리하지않음"
+          ],
+          "resume": "같은project/run에서수정한입력준비단계를검증한뒤 기존status/quote/승인범위에따라필요한단계만진행합니다. 과거실패job은변경하지않습니다.",
+          "retry": {
+            "policy": "reconcile_original_then_observe_changed_condition",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "얼굴관찰·현재스키마·기존접수/비용상태·승인선택이불명확하면해당생성은멈추고정확한제약과독립작업을기록합니다."
         },
         {
           "code": "SEEDANCE_CHARACTER_PROMPT_MISMATCH",
