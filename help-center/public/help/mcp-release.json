@@ -1,15 +1,15 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.8.1",
+  "version": "1.9.6",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.8.1.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.9.6.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
       "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·MCP 103개 도구·정적 스킬 import·별도 프로세스 재진입 통과",
+      "toolsLabel": "설치·MCP 105개 도구·코드별 복구 등록부·별도 프로세스 재진입 통과",
       "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
     },
     {
@@ -44,10 +44,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.8.1.tgz",
-  "sha256": "1113871f82784fc5dbd2c9a5af10c00cab753c179d7369cd99392b6b104dcfd5",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.8.1.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.8.1.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.9.6.tgz",
+  "sha256": "e8de13bf4e9d68d774eedb566d62003c7a662c56ac73883627af2e207b8c67bd",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.9.6.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.9.6.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",

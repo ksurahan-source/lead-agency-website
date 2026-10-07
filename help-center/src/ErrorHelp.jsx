@@ -3,7 +3,7 @@ import {PublicHeader,PublicFooter} from './HelpCenter';
 import styles from './install.module.css';
 export default function ErrorHelp({route}){
  const group=data.groups.find(g=>g.id===route.errorGroup);
- return <><PublicHeader/><main className={styles.shell}><article style={{maxWidth:1000,margin:'24px auto',padding:'0 20px'}}>
+ return <><PublicHeader/><main className={styles.shell}><article style={{maxWidth:1000,margin:'24px auto',padding:'0 20px',overflowWrap:'anywhere'}}>
   <nav aria-label="이동 경로"><a href="/help">도움말</a> / <a href="/help/errors">오류 코드 사전</a></nav>
   <h1>{group?group.title+' 오류 해결':'HIOB 오류 코드 사전과 복구 방법'}</h1>
   <p>MCP {data.version} 기준 · {data.reviewedAt} 검토. 오류의 원인과 해결 담당, 복구 후 확인할 조건을 안내합니다. 기존 원본·승인 대본·목소리·타이밍·진행 중 작업을 보존합니다.</p>
@@ -15,7 +15,7 @@ export default function ErrorHelp({route}){
    <h2>어떻게 복구하나요?</h2><ol>{group.steps.map((s,i)=><li key={i}>{s}</li>)}</ol>
    <h2>해결됐는지 확인하기</h2><ul>{group.successCriteria.map((s,i)=><li key={i}>{s}</li>)}</ul><p>{group.resume}</p>
    <h2>해당 오류 코드</h2><p>아래 코드는 이 절차를 공유합니다. 구체적인 원인 필드와 발생 조건은 코드별로 다르므로 AI가 설치본에서 해당 코드의 상세 항목을 읽어야 합니다.</p>
-   {group.codes.map(({code,resolution})=><section id={code} key={code} style={{scrollMarginTop:24,borderTop:'1px solid #ddd',padding:'12px 0'}}><h3 style={{overflowWrap:'anywhere'}}>{code}</h3><p>{resolution==='operator_diagnosis_required'?'이 코드의 실제 발생 조건과 현재 상태를 담당 운영자가 대조해야 합니다. 자동 수정 경로가 검증된 항목은 아닙니다.':'위 복구 순서에 따라 현재 입력과 저장 상태를 확인하고, 성공 조건을 충족한 뒤 기존 작업을 이어갑니다.'}</p><p>AI에게 “{code}의 코드별 복구 문서를 읽고, 기존 프로젝트에서 해당 조건을 확인해줘”라고 요청하세요.</p></section>)}
+   {group.codes.map(({code,resolution,explanation})=><section id={code} key={code} style={{scrollMarginTop:24,borderTop:'1px solid #ddd',padding:'12px 0'}}><h3 style={{overflowWrap:'anywhere'}}>{code}</h3><p>{explanation}</p><p>{resolution==='operator_diagnosis_required'?'이 코드의 실제 발생 조건과 현재 상태를 담당 운영자가 대조해야 합니다. 자동 수정 경로가 검증된 항목은 아닙니다.':'위 복구 순서에 따라 현재 입력과 저장 상태를 확인하고, 성공 조건을 충족한 뒤 기존 작업을 이어갑니다.'}</p><p>AI에게 “{code}의 코드별 복구 문서를 읽고, 기존 프로젝트에서 해당 조건을 확인해줘”라고 요청하세요.</p></section>)}
   </>}
   <h2>함께 확인할 안내</h2><p><a href="/help/install">MCP 설치와 업데이트</a> · <a href="/help/topics/fix">다른 문제 해결</a> · <a href="/help/privacy">자료와 개인정보 처리</a></p>
  </article></main><PublicFooter/></>;
