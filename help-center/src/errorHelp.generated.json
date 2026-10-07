@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.11",
+  "version": "1.9.12",
   "codeCount": 1996,
   "groups": [
     {
@@ -16242,11 +16242,27 @@
         },
         {
           "code": "AUDIO_PLAN_STALE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "음원 manifest의 planSha256과 현재 기획 파일 SHA가 다릅니다. 화면만 바뀐 경우와 전문·목소리·발화 방식·시간이 바뀐 경우를 이전 선택 체크포인트로 구분해야 합니다.",
+          "checkFields": [],
+          "steps": [
+            "audio_recovery(projectId)로 현재 권한과 이전 기획·선택 음원의 체크포인트를 조회한다. 같은 프로젝트의 실제 파일 해시와 대본·목소리·시간·발화 방식·출처를 대조한다.",
+            "ready_to_rebind이면 반환된 nextAction.arguments의 전체 tracks와 planSha256/expectedAudioSha256을 그대로 audio_set에 전달한다. 실제 음원 검사와 버전 충돌 검사는 저장 시 재실행되며 음악·효과음을 누락하지 않는다.",
+            "needs_review의 changes/issue 또는 needs_history의 history.issues를 읽고 해당 필드의 기존 승인·서버 revision·원본을 호스트가 복구한다. 고객에게 내부 트랙 입력을 요구하거나 새 합성·해시 덮어쓰기로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "동일 전문·목소리·타이밍·선택 파일의 해시가 보존되고 audio_set이 실제 음원/동시 변경 검사를 통과한다.",
+            "production_check에서 AUDIO_PLAN_STALE이 해소된다. 다른 편집·참조·품질 문제는 별도로 남기고 전체 완료로 표시하지 않는다."
+          ],
+          "resume": "audio_set 성공 후 반환된 resumeAction의 production_check로 같은 프로젝트·기존 작업의 다음 단계를 확인한다.",
+          "retry": {
+            "policy": "after_verified_binding_equivalence",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "이전 선택 근거 부재·파일 손상·발화/목소리/시간/경로 변경·현재 권한 미확인·동시 수정이면 기존 파일을 보존하고 해당 원인을 복구한다. 미관찰 품질을 통과시키지 않는다."
         },
         {
           "code": "BATCH_MANIFEST_DIGEST_MISMATCH",
