@@ -1,10 +1,10 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.9.6.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.9.7.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
@@ -44,10 +44,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.9.6.tgz",
-  "sha256": "e8de13bf4e9d68d774eedb566d62003c7a662c56ac73883627af2e207b8c67bd",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.9.6.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.9.6.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.9.7.tgz",
+  "sha256": "82ba84d212ac38e9bb94f6c9863ca7930ef7422d094e3426597937382b6a4f49",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.9.7.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.9.7.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",

@@ -207,6 +207,14 @@
       "sha256": "7fd4de9c02bcb912db6143ed20b671ff81434b3ad1a859794be0b7377da83667",
       "source": "reviewed_release_source",
       "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.9.6.zip"
+    },
+    {
+      "version": "1.9.7",
+      "url": "https://hi-ob.com/help/hiob-video-skill-1.9.7.zip",
+      "bytes": 205418,
+      "sha256": "1174da934986c594559a399ed769df6c71ea59ab902cc5344f34b408d930840f",
+      "source": "reviewed_release_source",
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.9.7.zip"
     }
   ]
 }
