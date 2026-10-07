@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-07",
-  "version": "1.9.8",
-  "codeCount": 1971,
+  "version": "1.9.9",
+  "codeCount": 1983,
   "groups": [
     {
       "id": "approval",
@@ -1889,6 +1889,14 @@
           "checkFields": []
         },
         {
+          "code": "ECONNREFUSED",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "대상 서비스가 연결을 거절했다. 서비스 주소·포트·기동 상태를 확인하고 같은 서버의 읽기 요청이 정상인지 확인한다. 생성 요청을 다른 제공사로 임의 재접수하지 않는다.",
+          "checkFields": []
+        },
+        {
           "code": "EDITOR_REVISION_CAS_UNAVAILABLE",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -1902,6 +1910,14 @@
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "ENOTFOUND",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "서비스 호스트 이름 조회에 실패했다. 호스트 주소·DNS·서비스 설정을 확인한다. 접수 직후 오류라면 기존 requestId로 서버 상태부터 대조하고 결과가 불명확한 유료 요청을 새로 만들지 않는다.",
           "checkFields": []
         },
         {
@@ -2526,6 +2542,14 @@
           "checkFields": []
         },
         {
+          "code": "EDIT_CAPTIONS_REQUIRED",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "EDIT_CAPTION_BINDING_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -2552,14 +2576,6 @@
           "checkFields": [
             "plan.beats.filter"
           ]
-        },
-        {
-          "code": "EDIT_CAPTIONS_REQUIRED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
         },
         {
           "code": "EDIT_CLIENT_ASSET_URL_FORBIDDEN",
@@ -2911,7 +2927,7 @@
           "checkFields": []
         },
         {
-          "code": "EDIT_TITLE_INVALID",
+          "code": "EDIT_TITLES_REQUIRED",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
@@ -2919,7 +2935,7 @@
           "checkFields": []
         },
         {
-          "code": "EDIT_TITLES_REQUIRED",
+          "code": "EDIT_TITLE_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
@@ -5905,6 +5921,19 @@
           "checkFields": []
         },
         {
+          "code": "NOT_FOUND",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
+          "checkFields": [
+            "result.items.length",
+            "result.items",
+            "body.batchId",
+            "input.jobId"
+          ]
+        },
+        {
           "code": "NO_CHARACTER_REASON_REQUIRED",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -5925,19 +5954,6 @@
             "plan.claims",
             "plan.claims.length",
             "plan.beats.some"
-          ]
-        },
-        {
-          "code": "NOT_FOUND",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
-          "checkFields": [
-            "result.items.length",
-            "result.items",
-            "body.batchId",
-            "input.jobId"
           ]
         },
         {
@@ -6175,6 +6191,14 @@
           ]
         },
         {
+          "code": "PROOF_ASSETS_REQUIRED",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "PROOF_ASSET_SCOPE_MISMATCH",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -6184,14 +6208,6 @@
             "asset?.id",
             "input.brand"
           ]
-        },
-        {
-          "code": "PROOF_ASSETS_REQUIRED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
         },
         {
           "code": "QUERY_INVALID",
@@ -6240,14 +6256,6 @@
           "checkFields": []
         },
         {
-          "code": "REEL_NOT_FOUND",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "REELS_LEAF_OUTPUT_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -6257,6 +6265,14 @@
         },
         {
           "code": "REELS_LEAF_RESULT_INVALID",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "REEL_NOT_FOUND",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
@@ -8312,6 +8328,14 @@
           ]
         },
         {
+          "code": "DESKTOP_FILES_INCOMPLETE",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "DESKTOP_FILE_NOT_IN_REVISION",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -8320,14 +8344,6 @@
           "checkFields": [
             "file.bytes"
           ]
-        },
-        {
-          "code": "DESKTOP_FILES_INCOMPLETE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
         },
         {
           "code": "DESKTOP_GENERATION_ALREADY_ACTIVE",
@@ -10606,24 +10622,6 @@
           "checkFields": []
         },
         {
-          "code": "NO_BRAND_PRODUCT_IMAGE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: input.brand.",
-          "checkFields": [
-            "input.brand"
-          ]
-        },
-        {
-          "code": "NO_LISTING_LOCK",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "NOT_A_REAL_BRAND",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -10643,6 +10641,24 @@
             "body.input",
             "body.nodeId"
           ]
+        },
+        {
+          "code": "NO_BRAND_PRODUCT_IMAGE",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: input.brand.",
+          "checkFields": [
+            "input.brand"
+          ]
+        },
+        {
+          "code": "NO_LISTING_LOCK",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
         },
         {
           "code": "ONBOARDING_WORKSPACE",
@@ -10860,6 +10876,14 @@
           "checkFields": []
         },
         {
+          "code": "PLANET_ORDERS_READ_FAILED",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "PLAN_QUOTA_EXCEEDED",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -10870,23 +10894,7 @@
           ]
         },
         {
-          "code": "PLANET_ORDERS_READ_FAILED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "PRIVATE_NETWORK_DETAIL",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -11005,6 +11013,14 @@
         },
         {
           "code": "PRODUCER_VIDEO_TOO_SHORT",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -12737,34 +12753,6 @@
           "checkFields": []
         },
         {
-          "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: request.jwt.claims.",
-          "checkFields": [
-            "request.jwt.claims"
-          ]
-        },
-        {
-          "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: request.jwt.claims.",
-          "checkFields": [
-            "request.jwt.claims"
-          ]
-        },
-        {
-          "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "STORYBOARD_APPROVAL_CONFLICT",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -12813,7 +12801,7 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_CARD_INVALID",
+          "code": "STORYBOARD_CARDS_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -12821,7 +12809,7 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_CARDS_INVALID",
+          "code": "STORYBOARD_CARD_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -12925,6 +12913,14 @@
           "checkFields": []
         },
         {
+          "code": "STORYBOARD_IMAGES_INVALID",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "STORYBOARD_IMAGE_CARD_MISMATCH",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -12966,14 +12962,6 @@
         },
         {
           "code": "STORYBOARD_IMAGE_SET_ITEM_INVALID",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "STORYBOARD_IMAGES_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -13093,7 +13081,7 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_REVISION_ITEM_INVALID",
+          "code": "STORYBOARD_REVISION_ITEMS_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -13101,7 +13089,7 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_REVISION_ITEMS_INVALID",
+          "code": "STORYBOARD_REVISION_ITEM_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -13157,14 +13145,6 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_VOICE_OUTPUT_INVALID",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "STORYBOARD_VOICE_OUTPUTS_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -13173,7 +13153,43 @@
           "checkFields": []
         },
         {
+          "code": "STORYBOARD_VOICE_OUTPUT_INVALID",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "STORYBOARD_VOICE_PREVIEW_STALE",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: request.jwt.claims.",
+          "checkFields": [
+            "request.jwt.claims"
+          ]
+        },
+        {
+          "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: request.jwt.claims.",
+          "checkFields": [
+            "request.jwt.claims"
+          ]
+        },
+        {
+          "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
           "resolution": "operator_diagnosis_required",
@@ -14303,6 +14319,54 @@
           "checkFields": []
         },
         {
+          "code": "EACCES",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "파일 접근 권한이 없다. 현재 프로젝트 폴더의 소유자와 읽기·쓰기 권한을 확인하고 허용된 작업 경로를 사용한다. 홈 전체 공개나 보안 해제로 우회하지 않는다.",
+          "checkFields": []
+        },
+        {
+          "code": "EEXIST",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이미 존재하는 파일을 새로 만들려 했다. 기존 파일의 내용·해시와 작업 ID를 비교해 같은 결과면 재사용한다. 다른 파일을 덮어쓰거나 삭제하지 않고 지원되는 새 결과 경로를 사용한다.",
+          "checkFields": []
+        },
+        {
+          "code": "EISDIR",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "파일이 필요한 위치에 폴더가 지정됐다. 프로젝트 목록에서 실제 원본 파일을 찾아 해당 입력 경로만 바로잡는다.",
+          "checkFields": []
+        },
+        {
+          "code": "ENOENT",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "요청한 파일 또는 상위 폴더가 없다. project_context와 프로젝트 파일 목록에서 실제 경로를 찾아 기존 원본을 다시 연결한다. 파일이 준비 중이면 같은 준비 요청을 조회하며, 없다는 이유만으로 영상을 재생성하지 않는다.",
+          "checkFields": []
+        },
+        {
+          "code": "ENOTDIR",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "폴더가 필요한 경로의 일부가 파일이다. 실제 프로젝트 경로 구성과 대상 유형을 확인하고 원본을 보존한 정상 경로를 연결한다.",
+          "checkFields": []
+        },
+        {
+          "code": "EPERM",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "현재 작업이 운영체제에서 허용되지 않았다. 요청한 파일 작업·잠금·프로젝트 경계를 확인하고 지원되는 경로로 복구한다. 불필요한 관리자 권한을 요구하지 않는다.",
+          "checkFields": []
+        },
+        {
           "code": "HIOB_CHARACTER_PATH_INVALID",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -14484,11 +14548,35 @@
           "checkFields": []
         },
         {
+          "code": "ECONNRESET",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "서버 연결이 끊겼다. 접수 성공 여부를 모르면 기존 requestId·jobId로 status를 먼저 조회한다. 결과를 찾기 전에는 새 유료 요청을 만들지 않는다.",
+          "checkFields": []
+        },
+        {
           "code": "ENSEMBLE_PROVIDER_OUTCOME_UNKNOWN",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "EPIPE",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "통신 상대가 닫힌 연결에 쓰기를 시도했다. MCP 또는 서비스 연결을 복구한 뒤 같은 요청의 저장 결과를 조회한다. 부분 성공 가능성을 확인하기 전 쓰기·유료 접수를 반복하지 않는다.",
+          "checkFields": []
+        },
+        {
+          "code": "ETIMEDOUT",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "연결 또는 응답 시간이 초과됐다. 기존 작업 ID의 저장 상태를 조회하고 진행 중이면 같은 작업을 기다린다. 미접수가 확인된 안전한 조회만 제한적으로 재시도한다.",
           "checkFields": []
         },
         {
@@ -14681,6 +14769,14 @@
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "ENOSPC",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "저장 장치 공간이 부족하다. 작업 상태와 원본을 보존하고 실제 디스크 여유 공간을 확인한다. 별도 보존 가능한 작업 폴더를 확보한 후 실패한 저장만 재개한다. 사용자 파일을 자동 삭제하지 않는다.",
           "checkFields": []
         },
         {
@@ -17199,17 +17295,6 @@
           ]
         },
         {
-          "code": "SEEDANCE_INPUT_MODE_UNSUPPORTED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: input.policy, input.mode.",
-          "checkFields": [
-            "input.policy",
-            "input.mode"
-          ]
-        },
-        {
           "code": "SEEDANCE_INPUT_MODEL_MISMATCH",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -17218,6 +17303,17 @@
           "checkFields": [
             "asset.referenceFile",
             "asset.seedanceInput"
+          ]
+        },
+        {
+          "code": "SEEDANCE_INPUT_MODE_UNSUPPORTED",
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "확인할 입력·상태: input.policy, input.mode.",
+          "checkFields": [
+            "input.policy",
+            "input.mode"
           ]
         },
         {
