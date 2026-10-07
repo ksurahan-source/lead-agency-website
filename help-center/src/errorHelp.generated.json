@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.10",
-  "codeCount": 1988,
+  "version": "1.9.11",
+  "codeCount": 1996,
   "groups": [
     {
       "id": "approval",
@@ -2420,10 +2420,26 @@
         {
           "code": "PGRST002",
           "recoveryVerification": "unit_tested",
-          "reviewStatus": "incident_diagnosed",
+          "reviewStatus": "condition_reviewed",
           "resolution": "diagnosed_conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "PostgREST가 DB 스키마 캐시를 읽지 못해 API/RPC 실행을 시작할 수 없었습니다. 고객 크레딧이나 영상 입력 오류로 취급하지 않습니다.",
+          "checkFields": [],
+          "steps": [
+            "PGRST002는 API가 스키마 캐시를 읽지 못한 오류다. 고객의 입력이나 크레딧 부족으로 처리하지 않는다. 오류 시각·기존 작업 ID·Modal task/input/functionCall ID를 보존하고 같은 작업 상태를 조회한다.",
+            "DB 상태, PostgREST 로그, Exposed schemas의 실제 존재 여부를 확인한다. 일시 장애이면 안전한 조회만 제한된 횟수로 재시도한다. 존재하지 않는 노출 스키마가 원인이면 운영자가 설정을 바로잡고 캐시 갱신 후 조회를 확인한다. 원인을 확인하지 않고 스키마 삭제·권한 확대를 하지 않는다.",
+            "예약 reconcile은 제공사 호출 없는 기존 작업 정리다. 해당 함수만 최대 3회 같은 RPC를 조회하며 계속 실패하면 실패 상태와 호출 ID를 남긴다. 영상 생성·결제·접수 결과 불명의 쓰기 작업에는 이 재시도를 적용하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 API 또는 예약 정리 함수가 정상 응답하며 실패가 재발하지 않는지 확인한다.",
+            "생성 성공·렌더 성공은 해당 job 상태와 실제 결과를 별도로 검수한다."
+          ],
+          "resume": "같은 reconcile 호출이 유효한 reconciled/results를 반환한 뒤 기존 작업 상태를 다시 읽는다. 생성·렌더 결과는 해당 job과 산출물로 별도 확인한다.",
+          "retry": {
+            "policy": "provider_free_reconciliation_rpc_only",
+            "maxAutomaticAttempts": 3,
+            "preserveIdentity": true
+          },
+          "stopCondition": "예약 reconcile은 최초 포함 최대 3회(추가 2회), 1초·3초 간격 후에도 실패하면 원래 오류를 발생시키고 Modal task/input ID를 유지한다. 다른 오류 및 유료 접수/결제는 재시도하지 않는다."
         }
       ]
     },
@@ -7717,6 +7733,109 @@
       "resume": "아래 코드별 성공 조건을 확인한 뒤 기존 작업의 실패 단계부터 재개합니다.",
       "codes": [
         {
+          "code": "DESKTOP_INCIDENT_CONFLICT",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "동일 이벤트 ID에 저장된 계정 또는 사건 내용이 이번 요청과 다릅니다. 기존 감사 기록은 수정하지 않습니다.",
+          "checkFields": [],
+          "steps": [
+            "중앙 이력의 기존 event ID·incident ID를 읽고 로컬 큐와 대조한다. 응답 유실 재전송이면 원래 내용 그대로 사용하고, 실제 새로운 시도라면 새 이벤트로 기록한다.",
+            "불일치 생산자를 고친 후 같은 incidentId에 새로운 복구 시도를 error_record로 추가한다."
+          ],
+          "successCriteria": [
+            "원래 이벤트는 그대로 남고 실제 새로운 시도만 별도 저장된다."
+          ],
+          "resume": "불일치 생산자를 고친 후 같은 incidentId에 새로운 복구 시도를 error_record로 추가한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "기존 기록 소유 계정이나 내용이 다르면 운영자 진단 전까지 해당 불변 이벤트 재전송을 중단한다."
+        },
+        {
+          "code": "DESKTOP_INCIDENT_INVALID",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "오류 사건의 코드·도구·이벤트 ID·시각·상태·증거 형식이 잘못됐거나 resolved에 결과 증거가 없습니다.",
+          "checkFields": [
+            "input?.schema",
+            "input.eventId",
+            "input.incidentId",
+            "input.tool",
+            "input.code",
+            "input.correlationId",
+            "input.status",
+            "input.at",
+            "input.action",
+            "input.evidence",
+            "input.eventId.toLowerCase"
+          ],
+          "steps": [
+            "호스트가 설치 버전과 입력 스키마를 확인한다. 실제 코드·작업 식별자와 관찰된 도구/결과 ID만 사용하고 raw 대본·URL·토큰은 넣지 않는다. 잘못된 불변 이벤트를 덮어쓰지 않는다.",
+            "입력 생산자를 고친 뒤 실제 새 복구 시도를 기록하고 기존 잘못된 기록은 진단용으로 보존한다."
+          ],
+          "successCriteria": [
+            "유효한 오류 시도만 저장되며 해결 상태에는 실제 도구·결과 ID·결과 상태가 있다."
+          ],
+          "resume": "입력 생산자를 고친 뒤 실제 새 복구 시도를 기록하고 기존 잘못된 기록은 진단용으로 보존한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 결과 증거가 없으면 blocked/retrying으로 기록한다. resolved나 결과 ID를 발명하지 않는다."
+        },
+        {
+          "code": "DESKTOP_INCIDENT_QUERY_INVALID",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "사건 조회의 limit, incidentId, since 또는 페이지 cursor 형식이 잘못됐습니다.",
+          "checkFields": [],
+          "steps": [
+            "limit은 1~100으로 지정하고 incidentId는 실제 응답의 값을 사용한다. cursor는 서버의 nextCursor를 그대로 전달한다. since는 ISO 시각을 사용한다.",
+            "유효한 조회 인자로 error_gateway(historyOnly=true)를 호출하고 같은 사건의 복구를 이어간다."
+          ],
+          "successCriteria": [
+            "같은 run의 올바른 사건 페이지와 다음 cursor가 반환된다."
+          ],
+          "resume": "유효한 조회 인자로 error_gateway(historyOnly=true)를 호출하고 같은 사건의 복구를 이어간다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 cursor/incident ID를 알 수 없으면 cursor 없이 첫 페이지부터 읽는다. SQL 표현식이나 추정 ID를 넣지 않는다."
+        },
+        {
+          "code": "DESKTOP_INCIDENT_STORAGE_UNAVAILABLE",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "서버 사건 저장 또는 수신 확인 조회가 실패했습니다. 기록의 저장 여부가 불명확하므로 같은 이벤트 ID를 유지합니다.",
+          "checkFields": [
+            "result.error",
+            "result.data"
+          ],
+          "steps": [
+            "호스트는 로컬 큐를 보존한다. 운영자가 DB/API 상태와 저장 응답을 확인하고 복구 후 동일 이벤트 ID를 다시 조회·전송한다.",
+            "error_gateway(historyOnly=true)로 같은 영속 큐를 재전송하고 원래 작업은 기존 job ID에서 재개한다."
+          ],
+          "successCriteria": [
+            "하나의 이벤트 ID에 하나의 불변 서버 기록과 일치하는 수신 확인이 있다."
+          ],
+          "resume": "error_gateway(historyOnly=true)로 같은 영속 큐를 재전송하고 원래 작업은 기존 job ID에서 재개한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "DB 장애가 지속되면 로컬 보관/미전송을 표시한다. 영상 생성이나 결제를 다시 접수하지 않는다."
+        },
+        {
           "code": "HIOB_ERROR_INCIDENT_MISMATCH",
           "recoveryVerification": "not_verified",
           "reviewStatus": "diagnosis_required",
@@ -7755,6 +7874,110 @@
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "HIOB_INCIDENT_PROJECT_CHANGED",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "기록에 고정된 run과 현재 프로젝트 연결의 run이 다릅니다. 이전 프로젝트의 오류를 새 프로젝트로 보내지 않습니다.",
+          "checkFields": [
+            "project.cloud?.runId",
+            "current.runId"
+          ],
+          "steps": [
+            "기록의 기존 run ID와 connection_diagnose 결과를 대조한다. 기존 run의 현재 권한을 복구하고 해당 프로젝트에서 오류 이력을 조회한다.",
+            "연결을 복구한 후 같은 큐 이벤트 ID로 error_gateway(historyOnly=true)를 호출한다."
+          ],
+          "successCriteria": [
+            "기존 run의 오류 기록만 해당 run으로 저장되고 새 run의 사건은 독립적으로 저장된다."
+          ],
+          "resume": "연결을 복구한 후 같은 큐 이벤트 ID로 error_gateway(historyOnly=true)를 호출한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "기존 프로젝트 권한을 잃었다면 운영자가 연결을 복구할 때까지 기존 큐는 보존한다. 새 run으로 재배정하지 않는다."
+        },
+        {
+          "code": "HIOB_INCIDENT_PROJECT_UNBOUND",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "현재 로컬 프로젝트에 서버 run 연결이 없어 오류 이력을 전송·조회할 수 없습니다.",
+          "checkFields": [
+            "project.cloud?.runId",
+            "current.runId"
+          ],
+          "steps": [
+            "connection_diagnose로 같은 프로젝트의 연결을 확인하고 기존 서버 프로젝트에 연결한다. 별도 새 run으로 오류 이력을 옮기지 않는다.",
+            "현재 프로젝트를 연결한 뒤 error_gateway(historyOnly=true)로 영속 큐를 재전송한다."
+          ],
+          "successCriteria": [
+            "같은 프로젝트의 error_gateway(historyOnly=true).central.status가 available이고 delivery.pending이 감소한다."
+          ],
+          "resume": "현재 프로젝트를 연결한 뒤 error_gateway(historyOnly=true)로 영속 큐를 재전송한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 권한으로 서버 run을 식별할 수 없으면 로컬 큐를 보존하고 연결을 복구한다."
+        },
+        {
+          "code": "HIOB_INCIDENT_RECEIPT_INVALID",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "서버 응답의 스키마·run ID·event ID·incident ID·저장 확인이 요청과 맞지 않아 동기화 성공으로 표시하지 않았습니다.",
+          "checkFields": [
+            "current.payload",
+            "result?.schema",
+            "result.stored",
+            "result.runId",
+            "result.eventId",
+            "current.payload.eventId",
+            "result.incidentId",
+            "current.payload.incidentId",
+            "result.events"
+          ],
+          "steps": [
+            "로컬 이벤트 ID를 보존하고 같은 프로젝트의 중앙 이력을 조회한다. 설치 MCP와 Studio 배포 버전을 대조하고 응답 계약을 일치시킨다.",
+            "버전/응답을 고친 뒤 error_gateway(historyOnly=true)로 같은 큐를 재전송한다."
+          ],
+          "successCriteria": [
+            "같은 이벤트 ID와 run의 서버 수신 확인이 돌아오고 하나의 사건 시도로 저장된다."
+          ],
+          "resume": "버전/응답을 고친 뒤 error_gateway(historyOnly=true)로 같은 큐를 재전송한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "응답이 계속 불일치하면 운영자가 서버 응답을 진단한다. 새 ID로 복제하거나 저장 완료로 처리하지 않는다."
+        },
+        {
+          "code": "HIOB_INCIDENT_SYNC_UNAVAILABLE",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "네트워크·권한·로컬 저장 문제로 오류 기록 전달을 확인하지 못했습니다. 원래 작업 오류와 미전송 기록은 별도로 남습니다.",
+          "checkFields": [],
+          "steps": [
+            "central.delivery.lastError와 connection_diagnose를 확인한다. 연결/서비스 상태를 복구하고 원래 작업은 기존 job ID로 상태를 조회한다.",
+            "error_gateway(historyOnly=true) 또는 project_context를 다시 읽어 영속 큐를 재전송한다."
+          ],
+          "successCriteria": [
+            "pending 기록이 같은 이벤트 ID로 저장되고 서버 이력을 조회할 수 있다."
+          ],
+          "resume": "error_gateway(historyOnly=true) 또는 project_context를 다시 읽어 영속 큐를 재전송한다.",
+          "retry": {
+            "policy": "same_event_after_diagnosis",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "연결이나 디스크가 복구되지 않으면 원래 오류와 기록 실패를 함께 보고한다. 큐를 삭제하거나 원래 오류를 숨기지 않는다."
         }
       ]
     },
@@ -15873,11 +16096,27 @@
       "codes": [
         {
           "code": "DESKTOP_RENDER_INTENT_IMMUTABLE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "저장된 렌더 요청의 불변 내용이 바뀌었거나, 접수 뒤 검수 영수증을 바꾸거나 제거하려고 했습니다. 견적 전 정상 영수증 연결도 거절하던 이전 DB 계약 충돌은 수정됐으며 나머지 보호 조건은 유지됩니다.",
+          "checkFields": [],
+          "steps": [
+            "기존 render_status와 서버 견적 요청을 조회해 접수·과금·Lambda 호출 여부를 먼저 확인한다. 같은 요청을 반복 렌더하지 않는다.",
+            "DESKTOP_RENDER_INTENT_IMMUTABLE이 견적 단계의 production_receipt_id 연결에서 발생하면 운영자가 desktop_render_immutable_v1과 desktop_production_quote_v1의 계약을 대조한다. 접수 전 현재 프로젝트·계정·리비전·입력 해시와 일치하는 유효 영수증 연결만 허용하는 마이그레이션을 적용한다.",
+            "원본·가격·접수 후 변경 및 제공자/출력 영수증은 계속 보호한다. 수정 확인 후 현재 자료로 검수 영수증·견적을 갱신하고 기존 승인 범위에서 실패 단계부터 진행한다. 고객에게 한도·사용량 숫자를 묻지 않는다."
+          ],
+          "successCriteria": [
+            "유효 영수증 연결은 성공하고 다른 프로젝트·만료·다른 입력 및 접수 후 변경은 거절된다.",
+            "현재 견적이 저장된 뒤 기존 승인 범위에서 접수할 수 있다. AWS 결과 성공은 별도 확인한다."
+          ],
+          "resume": "render_status로 기존 요청의 완료/접수 여부를 확인한다. done이면 기존 MP4를 사용한다. 미접수의 현재 입력에만 production_check와 render_quote를 진행하고 현재 승인 범위에서 접수한다.",
+          "retry": {
+            "policy": "reconcile_then_repair_pre_admission_binding",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "이미 접수됐거나 결과가 불명확하면 기존 render job을 조회/조정한다. intent를 덮어쓰거나 새 요청 ID로 중복 렌더하지 않는다."
         }
       ]
     },
@@ -17735,11 +17974,27 @@
         },
         {
           "code": "HUMAN_LIPSYNC_UNSUPPORTED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "해당 인물 컷의 실제 발화 분류·단일 화자·모델/길이·지정 목소리·전문 음원 연결·음성 구간 중 하나 이상이 현재 립싱크 계약과 맞지 않습니다. 같은 코드에도 causes별 수리가 필요합니다.",
+          "checkFields": [],
+          "steps": [
+            "speech_preflight(projectId)의 checks[].causes와 hiob://error-recovery/HUMAN_LIPSYNC_UNSUPPORTED를 읽어 자산별 원인을 구분한다. voice_id_required는 같은 run의 성공한 Typecast 전문 음원과 현재 선택 track 해시로 기존 voiceId를 복원하고 plan_save.narratorScript.voiceId에 연결한다.",
+            "원문·배역·타이밍·실제 화면 분류를 보존하며 해당 원인만 수리한다. 길이/다중 화자/미지원 모델은 기존 지원 원본 재사용, 실제 고객이 선택한 재설계, 검증된 어댑터 확장 순서로 대안을 제시한다. 순정 대안의 자료화면 음성이 필요하면 clone 지원·기존 성공 등록·가격/권한을 먼저 확인한다.",
+            "speech_preflight를 다시 실행해 같은 입력 오류가 사라졌는지 확인하고 기존 원본에 lipsync_prepare를 사용한다. 같은 입력을 반복 제출하거나 승인 음성을 다른 목소리로 바꾸지 않는다."
+          ],
+          "successCriteria": [
+            "수리한 컷의 supported가 true이고 실제 승인 전문·voiceId·단일 화자·길이·구간·현재 참조 입력이 모두 일치한다.",
+            "생성 계약 통과와 실제 입모양·얼굴/육도 연기·음성 품질은 분리하여 원본 및 립싱크 결과를 검수한다."
+          ],
+          "resume": "기존 완료 원본·전문 음원으로 lipsync_prepare의 nextArgs를 이어 사용하고, 새로운 유료 실행은 기존 승인 범위와 현재 견적에서만 진행한다.",
+          "retry": {
+            "policy": "repair_reported_causes_before_reentry",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "지원 입력이나 기존 고객의 경로/연출 선택이 없으면 실행 가능하다고 표시하지 않는다. 같은 원인·입력의 반복은 중단하고 실제 변경이 필요한 항목과 가능한 대안을 보여준다."
         },
         {
           "code": "HUMAN_NATIVE_CUT_ALIGNMENT_UNSUPPORTED",
