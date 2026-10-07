@@ -63,3 +63,11 @@ current = await guided_decision({
 립싱크(lipsync)는 세 모델의 현재 원본 + 지정 Typecast 승인 전문 구간 + Kling `lip_sync`다. 현재 어댑터는 5초 입력으로 제한한다. 원본에 음성이 있어도 원본 바이트를 보존하고 `local_dubbing_url`로 선택 음성을 제공한다. 제공사 요청에 특정 Kling 영상 생성 버전은 고정돼 있지 않으므로 Kling 1.5/2.6/3이라고 임의 표기하지 않는다.
 
 모든 화면 발화는 `faceIntegrityChecks`의 `face_detail`과 `identity_stability`를 실제 영상에서 pass로 검수해야 한다. 립싱크 전후 얼굴 세부 질감·윤곽·움직임을 비교하고 손상된 결과는 해상도 업스케일로 합격시키지 않는다. 순정은 `nativeSpeechChecks`, 립싱크는 `lipSyncChecks`로 실제 발화·입모양을 검수한다.
+
+## Seedance 얼굴 없는 입력 분기 (MCP 1.9.3)
+
+Seedance에는 공통 인물 시작 프레임 절차를 적용하지 않는다. `seedanceInput={policy:"seedance-face-free-v1",mode,character,references}`를 사용하며 mode는 text_to_video/omni_reference/first_last_frames다. 인물은 CHARACTER 영어 정확히 150단어로 기술한다. 실제 제공사 참조에는 얼굴 없는 제품·배경만 넣는다. 13구도·6표정 인물 카드는 기획·검수용으로 보존한다.
+
+각 참조는 실제 file/SHA-256/role/inspection을 기록한다. inspection은 호스트가 이미지 전체의 직접 얼굴·포장·포스터·화면·반사를 관찰한 결과다. present/unclear/누락/해시 변경은 접수 전에 차단하며 독립적인 자동 얼굴 인증으로 주장하지 않는다. 모델의 인물 정책·실제 출력 품질은 별도 검수 대상이다. 제품 사진을 first_frame 역할로 바꾸지 않는다. 기존 승인 인물·전문·타이밍·목소리는 유지한다.
+
+9개 블록 SETTINGS→INPUT CHECK→REFERENCE ROLES→CHARACTER→SCENE AND ACTION→COMPOSITION AND CAMERA→LIGHTING AND MATERIALS→AUDIO→CONTINUITY를 유지하며 전체 프롬프트는 4000자 이내다. reference_prepare와 guided_coverage_save는 Seedance 분기를 지원한다. 준비된 제품 보존·카메라·세계관·반전 증거 한계도 최종 프롬프트에 결박한다. 같은 자료의 관찰 시각만 변경해서 유료 접수를 중복하지 않는다.

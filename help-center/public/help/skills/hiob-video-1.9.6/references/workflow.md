@@ -205,7 +205,7 @@ MiniMax H3는 음성이 포함된 영상 생성이고 MiniMax Speech TTS는 다�
 
 생성 결과의 소리는 자동 승인·자동 보존되지 않는다. 실제 원본 발화·화자·입모양을 검수하고 유지할 음원을 dialogue 트랙에 연결한다. 원본 대사를 추출·연결하지 못한 상태는 미완료이며 새 나레이션이나 무음으로 대체하지 않는다. 최종 MP4에서 다시 청취한다. 문서·자동 테스트는 발화 품질 증거가 아니다. 이번 지침은 새로 컴파일하는 기획부터 적용되며 기존 생성물이나 이미 접수된 작업은 자동 재생성하지 않는다.
 
-Seedance 2.5 완화 심사: option=seedance-less-restriction, direction.generationModel=seedance-2.5-less-restriction. 5–60초 총분량, 컷당 5–15초, 480p/720p/1080p, 단일 이미지 참조. 일반 모델과 별도 견적이며 제공사 단가는 10% 높다. 인물 이미지 허용·생성 성공을 보장하지 않는다. 모델 선택 변경 후 direction_save → project_sync → 새 storyboard_quote를 실행한다. 기존 승인·견적을 재사용하거나 실패를 자동 재접수하지 않는다.
+Seedance 2.5 완화 심사: option=seedance-less-restriction, direction.generationModel=seedance-2.5-less-restriction. 5–60초 총분량, 컷당 5–15초, 480p/720p/1080p, 명시적인 얼굴 없는 참조 입력. 일반 모델과 별도 견적이며 제공사 단가는 10% 높다. 인물 이미지 허용·생성 성공을 보장하지 않는다. 모델 선택 변경 후 direction_save → project_sync → 새 storyboard_quote를 실행한다. 기존 승인·견적을 재사용하거나 실패를 자동 재접수하지 않는다.
 
 ## Seedance 선택과 오류 게이트웨이
 
@@ -422,3 +422,20 @@ const inspection = await material_inspect(output.nextArgs);
 대본을 촬영·음향·효과·편집 가능한 콘티로 발전시킬 때 `creative_skills(skill="hiob-storyboard-director")`와 필요한 참고 문서를 읽는다. 한 나레이터 승인 전문과 문장/컷 ID·시간축·참조 묶음에 배역/연기·카메라/빛·사용 상태·음악/Foley/특수음향·그래픽/VFX·다음 컷 연결을 결박한다. 기존 실제 자료·목소리·작업을 재사용하고 소리 포함 애니매틱으로 전편을 대조한다. 미제작 미리보기·미관찰 컷을 완료로 표시하지 않는다. 문서 필드는 현재 MCP 입력 계약과 구별하며 새 생성/합성/렌더는 기존 승인 범위에서만 한다.
 
 화면 발화는 MCP 1.7.0의 세 모델(MiniMax H3·Seedance 2·Seedance 2.5) × 순정/립싱크 6개 경로를 따릅니다. `direction.speechMode`를 명시하고 `hiob://guided-production`의 최신 6개 경로 절차를 읽으세요. 순정 원본 음성은 `native_audio_prepare`로 보존·추출하고 승인된 프로젝트 전용 Typecast clone을 자료화면 내레이션에도 사용합니다. 기존 승인 경로를 자동 변경하지 않으며 모든 발화 컷의 얼굴 세부 질감과 움직임 중 동일성을 검수합니다. 클로닝 실행은 실제 비용 설정과 원본/샘플 대조 승인 범위가 필요합니다.
+
+
+### MCP 1.9.0 편집 기능
+
+밝기·대비·채도는 `edit.videoAdjustments`에 현재 assetId별 0–3 값(중립 1)으로 설정합니다. 로고는 `edit.logos`에 실제 프로젝트 PNG/JPEG·해시·표시 시간·x/y/width/height·opacity로 연결합니다. 자막은 `captionPx` 16–200과 `captionBox` x/y/width로 조절합니다. 호스트가 파일·해시를 준비하고 고객에게 결과를 보여줍니다. `edit_check`와 실제 글자 폭/영상 검수를 유지하며 원문을 줄이거나 겹침 검사를 우회하지 않습니다. 기존 기본 편집과 진행 중 작업은 자동 변경하지 않습니다.
+
+
+## 최종 렌더 필수 편집 (2026-10-05)
+호스트는 음악·발화 전문 자막·별도 제목·서로 다른 시각효과 두 종류 이상·효과음을 실제 파일과 시간으로 결박한다. 누락되면 에이전트가 기존 발화/원본을 보존하며 보완하고 edit_check → edit_assemble → project_sync → render_quote를 재개한다. effects는 flash/vignette/zoom, outputShortEdge는 360–2160의 짝수(720/1080/1340/2120/2160 등)이며 비율과 텍스트 위치를 유지한다. 기능 존재는 실제 시청·청취 합격이 아니다. 기존 진행 중/완료 렌더는 재접수하지 않는다. 원본 묶음은 합계 100GB 계약으로 검증하고 필요한 결박 파일만 작업 공간에 가져온다.
+
+## Seedance 얼굴 없는 입력 분기 (MCP 1.9.3)
+
+Seedance에는 공통 인물 시작 프레임 절차를 적용하지 않는다. `seedanceInput={policy:"seedance-face-free-v1",mode,character,references}`를 사용하며 mode는 text_to_video/omni_reference/first_last_frames다. 인물은 CHARACTER 영어 정확히 150단어로 기술한다. 실제 제공사 참조에는 얼굴 없는 제품·배경만 넣는다. 13구도·6표정 인물 카드는 기획·검수용으로 보존한다.
+
+각 참조는 실제 file/SHA-256/role/inspection을 기록한다. inspection은 호스트가 이미지 전체의 직접 얼굴·포장·포스터·화면·반사를 관찰한 결과다. present/unclear/누락/해시 변경은 접수 전에 차단하며 독립적인 자동 얼굴 인증으로 주장하지 않는다. 모델의 인물 정책·실제 출력 품질은 별도 검수 대상이다. 제품 사진을 first_frame 역할로 바꾸지 않는다. 기존 승인 인물·전문·타이밍·목소리는 유지한다.
+
+9개 블록 SETTINGS→INPUT CHECK→REFERENCE ROLES→CHARACTER→SCENE AND ACTION→COMPOSITION AND CAMERA→LIGHTING AND MATERIALS→AUDIO→CONTINUITY를 유지하며 전체 프롬프트는 4000자 이내다. reference_prepare와 guided_coverage_save는 Seedance 분기를 지원한다. 준비된 제품 보존·카메라·세계관·반전 증거 한계도 최종 프롬프트에 결박한다. 같은 자료의 관찰 시각만 변경해서 유료 접수를 중복하지 않는다.
