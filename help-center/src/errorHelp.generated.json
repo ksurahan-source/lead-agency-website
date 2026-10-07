@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.21",
-  "codeCount": 2001,
+  "version": "1.9.22",
+  "codeCount": 2002,
   "groups": [
     {
       "id": "approval",
@@ -3226,6 +3226,33 @@
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "GUIDED_REPAIR_INSPECTION_MISMATCH",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "미해결 피드백의 원래 생성 작업과 반환된 검사의 작업·원본 해시·run 또는 motion 범위가 다릅니다. 해당 검사는 복구 관찰 근거로 저장되지 않습니다.",
+          "checkFields": [],
+          "steps": [
+            "guided_status에서 같은 프로젝트/run/revision과 host.repairPlan.tasks의 원래 sourceSha256·jobId·reviewId를 읽습니다. 원래 incidentId와 실패한 guided requestId를 보존합니다.",
+            "connection_diagnose 및 generation_status(view=jobs)로 같은 cloud run의 성공 작업·generationJobId·원본 SHA를 대조합니다. 다른 run, 미완료 작업, 복수 원본 매핑을 임의 선택하지 않습니다.",
+            "원래 generation_inspect(projectId,jobId,profile=motion)의 기존 request/검사 job 상태를 확인합니다. pending은 같은 검사를 이어 조회하며 새 생성·렌더나 다른 원본으로 대체하지 않습니다.",
+            "serverInspection 또는 pending job의 runId/sourceSha256/generationJobId 및 motion/profile·전체 범위가 원래 작업과 정확히 같은지 확인합니다. 잘못된 영수증을 정상으로 고쳐 저장하거나 캐시를 삭제해 새 요청을 만들지 않습니다.",
+            "불일치 원인을 고친 뒤 같은 guided run의 최신 revision으로 원래 검사를 이어갑니다. 실제 영상·소리를 관찰하고 feedback_save에 원본 SHA/inspectionId/관찰 범위를 기록합니다.",
+            "해결된 새 결과가 없으면 기존 미해결 feedback과 blocked incident를 유지합니다. 검사 수신이나 모델 호환만으로 resolves/pass/최종 납품을 기록하지 않습니다."
+          ],
+          "successCriteria": [
+            "같은 원래 작업·원본 SHA·run·motion 조건의 검사 영수증이 확인되어 guided가 repair_observation으로 이어짐",
+            "기존 미해결 feedback·승인 전문·목소리·타이밍·원본이 보존되고 새 유료 중복 접수가 없음"
+          ],
+          "resume": "동일 guided run의 repair_observation에서 실제 원본 검토를 이어갑니다. 이후 해결된 새 결과를 관찰한 경우에만 원래 reviewId/category와 resolves를 연결합니다.",
+          "retry": {
+            "policy": "observe_state_change_before_same_workflow_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "원래 작업과 같은 영수증을 확인할 수 없으면 blocked를 유지하고 운영자가 해당 검사 계보를 조사합니다. 검사 receipt는 영상품질 증거가 아닙니다."
         }
       ]
     },

@@ -284,6 +284,13 @@
       "bytes": 232343,
       "source": "reviewed_local_candidate",
       "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.9.21.zip"
+    },
+    {
+      "version": "1.9.22",
+      "sha256": "a69d8ad7e5a7bc2223313589f328fa8569852615d14572ec5cc67916bdbb4d8d",
+      "bytes": 234739,
+      "source": "reviewed_local_candidate",
+      "artifactPath": "help-center/public/release-archives/hiob-video-skill-1.9.22.zip"
     }
   ]
 }
