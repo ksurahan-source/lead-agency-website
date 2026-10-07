@@ -28,6 +28,8 @@ function run(command, args, capture = false) {
 await rm(destination, { recursive: true, force: true });
 await mkdir(new URL("help/assets/", destination), { recursive: true });
 await mkdir(new URL(".build/", import.meta.url), { recursive: true });
+// Exact Google-issued ownership file for the requested Search Console account.
+await cp(new URL("public/google93b97dd2c655106b.html", import.meta.url), new URL("google93b97dd2c655106b.html", destination));
 for (const file of ['broll-biological-cutaway-1.3.7.jpg', 'broll-test-products-1.3.7.jpg']) {
   await cp(new URL('public/help/assets/' + file, import.meta.url), new URL('help/assets/' + file, destination));
 }

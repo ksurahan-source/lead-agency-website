@@ -294,3 +294,14 @@ test('public manual contains executable one-pain guidance and customer review',(
  assert.ok(documents.get('/help/advertising').includes('customer-primary-pain.md'));
  assert.ok(documents.get('/help/advertising').includes('고객의 개인적 고통 하나'));
 });
+
+test('only the issued Google verification file is publicly served', async () => {
+  const response = await worker.fetch(new Request(ORIGIN + '/google93b97dd2c655106b.html'), env);
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), 'google-site-verification: google93b97dd2c655106b.html');
+  const unknown = await worker.fetch(new Request(ORIGIN + '/google-other.html'), env);
+  assert.equal(unknown.status, 404);
+  const config = await readFile(new URL('./wrangler.toml', import.meta.url), 'utf8');
+  assert.ok(config.includes('hi-ob.com/google93b97dd2c655106b.html'));
+  assert.ok(!config.includes('hi-ob.com/google*'));
+});

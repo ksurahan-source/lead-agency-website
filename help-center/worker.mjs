@@ -2,6 +2,7 @@ import { PUBLIC_ROUTES, ARTICLE_PATHS } from "./src/routes.mjs";
 const documents = new Set(PUBLIC_ROUTES.map((route) => route.path));
 const discovery = new Set([
   "/robots.txt",
+  "/google93b97dd2c655106b.html",
   "/sitemap.xml",
   "/video-sitemap.xml",
 ]);
