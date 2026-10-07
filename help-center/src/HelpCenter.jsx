@@ -16,6 +16,7 @@ export function PublicHeader() {
       <nav aria-label="HIOB 서비스">
         <a href="/mcp">MCP 소개</a>
         <a href="/help">도움말</a>
+        <a href="/help/errors">오류 코드 사전</a>
         <Link className={styles.outline} href="/start">
           Studio 열기 <ArrowRight size={15} aria-hidden="true" />
         </Link>

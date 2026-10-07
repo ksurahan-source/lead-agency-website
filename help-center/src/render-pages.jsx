@@ -1,3 +1,4 @@
+import ErrorHelp from './ErrorHelp';
 import { renderToStaticMarkup } from "react-dom/server";
 import HelpCenter from "./HelpCenter";
 import ProductPage from "./ProductPage";
@@ -18,7 +19,7 @@ const escape = (value) =>
   );
 function documentBody(route, context) {
   let body = renderToStaticMarkup(
-    route.path === "/mcp" ? (
+    route.errorIndex || route.errorGroup ? (<ErrorHelp route={route}/>) : route.path === "/mcp" ? (
       <ProductPage {...context} />
     ) : route.path === "/watch/hiob" ? (
       <WatchPage {...context} />
@@ -86,7 +87,7 @@ function schemas(route, context) {
       operatingSystem: "macOS, Windows, Linux (환경별 검증 범위는 본문 참고)",
     });
   const article = HELP_ARTICLES.find((a) => a.id === route.article);
-  if (article)
+  if (article || route.errorGroup)
     graph.push({
       ...common,
       "@type": "TechArticle",
@@ -99,6 +100,7 @@ function schemas(route, context) {
   const crumbs = [{ name: "HIOB", path: "/" }];
   if (route.path.startsWith("/help"))
     crumbs.push({ name: "도움말", path: "/help" });
+  if (route.errorGroup) crumbs.push({name:"오류 코드 사전",path:"/help/errors"});
   if (article) {
     const topic = HELP_TOPICS.find((t) => t.id === article.topic);
     crumbs.push({ name: topic.title, path: helpHref(topic.id) });

@@ -5,6 +5,66 @@
   "codeCount": 1248,
   "groups": [
     {
+      "id": "approval",
+      "title": "실제 고객 선택·승인 근거",
+      "owner": "host",
+      "steps": [
+        "저장된 고객 선택과 승인 원문의 프로젝트·자료 해시·금액·목소리·유효기간 범위를 조회한다.",
+        "현재 요청이 같은 승인 범위이면 실제 근거를 재사용한다. 없는 승인이나 변경된 범위는 사용자에게 구체적인 결과/견적을 제시하고 선택을 받는다.",
+        "현재 자료와 실제 승인 근거를 지원 도구로 연결한 뒤 해당 작업만 재개한다."
+      ],
+      "successCriteria": [
+        "현재 요청과 실제 승인 근거의 대상·범위·유효기간이 일치한다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "ARES_XL_APPROVAL_NOT_REPLAYABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_APPROVAL_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_ANALYSIS_APPROVAL_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_APPROVAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_APPROVAL_SECRET_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "EDITOR_APPROVAL_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_ARTEMIS_APPROVAL_INTENT_SECRET",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_STUDIO_APPROVAL_INTENT_SECRET",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_APPROVAL_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_CONFIRMATION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_CONFIRMATION_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
       "id": "asset",
       "title": "소재 접근·결박",
       "owner": "host",
@@ -563,10 +623,6 @@
           "resolution": "conditional_recovery"
         },
         {
-          "code": "ARES_SCRIPT_DISPATCH_LEDGER_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "AUDIT_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
@@ -580,10 +636,6 @@
         },
         {
           "code": "COMPOSE_DIGEST_WORKER_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "CONFIG_MISSING",
           "resolution": "conditional_recovery"
         },
         {
@@ -703,43 +755,11 @@
           "resolution": "conditional_recovery"
         },
         {
-          "code": "INVALID_RELEASE_PATH",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "INVALID_RELEASE_POINTER",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "INVALID_WORKER_HANDSHAKE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "INVALID_WORKER_TOOLS",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "LIBRARY_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "LLM_API_KEY_MISSING",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "LUNA_PROVIDER_MODE_NOT_CONFIGURED",
           "resolution": "conditional_recovery"
         },
         {
-          "code": "MCP_RENDER_NODE_DEPENDENCY_MISMATCH",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "MEDIA_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "NARRATION_APPROVAL_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
         {
@@ -771,10 +791,6 @@
           "resolution": "conditional_recovery"
         },
         {
-          "code": "PRODUCTION_DISPATCH_LOCK_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "QUEUE_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
@@ -788,10 +804,6 @@
         },
         {
           "code": "RECOVERY_CANCEL_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "RECOVERY_CONFIG_MISSING",
           "resolution": "conditional_recovery"
         },
         {
@@ -819,14 +831,6 @@
           "resolution": "conditional_recovery"
         },
         {
-          "code": "RELEASE_RECEIPT_MISMATCH",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "RELEASE_VERSION_MISMATCH",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "RENDER_METER_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
@@ -835,19 +839,11 @@
           "resolution": "conditional_recovery"
         },
         {
-          "code": "RENDER_PROVIDER_CONFIGURATION_INVALID",
-          "resolution": "conditional_recovery"
-        },
-        {
           "code": "RENDER_PROVIDER_TASK_RECORDER_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
         {
           "code": "RESULT_COOLDOWN_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "RESULT_POOL_CONFIG_INVALID",
           "resolution": "conditional_recovery"
         },
         {
@@ -896,14 +892,6 @@
         },
         {
           "code": "STUDIO_PRODUCT_REVIEW_RECEIPT_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "STUDIO_RUN_CREATE_LOCK_UNAVAILABLE",
-          "resolution": "conditional_recovery"
-        },
-        {
-          "code": "STUDIO_WIZARD_CONFIRMATION_UNAVAILABLE",
           "resolution": "conditional_recovery"
         },
         {
@@ -1209,6 +1197,1686 @@
       ]
     },
     {
+      "id": "input",
+      "title": "요청 필드·자료 형식 검증",
+      "owner": "host",
+      "steps": [
+        "현재 도구 스키마와 오류의 발생 조건에 나온 필드를 읽고 실제 요청의 타입·필수값·허용 범위를 비교한다.",
+        "누락 값은 기존 승인 문서·소재·서버 receipt에서 파생한다. 사용자 선택이 필요한 값만 별도로 확인하고 임의 기본값으로 통과시키지 않는다.",
+        "수정한 입력을 검증한다. 실패 호출이 유료 제출이었다면 기존 접수 여부를 확인하기 전 다시 제출하지 않는다."
+      ],
+      "successCriteria": [
+        "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "ARES_PROVIDER_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_SCRIPT_DISPATCH_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_V3_MAKE_CONTEXT_DIGEST_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_V3_SCRIPT_DISPATCH_CLAIM_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_XL_PLANNING_SUBJECT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_XL_REVIEWED_PLAN_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_XL_REVIEWED_SCRIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARTEMIS_CLOCK_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARTEMIS_PRODUCT_LOCK_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARTEMIS_PRODUCT_LOCK_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARTIFACT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARTIFACT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ASPECT_RATIO_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ASSET_BINDING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ATROPOS_SNAPSHOT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "AUDIO_MANIFEST_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "AUDIO_STREAM_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "AUDIO_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BATCH_PLAN_SEAL_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CATALOG_CAPABILITY_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CATALOG_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_CARD_DETAIL_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_CARD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_ID_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_IMAGE_PNG_JPEG_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_IMAGE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_IMAGE_SIZE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_LINK_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_LOCK_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHARACTER_PAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_CANDIDATE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_CROP_COUNT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_CROP_IDS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_CROP_RECT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_IDEMPOTENCY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_LISTING_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_OUTPUT_LOCALE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_PRICE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_PROVIDER_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_SELECTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_SOURCE_ASSET_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_SOURCE_URL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CONFIG_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CONTENT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "COVERAGE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CREATION_DRAFT_SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CREATIVE_EXPERIMENT_BRIEF_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CREATIVE_EXPERIMENT_RUN_BINDING_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_BODY_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_CHUNK_UPLOAD_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_ENTRY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_FILE_CONTENT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_FILE_HASH_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_FILE_HASH_SIZE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_FILE_SIZE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_ASPECT_RATIO_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_DURATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_JOB_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_MODEL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_OUTPUT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_PAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_RESOLUTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_SELECTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_GENERATION_SHOT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_JSON_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_LANE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_MANIFEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PREVIEW_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_AUDIO_REQUIRED_USE_MCP_030",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_IMPORTED_SOURCE_CONTRACT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_MATERIAL_REVIEW_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_OPERATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REFERENCE_IMAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REFERENCE_PREPARATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REFERENCE_PREPARATION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REFERENCE_PRODUCER_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REFERENCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REVISION_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_REVISION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SILENT_SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SINGLE_NARRATOR_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_BEATS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_DECISIONS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_FILE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_JSON_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_TEXT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_TIMING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_STAGE_REQUIREMENTS_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_OUTPUT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_REVISION_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_SNAPSHOT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_REQUEST_ID_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_REVISION_ID_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_REVISION_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_REVISION_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RUN_ID_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_SOURCE_FILE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_STREAM_READER_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_CATALOG_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_JOB_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_OUTPUT_DURATION_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_OUTPUT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_PROVIDER_RESPONSE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_SPEECH_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_TIMESTAMPS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_TIMESTAMPS_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_TRANSCRIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DIRECTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DIRECTION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DOCUMENT_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DRAFT_REVISION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DURATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "EMPTY_CATALOG_FACTS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENDPOINT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_ACTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_ARTIFACT_REPLAY_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_AUDIO_EDIT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_CAPTION_ALIGNMENT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_CAPTION_SOURCE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_MEDIA_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_OPERATION_RECEIPT_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_PROVIDER_MEDIA_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_PROVIDER_TASK_ID_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_SCENE_REFERENCE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ENSEMBLE_SCENE_REFERENCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FACTORY_FINISH_EXPIRY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FACTORY_FINISH_QUEUE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FACTORY_FINISH_TOKEN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FACTORY_PAID_PRODUCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FEEDBACK_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FEEDBACK_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FILE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FILE_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FIXED_HOOK_TOO_LONG",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HEPHAESTUS_EXACT_MANIFEST_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HEPHAESTUS_EXACT_SHA_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HEVC_RECOVERY_CODEC_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HEVC_RECOVERY_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_ACTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_CATALOG_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_EXECUTION_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_EXECUTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_INPUT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_INPUT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_NODE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_OWNER_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_PREPARATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_REVISION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CHARACTER_CARD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CHARACTER_SIZE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_DOCUMENT_VERSION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_ERROR_GATEWAY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_GENERATION_HISTORY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_GENERATION_OPTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_GENERATION_REUSE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_GENERATION_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_GENERATION_STATUS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_IMAGE_ASPECT_RATIO_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_IMAGE_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_IMAGE_REUSE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_IMAGE_STATUS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_MATERIAL_REVIEW_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_MODEL_CATALOG_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_PAIN_FOCUS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_PAIN_SOURCE_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_PAIN_VERSION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_PLAN_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_ASSET_BINDING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_DIRECTION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_IMAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_IMAGE_SIZE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_NO_CHARACTER_REASON_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_NO_PRODUCT_REASON_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_PREPARATION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_PRODUCER_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_PROMPT_TOO_LONG",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_REQUEST_STATE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SERVER_FAILURE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SERVER_PENDING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SERVER_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SHOT_CARD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SHOT_COVERAGE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SHOT_VIEW_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SPLIT_ASSET_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SYNC_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_SYNC_STATE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_REFERENCE_WOW_BEAT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_SOUND_DOWNLOAD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_SOUND_SIZE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_VISUAL_PROMPT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ID_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_FRAME_PLAN_DIGEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_FRAME_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_OUTPUT_SIZE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMPORTED_SOURCE_CONTRACT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INPUT_DEPTH_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_ANSWERS_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_BRAND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_JSON",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_LINE_KIND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_METADATA",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_READINESS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_REEL_MODE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_REFERENCE_JOURNAL",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_RELEASE_PATH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_RELEASE_POINTER",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_SIGNATURE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_WORKER_HANDSHAKE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INVALID_WORKER_TOOLS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "JANUS_SOURCE_MATERIAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "JOB_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "JSON_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "KARMA_RECONCILE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "KARMA_SOURCE_MATERIAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "KEY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LLM_API_KEY_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_BATCH_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_REVIEW_BINDINGS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_REVIEW_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_ROLE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_TARGET_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_TARGET_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MCP_CREDENTIAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MCP_RECONNECT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MCP_RENDER_NODE_DEPENDENCY_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MCP_RENDER_RECOVERY_RECEIPT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MEDIA_REDIRECT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MEDIA_SPINE_ONE_BEAT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MINIMAX_OUTPUT_DURATION_OR_ASPECT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MINIMAX_TASK_RECEIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MINIMAX_TASK_RECEIPT_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MISSING_REQUIRED_FIELD",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MISSING_RUN_ID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MISSING_SCOPE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MISSING_SNAPSHOT_ID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MIX_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MODEL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_COMMAND_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_ENDPOINT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_HISTORY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_REVIEW_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_SELECTION_CONTEXT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_TEXT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATION_UPSTREAM_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NO_CHARACTER_REASON_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NO_PRODUCT_REASON_AND_EXPLICIT_EMPTY_CLAIMS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OBSERVED_IMAGE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ONBOARDING_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OPERATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OPTIONS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_DIGEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_DURATION_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_RECEIPT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_SCHEMA_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "OUTPUT_STAGE_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCER_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCER_READABLE_PDF_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCER_SNAPSHOT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCER_SPEECH_TIMINGS_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCER_VIDEO_BALANCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PROJECT_WORKSPACE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PROJECT_WORKSPACE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PROOF_ASSET_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PROOF_ASSETS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "QUERY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "READ_RANGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RECOVERY_CONFIG_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REEL_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REELS_LEAF_OUTPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REELS_LEAF_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REFERENCE_PREPARATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REFERENCE_PREPARATION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REFERENCE_PRODUCER_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REFERENCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RELEASE_RECEIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RELEASE_VERSION_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RENDER_JOB_RUN_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RENDER_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RENDER_PROVIDER_CONFIGURATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RENDER_TRANSPORT_EVIDENCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RESOLUTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RESPONSE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RESULT_CLAIM_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RESULT_POOL_CONFIG_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REVISION_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "REVISION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ROW_BRAND_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCHEMA_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCOPE_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_BEAT_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_REQUEST_DIGEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SELECTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SERIES_HOOK_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SHOT_BINDING_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SHOT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SILENT_REASON_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SILENT_SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SINGLE_NARRATOR_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SIZE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SIZE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SNAPSHOT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_BEATS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_DECISIONS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_FILE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_JSON_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_ADAPTER_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_ASSET_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_CONTEXT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_LINEAGE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_SIGNED_URL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_TEXT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_TIMING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_URL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SPEECH_ASSET_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SPEECH_BINDING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SPEECH_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAGE_REQUIREMENTS_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_MAKE_CONTEXT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_REELS_FACTORY_COMMAND_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_REELS_SAME_ORIGIN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_REELS_VIEW_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_RENDER_OUTPUT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_RUN_STATUS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_SCRIPT_COMMAND_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_CONFIRMED_SCRIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_INTAKE_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_PLAN_PAYLOAD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_PRODUCT_REVIEW_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_SCRIPT_PAYLOAD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STORYBOARD_PRODUCTION_STATUS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STRATEGY_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STREAM_READER_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STRUCTURED_SOURCE_MATERIAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STRUCTURED_SOURCE_MATERIAL_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_13Q_INTAKE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_MAKE_CAPABILITY_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_PRODUCT_REVIEW_PAYLOAD_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_REEL_FORMAT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_AUTHORITY_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_FORMAT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_SCOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_SOURCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TABLE_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TEXT_ENCODING_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "THUMBNAIL_FILE_COUNT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TIMESTAMPS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TIMESTAMPS_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TRANSCRIPT_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UGC_PLAN_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_BRAND_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_LISTING_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_ASSET_BRAND_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_ASSET_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_ASSET_PROVENANCE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_ASSET_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_DURATION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_PROVIDER_PREFLIGHT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_REQUEST_DIGEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_REQUEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_SIGNAL_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_TRACK_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VOICE_INPUT_DIGEST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VOICE_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VOICE_RESULT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "WORKSPACE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "WORKSPACE_SELECTION_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "WORKSPACE_SELECTION_REQUIRED",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
       "id": "inspection",
       "title": "자료 검사 입력·결과",
       "owner": "host",
@@ -1380,15 +3048,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ARES_HOOK_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ARES_PROVIDER_CALL_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_PROVIDER_OUTPUT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1404,23 +3064,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ARES_SCRIPT_DISPATCH_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ARES_SCRIPT_DISPATCH_TERMINAL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_SCRIPT_STATE_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_V3_MAKE_CONTEXT_DIGEST_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_V3_PERSISTENCE_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1428,63 +3072,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ARES_V3_REDISPATCH_DISABLED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_V3_SCRIPT_DISPATCH_CLAIM_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_XL_APPROVAL_NOT_REPLAYABLE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ARES_XL_APPROVED_PLAN_NOT_REPLAYABLE",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ARES_XL_PLANNING_SUBJECT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_XL_REVIEWED_PLAN_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARES_XL_REVIEWED_SCRIPT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARTEMIS_CLOCK_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARTEMIS_PRODUCT_LOCK_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARTEMIS_PRODUCT_LOCK_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ARTEMIS_SOURCE_MATERIAL_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARTIFACT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ARTIFACT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ASPECT_RATIO_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ASSET_BINDING_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1496,27 +3088,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ASSET_MOTION_PAID_AUTHORITY_NOT_WIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ATHENA_UPSTREAM_INCOMPLETE",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ATROPOS_SNAPSHOT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "AUDIO_FORMAT_UNSUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "AUDIO_INTENT_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "AUDIO_MANIFEST_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1525,54 +3101,6 @@
         },
         {
           "code": "AUDIO_SILENT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "AUDIO_STREAM_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "AUDIO_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "AUTO_PRODUCE_DISABLED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BATCH_PLAN_SEAL_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_ACCESS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_EXISTS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_REVISION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_WORKSPACE_LOOKUP_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "BRAND_WORKSPACE_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1592,67 +3120,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "CATALOG_CAPABILITY_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CATALOG_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CATALOG_MUTATION_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_APPROVAL_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_CARD_DETAIL_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_CARD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_ID_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "CHARACTER_IMAGE_INTEGRITY_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_IMAGE_PNG_JPEG_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_IMAGE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_IMAGE_SIZE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_LINK_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_LOCK_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHARACTER_PAGE_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1692,26 +3160,6 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "CHAT_THREAD_PERSISTENCE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CHILD_RUN_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_ANALYSIS_APPROVAL_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_APPROVAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_APPROVAL_SECRET_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "CLAIM_ASSET_READ_FAILED",
           "resolution": "operator_diagnosis_required"
         },
@@ -1720,91 +3168,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "CLAIM_CANDIDATE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "CLAIM_CANDIDATE_NOT_GROUNDED",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "CLAIM_CROP_COUNT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_CROP_IDS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_CROP_RECT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_IDEMPOTENCY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_LISTING_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "CLAIM_LISTING_READ_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_LISTING_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_OUTPUT_LOCALE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_PRICE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_PROVIDER_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_SELECTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_SOURCE_ASSET_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLAIM_SOURCE_URL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLIP_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CLIP_TRACK_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CONTENT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "COVERAGE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CREATION_DRAFT_SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CREATIVE_EXPERIMENT_BRIEF_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "CREATIVE_EXPERIMENT_RUN_BINDING_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1820,51 +3188,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DB_QUERY_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DB_UPDATE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_BODY_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_CHUNK_UPLOAD_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_CONTENT_TYPE_REJECTED",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_ENTRY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_FILE_CONTENT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_FILE_HASH_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_FILE_HASH_SIZE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_FILE_NOT_IN_REVISION",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_FILE_SIZE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_ASPECT_RATIO_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -1876,175 +3204,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_GENERATION_DURATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_JOB_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_MODEL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_OUTPUT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_PAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_RESOLUTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_SELECTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_GENERATION_SHOT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_JSON_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_LANE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_LANE_RETRY",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_MANIFEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_ORIGIN_REJECTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PREVIEW_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_AUDIO_REQUIRED_USE_MCP_030",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_IMPORTED_SOURCE_CONTRACT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_MATERIAL_REVIEW_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_NARRATOR_SCRIPT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_OPERATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REFERENCE_IMAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REFERENCE_PREPARATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REFERENCE_PREPARATION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REFERENCE_PRODUCER_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REFERENCE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REVISION_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_REVISION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SILENT_SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SINGLE_NARRATOR_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_BEATS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_DECISIONS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_FILE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_JSON_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_PLAN_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_TEXT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_SOURCE_TIMING_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_PRODUCTION_STAGE_REQUIREMENTS_MISSING",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2056,63 +3220,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_RENDER_EXPRESSIVE_DISABLED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_OUTPUT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_REVISION_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RENDER_SNAPSHOT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_REQUEST_ID_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_REVISION_ID_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_REVISION_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_REVISION_NOT_READY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_REVISION_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_RUN_ID_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_SOURCE_FILE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_STREAM_READER_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2120,15 +3228,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_VOICE_AUDIO_FORMAT_UNSUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_VOICE_AUDIO_SILENT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_CATALOG_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2136,63 +3236,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DESKTOP_VOICE_JOB_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_OUTPUT_DURATION_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_OUTPUT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_PROVIDER_RESPONSE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DESKTOP_VOICE_RECORDING_SELECTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_SPEECH_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_TIMESTAMPS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_TIMESTAMPS_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DESKTOP_VOICE_TRANSCRIPT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DIRECTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DIRECTION_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2212,23 +3256,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DISPATCH_RECEIPT_PERSIST_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DOCUMENT_FORMAT_UNSUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DOCUMENT_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "DOWNLOAD_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "DRAFT_REVISION_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2236,47 +3264,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "DURATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "EDITOR_APPROVAL_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "EDITOR_GATE_DB",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "EMPTY_CATALOG_FACTS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENDPOINT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_ACTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_ARTIFACT_REPLAY_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ENSEMBLE_ARTIFACT_UPLOAD_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_AUDIO_EDIT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_CAPTION_ALIGNMENT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_CAPTION_SOURCE_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2288,23 +3280,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ENSEMBLE_MEDIA_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_OPERATION_RECEIPT_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ENSEMBLE_PRODUCT_FACTS_RETRACTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_PROVIDER_MEDIA_MISSING",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2324,18 +3300,6 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "ENSEMBLE_PROVIDER_TASK_ID_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_SCENE_REFERENCE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ENSEMBLE_SCENE_REFERENCE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "ENSEMBLE_SCENE_TOO_SHORT",
           "resolution": "operator_diagnosis_required"
         },
@@ -2352,71 +3316,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "EXPRESSIVE_DISABLED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "FACTORY_COST_PROFILE_NOT_CURRENT",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "FACTORY_FINISH_EXPIRY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FACTORY_FINISH_QUEUE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FACTORY_FINISH_TOKEN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FACTORY_PAID_PRODUCE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FEEDBACK_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FEEDBACK_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FILE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FILE_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FIXED_HOOK_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "FIXED_HOOK_TOO_LONG",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HEPHAESTUS_EXACT_MANIFEST_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HEPHAESTUS_EXACT_SHA_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HEVC_RECOVERY_CODEC_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HEVC_RECOVERY_HASH_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HEVC_RECOVERY_INPUT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2440,87 +3344,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_ARTEMIS_APPROVAL_INTENT_SECRET",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_ACTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_CATALOG_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_EXECUTION_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_EXECUTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_INPUT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_INPUT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_NODE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_OWNER_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_PLAN_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_PREPARATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_REVISION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CAPABILITY_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_CHARACTER_CARD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_CHARACTER_DOWNLOAD_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_CHARACTER_SIZE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_DEPLOY_SHA",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_DOCUMENT_VERSION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_ERROR_GATEWAY_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2532,71 +3360,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_GENERATION_HISTORY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_GENERATION_OPTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_GENERATION_REUSE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_GENERATION_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_GENERATION_STATUS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_IMAGE_ASPECT_RATIO_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_IMAGE_COOLDOWN",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_IMAGE_RESULT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_IMAGE_REUSE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_IMAGE_STATUS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_MATERIAL_REVIEW_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_MODEL_CATALOG_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_PAIN_FOCUS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_PAIN_SOURCE_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_PAIN_VERSION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_PLAN_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_PLAN_TOO_LARGE",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2604,23 +3368,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_REFERENCE_ASSET_BINDING_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_DIRECTION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_REFERENCE_DUPLICATE_CARD",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_IMAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_IMAGE_SIZE_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2628,95 +3376,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_REFERENCE_NO_CHARACTER_REASON_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_NO_PRODUCT_REASON_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_PREPARATION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_PRODUCER_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_PROMPT_TOO_LONG",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_REQUEST_STATE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SERVER_FAILURE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SERVER_PENDING_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SERVER_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SHOT_CARD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SHOT_COVERAGE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SHOT_VIEW_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SPLIT_ASSET_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SYNC_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_SYNC_STATE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_REFERENCE_WOW_BEAT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_SCRIPT_DIRECTION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_SOUND_DOWNLOAD_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_SOUND_DOWNLOAD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_SOUND_SIZE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "HIOB_SOURCE_HISTORY_LINK",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "HIOB_STUDIO_APPROVAL_INTENT_SECRET",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2728,19 +3392,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "HIOB_VISUAL_PROMPT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ID_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "IDEMPOTENCY_IDENTITY_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IDENTITY_LOCK_MUTATION_RETIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2748,51 +3400,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "IMAGE_ARTIFACT_PERSISTENCE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_FORMAT_UNSUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_FRAME_PLAN_DIGEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_FRAME_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_OUTPUT_SIZE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "IMAGE_PROVIDER_TERMINAL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMAGE_RESULT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "IMPORTED_SOURCE_CONTRACT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INPUT_DEPTH_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INPUT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2800,83 +3408,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "INTAKE_RECEIPT_ANSWERS_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INTAKE_RECEIPT_EMPTY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INTAKE_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INTAKE_RECEIPT_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INTAKE_RECEIPT_NOT_PERSISTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INTAKE_RECEIPT_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_BRAND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_INPUT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_JSON",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_LINE_KIND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_METADATA",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_READINESS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_REEL_MODE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_REFERENCE_JOURNAL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "INVALID_SIGNATURE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "JANUS_SOURCE_MATERIAL_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "JANUS_SOURCE_MATERIAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "JOB_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "JSON_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "KARMA_RECONCILE_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2884,91 +3416,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "KARMA_SOURCE_MATERIAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "KARMA_SOURCE_MATERIAL_REJECTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "KEY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LEGACY_GENERATION_INTERNAL_ONLY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LIBRARY_REGISTER_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LINE_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_BINDING_LOOKUP_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_BINDING_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_BINDING_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_DRAFT_MUTATION_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_EXISTS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_LINE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_LINE_MOVE_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_LOOKUP_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_NAME_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_REVISION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_SLUG_EXHAUSTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LISTING_STRUCTURED_MUTATION_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "LOCAL_PREVIEW_UNSUPPORTED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -2976,63 +3424,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "MATERIAL_BATCH_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_BYTES_EMPTY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_DIMENSIONS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_DIMENSIONS_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_FILE_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_FORM_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_MIME_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_REVIEW_BINDINGS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_REVIEW_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_ROLE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_SIGNATURE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "MATERIAL_TARGET_LOOKUP_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_TARGET_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_TARGET_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MATERIAL_TARGET_RETIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3040,19 +3432,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "MCP_CREDENTIAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MCP_RECONNECT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "MCP_RENDER_LAMBDA_PENDING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MCP_RENDER_RECOVERY_RECEIPT_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3060,15 +3440,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "MEDIA_REDIRECT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "MEDIA_REDIRECT_LIMIT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MEDIA_SPINE_ONE_BEAT_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3080,39 +3452,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "MINIMAX_OUTPUT_DURATION_OR_ASPECT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "MINIMAX_POLL_TIMEOUT_TASK_PRESERVED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MINIMAX_TASK_RECEIPT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MINIMAX_TASK_RECEIPT_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MISSING_REQUIRED_FIELD",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MISSING_RUN_ID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MISSING_SCOPE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MISSING_SNAPSHOT_ID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "MIX_OUTPUT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3120,43 +3460,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "MODEL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "NARRATION_ATTEMPT_UNKNOWN_NO_RETRY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_COMMAND_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_ENDPOINT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_HISTORY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_REVIEW_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_SELECTION_CONTEXT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NARRATION_TEXT_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3172,10 +3476,6 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "NARRATION_UPSTREAM_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "NARRATION_UPSTREAM_REQUEST_REJECTED",
           "resolution": "operator_diagnosis_required"
         },
@@ -3184,23 +3484,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "NARRATOR_SCRIPT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "NO_BRAND_PRODUCT_IMAGE",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "NO_CHARACTER_REASON_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "NO_LISTING_LOCK",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "NO_PRODUCT_REASON_AND_EXPLICIT_EMPTY_CLAIMS_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3212,95 +3500,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OBSERVED_IMAGE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ONBOARDING_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OPERATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OPTIONS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_DIGEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_DURATION_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_RECEIPT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_SCHEMA_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "OUTPUT_STAGE_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PAID_ROUTE_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PARENT_NOT_ALLOWED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PARENT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PARENT_NOT_GROUP",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PARENT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "PIAPI_WEBHOOK_SECRET",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "PLAN_QUOTA_EXCEEDED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PLAN_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3320,23 +3524,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "PRODUCER_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "PRODUCER_PDF_LIMIT",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "PRODUCER_READABLE_PDF_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "PRODUCER_RENDER_HASH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCER_SNAPSHOT_NOT_FOUND",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3352,55 +3544,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "PRODUCER_SPEECH_TIMINGS_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCER_VIDEO_BALANCE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "PRODUCER_VIDEO_TOO_SHORT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCT_EXISTS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCT_ID_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCT_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCT_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PRODUCT_TRUTH_MUTATION_RETIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PROJECT_WORKSPACE_BINDING_UNSUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PROJECT_WORKSPACE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PROJECT_WORKSPACE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PROOF_ASSET_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "PROOF_ASSETS_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3408,15 +3552,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "QUERY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "RATE_LIMIT_EXCEEDED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "READ_RANGE_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3424,15 +3560,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "RECORDING_SELECTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REEL_NOT_FOUND",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3440,35 +3568,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "REELS_LEAF_OUTPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "REELS_LEAF_REMOTE_UNKNOWN",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "REELS_LEAF_RESULT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "REELS_VOICE_PROVIDER_TERMINAL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REFERENCE_PREPARATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REFERENCE_PREPARATION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REFERENCE_PRODUCER_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REFERENCE_REQUIRED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3484,15 +3588,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "RENDER_JOB_RUN_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "RENDER_MODIFICATIONS_NOT_SUPPORTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RENDER_NOT_FOUND",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3504,31 +3600,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "RENDER_TRANSPORT_EVIDENCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "RESERVED_SLUG",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RESOLUTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RESPONSE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RESULT_CLAIM_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RESULT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3552,71 +3624,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "REVISION_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "REVISION_NOT_READY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "REVISION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "ROW_BRAND_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_CLOSURE_ENVELOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_CLOSURE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_CLOSURE_SCOPE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_CREATE_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_ID_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_READ_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_WORKSPACE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_WORKSPACE_RACE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "RUN_WORKSPACE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCHEMA_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCOPE_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCOPE_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3624,15 +3632,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SCRIPT_BEAT_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SCRIPT_CHAT_BRIEF_WRITE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCRIPT_CHAT_LEDGER_WRITE_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3656,27 +3656,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SCRIPT_REQUEST_DIGEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCRIPT_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCRIPT_RESULT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SCRIPT_REVISION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SEEDREAM_TASK_CREATE_REJECTED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SELECTION_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3688,14 +3668,6 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SERIES_HOOK_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SERIES_HOOKS_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SERVER_AUTHORITY_REJECTED",
           "resolution": "operator_diagnosis_required"
         },
@@ -3704,35 +3676,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SHOT_BINDING_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SHOT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SILENT_REASON_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SILENT_REVIEW_ONLY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SILENT_SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SINGLE_NARRATOR_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SIZE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SIZE_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3740,99 +3684,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SNAPSHOT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SNAPSHOT_QUERY_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_BEATS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_DECISIONS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_FILE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_JSON_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_ADAPTER_NOT_WIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_ADAPTER_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_ASSET_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_CONTEXT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SOURCE_MATERIAL_LINEAGE_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_LINEAGE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_RECEIPT_PERSIST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_MATERIAL_SIGNED_URL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_PLAN_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_TEXT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_TIMING_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SOURCE_URL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SPEECH_ASSET_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SPEECH_BINDING_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3840,19 +3692,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "SPEECH_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "SPEECH_PLAN_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SPEECH_SILENT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAGE_REQUIREMENTS_MISSING",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3864,47 +3704,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "STAR_MAKE_CONTEXT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_PLAN_REVIEW_NOT_READY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_REELS_FACTORY_COMMAND_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_REELS_SAME_ORIGIN_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_REELS_VIEW_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_RENDER_OUTPUT_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_RUN_STATUS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "STAR_RUN_STATUS_NOT_READY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_SCRIPT_COMMAND_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_SCRIPT_COMMAND_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_WIZARD_CONFIRMED_SCRIPT_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3912,23 +3712,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "STAR_WIZARD_INTAKE_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "STAR_WIZARD_INTAKE_STORE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_WIZARD_PLAN_PAYLOAD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_WIZARD_PRODUCT_REVIEW_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STAR_WIZARD_SCRIPT_PAYLOAD_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -3936,67 +3720,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "STAR_WIZARD_STAGE_STATE_CONFLICT",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "STAR_WIZARD_STAGE_STORE_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "STATE_PERSIST_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STORYBOARD_NOT_READY",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STORYBOARD_PRODUCTION_BINDING_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STORYBOARD_PRODUCTION_STATUS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "STORYBOARD_REQUIRES_16_BEATS",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STRATEGY_DIGEST_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STRATEGY_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STREAM_READER_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STRUCTURED_SOURCE_MATERIAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STRUCTURED_SOURCE_MATERIAL_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_13Q_INTAKE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_MAKE_CAPABILITY_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_PRODUCT_REVIEW_PAYLOAD_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_REEL_FORMAT_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -4008,39 +3736,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "STUDIO_WIZARD_CONFIRMATION_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_AUTHORITY_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_FORMAT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_SCOPE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_SOURCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_STRUCTURED_SOURCE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "SUPABASE_URL",
           "resolution": "operator_diagnosis_required"
         },
         {
           "code": "SUPER_SECRET_PROVIDER_DETAIL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "TABLE_MISSING",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -4052,67 +3752,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "TEXT_ENCODING_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "THUMBNAIL_FILE_COUNT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "TIMESTAMPS_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "TIMESTAMPS_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "TRACK_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "TRANSCRIPT_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UGC_PLAN_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "UNKNOWN_FAILURE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UNSUPPORTED_CUSTOM_COMPOSITION",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UNSUPPORTED_DISPATCH_SCOPE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_BODY_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_BRAND_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_FILE_SIZE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_FILE_TOO_LARGE",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_FORM_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_LENGTH_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -4120,31 +3760,7 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "UPLOAD_LISTING_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_MIME_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_SIGNATURE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "UPLOAD_SIZE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "USE_MEDIA_INSPECTION",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_ARTIFACT_PERSISTENCE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_ASSET_BRAND_MISMATCH",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -4152,75 +3768,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "VIDEO_ASSET_NOT_FOUND",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_ASSET_PROVENANCE_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_ASSET_SCOPE_MISMATCH",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_DURATION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "VIDEO_PROVIDER_CREATE_UNKNOWN",
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "VIDEO_PROVIDER_PREFLIGHT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_RECEIPT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_REQUEST_DIGEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_REQUEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_RESULT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_SIGNAL_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VIDEO_TRACK_MISSING",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VOICE_ARTIFACT_PERSISTENCE_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VOICE_INPUT_DIGEST_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VOICE_INPUT_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "VOICE_PROVIDER_TERMINAL",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "VOICE_RESULT_INVALID",
           "resolution": "operator_diagnosis_required"
         },
         {
@@ -4232,27 +3784,11 @@
           "resolution": "operator_diagnosis_required"
         },
         {
-          "code": "WEBHOOK_LEDGER_TRANSITION_LOST",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
           "code": "WORKSPACE_LOOKUP_FAILED",
           "resolution": "operator_diagnosis_required"
         },
         {
           "code": "WORKSPACE_MEMBERSHIP_LOOKUP_FAILED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "WORKSPACE_REQUIRED",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "WORKSPACE_SELECTION_INVALID",
-          "resolution": "operator_diagnosis_required"
-        },
-        {
-          "code": "WORKSPACE_SELECTION_REQUIRED",
           "resolution": "operator_diagnosis_required"
         }
       ]
@@ -4438,6 +3974,198 @@
       ]
     },
     {
+      "id": "persistence",
+      "title": "서버 저장·조회·작업 장부 오류",
+      "owner": "operator",
+      "steps": [
+        "기존 요청 ID와 서버 저장 응답·최종 receipt를 대조해 이미 저장됐는지 먼저 확인한다.",
+        "DB 연결·스키마·잠금·조건부 갱신 실패를 운영자가 수정한다. 응답 유실을 미저장으로 단정해 중복 생성하지 않는다.",
+        "같은 ID의 정식 저장 상태를 읽어 확정한 뒤 기존 작업을 재개한다."
+      ],
+      "successCriteria": [
+        "정식 장부의 상태가 확인되고 같은 요청이 중복 없이 읽기/저장된다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "ARES_SCRIPT_DISPATCH_LEDGER_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_SCRIPT_STATE_CONFLICT",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ARES_V3_PERSISTENCE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHAT_THREAD_PERSISTENCE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DB_QUERY_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DB_UPDATE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DISPATCH_RECEIPT_PERSIST_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_ARTIFACT_PERSISTENCE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_NOT_PERSISTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCTION_DISPATCH_LOCK_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_CHAT_LEDGER_WRITE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SNAPSHOT_QUERY_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_RECEIPT_PERSIST_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_WIZARD_STAGE_STATE_CONFLICT",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STATE_PERSIST_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_RUN_CREATE_LOCK_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VIDEO_ARTIFACT_PERSISTENCE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "VOICE_ARTIFACT_PERSISTENCE_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "WEBHOOK_LEDGER_TRANSITION_LOST",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
+      "id": "planning",
+      "title": "기획·대본·스토리보드 준비",
+      "owner": "host",
+      "steps": [
+        "저장된 원문·기획·대본·연출·스토리보드와 오류가 지목한 필수 자료를 조회한다.",
+        "부족한 구조와 연결을 기존 승인 자료에서 채운다. 대본 전문·한 나레이터·타이밍을 유지하며 새로운 내용 변경만 고객에게 검토받는다.",
+        "현재 버전의 자료로 준비 검사와 컴파일을 다시 수행하고 해당 누락 항목이 해소됐는지 확인한다."
+      ],
+      "successCriteria": [
+        "현재 revision에 필요한 기획 자료가 연결되고 정확한 원문과 실제 승인 이력이 보존된다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "ARES_HOOK_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_NARRATOR_SCRIPT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_PRODUCTION_SOURCE_PLAN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "FIXED_HOOK_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_CAPABILITY_PLAN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_PLAN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "HIOB_SCRIPT_DIRECTION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_EMPTY",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "INTAKE_RECEIPT_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "NARRATOR_SCRIPT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PLAN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SCRIPT_REVISION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SERIES_HOOKS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_PLAN_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SPEECH_PLAN_MISSING",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_PLAN_REVIEW_NOT_READY",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STAR_SCRIPT_COMMAND_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STORYBOARD_NOT_READY",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STORYBOARD_PRODUCTION_BINDING_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STRATEGY_DIGEST_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "STUDIO_WIZARD_INTAKE_RECOVERY_STRUCTURED_SOURCE_REQUIRED",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
       "id": "provider",
       "title": "제공사 생성 실패",
       "owner": "operator",
@@ -4548,6 +4276,198 @@
       "codes": [
         {
           "code": "REACTION_QUERY_INVALID",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
+      "id": "record",
+      "title": "프로젝트·제품·자료 레코드 연결",
+      "owner": "operator",
+      "steps": [
+        "오류가 지목한 ID의 실제 존재 여부와 현재 workspace·brand·project·run 소속을 확인한다.",
+        "기존 정식 레코드와 최신 revision을 조회해 누락 연결을 복구한다. 다른 고객/프로젝트 ID로 바꿔 접근 검사를 우회하지 않는다.",
+        "이미 존재하는 레코드를 중복 생성하지 말고 같은 범위의 읽기 조회로 연결을 검증한다."
+      ],
+      "successCriteria": [
+        "요청 ID가 현재 권한 범위의 정식 레코드에 연결되고 최신 조회가 성공한다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "BRAND_ACCESS_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_EXISTS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_REVISION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_WORKSPACE_LOOKUP_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "BRAND_WORKSPACE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CHILD_RUN_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLIP_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLIP_TRACK_SCOPE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LIBRARY_REGISTER_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LIBRARY_UNAVAILABLE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LINE_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_BINDING_LOOKUP_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_BINDING_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_BINDING_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_EXISTS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_LINE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_LOOKUP_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_NAME_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_REVISION_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_SLUG_EXHAUSTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PARENT_NOT_ALLOWED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PARENT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PARENT_NOT_GROUP",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PARENT_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCT_EXISTS",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCT_ID_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCT_INPUT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCT_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_CLOSURE_ENVELOPE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_CLOSURE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_CLOSURE_SCOPE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_CREATE_RECEIPT_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_ID_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_NOT_FOUND",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_READ_FAILED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_WORKSPACE_MISMATCH",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_WORKSPACE_RACE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "RUN_WORKSPACE_REQUIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "TRACK_NOT_FOUND",
           "resolution": "conditional_recovery"
         }
       ]
@@ -5408,6 +5328,198 @@
         },
         {
           "code": "NATIVE_SOURCE_SYNC_REQUIRED",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
+      "id": "unsupported",
+      "title": "지원되지 않는 기능·실행 경로",
+      "owner": "operator",
+      "steps": [
+        "현재 설치 버전·서버 기능 목록·어댑터와 코드별 미지원 조건을 확인한다.",
+        "기존 조회·성공 결과는 유지한다. 지원되는 경로의 입력·권한·비용을 검증해 대안으로 제시하거나 필요한 제품 수정을 명시한다.",
+        "새 경로의 연출·목소리·시간·비용이 달라지면 실제 고객 선택을 반영한 뒤 검증된 어댑터로만 진행한다."
+      ],
+      "successCriteria": [
+        "선택 경로가 현재 배포 어댑터와 실제 입력·권한·승인 범위에서 지원된다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "ARES_V3_REDISPATCH_DISABLED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "ASSET_MOTION_PAID_AUTHORITY_NOT_WIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "AUDIO_FORMAT_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "AUTO_PRODUCE_DISABLED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CATALOG_MUTATION_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "CLAIM_LISTING_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_RENDER_EXPRESSIVE_DISABLED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DESKTOP_VOICE_AUDIO_FORMAT_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "DOCUMENT_FORMAT_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "EXPRESSIVE_DISABLED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IDENTITY_LOCK_MUTATION_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "IMAGE_FORMAT_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LEGACY_GENERATION_INTERNAL_ONLY",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_DRAFT_MUTATION_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_LINE_MOVE_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LISTING_STRUCTURED_MUTATION_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "LOCAL_PREVIEW_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_TARGET_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PAID_ROUTE_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PRODUCT_TRUTH_MUTATION_RETIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "PROJECT_WORKSPACE_BINDING_UNSUPPORTED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "SOURCE_MATERIAL_ADAPTER_NOT_WIRED",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UNSUPPORTED_CUSTOM_COMPOSITION",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UNSUPPORTED_DISPATCH_SCOPE",
+          "resolution": "conditional_recovery"
+        }
+      ]
+    },
+    {
+      "id": "upload",
+      "title": "업로드 파일·형식·크기 검증",
+      "owner": "host",
+      "steps": [
+        "실제 파일의 바이트 수·확장자·MIME·시그니처·해시와 현재 업로드 한도를 비교한다.",
+        "원본을 보존하고 지원되는 파일 형식/범위로 자료를 준비한다. 영상 원본을 임의 축소하거나 다른 자료를 같은 해시로 표시하지 않는다.",
+        "전송 receipt와 서버 파일 바이트를 확인하고 같은 프로젝트의 누락 연결만 재개한다."
+      ],
+      "successCriteria": [
+        "실제 파일과 서버 receipt의 크기·형식·SHA가 일치한다."
+      ],
+      "resume": "성공 조건을 확인한 뒤 같은 프로젝트·run의 실패한 단계부터 이어갑니다. 유료 작업은 기존 접수·승인 범위를 다시 대조합니다.",
+      "codes": [
+        {
+          "code": "MATERIAL_BYTES_EMPTY",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_DIMENSIONS_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_DIMENSIONS_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_FILE_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_FORM_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_MIME_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "MATERIAL_SIGNATURE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_BODY_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_FILE_SIZE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_FILE_TOO_LARGE",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_FORM_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_LENGTH_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_MIME_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_SIGNATURE_INVALID",
+          "resolution": "conditional_recovery"
+        },
+        {
+          "code": "UPLOAD_SIZE_MISMATCH",
           "resolution": "conditional_recovery"
         }
       ]
