@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.17",
-  "codeCount": 2000,
+  "version": "1.9.18",
+  "codeCount": 2001,
   "groups": [
     {
       "id": "approval",
@@ -2463,14 +2463,6 @@
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "HIOB_PRODUCTION_CONTEXT_REQUIRED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "새 세션에서는 먼저 project_context(projectId)를 호출하고 workflow와 productionGuide, creativeVault.notes의 전체 전문과 현재 기획·음원·후보 상태를 읽으세요. 전체 문서가 누락되면 project_context(projectId, guidance=full)로 다시 받으세요. 문서 전달은 품질 합격이나 유료 실행 승인이 아닙니다.",
           "checkFields": []
         }
       ]
@@ -15021,6 +15013,32 @@
           "checkFields": []
         },
         {
+          "code": "DESKTOP_CAPABILITIES_NODE_UNAVAILABLE",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "Studio가 행성 응답을 제때 받지 못했거나 상위 서비스가 정상 결과를 주지 않았습니다. 통신 시간 초과 뒤 행성에서 같은 요청이 성공할 수 있으므로 작업 실패로 단정하거나 새 요청 ID를 만들지 않습니다. 상태 조회와 실제 영수증을 대조합니다.",
+          "checkFields": [],
+          "steps": [
+            "error_gateway(projectId,historyOnly=true)와 project_context로 원래 requestId·executionId·revisionId·입력SHA·현재 연결을 읽는다. 기존 영상 생성·음원·렌더 작업은 보존한다.",
+            "reference_prepare의 sync가 pending이면 같은 job_status(jobId)를 조회한다. 통신 미확인 참조 실행이 running이면 원래 lease 종료를 기다린 후 저장한 references·expectedPlanSha256·requestId 그대로 reference_prepare를 호출한다. 새 requestId·새 유료 생성은 만들지 않는다.",
+            "구버전이 parzifal.references.prepare 또는 artemis.references.prepare를 UNAVAILABLE로 failed 처리했어도 현재 권한·같은 입력·만료 lease가 확인되면 서버가 같은 실행을 회수한다. 반환된 producer 영수증의 원래 입력SHA·run·trace·출력 digest를 검증한 뒤 완료를 저장한다.",
+            "권한 거부·스키마/출력/서명 오류 또는 통신 미확인이 아닌 확정 실패는 반복하지 않는다. 운영자가 원래 오류와 현재 배포·노드 상태·연결을 확인한다. 다른 노드의 실패를 이 참조 전용 복구로 처리하지 않는다.",
+            "saved=true인 서버 참조 영수증을 받은 뒤 storyboard_compile과 현재 project_sync를 확인한다. 같은 incidentId에 실제 reference_prepare 결과 ID와 상태를 기록한다. 참조 준비 성공은 생성·음성·영상 품질 합격이 아니다."
+          ],
+          "successCriteria": [
+            "동일 requestId·executionId·revision·입력SHA의 서버 영수증이 준비되고 providerCalls=0·saved=true이며 실제 producer digest 검증이 통과한다.",
+            "같은 입력의 storyboard_compile이 참조를 결박한다. 유료 생성·검수·납품 성공은 해당 작업과 실제 영상으로 별도 확인한다."
+          ],
+          "resume": "같은 프로젝트의 reference_prepare → storyboard_compile → project_sync → 현재 견적 순서로 재개한다. 실행 불명인 기존 유료 작업을 재접수하지 않는다.",
+          "retry": {
+            "policy": "same_immutable_reference_request_after_lease_and_current_authority",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 입력·권한·revision 확인 실패, 확정 권한/출력 오류 또는 같은 원인의 반복이면 새 요청을 만들지 않고 원인을 조사한다. 기존 성공 영수증을 검증 없이 합격으로 바꾸지 않는다."
+        },
+        {
           "code": "DIRECTOR_OUTCOME_UNKNOWN",
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
@@ -15442,6 +15460,30 @@
           "resolution": "conditional_recovery",
           "explanation": "plan_save로 초안을 먼저 저장하세요.",
           "checkFields": []
+        },
+        {
+          "code": "HIOB_PRODUCTION_CONTEXT_REQUIRED",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
+          "resolution": "conditional_recovery",
+          "explanation": "현재 MCP 세션이 해당 프로젝트의 제작 지침과 현재 상태를 아직 조회하지 않았습니다. 이전 세션에서 읽은 기록만으로 새 세션의 도구를 실행할 수 없습니다. 문서 동시 수정이나 고객 승인 누락을 뜻하지 않습니다.",
+          "checkFields": [],
+          "steps": [
+            "같은 MCP 연결·세션에서 project_context(projectId,guidance=full)를 호출한다. productionGuide·workflow·creativeVault.notes와 현재 기획·음원·후보·writeVersions를 읽는다.",
+            "기존 승인 원문·목소리·타이밍·권한과 현재 파일 해시를 대조하고 의도한 변경만 유지한다. 오래된 expected 해시를 최신 해시로 바꾸기만 해서 전송하지 않는다.",
+            "같은 세션에서 거절된 저장/준비 도구를 현재 입력으로 재개한다. 이 문맥 오류만 발생했다면 원래 도구는 실행 전 거절됐으며 새 유료 작업이나 추가 고객 승인이 필요하다는 뜻이 아니다. 다른 오류가 반환되면 그 코드별 복구를 따른다."
+          ],
+          "successCriteria": [
+            "같은 세션의 project_context가 필요한 전문과 현재 상태를 반환하고 원래 도구가 문맥 게이트를 통과한다.",
+            "실제 저장/준비 결과와 해시를 확인한다. 지침 전달 자체는 품질 검수나 고객 승인 증거가 아니다."
+          ],
+          "resume": "같은 MCP 세션에서 거절됐던 도구를 현재 문서와 기존 승인 범위로 이어간다.",
+          "retry": {
+            "policy": "after_context_delivery_in_same_session",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "프로젝트 조회·권한 또는 현재 문서 대조가 실패하면 해당 오류를 먼저 해결한다. 세션을 매 호출마다 다시 열어 같은 문맥 오류를 반복하지 않는다."
         },
         {
           "code": "HIOB_SCRIPT_DIRECTION_REQUIRED",
