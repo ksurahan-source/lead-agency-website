@@ -255,6 +255,10 @@
     {
       "version": "1.9.16",
       "sha256": "aea50a92c45cb5ba3cbb4e4fdbd408efa6b55b09931962d3280b2b8677efeeb9"
+    },
+    {
+      "version": "1.9.17",
+      "sha256": "e6fd82f35a2234e2c7a071f53a8083778fcb138aefe19ebdecadf6e10332c5dd"
     }
   ]
 }
