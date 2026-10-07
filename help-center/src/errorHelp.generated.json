@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.22",
+  "version": "1.9.23",
   "codeCount": 2002,
   "groups": [
     {
@@ -7625,13 +7625,32 @@
         },
         {
           "code": "DESKTOP_MEDIA_FEEDBACK_SOURCE_MISMATCH",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: plan.json.",
+          "explanation": "plan은 같은 run/workspace의 ready revision에 저장된 기획 SHA가 필요합니다. material/edit/final은 같은 원본의 done 검사 및 stage별 kind가 필요합니다. 산출물 이전의 고객 지시나 저장 실패를 이 source-bound 품질 API에 제출하면 해당 조건을 충족하지 못합니다.",
           "checkFields": [
             "plan.json"
-          ]
+          ],
+          "steps": [
+            "feedback_list의 pending.payload·requestId·runId·sourceSha256·stage와 incident를 읽고 원래 본문/관찰/승인 이력을 보존합니다. 중앙 오류 수신은 품질 feedback 본문의 저장 성공이 아닙니다.",
+            "plan은 동일 run/workspace의 ready revision manifest에서 source-review/production-plan.json의 정확한 SHA를 확인합니다. inspectionId/inputSha는 null, observed는 script여야 합니다. 저장 전 지시를 현재 기획 SHA로 바꾸지 않습니다.",
+            "material/edit/final은 동일 run/workspace의 done 검사와 원본 SHA·inspectionId·inputSha를 대조합니다. kind는 material=visual, edit/final=final이어야 합니다. 검사나 관찰 범위를 발명하지 않습니다.",
+            "원래 원본의 연결을 실제 복구한 뒤 feedback_list(projectId,retryRequestId=원래 요청 ID)로 같은 payload를 한 번 재전송하고 서버 review receipt를 확인합니다. 같은 실패를 변화 없이 반복하지 않습니다.",
+            "원본이 아직 없거나 역사 SHA를 복구할 수 없으면 pending 원문을 보존하고 별도 고객 지시 이력 경로의 미지원 상태를 명시합니다. 현재 모델/승인/목소리/타이밍에 과거 지시를 자동 적용하지 않습니다. 다른 독립 자료의 상태 조회를 진행합니다.",
+            "error_gateway(historyOnly=true)에서 같은 request/run/incident의 중앙 수신을 확인합니다. 저장 실패나 run 변경이면 기록을 보존하고 원래 권한을 복구합니다."
+          ],
+          "successCriteria": [
+            "원래 request/run/source/payload가 보존되며 정확한 서버 review receipt로 stored가 확인됨",
+            "원본 복구 전에는 pending 원문과 단계별 복구 조건 및 중앙 실패 기록이 보이고 반복 전송·새 유료 접수가 없음"
+          ],
+          "resume": "원래 원본 연결 복구 후 같은 요청 ID를 재전송합니다. 품질 문제가 해결되었다는 뜻은 아니며 실제 수정 결과를 관찰해야 resolves를 연결합니다.",
+          "retry": {
+            "policy": "explicit_same_request_after_source_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "원래 원본 연결을 복구하지 못하면 pending을 보존하며 현재 SHA 교체/가짜 inspection/새 request로 우회하지 않는다."
         },
         {
           "code": "DESKTOP_MEDIA_NOT_FOUND",
