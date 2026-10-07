@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.18",
+  "version": "1.9.19",
   "codeCount": 2001,
   "groups": [
     {
@@ -1520,15 +1520,54 @@
         },
         {
           "code": "NATIVE_NARRATION_CLONE_DEPENDENCY",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: result?.jobs, project.cloud?.runId, result?.paidExecutionAvailable.",
+          "explanation": "현재 기획에 순정 화면 발화와 external_narration이 함께 있어 같은 나레이터의 프로젝트 전용 목소리가 필요합니다. 이 의존성 자체는 제공사 결제 실패나 대본 오류를 뜻하지 않습니다.",
           "checkFields": [
             "result?.jobs",
             "project.cloud?.runId",
             "result?.paidExecutionAvailable"
-          ]
+          ],
+          "alternatives": [
+            {
+              "id": "reuse_current_project_clone",
+              "description": "같은 프로젝트의 기존 등록 목소리 또는 승인된 음원 연결을 검토합니다.",
+              "conditions": [
+                "현재 run의 succeeded clone_voice_id와 원래 sourceJobId·화자·샘플 및 현재 승인 일치",
+                "등록 목소리 사용도 현재 API·모델 지원과 유효 견적이 필요하며, 이미 저장된 음원은 실제 원문·타이밍을 대조",
+                "다른 프로젝트 목소리나 과거 서현/필재 음성을 임의 상속하지 않음"
+              ]
+            },
+            {
+              "id": "independent_material_work",
+              "description": "현재 클로닝과 독립적인 기존 소재 조회·관찰을 이어갑니다.",
+              "conditions": [
+                "generation_status(view=jobs)로 같은 run의 기존 작업·성공 원본과 review 상태를 먼저 확인",
+                "승인된 연출·원본·대본을 유지하고 실제 보지 않은 동작을 pass로 기록하지 않음",
+                "새 유료 접수나 순정/립싱크 경로 변경은 이 대안으로 자동 허가되지 않음"
+              ]
+            }
+          ],
+          "steps": [
+            "같은 세션의 project_context(guidance=full)에서 현재 speechMode=native와 정확한 전문·화자·타이밍을 읽고 connection_diagnose 및 production_check로 기존 서버 권한을 확인합니다.",
+            "voice_clone_status의 같은 run succeeded 작업과 sourceJobId·clone_voice_id를 원래 화자/승인에 대조합니다. 기존 등록 결과가 있으면 가격 설정이 막혀도 삭제하거나 새로 등록하지 않습니다.",
+            "executionReadiness.blockers의 feature_disabled·price_missing/invalid/expired·price_validity_missing/invalid·provider_not_configured를 구분합니다. 호스트/운영자가 서버와 실제 API 계정·현재 가격 근거를 확인하며 고객에게 예산 숫자를 묻지 않습니다.",
+            "기존 등록이 없으면 generation_status(view=jobs)에서 현재 모델·입력의 원본을 먼저 찾습니다. native_audio_prepare는 지원되는 정확한 원본에서 샘플을 추출할 뿐 깨끗한 단일 화자·발화 검수를 대신하지 않습니다.",
+            "원본·샘플·권리·현재 가격/권한이 확인된 경우에만 기존 voice_clone_quote requestId/견적을 이어갑니다. dispatching/review 작업은 같은 jobId 상태를 조사하며 다시 POST하거나 새 requestId를 만들지 않습니다.",
+            "클로닝이 막힌 동안 independentAssetIds의 기존 소재 조회·검수와 오류 기록을 진행합니다. 방향 문서를 반복해서 읽거나 승인 목소리를 자동 변경해 서버 설정 문제를 해결하지 않습니다."
+          ],
+          "successCriteria": [
+            "같은 run의 실제 원본 화자와 등록 목소리·승인 근거가 일치하고 선택한 음원/원문/타이밍이 연결됨",
+            "설정 configured는 접수/권리/음성 품질 승인과 별개이며 실제 발화·샘플 검수 결과를 보존함"
+          ],
+          "resume": "실제 사용 가능한 원본·등록 목소리와 유효한 현재 견적을 확보한 단계에서 재개합니다. 의존성이 남으면 독립 소재 작업만 이어갑니다.",
+          "retry": {
+            "policy": "observe_state_change_before_same_workflow_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "사용 가능한 같은 원본/목소리·가격·권한·샘플 관찰이 없으면 신규 등록과 음원 재연결을 멈추고 실제 차단을 기록합니다."
         }
       ]
     },
@@ -1567,22 +1606,98 @@
         },
         {
           "code": "DESKTOP_VOICE_CLONE_PRICING_UNAVAILABLE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "서버 클로닝 활성 설정, 비어 있지 않은 안전한 정수 비용 또는 미래 가격 만료 시각이 준비되지 않았습니다. 고객 지갑 부족과 다른 운영 설정 오류입니다. 빈 문자열·공백은 0원 가격이 아닙니다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "reuse_current_project_clone",
+              "description": "같은 프로젝트의 기존 등록 목소리 또는 승인된 음원 연결을 검토합니다.",
+              "conditions": [
+                "현재 run의 succeeded clone_voice_id와 원래 sourceJobId·화자·샘플 및 현재 승인 일치",
+                "등록 목소리 사용도 현재 API·모델 지원과 유효 견적이 필요하며, 이미 저장된 음원은 실제 원문·타이밍을 대조",
+                "다른 프로젝트 목소리나 과거 서현/필재 음성을 임의 상속하지 않음"
+              ]
+            },
+            {
+              "id": "independent_material_work",
+              "description": "현재 클로닝과 독립적인 기존 소재 조회·관찰을 이어갑니다.",
+              "conditions": [
+                "generation_status(view=jobs)로 같은 run의 기존 작업·성공 원본과 review 상태를 먼저 확인",
+                "승인된 연출·원본·대본을 유지하고 실제 보지 않은 동작을 pass로 기록하지 않음",
+                "새 유료 접수나 순정/립싱크 경로 변경은 이 대안으로 자동 허가되지 않음"
+              ]
+            }
+          ],
+          "steps": [
+            "voice_clone_status.executionReadiness.blockers에서 실제 원인을 읽습니다. feature_disabled는 서버 활성 설정, price_missing/invalid는 비용, price_validity_missing/invalid/price_expired는 유효기한 문제입니다.",
+            "운영자는 현재 배포 설정 HIOB_VOICE_CLONE_ENABLED·HIOB_VOICE_CLONE_COST_MICROUSD·HIOB_VOICE_CLONE_PRICE_VALID_UNTIL을 실제 계약/가격 근거와 대조합니다. 무조건 true·0원·먼 미래 날짜로 바꾸지 않습니다.",
+            "호스트가 기존 제공사 API 계정의 subscription을 읽어 현재 계획·슬롯·권한을 확인합니다. 웹 편집기와 API 요금제를 혼동하지 않으며 계정 조회 성공만으로 단가나 새로운 결제 승인을 만들지 않습니다.",
+            "고객에게 한도/사용량/총예산 숫자나 반복 승인을 묻지 않습니다. 승인 범위에서 가능한 설정 복구만 하고 새 결제·한도 확대는 하지 않습니다.",
+            "근거 있는 배포가 반영된 뒤 같은 프로젝트의 status와 현재 견적을 확인합니다. 과거 queued/dispatching/review/succeeded 작업과 음원을 보존하고 이전 제출을 다시 실행하지 않습니다."
+          ],
+          "successCriteria": [
+            "실제 서버의 가격 관련 blockers가 없어지고 현재 quote가 검증된 costMicrousd·validUntil을 반환함",
+            "이전 승인·실행 이력은 보존되며 신규 등록의 원본/샘플·권한 검사도 따로 충족함"
+          ],
+          "resume": "현재 설정과 가격 상태가 바뀐 뒤 원래 샘플·requestId/견적 흐름부터 재개합니다. 같은 오류를 변경 없이 반복하지 않습니다.",
+          "retry": {
+            "policy": "observe_state_change_before_same_workflow_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 가격 근거 또는 설정 권한이 없으면 추정 가격으로 활성화하지 않습니다. 기존 음원과 독립 소재 작업을 보존합니다."
         },
         {
           "code": "DESKTOP_VOICE_CLONE_PROVIDER_UNAVAILABLE",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: body?.jobId, body?.approvalId.",
+          "explanation": "클로닝 제출 서버의 TYPECAST_API_KEY 설정이 없거나 공백입니다. 고객 대본·예산 숫자·보이스 선택을 바꿔 해결하는 오류가 아닙니다.",
           "checkFields": [
             "body?.jobId",
             "body?.approvalId"
-          ]
+          ],
+          "alternatives": [
+            {
+              "id": "reuse_current_project_clone",
+              "description": "같은 프로젝트의 기존 등록 목소리 또는 승인된 음원 연결을 검토합니다.",
+              "conditions": [
+                "현재 run의 succeeded clone_voice_id와 원래 sourceJobId·화자·샘플 및 현재 승인 일치",
+                "등록 목소리 사용도 현재 API·모델 지원과 유효 견적이 필요하며, 이미 저장된 음원은 실제 원문·타이밍을 대조",
+                "다른 프로젝트 목소리나 과거 서현/필재 음성을 임의 상속하지 않음"
+              ]
+            },
+            {
+              "id": "independent_material_work",
+              "description": "현재 클로닝과 독립적인 기존 소재 조회·관찰을 이어갑니다.",
+              "conditions": [
+                "generation_status(view=jobs)로 같은 run의 기존 작업·성공 원본과 review 상태를 먼저 확인",
+                "승인된 연출·원본·대본을 유지하고 실제 보지 않은 동작을 pass로 기록하지 않음",
+                "새 유료 접수나 순정/립싱크 경로 변경은 이 대안으로 자동 허가되지 않음"
+              ]
+            }
+          ],
+          "steps": [
+            "voice_clone_status의 executionReadiness.providerConfigured와 provider_not_configured 원인을 확인합니다. 이 값은 키 존재 검사이며 실제 API 권한이나 가격 통과 인증은 아닙니다.",
+            "운영자가 현재 배포 표면의 제공사 secret 바인딩과 기존 승인된 키 설정을 확인합니다. 고객에게 비밀키를 채팅으로 보내라고 요청하거나 키 내용을 로그·오류 기록에 저장하지 않습니다.",
+            "기존 설정으로 가능한 읽기 전용 API 계정 조회에서 인증/계정 상태를 확인합니다. 인증 실패는 실제 상태로 기록하며 임의 키 재발급·결제·플랜 확대를 하지 않습니다.",
+            "같은 프로젝트의 기존 jobId·상태를 먼저 확인합니다. dispatching/review는 제공사 접수 여부가 불명확할 수 있으므로 새 POST를 만들지 않고 기존 결과를 조사합니다.",
+            "실제 서버 연결·가격·원본/샘플 검수가 준비되면 아직 접수하지 않은 같은 견적과 승인 범위부터 이어갑니다. 완료된 음원과 독립 소재는 보존합니다."
+          ],
+          "successCriteria": [
+            "운영 서버 providerConfigured=true와 실제 제공사 인증 조회가 확인되고 기존 오류 원인이 사라짐",
+            "신규 제출은 별도 유효 가격·원본/샘플 검증·기존 승인 조건 안에서만 가능함"
+          ],
+          "resume": "연결 근거가 확보된 뒤 원래 jobId의 상태에 따라 이어갑니다. 성공한 작업을 재등록하지 않습니다.",
+          "retry": {
+            "policy": "observe_state_change_before_same_workflow_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 계정/키 권한을 확인하지 못하거나 기존 접수가 불명확하면 재접수하지 않고 해당 결과를 기록합니다."
         }
       ]
     },
@@ -8011,11 +8126,30 @@
         },
         {
           "code": "HIOB_ERROR_RESOLUTION_EVIDENCE_REQUIRED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "error_record(status=resolved)의 evidence.tool/resultId/outcome 중 하나가 없거나 지원되는 식별자 형식이 아닙니다. 실제 결과가 생기기 전에는 resolved로 기록할 수 없습니다.",
+          "checkFields": [],
+          "steps": [
+            "error_gateway(historyOnly=true)에서 원래 incidentId·code·tool·요청/작업 ID와 마지막 사건을 읽고 같은 오류에 연결합니다.",
+            "실제로 성공한 도구 결과나 서버 수신 eventId/revisionId/jobId에서 결과 식별자를 가져옵니다. evidence.resultId는 실제 UUID 또는 ta-/in-/fc-/job-/req-/op- 접두의 영숫자·콜론·하이픈 식별자입니다. bare SHA 해시·파일경로·URL·임의 문구는 지원하지 않습니다.",
+            "해시만 반환된 경우 관련 실제 동기화 revision UUID 또는 후속 결과 영수증을 확인합니다. SHA에 접두를 붙이거나 존재하지 않는 UUID를 발명하지 않습니다.",
+            "evidence.tool과 outcome은 영문자로 시작하는 영숫자·밑줄·점·콜론·하이픈의 최대101자 레이블로 기록합니다. 비밀키·원문 대본·개인정보를 넣지 않습니다.",
+            "같은 incidentId/code/tool에 status=resolved와 실제 evidence를 기록합니다. 이미 같은 해결 event가 있으면 새로 중복 기록하지 않습니다.",
+            "error_gateway(historyOnly=true)를 다시 읽어 central의 실제 resolved event·결과 ID·serverSync와 pending을 확인합니다. 기록 수신은 영상 품질 pass가 아닙니다."
+          ],
+          "successCriteria": [
+            "원래 incident에 실제 결과 도구/지원 식별자/outcome이 연결되어 resolved로 영속 저장됨",
+            "현재 프로젝트 권한의 중앙 조회에서 해당 event 수신·같은 결과 ID가 확인됨"
+          ],
+          "resume": "중앙 수신된 해결 사건을 다음 에이전트가 조회하고 원래 작업의 다음 미완료 단계부터 이어갑니다.",
+          "retry": {
+            "policy": "observe_state_change_before_same_workflow_resume",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 성공 결과 식별자가 없으면 blocked/retrying을 유지합니다. 근거를 꾸며 resolved로 만들지 않습니다."
         },
         {
           "code": "HIOB_INCIDENT_PROJECT_CHANGED",
