@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.15",
+  "version": "1.9.16",
   "codeCount": 2000,
   "groups": [
     {
@@ -5274,11 +5274,57 @@
         },
         {
           "code": "HIOB_REFERENCE_PROMPT_TOO_LONG",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "대사 원문을 보존하고 중복 화면 설명을 줄이세요.",
-          "checkFields": []
+          "explanation": "현재 영상 프롬프트 또는 서버에서 준비한 세계관·인물·제품·카메라 참조를 붙인 최종 프롬프트가 비Seedance 입력의 2,000자 한계를 넘었습니다. 입력 확장은 기존 촬영 실패나 크레딧 부족을 뜻하지 않습니다.",
+          "checkFields": [
+            "asset.id"
+          ],
+          "alternatives": [
+            {
+              "id": "reuse_verified_existing_media",
+              "description": "검증된 기존 촬영과 검수 이력으로 재개",
+              "conditions": [
+                "같은 승인 plan/direction과 실제 참조가 저장된 촬영 입력 전체를 정확히 재구성",
+                "같은 run의 성공 job·선택 원본 SHA·현재 권한 확인; 새 유료 입력으로 재사용하지 않음"
+              ]
+            },
+            {
+              "id": "remove_only_duplicate_instructions",
+              "description": "호스트가 중복 설명만 정리해 현행 입력 준비",
+              "conditions": [
+                "승인 전문·목소리·시간·인물/브랜드/배경/카메라 내용 보존",
+                "현재 입력 길이·준비 receipt·동기화 revision 및 기존 승인 범위 확인"
+              ]
+            },
+            {
+              "id": "approved_scene_revision",
+              "description": "필수 내용이 길면 해당 컷의 연출 변경안을 준비",
+              "conditions": [
+                "분할·시간·대사 등 실제 변경에 고객의 선택 근거",
+                "변경된 부분만 새 입력으로 검증하고 기존 성공 자산·예약 보존"
+              ]
+            }
+          ],
+          "steps": [
+            "project_context(projectId,guidance=auto)에서 현재 writeVersions·선택 모델·승인 전문·referencePreparation을 읽고 generation_status(projectId)로 이미 접수된 같은 run 작업부터 확인한다.",
+            "storyboard_compile(projectId)를 한 번 조회한다. reuse.status=verified 및 generation.status=blocked이면 같은 plan/direction과 실제 참조·저장 촬영 입력이 검증된 기존 자료를 generation_status의 정확한 jobId로 조회·다운로드한다. 오래된 입력을 새 generation_quote/submit에 보내지 않는다.",
+            "기존 자산과 연결되지 않으면 source-review/production-plan.json, creative-direction.json, reference-preparation.json과 저장 storyboard-compiled.json을 project_read_text로 대조한다. 길이는 기본 연출/정확한 대사/준비 참조를 합산한다. 승인 대사·목소리·시간·브랜드·인물/몸·환경·카메라 조건을 줄이지 않는다.",
+            "새 생성이 필요한 경우 호스트가 중복된 비발화 설명만 정리한 완전한 direction을 준비한다. 바뀌는 실제 연출·장면 분할은 고객 선택 근거가 있어야 한다. 현재 expectedPlanSha256으로 direction_save한 뒤 준비 참조가 stale이면 현재 reference_prepare 계약으로 다시 결박한다.",
+            "project_sync 완료와 storyboard_compile의 현행 shots 길이를 확인한 뒤 storyboard_quote를 호출한다. 기존 승인 범위와 같은 작업/견적 식별자를 대조하며 진행 중 job을 중복 접수하지 않는다."
+          ],
+          "successCriteria": [
+            "기존 자료는 검증된 reuse.shots와 같은 성공 job/파일 SHA를 조회하고 새 생성 없이 재사용한다. quality=not_verified는 실제 추가 검수를 요구한다.",
+            "새 입력 복구는 기존 전문·목소리·시간·참조를 유지한 현행 shots가 2,000자 이내이며 준비 receipt와 sync revision이 일치한다. quote는 지원/견적 증거이고 생성·품질 성공이 아니다."
+          ],
+          "resume": "기존 자산은 같은 job의 generation_download/material_inspect 또는 guided_status의 재사용 단계에서 이어간다. 새 생성은 변경된 입력 검증→project_sync→storyboard_quote 단계에서 기존 승인 범위를 적용한다.",
+          "retry": {
+            "policy": "after_exact_existing_media_match_or_lossless_input_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "기존 문서/참조/촬영 해시가 정확히 일치하지 않거나 필수 대사·일관성 조건을 삭제해야만 길이가 맞으면 임의 축약·새 접수를 중단한다. 기존 파일·작업은 보존하고 필요한 연출 변경을 별도 제안한다."
         },
         {
           "code": "HIOB_REFERENCE_REQUEST_INVALID",
@@ -17820,18 +17866,61 @@
         },
         {
           "code": "SEEDANCE_LEGACY_FACE_FRAME_BLOCKED",
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: asset.referenceFile, asset.seedanceInput, job.model, job.shot.referenceHash, job.shot.seedanceInput, job.shot.prompt.",
+          "explanation": "Seedance 선택에 과거 인물 firstFrame/referenceFile/referenceHash가 남았거나 seedanceInput과 firstFrame이 함께 들어 있습니다. 현재 얼굴 없는 참조 입력 계약은 기획용 인물 카드를 제공사 입력으로 허용하지 않습니다. 생성 영상 속 얼굴을 금지하는 오류는 아닙니다.",
           "checkFields": [
             "asset.referenceFile",
-            "asset.seedanceInput",
             "job.model",
             "job.shot.referenceHash",
             "job.shot.seedanceInput",
             "job.shot.prompt"
-          ]
+          ],
+          "alternatives": [
+            {
+              "id": "face_free_omni_input",
+              "description": "얼굴 없는 실제 소품·배경 참조를 준비",
+              "conditions": [
+                "모든 실제 업로드 파일의 얼굴 없음 관찰·역할·SHA 확보",
+                "선택 모델의 omni_reference 계약과 승인 CHARACTER150단어·대본·음성 경로 유지"
+              ]
+            },
+            {
+              "id": "supported_text_input",
+              "description": "선택 모델이 지원하는 텍스트 입력 준비",
+              "conditions": [
+                "text_to_video가 현재 모델·어댑터에서 실제 지원됨",
+                "필수 제품 실증/참조를 생략하지 않으며 기존 승인 인물을 자동 대체하지 않음"
+              ]
+            },
+            {
+              "id": "external_input_package",
+              "description": "내부 입력이 미지원이면 외부 테스트용 전체 패키지 제공",
+              "conditions": [
+                "실제 외부 서비스의 지원 설정과 관찰한 얼굴 없는 참조 순서 확보",
+                "내부 생성 접수·고객 승인·품질 성공으로 표시하지 않음"
+              ]
+            }
+          ],
+          "steps": [
+            "model_catalog로 선택한 Seedance2/2.5 옵션의 현재 입력 계약을 읽고 project_context의 writeVersions·direction.generationModel·speechMode·기존 승인 전문/목소리/인물 선택을 확인한다. 선택 모델을 이전 H3로 자동 롤백하지 않는다.",
+            "호스트가 project_read_text로 creative-direction.json과 reference-preparation-request.json의 해당 asset 및 shot/assetBindings를 읽는다. referenceFile, firstFrame, 단일 referenceHash와 seedanceInput 동시 사용 지점을 찾되 기존 원본 파일과 승인 카드를 삭제하지 않는다.",
+            "지원되는 입력은 seedanceInput(policy=seedance-face-free-v1,mode=text_to_video 또는 omni_reference)이다. 인물이면 승인 외형을 반영한 CHARACTER만 영어 공백 기준150단어로 계수한다. 기존 승인 인물을 새 인물로 자동 대체하지 않는다. 출력 얼굴 동일성은 텍스트만으로 보장하지 않는다.",
+            "omni_reference의 실제 소품/배경 파일은 호스트가 열어 포장·포스터·화면·반사 및 실사형 AI 얼굴까지 확인한 뒤 file/sha256/role과 inspection(result=absent,coverage=full_image,method=host_visual_review,authority=host_observation_not_independent_certification,동일 sha256,observedAt,evidence,surfaces.direct/packaging/poster/screen/reflection=absent)을 실제 관찰 근거로 준비한다. 미관찰·판단 불가·얼굴 포함 파일은 제출하지 않고 얼굴 없는 대체 자료를 준비한다. 제품 참조를 first_frame으로 바꾸지 않는다.",
+            "현재 expectedPlanSha256의 direction_save와 같은 Seedance 입력의 reference_prepare를 연결한다. storyboard_compile→project_sync 완료 후 해당 모델 storyboard_quote를 기존 승인 범위에서 확인한다. 내부 스키마/권한이 충족되지 않으면 실행 가능한 외부 입력 패키지와 빠진 조건만 제공한다."
+          ],
+          "successCriteria": [
+            "Seedance의 direction/준비 참조/실제 shot에 legacy firstFrame/referenceFile/referenceHash가 없고 동일한 seedanceInput을 사용한다. 기존 대본·목소리·타이밍과 기획용 인물 카드는 보존한다.",
+            "CHARACTER150단어·실제 업로드 파일 얼굴 없음 관찰·역할·SHA가 일치하며 compile/현재 quote 입력 검증이 통과한다. 이것은 생성된 얼굴·감정·발화 품질의 합격이 아니다."
+          ],
+          "resume": "현재 모델을 유지한 reference_prepare→storyboard_compile→project_sync→storyboard_quote에서 이어간다. 기존 성공 작업은 generation_status로 따로 조회하고 새 접수나 다른 모델 선택으로 숨기지 않는다.",
+          "retry": {
+            "policy": "after_observed_face_free_input_and_current_schema_repair",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "실제 참조 파일에 얼굴이 있거나 미관찰/판단 불가, 현재 모델 스키마 미지원, 승인 인물·전문·목소리·시간이 바뀌면 해당 제공사 제출을 중단한다. 기존 자료를 보존하고 구체적인 대체 입력/지원 조건을 준비한다."
         },
         {
           "code": "SEEDANCE_PROMPT_BLOCKS_REQUIRED",

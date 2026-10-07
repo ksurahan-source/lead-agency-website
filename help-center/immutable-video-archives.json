@@ -251,6 +251,10 @@
     {
       "version": "1.9.15",
       "sha256": "5805ef7b40e20f72acd5fd386acc8adae5fad203408c26e50a5fce3c624f20ec"
+    },
+    {
+      "version": "1.9.16",
+      "sha256": "aea50a92c45cb5ba3cbb4e4fdbd408efa6b55b09931962d3280b2b8677efeeb9"
     }
   ]
 }
