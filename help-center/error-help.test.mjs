@@ -30,6 +30,8 @@ test('all public code entries carry bounded recovery guidance rendered in their 
  for(const group of data.groups){
   const html=await fs.readFile(new URL(`./dist/help/errors/${group.id}/index.html`,import.meta.url),'utf8');
   assert.ok(html.includes('막혔을 때 이어가는 방법'),group.id);
-  for(const entry of group.codes){assert.equal(entry.workflow.code,entry.code);assert.equal(entry.workflow.automaticRetry,false);assert.ok(html.includes(entry.workflow.stopCondition));assert.equal(entry.workflow.identity,undefined);}
+  for(const entry of group.codes){assert.equal(entry.workflow.code,entry.code);assert.equal(entry.workflow.automaticRetry,false);assert.ok(html.includes(entry.workflow.stopCondition));assert.equal(entry.workflow.identity,undefined);
+   assert.ok(entry.sourceIndex.length);for(const source of entry.sourceIndex)assert.ok(html.includes(source.id),entry.code+' '+source.id);
+  }
  }
 });
