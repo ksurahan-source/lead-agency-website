@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.32",
-  "codeCount": 2113,
+  "version": "1.9.33",
+  "codeCount": 2115,
   "groups": [
     {
       "id": "approval",
@@ -18013,6 +18013,81 @@
             "preserveIdentity": true
           },
           "stopCondition": "미등록 도구를 반복 호출하지 말고 설치 버전과 호스트의 도구 목록을 갱신한다."
+        },
+        {
+          "code": "HIOB_STATE_BUSY",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_STATE_BUSY",
+            "procedure": "configuration",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_STATE_BUSY",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "동일 상태의 정상 저장 작업이 아직 잠금을 보유하고 있다. 원래 작업의 실패를 뜻하지 않는다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "기존 잠금이 정상 해제되고 같은 run의 최신 저장 상태가 반환된다.",
+              "목록·상태 읽기는 유료 접수·품질 합격·납품 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "predicate_and_transport_tested_customer_unproven",
+          "resolution": "conditioned_read_recovery",
+          "explanation": "동일 상태의 정상 저장 작업이 아직 잠금을 보유하고 있다. 원래 작업의 실패를 뜻하지 않는다.",
+          "checkFields": [
+            "stateRead.inFlight",
+            "stateRead.savedAt"
+          ],
+          "sourceIndex": [
+            {
+              "id": "source_22b4afc6be9a315591594b5a",
+              "checkFields": [
+                "Object.assign"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/HIOB_STATE_BUSY",
+              "verification": "unit_tested",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            }
+          ],
+          "steps": [
+            "같은 프로젝트·run의 guided_status를 읽어 stateRead.inFlight와 마지막 저장 시각을 확인한다.",
+            "잠금을 삭제하거나 새 실행·요청 ID를 만들지 않고 기존 작업의 저장 완료 후 최신 revision으로 재개한다."
+          ],
+          "successCriteria": [
+            "기존 잠금이 정상 해제되고 같은 run의 최신 저장 상태가 반환된다.",
+            "목록·상태 읽기는 유료 접수·품질 합격·납품 증거가 아니다."
+          ],
+          "resume": "잠금을 삭제하거나 새 실행·요청 ID를 만들지 않고 기존 작업의 저장 완료 후 최신 revision으로 재개한다.",
+          "retry": {
+            "policy": "원래 ID·현재 상태로 읽기만 재개; 유료 자동 재접수 없음",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 실패가 지속되면 현재 사건과 작업 ID를 유지해 원인을 진단한다. 건강한 잠금 삭제·입력 범위 확대·새 유료 접수는 하지 않는다."
         },
         {
           "code": "HIOB_TOOL_OUTPUT_INVALID",
@@ -36423,7 +36498,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_848bb9300dc39b315f1e05d4",
+              "id": "source_75d8a830c5b88901a3177cff",
               "checkFields": [
                 "priorFailure.retryAttempts",
                 "args.retryBlocked",
@@ -36491,7 +36566,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_e8af29fb5c09d61904ccea0b",
+              "id": "source_d8de00519241de784b6a9a36",
               "checkFields": [
                 "args.bindings",
                 "binding.assetId",
@@ -36554,7 +36629,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_ab4b11eefbd2798b4d79c768",
+              "id": "source_2edb1eb7ef4030bc06e8f2ee",
               "checkFields": [
                 "run.binding",
                 "binding.directionSha256",
@@ -36579,7 +36654,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_d7f96cc2b8444e4976a2ed25",
+              "id": "source_e73d82ce69effb94e3fe335b",
               "checkFields": [
                 "binding.environment",
                 "binding.firstFrame",
@@ -36599,7 +36674,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_d735e88ab4eb43e09a2d631c",
+              "id": "source_17b3b07a25f5b781b74087e7",
               "checkFields": [
                 "stat.size",
                 "fs.readFile",
@@ -36659,7 +36734,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_c2a47b0e74acf07a30b5b3e1",
+              "id": "source_bcf09488a637c03b54ffe7a0",
               "checkFields": [
                 "run.revision",
                 "this.persist",
@@ -36730,7 +36805,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_cc4e777fc64926ae55268445",
+              "id": "source_881cd8f1103ed6766764fd69",
               "checkFields": [
                 "run.revision",
                 "this.persist",
@@ -36805,7 +36880,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_49179b082c8c434a56e87e37",
+              "id": "source_a4e712c881cf34877694f77c",
               "checkFields": [
                 "this.store.filename",
                 "production.json",
@@ -36891,24 +36966,23 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_32c16cb2fc4484fa481ace25",
+              "id": "source_58a2f3daa4e16b92bb73e68f",
               "checkFields": [
-                "this.file",
-                "args.projectId",
-                "args.runId",
-                "run.id",
-                "run.binding",
-                "run.board",
-                "this.refresh",
-                "run.revision",
-                "this.persist",
-                "this.response",
                 "this.store.get",
+                "args.projectId",
+                "this.file",
+                "run.id",
+                "args.runId",
                 "run.operations.find",
                 "x.requestId",
                 "args.requestId",
                 "previous.inputSha256",
-                "previous.status"
+                "previous.status",
+                "this.response",
+                "run.revision",
+                "args.expectedRevision",
+                "run.operations.length",
+                "z.object"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/GUIDED_JOURNAL_LIMIT",
@@ -36962,12 +37036,10 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_09044ff7bfc2c802123a9e04",
+              "id": "source_a787fa64f648665fee1ac3ec",
               "checkFields": [
-                "run.updatedAt",
-                "this.file",
-                "run.projectId",
                 "this.data",
+                "run.projectId",
                 "data.context",
                 "data.inputs",
                 "run.binding.serverRunId",
@@ -36979,7 +37051,9 @@
                 "run.binding.referenceSha256",
                 "data.inputs.references?.assetBindings",
                 "run.assetBindings",
-                "run.bindingArtifacts"
+                "run.bindingArtifacts",
+                "run.epoch",
+                "run.remote"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/GUIDED_PROJECT_RUN_CHANGED",
@@ -37034,7 +37108,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_cd318298fe8aad9be88b457a",
+              "id": "source_7f847b44c67b541dcfeec66c",
               "checkFields": [
                 "a.tool",
                 "run.board.repairPlan?.tasks.find",
@@ -37149,24 +37223,22 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_cbdb0d8c742cda5f7bf72e65",
+              "id": "source_860727345c4392f88d441d57",
               "checkFields": [
-                "z.object",
                 "this.store.get",
                 "args.projectId",
                 "this.file",
-                "args.runId",
                 "run.id",
-                "run.binding",
-                "run.board",
-                "this.refresh",
-                "run.revision",
-                "this.persist",
-                "this.response",
+                "args.runId",
                 "run.operations.find",
                 "x.requestId",
                 "args.requestId",
-                "previous.inputSha256"
+                "previous.inputSha256",
+                "previous.status",
+                "this.response",
+                "run.revision",
+                "args.expectedRevision",
+                "run.operations.length"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/GUIDED_REQUEST_CONFLICT",
@@ -37174,7 +37246,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_1e9edfae8d82271e373be52c",
+              "id": "source_d173e2a6315b309d5caec7dc",
               "checkFields": [
                 "z.object",
                 "args.maxSteps",
@@ -37249,24 +37321,23 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_24ab888ec8764ac8f19da685",
+              "id": "source_fff234d2d652b62b880c32fc",
               "checkFields": [
-                "this.file",
-                "args.projectId",
-                "args.runId",
-                "run.id",
-                "run.binding",
-                "run.board",
-                "this.refresh",
-                "run.revision",
-                "this.persist",
-                "this.response",
                 "this.store.get",
+                "args.projectId",
+                "this.file",
+                "run.id",
+                "args.runId",
                 "run.operations.find",
                 "x.requestId",
                 "args.requestId",
                 "previous.inputSha256",
-                "previous.status"
+                "previous.status",
+                "this.response",
+                "run.revision",
+                "args.expectedRevision",
+                "run.operations.length",
+                "z.object"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/GUIDED_REVISION_CONFLICT",
@@ -37287,7 +37358,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "확인할 입력·상태: plan?.narratorScript.",
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -37316,10 +37387,8 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: plan?.narratorScript.",
-          "checkFields": [
-            "plan?.narratorScript"
-          ],
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": [],
           "sourceIndex": [
             {
               "id": "source_24d7f0bc0b64e27137332782",
@@ -37338,32 +37407,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_4ab554f2cb0673b3fc3e41f7",
-              "checkFields": [
-                "this.data",
-                "args.projectId",
-                "run.binding",
-                "data.context",
-                "data.inputs",
-                "run.presentedScript",
-                "data.inputs.plan?.narratorScript",
-                "run.board",
-                "this.persist",
-                "this.response",
-                "z.object",
-                "this.store.get",
-                "this.file",
-                "args.runId",
-                "run.id",
-                "this.refresh"
-              ],
-              "sourceKind": "registered_source",
-              "readNext": "hiob://error-recovery/GUIDED_RUN_MISMATCH",
-              "verification": "not_verified",
-              "selection": "match_actual_failure_not_automatic_diagnosis"
-            },
-            {
-              "id": "source_fd4bb2d27a339a654d887b76",
+              "id": "source_f0aa36ae00d6f42a59e39611",
               "checkFields": [
                 "z.object",
                 "this.store.get",
@@ -37376,11 +37420,44 @@
                 "this.refresh",
                 "run.revision",
                 "this.persist",
-                "this.response",
+                "this.response"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/GUIDED_RUN_MISMATCH",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_74d38eafb7e6b48ada79ff26",
+              "checkFields": [
+                "error.code",
+                "this.file",
+                "args.projectId",
+                "args.runId",
+                "run.id"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/GUIDED_RUN_MISMATCH",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_408d175486dd138bc2c5f9b3",
+              "checkFields": [
+                "this.store.get",
+                "args.projectId",
+                "this.file",
+                "run.id",
+                "args.runId",
                 "run.operations.find",
                 "x.requestId",
                 "args.requestId",
-                "previous.inputSha256"
+                "previous.inputSha256",
+                "previous.status",
+                "this.response",
+                "run.revision",
+                "args.expectedRevision",
+                "run.operations.length"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/GUIDED_RUN_MISMATCH",
@@ -51666,6 +51743,20 @@
               "readNext": "hiob://error-recovery/FEEDBACK_INVALID",
               "verification": "not_verified",
               "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_868787bf81d8c32815280af4",
+              "checkFields": [
+                "this.entries",
+                "uuid.test",
+                "entries.some",
+                "e.payload.requestId",
+                "entries.filter"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/FEEDBACK_INVALID",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
             }
           ]
         },
@@ -51681,7 +51772,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "확인할 입력·상태: project.cloud.runId.",
+            "cause": "확인할 입력·상태: current.runId, current.payload, result?.review?.payload?.requestId, current.payload.requestId, result.review.run_id, result.review.id, project.cloud.runId.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -51710,13 +51801,39 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: project.cloud.runId.",
+          "explanation": "확인할 입력·상태: current.runId, current.payload, result?.review?.payload?.requestId, current.payload.requestId, result.review.run_id, result.review.id, project.cloud.runId.",
           "checkFields": [
+            "current.runId",
+            "current.payload",
+            "result?.review?.payload?.requestId",
+            "current.payload.requestId",
+            "result.review.run_id",
+            "result.review.id",
             "project.cloud.runId"
           ],
           "sourceIndex": [
             {
-              "id": "source_e4172cd732323c4209c4bfa3",
+              "id": "source_6415f8b0d605477219c6c66f",
+              "checkFields": [
+                "this.store.get",
+                "cloud?.runId",
+                "current.runId",
+                "client.saveFeedback",
+                "current.payload",
+                "result?.review?.payload?.requestId",
+                "current.payload.requestId",
+                "result.review.run_id",
+                "uuid.test",
+                "result.review.id",
+                "entry.file"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/FEEDBACK_RECEIPT_INVALID",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_e54f4fff3b992c3a8a0ef32f",
               "checkFields": [
                 "this.connections.forProject",
                 "client.feedback",
@@ -51726,14 +51843,6 @@
                 "data?.reviews",
                 "data?.unresolved"
               ],
-              "sourceKind": "registered_source",
-              "readNext": "hiob://error-recovery/FEEDBACK_RECEIPT_INVALID",
-              "verification": "not_verified",
-              "selection": "match_actual_failure_not_automatic_diagnosis"
-            },
-            {
-              "id": "source_84e4cddb06f6be6d54d04889",
-              "checkFields": [],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/FEEDBACK_RECEIPT_INVALID",
               "verification": "not_verified",
@@ -53073,6 +53182,83 @@
           ]
         },
         {
+          "code": "HIOB_CONTEXT_PAGE_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_CONTEXT_PAGE_INVALID",
+            "procedure": "input",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_CONTEXT_PAGE_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "프로젝트 파일 목록의 offset 또는 limit이 지원되는 정수 범위 밖이다. 파일·전송 한도 변경으로 해결하지 않는다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "지원되는 목록 페이지가 반환되고 전체 파일 수와 nextOffset으로 누락 없이 이어 읽는다.",
+              "목록·상태 읽기는 유료 접수·품질 합격·납품 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "predicate_and_transport_tested_customer_unproven",
+          "resolution": "conditioned_read_recovery",
+          "explanation": "프로젝트 파일 목록의 offset 또는 limit이 지원되는 정수 범위 밖이다. 파일·전송 한도 변경으로 해결하지 않는다.",
+          "checkFields": [
+            "fileOffset",
+            "fileLimit",
+            "filePagination.nextOffset"
+          ],
+          "sourceIndex": [
+            {
+              "id": "source_a00ae17603d925dd66cf422f",
+              "checkFields": [
+                "Number.isSafeInteger",
+                "this.store.get"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/HIOB_CONTEXT_PAGE_INVALID",
+              "verification": "unit_tested",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            }
+          ],
+          "steps": [
+            "호스트가 filePagination.nextOffset을 재사용하고 fileLimit을 1–500의 정수로 복원한다.",
+            "같은 프로젝트의 다음 페이지를 읽고 기존 원본·전체 inventory를 유지한다."
+          ],
+          "successCriteria": [
+            "지원되는 목록 페이지가 반환되고 전체 파일 수와 nextOffset으로 누락 없이 이어 읽는다.",
+            "목록·상태 읽기는 유료 접수·품질 합격·납품 증거가 아니다."
+          ],
+          "resume": "같은 프로젝트의 다음 페이지를 읽고 기존 원본·전체 inventory를 유지한다.",
+          "retry": {
+            "policy": "원래 ID·현재 상태로 읽기만 재개; 유료 자동 재접수 없음",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 실패가 지속되면 현재 사건과 작업 ID를 유지해 원인을 진단한다. 건강한 잠금 삭제·입력 범위 확대·새 유료 접수는 하지 않는다."
+        },
+        {
           "code": "HIOB_DOCUMENT_VERSION_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -54055,7 +54241,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_d7fcb644a0547271711009ef",
+              "id": "source_aacd39684868274503d2e286",
               "checkFields": [
                 "this.store.file",
                 "e.path",
@@ -54201,7 +54387,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_8454bfeeff2398cf852b5881",
+              "id": "source_038e4d33084cfe8fbe96dcc2",
               "checkFields": [
                 "this.store.file",
                 "plan.json",
@@ -55995,7 +56181,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_6aab1bf9ecf6b4697ed97c85",
+              "id": "source_5061593fd83afcd67ca7d51e",
               "checkFields": [
                 "this.store",
                 "compiled?.promptVersion",
@@ -56012,7 +56198,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_5cbe1c5c8638c0e02cc67406",
+              "id": "source_725ea1d06440efa359613a22",
               "checkFields": [
                 "args.plan",
                 "this.store",
@@ -56027,7 +56213,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_58a5b6ac4407448b483eeff6",
+              "id": "source_72d238b6d72487a6d682cb27",
               "checkFields": [
                 "this.generation",
                 "args.projectId",
@@ -75335,7 +75521,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_2029d4b2f88d87a6e1f044e4",
+              "id": "source_edcd27e15ec6da057bde3674",
               "checkFields": [
                 "localCursor?.match"
               ],
@@ -75424,7 +75610,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_88c02194bd81a75d9c8a40b5",
+              "id": "source_30a7777c9e58fe4590c9ece7",
               "checkFields": [
                 "prior.incidentId",
                 "prior.projectId"
@@ -75435,7 +75621,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_a317a86950c5a9c16b972027",
+              "id": "source_1ef0da2d7338bf12a6ae30ce",
               "checkFields": [
                 "prior.incidentId",
                 "prior.projectId",
@@ -75449,7 +75635,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_61480ee42cff35b45f0900b4",
+              "id": "source_4a2f6abe2cb37b60873380b4",
               "checkFields": [
                 "existing.code",
                 "existing.tool",
@@ -75508,7 +75694,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_324720cd887268bf64af68d8",
+              "id": "source_8eca289bb5fad69f8734b15e",
               "checkFields": [
                 "prior.incidentId",
                 "prior.projectId",
@@ -75521,7 +75707,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_34381368d1467c8a0e008113",
+              "id": "source_dd3513bb89a9c0f8499d9cf7",
               "checkFields": [
                 "remote.status",
                 "Object.assign",
@@ -75591,7 +75777,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_5d06c2b6f245ad22b70b0f62",
+              "id": "source_c409698aaa56ff797bcf2d01",
               "checkFields": [
                 "localCursor?.match",
                 "Number.isFinite",
@@ -75683,7 +75869,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_78df32225545174bbb1e9f7d",
+              "id": "source_86ee977ee33b704b5ae196da",
               "checkFields": [],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/HIOB_ERROR_JOURNAL_INVALID",
@@ -75691,7 +75877,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_10a9d95f078289e69f3467c4",
+              "id": "source_82684d6ccfd72827bba50548",
               "checkFields": [
                 "Object.fromEntries",
                 "Object.entries"
@@ -75748,7 +75934,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_f1fd1175704004c4ab3fad16",
+              "id": "source_a3da394ffa49e689ce379181",
               "checkFields": [
                 "uuid.test",
                 "path.join",
@@ -75807,7 +75993,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_fa139a26118402c3ad277364",
+              "id": "source_305db2071103c888b91ab3d1",
               "checkFields": [
                 "ids.runId",
                 "this.boundRunId",
@@ -75827,7 +76013,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_2a5ce202617fbd8160ee409d",
+              "id": "source_c0f8df67ed7ebb5fb070f873",
               "checkFields": [
                 "existing.status",
                 "existing.events",
@@ -75907,7 +76093,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_1c4f4ed31b099ee8667bb54b",
+              "id": "source_bc6cddf06447c7c8ca38909f",
               "checkFields": [
                 "this.store.get",
                 "project.cloud?.runId",
@@ -75920,7 +76106,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_99e8d8c8a20de761049c56b7",
+              "id": "source_6126b400fe6a81f958e4032d",
               "checkFields": [
                 "this.connections.forProject",
                 "this.store.get",
@@ -75932,7 +76118,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_43f86ad86c8fb9d0f426553e",
+              "id": "source_9b0af2265d5efe11b17a7240",
               "checkFields": [
                 "this.store.get",
                 "project.cloud?.runId",
@@ -76009,7 +76195,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_d393cc3378545afcd068cd98",
+              "id": "source_10dbfa9676e69a8655432a69",
               "checkFields": [
                 "this.store.get",
                 "project.cloud?.runId",
@@ -76021,7 +76207,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_451e003a1d0740866d5036bb",
+              "id": "source_dce331c26e96a6d6d1759dd2",
               "checkFields": [
                 "this.store.get",
                 "project.cloud?.runId",
@@ -76104,7 +76290,7 @@
           ],
           "sourceIndex": [
             {
-              "id": "source_4db784d159666044f1dd7e47",
+              "id": "source_cc3e58db78e62c23f11aebfd",
               "checkFields": [
                 "this.projectClient",
                 "client.request",
@@ -76125,7 +76311,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_ab05590bb9aeb3917bca0c44",
+              "id": "source_a26d67b677b4feba02c956b1",
               "checkFields": [
                 "query.set",
                 "client.request",
@@ -97693,7 +97879,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_3d35d8c95f93aa0f6773fc10",
+              "id": "source_0d8b0093fd0e590100314af8",
               "checkFields": [
                 "context.audioRecovery",
                 "this.call",
@@ -136995,7 +137181,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_895ff919852c1df588eebbb5",
+              "id": "source_9beeb043b1999159086eaf1c",
               "checkFields": [
                 "fs.stat",
                 "Object.assign"
@@ -142456,7 +142642,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_66d4ff8c424c5330c9efc251",
+              "id": "source_d8fd71b3f91cff66e3e5243e",
               "checkFields": [
                 "args.action",
                 "args.plan",
@@ -153636,7 +153822,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "확인할 입력·상태: current.status, current.runId, project.cloud.runId.",
+            "cause": "확인할 입력·상태: input.requestId, project.cloud?.runId, current.lastAttemptAt, current.runId, project.cloud.runId, current.payload.requestId, current.payload.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -153665,20 +153851,55 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: current.status, current.runId, project.cloud.runId.",
+          "explanation": "확인할 입력·상태: input.requestId, project.cloud?.runId, current.lastAttemptAt, current.runId, project.cloud.runId, current.payload.requestId, current.payload.",
           "checkFields": [
-            "current.status",
+            "input.requestId",
+            "project.cloud?.runId",
+            "current.lastAttemptAt",
             "current.runId",
-            "project.cloud.runId"
+            "project.cloud.runId",
+            "current.payload.requestId",
+            "current.payload"
           ],
           "sourceIndex": [
             {
-              "id": "source_74f2a64a8a008a1fda11e101",
+              "id": "source_77757cc0c53515348967b5ab",
               "checkFields": [
-                "entry.file",
-                "current.status",
+                "this.store.get",
+                "input.requestId",
+                "project.cloud?.runId",
+                "path.join",
+                "this.directory"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/FEEDBACK_PROJECT_CHANGED",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_866e73d2e48e4bc725e01129",
+              "checkFields": [
+                "current.lastAttemptAt",
                 "current.runId",
-                "project.cloud.runId"
+                "project.cloud.runId",
+                "current.payload.requestId"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/FEEDBACK_PROJECT_CHANGED",
+              "verification": "not_verified",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_cc50bac3d1545c0f44f9b897",
+              "checkFields": [
+                "current.runId",
+                "project.cloud.runId",
+                "entry.file",
+                "this.connections.forProject",
+                "this.store.get",
+                "cloud?.runId",
+                "client.saveFeedback",
+                "current.payload"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/FEEDBACK_PROJECT_CHANGED",
@@ -161561,7 +161782,7 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_2f930bf5906712d8b3e2292d",
+              "id": "source_d5f2be5e033425a8ba2b2c58",
               "checkFields": [
                 "seen.has",
                 "data.inputs.direction?.cuts?.some",
@@ -162604,21 +162825,6 @@
               "selection": "match_actual_failure_not_automatic_diagnosis"
             },
             {
-              "id": "source_90fa19e9e013739974a5c163",
-              "checkFields": [
-                "seen.add",
-                "binding.firstFrame",
-                "binding.seedanceInput",
-                "binding.characterIds.length",
-                "binding.environment",
-                "binding.seedanceInput?.references"
-              ],
-              "sourceKind": "registered_source",
-              "readNext": "hiob://error-recovery/SEEDANCE_LEGACY_FACE_FRAME_BLOCKED",
-              "verification": "contract_tested",
-              "selection": "match_actual_failure_not_automatic_diagnosis"
-            },
-            {
               "id": "source_ebde4b8fa90117f8586cf577",
               "checkFields": [
                 "shot.seedanceInput",
@@ -162632,6 +162838,21 @@
               ],
               "sourceKind": "domain_alias",
               "canonicalCode": "DESKTOP_CAPABILITIES_REFERENCE_SEEDANCE_LEGACY_FACE_FRAME_BLOCKED",
+              "readNext": "hiob://error-recovery/SEEDANCE_LEGACY_FACE_FRAME_BLOCKED",
+              "verification": "contract_tested",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_f30dde9b149296e824203efd",
+              "checkFields": [
+                "seen.add",
+                "binding.firstFrame",
+                "binding.seedanceInput",
+                "binding.characterIds.length",
+                "binding.environment",
+                "binding.seedanceInput?.references"
+              ],
+              "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/SEEDANCE_LEGACY_FACE_FRAME_BLOCKED",
               "verification": "contract_tested",
               "selection": "match_actual_failure_not_automatic_diagnosis"
@@ -162865,7 +163086,7 @@
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_8b8e98cf5876b8c79a476f79",
+              "id": "source_b5d27f805c6aadf66d9260af",
               "checkFields": [
                 "fs.readFile",
                 "bytes.subarray",
