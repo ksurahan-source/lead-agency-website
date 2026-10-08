@@ -1,8 +1,8 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.29",
-  "codeCount": 2017,
+  "version": "1.9.30",
+  "codeCount": 2022,
   "groups": [
     {
       "id": "approval",
@@ -11561,50 +11561,6 @@
           "checkFields": []
         },
         {
-          "code": "EDIT_CAPTIONS_REQUIRED",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "EDIT_CAPTIONS_REQUIRED",
-            "procedure": "edit",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/EDIT_CAPTIONS_REQUIRED",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "편집 검사가 해당 필드의 오류를 반환하지 않고 실제 프리뷰에서 의도한 결과를 확인한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "EDIT_CAPTION_BINDING_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -11739,6 +11695,50 @@
           "checkFields": [
             "plan.beats.filter"
           ]
+        },
+        {
+          "code": "EDIT_CAPTIONS_REQUIRED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "EDIT_CAPTIONS_REQUIRED",
+            "procedure": "edit",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/EDIT_CAPTIONS_REQUIRED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "편집 검사가 해당 필드의 오류를 반환하지 않고 실제 프리뷰에서 의도한 결과를 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
         },
         {
           "code": "EDIT_CLIENT_ASSET_URL_FORBIDDEN",
@@ -13458,13 +13458,13 @@
           "checkFields": []
         },
         {
-          "code": "EDIT_TITLES_REQUIRED",
+          "code": "EDIT_TITLE_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "EDIT_TITLES_REQUIRED",
+            "code": "EDIT_TITLE_INVALID",
             "procedure": "edit",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/EDIT_TITLES_REQUIRED",
+            "readNext": "hiob://error-recovery/EDIT_TITLE_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -13502,13 +13502,13 @@
           "checkFields": []
         },
         {
-          "code": "EDIT_TITLE_INVALID",
+          "code": "EDIT_TITLES_REQUIRED",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "EDIT_TITLE_INVALID",
+            "code": "EDIT_TITLES_REQUIRED",
             "procedure": "edit",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/EDIT_TITLE_INVALID",
+            "readNext": "hiob://error-recovery/EDIT_TITLES_REQUIRED",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -14171,7 +14171,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "cause": "확인할 입력·상태: plan?.narratorScript.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -14200,8 +14200,10 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "explanation": "확인할 입력·상태: plan?.narratorScript.",
+          "checkFields": [
+            "plan?.narratorScript"
+          ]
         }
       ]
     },
@@ -25956,7 +25958,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "이전 설명 혼합 프롬프트는 새로 접수하지 않습니다. 이미 접수한 작업은 generation_status로 조회하고 미접수 기획은 direction_save부터 갱신하세요.",
+            "cause": "새 유료 요청은 참조 이미지와 audioMode에 맞춘 화면·원본 대사 지시가 필요합니다. 현재 기획으로 direction_save → project_sync → storyboard_quote를 실행하세요. 기존 작업은 generation_status로 조회할 수 있습니다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -25985,9 +25987,13 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "이전 설명 혼합 프롬프트는 새로 접수하지 않습니다. 이미 접수한 작업은 generation_status로 조회하고 미접수 기획은 direction_save부터 갱신하세요.",
+          "explanation": "새 유료 요청은 참조 이미지와 audioMode에 맞춘 화면·원본 대사 지시가 필요합니다. 현재 기획으로 direction_save → project_sync → storyboard_quote를 실행하세요. 기존 작업은 generation_status로 조회할 수 있습니다.",
           "checkFields": [
-            "compiled?.promptVersion"
+            "compiled?.promptVersion",
+            "compiled.shots.filter",
+            "plan.selectedShotIds",
+            "plan.shots.map",
+            "compiled.humanLipSyncPolicy"
           ]
         },
         {
@@ -28838,55 +28844,6 @@
           "checkFields": []
         },
         {
-          "code": "NOT_FOUND",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "NOT_FOUND",
-            "procedure": "input",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/NOT_FOUND",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
-          "checkFields": [
-            "result.items.length",
-            "result.items",
-            "body.batchId",
-            "input.jobId"
-          ]
-        },
-        {
           "code": "NO_CHARACTER_REASON_REQUIRED",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -28979,6 +28936,55 @@
             "plan.claims",
             "plan.claims.length",
             "plan.beats.some"
+          ]
+        },
+        {
+          "code": "NOT_FOUND",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "NOT_FOUND",
+            "procedure": "input",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/NOT_FOUND",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "확인할 입력·상태: result.items.length, result.items, body.batchId, input.jobId.",
+          "checkFields": [
+            "result.items.length",
+            "result.items",
+            "body.batchId",
+            "input.jobId"
           ]
         },
         {
@@ -30044,50 +30050,6 @@
           ]
         },
         {
-          "code": "PROOF_ASSETS_REQUIRED",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "PROOF_ASSETS_REQUIRED",
-            "procedure": "input",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/PROOF_ASSETS_REQUIRED",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "PROOF_ASSET_SCOPE_MISMATCH",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -30133,6 +30095,50 @@
             "asset?.id",
             "input.brand"
           ]
+        },
+        {
+          "code": "PROOF_ASSETS_REQUIRED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "PROOF_ASSETS_REQUIRED",
+            "procedure": "input",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/PROOF_ASSETS_REQUIRED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
         },
         {
           "code": "QUERY_INVALID",
@@ -30361,6 +30367,50 @@
           "checkFields": []
         },
         {
+          "code": "REEL_NOT_FOUND",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "REEL_NOT_FOUND",
+            "procedure": "input",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/REEL_NOT_FOUND",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "REELS_LEAF_OUTPUT_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -30412,50 +30462,6 @@
             "procedure": "input",
             "status": "context_required",
             "readNext": "hiob://error-recovery/REELS_LEAF_RESULT_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "코드별 발생 조건의 필드·타입·범위가 현재 스키마를 충족한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "REEL_NOT_FOUND",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "REEL_NOT_FOUND",
-            "procedure": "input",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/REEL_NOT_FOUND",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -35471,7 +35477,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "확인할 입력·상태: job.id, job.revisionId, job.status, job.errorCode.",
+            "cause": "확인할 입력·상태: job.errorCode, job.runId, job.id.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -35500,12 +35506,11 @@
           "recoveryVerification": "not_verified",
           "reviewStatus": "procedure_mapped",
           "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: job.id, job.revisionId, job.status, job.errorCode.",
+          "explanation": "확인할 입력·상태: job.errorCode, job.runId, job.id.",
           "checkFields": [
-            "job.id",
-            "job.revisionId",
-            "job.status",
-            "job.errorCode"
+            "job.errorCode",
+            "job.runId",
+            "job.id"
           ]
         },
         {
@@ -36193,6 +36198,412 @@
           "stopCondition": "파일·권한·승인 연출·비교 원본·실제 motion 관찰이 확인되지 않으면 해당 품질 pass를 중단하고 unverified를 보존한다. 기존 읽기·다운로드·복구·편집은 무효화하지 않는다."
         },
         {
+          "code": "HIOB_INSPECTION_RETRY_EXHAUSTED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_INSPECTION_RETRY_EXHAUSTED",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_INSPECTION_RETRY_EXHAUSTED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "같은 최종 원본에 허용된 호스트 추가 검사 1회를 이미 준비·접수했고 추가 시도도 실패했다. 일반 조회/재준비로 새 UUID를 만들 수 없다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+              "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "retry_guard_tested_customer_unproven",
+          "resolution": "bounded_stop_or_context_repair",
+          "explanation": "같은 최종 원본에 허용된 호스트 추가 검사 1회를 이미 준비·접수했고 추가 시도도 실패했다. 일반 조회/재준비로 새 UUID를 만들 수 없다.",
+          "checkFields": [
+            "current?.status"
+          ],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "호스트가 error_gateway(historyOnly=true)와 기존 검사 응답의 actual jobId/requestId/run을 대조한다. 고객에게 내부 ID·사용량·승인을 다시 작성하게 하지 않는다.",
+            "같은 최종 원본에 허용된 호스트 추가 검사 1회를 이미 준비·접수했고 추가 시도도 실패했다. 일반 조회/재준비로 새 UUID를 만들 수 없다. 현재 권한·원장·원본 또는 실행기 원인을 확인하고 지원된 경로로만 진행한다.",
+            "정상 진행/완료 작업은 조회·재사용하고, 상한 소진/미지원은 원장 삭제·새 UUID·새 유료 생성/렌더로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+            "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+          ],
+          "resume": "원인 수리와 현재 권한/원본·실제 receipt를 확인한 뒤 지원된 같은 검사/독립 관찰을 이어간다. 변경이 없는 실패 호출은 반복하지 않는다.",
+          "retry": {
+            "policy": "일반 조회/동일 준비 replay는 같은 ID; 호스트 추가 시도 1회, 자동 신규 접수 0",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 검사 미확인·미지원 원인·추가 실패·다른 source/권한이면 준비를 중단하고 실제 원인 수리로 진행한다."
+        },
+        {
+          "code": "HIOB_INSPECTION_RETRY_NOT_FAILED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_INSPECTION_RETRY_NOT_FAILED",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_INSPECTION_RETRY_NOT_FAILED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "현재 인증된 검사 상태가 failed가 아니다. queued/dispatching/processing은 대기이며 done은 재사용할 완료 결과다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+              "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "retry_guard_tested_customer_unproven",
+          "resolution": "bounded_stop_or_context_repair",
+          "explanation": "현재 인증된 검사 상태가 failed가 아니다. queued/dispatching/processing은 대기이며 done은 재사용할 완료 결과다.",
+          "checkFields": [
+            "job.status"
+          ],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "호스트가 error_gateway(historyOnly=true)와 기존 검사 응답의 actual jobId/requestId/run을 대조한다. 고객에게 내부 ID·사용량·승인을 다시 작성하게 하지 않는다.",
+            "현재 인증된 검사 상태가 failed가 아니다. queued/dispatching/processing은 대기이며 done은 재사용할 완료 결과다. 현재 권한·원장·원본 또는 실행기 원인을 확인하고 지원된 경로로만 진행한다.",
+            "정상 진행/완료 작업은 조회·재사용하고, 상한 소진/미지원은 원장 삭제·새 UUID·새 유료 생성/렌더로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+            "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+          ],
+          "resume": "원인 수리와 현재 권한/원본·실제 receipt를 확인한 뒤 지원된 같은 검사/독립 관찰을 이어간다. 변경이 없는 실패 호출은 반복하지 않는다.",
+          "retry": {
+            "policy": "일반 조회/동일 준비 replay는 같은 ID; 호스트 추가 시도 1회, 자동 신규 접수 0",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 검사 미확인·미지원 원인·추가 실패·다른 source/권한이면 준비를 중단하고 실제 원인 수리로 진행한다."
+        },
+        {
+          "code": "HIOB_INSPECTION_RETRY_SOURCE_CHANGED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_INSPECTION_RETRY_SOURCE_CHANGED",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_INSPECTION_RETRY_SOURCE_CHANGED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "현재 연결·run·최종 파일/bytes/SHA·렌더 job/revision·inputSha가 실패 당시 검사 대상과 달라졌다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+              "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "retry_guard_tested_customer_unproven",
+          "resolution": "bounded_stop_or_context_repair",
+          "explanation": "현재 연결·run·최종 파일/bytes/SHA·렌더 job/revision·inputSha가 실패 당시 검사 대상과 달라졌다.",
+          "checkFields": [
+            "project.delivery",
+            "source.sourceBytes",
+            "project.connectionId"
+          ],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "호스트가 error_gateway(historyOnly=true)와 기존 검사 응답의 actual jobId/requestId/run을 대조한다. 고객에게 내부 ID·사용량·승인을 다시 작성하게 하지 않는다.",
+            "현재 연결·run·최종 파일/bytes/SHA·렌더 job/revision·inputSha가 실패 당시 검사 대상과 달라졌다. 현재 권한·원장·원본 또는 실행기 원인을 확인하고 지원된 경로로만 진행한다.",
+            "정상 진행/완료 작업은 조회·재사용하고, 상한 소진/미지원은 원장 삭제·새 UUID·새 유료 생성/렌더로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+            "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+          ],
+          "resume": "원인 수리와 현재 권한/원본·실제 receipt를 확인한 뒤 지원된 같은 검사/독립 관찰을 이어간다. 변경이 없는 실패 호출은 반복하지 않는다.",
+          "retry": {
+            "policy": "일반 조회/동일 준비 replay는 같은 ID; 호스트 추가 시도 1회, 자동 신규 접수 0",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 검사 미확인·미지원 원인·추가 실패·다른 source/권한이면 준비를 중단하고 실제 원인 수리로 진행한다."
+        },
+        {
+          "code": "HIOB_INSPECTION_RETRY_UNAVAILABLE",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_INSPECTION_RETRY_UNAVAILABLE",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_INSPECTION_RETRY_UNAVAILABLE",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "현재 프로젝트의 기존 검사 원장에서 지정한 실제 검사 ID를 찾을 수 없다. 생성 jobId와 검사 jobId를 혼동했거나 해당 작업의 권한/원장이 없다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+              "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "retry_guard_tested_customer_unproven",
+          "resolution": "bounded_stop_or_context_repair",
+          "explanation": "현재 프로젝트의 기존 검사 원장에서 지정한 실제 검사 ID를 찾을 수 없다. 생성 jobId와 검사 jobId를 혼동했거나 해당 작업의 권한/원장이 없다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "호스트가 error_gateway(historyOnly=true)와 기존 검사 응답의 actual jobId/requestId/run을 대조한다. 고객에게 내부 ID·사용량·승인을 다시 작성하게 하지 않는다.",
+            "현재 프로젝트의 기존 검사 원장에서 지정한 실제 검사 ID를 찾을 수 없다. 생성 jobId와 검사 jobId를 혼동했거나 해당 작업의 권한/원장이 없다. 현재 권한·원장·원본 또는 실행기 원인을 확인하고 지원된 경로로만 진행한다.",
+            "정상 진행/완료 작업은 조회·재사용하고, 상한 소진/미지원은 원장 삭제·새 UUID·새 유료 생성/렌더로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+            "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+          ],
+          "resume": "원인 수리와 현재 권한/원본·실제 receipt를 확인한 뒤 지원된 같은 검사/독립 관찰을 이어간다. 변경이 없는 실패 호출은 반복하지 않는다.",
+          "retry": {
+            "policy": "일반 조회/동일 준비 replay는 같은 ID; 호스트 추가 시도 1회, 자동 신규 접수 0",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 검사 미확인·미지원 원인·추가 실패·다른 source/권한이면 준비를 중단하고 실제 원인 수리로 진행한다."
+        },
+        {
+          "code": "HIOB_INSPECTION_RETRY_UNSUPPORTED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "HIOB_INSPECTION_RETRY_UNSUPPORTED",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/HIOB_INSPECTION_RETRY_UNSUPPORTED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "최종 v3의 FAILED/TIMEOUT 일시 실패 이외의 kind/version/원인에는 이 재시도 준비를 지원하지 않는다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+              "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "unit_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "unit_tested",
+          "reviewStatus": "retry_guard_tested_customer_unproven",
+          "resolution": "bounded_stop_or_context_repair",
+          "explanation": "최종 v3의 FAILED/TIMEOUT 일시 실패 이외의 kind/version/원인에는 이 재시도 준비를 지원하지 않는다.",
+          "checkFields": [
+            "job.status",
+            "project.delivery"
+          ],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "호스트가 error_gateway(historyOnly=true)와 기존 검사 응답의 actual jobId/requestId/run을 대조한다. 고객에게 내부 ID·사용량·승인을 다시 작성하게 하지 않는다.",
+            "최종 v3의 FAILED/TIMEOUT 일시 실패 이외의 kind/version/원인에는 이 재시도 준비를 지원하지 않는다. 현재 권한·원장·원본 또는 실행기 원인을 확인하고 지원된 경로로만 진행한다.",
+            "정상 진행/완료 작업은 조회·재사용하고, 상한 소진/미지원은 원장 삭제·새 UUID·새 유료 생성/렌더로 우회하지 않는다."
+          ],
+          "successCriteria": [
+            "진행/완료/손상/원본 변경/추가 시도 소진에 새 접수 0이며 같은 원래 job/request가 보존된다.",
+            "유효한 기존 최종 failed receipt와 지원 원인·동일 source 조건이면 1회 준비가 같은 requestId로 재조회된다. 조건부 중단은 제작 완료 증거가 아니다."
+          ],
+          "resume": "원인 수리와 현재 권한/원본·실제 receipt를 확인한 뒤 지원된 같은 검사/독립 관찰을 이어간다. 변경이 없는 실패 호출은 반복하지 않는다.",
+          "retry": {
+            "policy": "일반 조회/동일 준비 replay는 같은 ID; 호스트 추가 시도 1회, 자동 신규 접수 0",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "현재 검사 미확인·미지원 원인·추가 실패·다른 source/권한이면 준비를 중단하고 실제 원인 수리로 진행한다."
+        },
+        {
           "code": "INSPECTION_TIMEOUT",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -36279,6 +36690,85 @@
           "resolution": "conditional_recovery",
           "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
           "checkFields": []
+        },
+        {
+          "code": "MCP_MEDIA_ARTIFACT_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "MCP_MEDIA_ARTIFACT_INVALID",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/MCP_MEDIA_ARTIFACT_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "파생 contact sheet/무음 preview/혼합 음원의 형식·시그니처·크기·영상 길이 또는 검사 probe가 유효하지 않다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "contract_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "conditioned_operator_recovery",
+          "explanation": "파생 contact sheet/무음 preview/혼합 음원의 형식·시그니처·크기·영상 길이 또는 검사 probe가 유효하지 않다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "원본과 검사 job/request를 보존하고 파생 산출물의 MIME·bytes·SHA·JPEG 시그니처·MP4 길이/화질·오디오 여부를 대조한다. 실행기/산출물 저장을 수리한다. 파생 검사 실패를 원본 유료 생성·렌더로 대신하지 않는다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
         },
         {
           "code": "MCP_MEDIA_AUDIO_DURATION_INVALID",
@@ -36427,7 +36917,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "cause": "검사 실행·dispatch 또는 반환 결과를 확정하지 못한 서버 검사 실패다. 고객의 대본·목소리·크레딧 값을 바꿔 해결하지 않는다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -36440,7 +36930,8 @@
             "executionAuthorized": false,
             "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
             "resumeCondition": [
-              "같은 원본 SHA의 검사 결과가 저장되고 현재 입력과 일치한다."
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
             ],
             "preserves": [
               "approved_script",
@@ -36450,14 +36941,127 @@
               "existing_job_request",
               "unresolved_feedback"
             ],
-            "verification": "not_verified",
+            "verification": "contract_tested",
             "authority": "diagnostic_routing_not_repair_or_quality_proof"
           },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "bounded_host_recovery",
+          "explanation": "검사 실행·dispatch 또는 반환 결과를 확정하지 못한 서버 검사 실패다. 고객의 대본·목소리·크레딧 값을 바꿔 해결하지 않는다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "호스트가 실제 failed 검사와 job/request/run을 대조한다. 최종 v3의 같은 MP4인 경우에만 inspection_retry_prepare로 현재 권한·원본을 확인해 추가 1회 준비한다. 일반 검수 호출은 실패한 요청을 그대로 조회한다. 추가 실패·불명확 상태는 원인 계보를 남기고 실행기/dispatch/결과 계약을 수리한다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
+        },
+        {
+          "code": "MCP_MEDIA_INSPECTION_TIMEOUT",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "MCP_MEDIA_INSPECTION_TIMEOUT",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/MCP_MEDIA_INSPECTION_TIMEOUT",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "네이티브 검사 전체 450초 deadline 또는 고정된 하위 프로세스 제한 시간을 초과한 상태다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "contract_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "bounded_host_recovery",
+          "explanation": "네이티브 검사 전체 450초 deadline 또는 고정된 하위 프로세스 제한 시간을 초과한 상태다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "호스트가 실패한 검사 job/request와 현재 원본을 확인한다. 최종 v3의 같은 MP4이면 inspection_retry_prepare가 failed receipt·동일 source/render/inputSha를 검증해 추가 1회만 준비하고 다음 review_evidence가 같은 prepared request를 접수/조회한다. 추가 실패는 실행기 용량·timeout 원인을 수리하며 반복 접수하지 않는다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
         },
         {
           "code": "MCP_MEDIA_MASTER_INVALID",
@@ -36866,6 +37470,246 @@
             "request.sourceBytes",
             "request.sourceSha256"
           ]
+        },
+        {
+          "code": "MCP_MEDIA_VIDEO_DURATION_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "MCP_MEDIA_VIDEO_DURATION_INVALID",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_DURATION_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "visual 180초/final 600초 범위를 벗어나거나 실제 마지막 디코딩 프레임과 메타데이터 길이가 일치하지 않는다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "contract_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "conditioned_operator_recovery",
+          "explanation": "visual 180초/final 600초 범위를 벗어나거나 실제 마지막 디코딩 프레임과 메타데이터 길이가 일치하지 않는다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "원본 길이와 마지막 프레임 시각을 대조한다. 고객의 승인 전문·타이밍을 임의로 자르지 않는다. 잘못된 metadata이면 ffprobe/실행기를 수리하고 범위를 벗어난 원본의 편집 변경은 실제 선택 근거를 확인한다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
+        },
+        {
+          "code": "MCP_MEDIA_VIDEO_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "MCP_MEDIA_VIDEO_INVALID",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "영상 컨테이너·코덱·화면 크기·프레임레이트·디코딩 시간표가 검사 범위에 맞지 않거나 메타데이터가 손상됐다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "contract_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "conditioned_operator_recovery",
+          "explanation": "영상 컨테이너·코덱·화면 크기·프레임레이트·디코딩 시간표가 검사 범위에 맞지 않거나 메타데이터가 손상됐다.",
+          "checkFields": [],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "실제 원본의 존재·SHA/bytes와 ffprobe의 streams·codec·dimensions·fps·rotation·decoded frame time을 대조한다. 잘못된 원본이면 승인 원본을 보존한 채 유효한 자료를 별도로 준비하고, 유효 원본의 검사 출력이 손상됐으면 실행기를 수리한다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
+        },
+        {
+          "code": "MCP_MEDIA_VIDEO_SIGNAL_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "MCP_MEDIA_VIDEO_SIGNAL_INVALID",
+            "procedure": "inspection",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_SIGNAL_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "검은 화면·무음 구간·음량 값이 비정상/미완료이거나 FFmpeg 측정이 실제 영상 끝까지 완료되지 않았다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+              "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "contract_tested",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "contract_tested",
+          "reviewStatus": "producer_and_retry_tested_customer_unproven",
+          "resolution": "conditioned_operator_recovery",
+          "explanation": "검은 화면·무음 구간·음량 값이 비정상/미완료이거나 FFmpeg 측정이 실제 영상 끝까지 완료되지 않았다.",
+          "checkFields": [
+            "result.push",
+            "result.length"
+          ],
+          "alternatives": [
+            {
+              "id": "preserve_and_observe_original",
+              "description": "기존 원본을 현재 권한으로 다운로드해 지원된 독립 화면·소리 관찰을 계속한다.",
+              "conditions": [
+                "실제 원본 bytes/SHA와 기존 승인 범위 일치",
+                "검사 실패를 서버 완료·품질 pass로 표시하지 않음"
+              ]
+            },
+            {
+              "id": "repair_inspector",
+              "description": "실패한 검사 원장으로 실행기/파서/파생 저장의 실제 조건을 수리한다.",
+              "conditions": [
+                "실제 failed job/request와 현재 실행기 로그 대조",
+                "운영 수리 후 같은 producer 조건의 회귀와 정규 배포 확인"
+              ]
+            }
+          ],
+          "steps": [
+            "오류의 실제 검사 jobId·requestId·runId와 원본 SHA/bytes·kind/inspectorVersion을 incident에 보존한다. error_gateway(historyOnly=true)로 같은 사건과 중앙 수신을 확인한다.",
+            "같은 원본·검사 job/request를 보존하고 FFmpeg progress=end/out_time, 음량 값의 유한성·개수·순서, 구간 끝과 실제 길이를 대조한다. 측정 파서/실행 조건을 수리한다. 불완전 결과를 pass로 기록하지 않는다.",
+            "일반 조회는 실패 request를 바꾸지 않는다. 원본 손상·미확인·다른 원본·권한 실패에 새 검사를 만들지 않는다. 기존 대본·목소리·타이밍·성공 자산을 보존하고 실제 영상·소리 관찰 전 품질 pass/고객 전달 완료로 표시하지 않는다."
+          ],
+          "successCriteria": [
+            "같은 원본 SHA/bytes를 보존한 실제 producer가 유효한 검사 조건에서 완료 receipt를 만들고 현재 run/source/kind와 일치한다.",
+            "실패한 원래 검사와 요청은 이력에 남고 통신 불명은 같은 prepared 요청으로 확인한다. 실제 고객 서버/영상 품질 증거는 별도로 확인한다."
+          ],
+          "resume": "현재 권한과 같은 원본의 완료 receipt를 확인한 뒤 실제 원본→발화/립싱크→최종 관찰을 이어간다. 지원되지 않는 실패는 운영 수리 또는 지원된 독립 관찰을 진행하며 실패 상태를 자동 해제하지 않는다.",
+          "retry": {
+            "policy": "일반 조회는 실패 ID를 보존한다. 지원되는 최종 FAILED/TIMEOUT만 명시적 호스트 준비로 추가 1회; 나머지 코드의 동일 재접수는 지원하지 않는다.",
+            "maxAutomaticAttempts": 0,
+            "preserveIdentity": true
+          },
+          "stopCondition": "같은 원본의 호스트 추가 시도 1회 실패·원본 변경·손상·권한 실패·불명확 상태이면 신규 접수를 중단하고 실제 원인 수리 또는 지원된 독립 작업으로 진행한다. 원장 삭제/UUID 교체로 상한을 우회하지 않는다."
         }
       ]
     },
@@ -41661,50 +42505,6 @@
           ]
         },
         {
-          "code": "DESKTOP_FILES_INCOMPLETE",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "DESKTOP_FILES_INCOMPLETE",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/DESKTOP_FILES_INCOMPLETE",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "DESKTOP_FILE_NOT_IN_REVISION",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -41749,6 +42549,50 @@
           "checkFields": [
             "file.bytes"
           ]
+        },
+        {
+          "code": "DESKTOP_FILES_INCOMPLETE",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "DESKTOP_FILES_INCOMPLETE",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/DESKTOP_FILES_INCOMPLETE",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
         },
         {
           "code": "DESKTOP_GENERATION_ALREADY_ACTIVE",
@@ -51415,229 +52259,6 @@
           ]
         },
         {
-          "code": "MCP_MEDIA_ARTIFACT_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "MCP_MEDIA_ARTIFACT_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/MCP_MEDIA_ARTIFACT_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "MCP_MEDIA_INSPECTION_TIMEOUT",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "MCP_MEDIA_INSPECTION_TIMEOUT",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/MCP_MEDIA_INSPECTION_TIMEOUT",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "MCP_MEDIA_VIDEO_DURATION_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "MCP_MEDIA_VIDEO_DURATION_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_DURATION_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "MCP_MEDIA_VIDEO_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "MCP_MEDIA_VIDEO_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "MCP_MEDIA_VIDEO_SIGNAL_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "MCP_MEDIA_VIDEO_SIGNAL_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/MCP_MEDIA_VIDEO_SIGNAL_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: result.push, result.length.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: result.push, result.length.",
-          "checkFields": [
-            "result.push",
-            "result.length"
-          ]
-        },
-        {
           "code": "MCP_RENDER_FORBIDDEN",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -53840,6 +54461,96 @@
           "checkFields": []
         },
         {
+          "code": "NO_BRAND_PRODUCT_IMAGE",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "NO_BRAND_PRODUCT_IMAGE",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/NO_BRAND_PRODUCT_IMAGE",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "확인할 입력·상태: input.brand.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: input.brand.",
+          "checkFields": [
+            "input.brand"
+          ]
+        },
+        {
+          "code": "NO_LISTING_LOCK",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "NO_LISTING_LOCK",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/NO_LISTING_LOCK",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "NOT_A_REAL_BRAND",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -53931,96 +54642,6 @@
             "body.input",
             "body.nodeId"
           ]
-        },
-        {
-          "code": "NO_BRAND_PRODUCT_IMAGE",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "NO_BRAND_PRODUCT_IMAGE",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/NO_BRAND_PRODUCT_IMAGE",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: input.brand.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: input.brand.",
-          "checkFields": [
-            "input.brand"
-          ]
-        },
-        {
-          "code": "NO_LISTING_LOCK",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "NO_LISTING_LOCK",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/NO_LISTING_LOCK",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
         },
         {
           "code": "ONBOARDING_WORKSPACE",
@@ -55174,50 +55795,6 @@
           "checkFields": []
         },
         {
-          "code": "PLANET_ORDERS_READ_FAILED",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "PLANET_ORDERS_READ_FAILED",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/PLANET_ORDERS_READ_FAILED",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "PLAN_QUOTA_EXCEEDED",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -55264,6 +55841,50 @@
           ]
         },
         {
+          "code": "PLANET_ORDERS_READ_FAILED",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "PLANET_ORDERS_READ_FAILED",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/PLANET_ORDERS_READ_FAILED",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "PRIVATE_NETWORK_DETAIL",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -55271,6 +55892,50 @@
             "procedure": "operator",
             "status": "context_required",
             "readNext": "hiob://error-recovery/PRIVATE_NETWORK_DETAIL",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -55893,50 +56558,6 @@
             "procedure": "operator",
             "status": "context_required",
             "readNext": "hiob://error-recovery/PRODUCER_VIDEO_TOO_SHORT",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
-          "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/PRODUCE_BINDING_PLACEHOLDER_PATCH_TARGET_MISSING",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -65223,6 +65844,142 @@
           "checkFields": []
         },
         {
+          "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "확인할 입력·상태: request.jwt.claims.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: request.jwt.claims.",
+          "checkFields": [
+            "request.jwt.claims"
+          ]
+        },
+        {
+          "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_INPUT_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "확인할 입력·상태: request.jwt.claims.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "확인할 입력·상태: request.jwt.claims.",
+          "checkFields": [
+            "request.jwt.claims"
+          ]
+        },
+        {
+          "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
           "code": "STORYBOARD_APPROVAL_CONFLICT",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -65487,13 +66244,13 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_CARDS_INVALID",
+          "code": "STORYBOARD_CARD_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_CARDS_INVALID",
+            "code": "STORYBOARD_CARD_INVALID",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_CARDS_INVALID",
+            "readNext": "hiob://error-recovery/STORYBOARD_CARD_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -65531,13 +66288,13 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_CARD_INVALID",
+          "code": "STORYBOARD_CARDS_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_CARD_INVALID",
+            "code": "STORYBOARD_CARDS_INVALID",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_CARD_INVALID",
+            "readNext": "hiob://error-recovery/STORYBOARD_CARDS_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -66103,50 +66860,6 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_IMAGES_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_IMAGES_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_IMAGES_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "STORYBOARD_IMAGE_CARD_MISMATCH",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -66374,6 +67087,50 @@
             "procedure": "operator",
             "status": "context_required",
             "readNext": "hiob://error-recovery/STORYBOARD_IMAGE_SET_ITEM_INVALID",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "diagnosis_required",
+          "resolution": "operator_diagnosis_required",
+          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
+          "checkFields": []
+        },
+        {
+          "code": "STORYBOARD_IMAGES_INVALID",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "STORYBOARD_IMAGES_INVALID",
+            "procedure": "operator",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/STORYBOARD_IMAGES_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -67027,13 +67784,13 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_REVISION_ITEMS_INVALID",
+          "code": "STORYBOARD_REVISION_ITEM_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_REVISION_ITEMS_INVALID",
+            "code": "STORYBOARD_REVISION_ITEM_INVALID",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_REVISION_ITEMS_INVALID",
+            "readNext": "hiob://error-recovery/STORYBOARD_REVISION_ITEM_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -67071,13 +67828,13 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_REVISION_ITEM_INVALID",
+          "code": "STORYBOARD_REVISION_ITEMS_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_REVISION_ITEM_INVALID",
+            "code": "STORYBOARD_REVISION_ITEMS_INVALID",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_REVISION_ITEM_INVALID",
+            "readNext": "hiob://error-recovery/STORYBOARD_REVISION_ITEMS_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -67379,50 +68136,6 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_VOICE_OUTPUTS_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_VOICE_OUTPUTS_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_VOICE_OUTPUTS_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "이 오류의 검증 조건은 코드별 상세 문서의 발생 위치에서 확인합니다.",
-          "checkFields": []
-        },
-        {
           "code": "STORYBOARD_VOICE_OUTPUT_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -67467,13 +68180,13 @@
           "checkFields": []
         },
         {
-          "code": "STORYBOARD_VOICE_PREVIEW_STALE",
+          "code": "STORYBOARD_VOICE_OUTPUTS_INVALID",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORYBOARD_VOICE_PREVIEW_STALE",
+            "code": "STORYBOARD_VOICE_OUTPUTS_INVALID",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORYBOARD_VOICE_PREVIEW_STALE",
+            "readNext": "hiob://error-recovery/STORYBOARD_VOICE_OUTPUTS_INVALID",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -67511,105 +68224,13 @@
           "checkFields": []
         },
         {
-          "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+          "code": "STORYBOARD_VOICE_PREVIEW_STALE",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
+            "code": "STORYBOARD_VOICE_PREVIEW_STALE",
             "procedure": "operator",
             "status": "context_required",
-            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_CALLER_FORBIDDEN",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: request.jwt.claims.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: request.jwt.claims.",
-          "checkFields": [
-            "request.jwt.claims"
-          ]
-        },
-        {
-          "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORY_V4_STUDIO_STAGE_INPUT_INVALID",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_INPUT_INVALID",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: request.jwt.claims.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "해당 코드의 실제 발생 조건을 담당자가 해소하고 같은 입력의 재현이 통과한다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "diagnosis_required",
-          "resolution": "operator_diagnosis_required",
-          "explanation": "확인할 입력·상태: request.jwt.claims.",
-          "checkFields": [
-            "request.jwt.claims"
-          ]
-        },
-        {
-          "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
-            "procedure": "operator",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/STORY_V4_STUDIO_STAGE_SCOPE_FORBIDDEN",
+            "readNext": "hiob://error-recovery/STORYBOARD_VOICE_PREVIEW_STALE",
             "diagnose": null,
             "requiredContext": [
               "projectId"
@@ -87634,53 +88255,6 @@
           ]
         },
         {
-          "code": "SEEDANCE_INPUT_MODEL_MISMATCH",
-          "workflow": {
-            "schema": "HiobRecoveryWorkflow.v1",
-            "code": "SEEDANCE_INPUT_MODEL_MISMATCH",
-            "procedure": "seedance",
-            "status": "context_required",
-            "readNext": "hiob://error-recovery/SEEDANCE_INPUT_MODEL_MISMATCH",
-            "diagnose": null,
-            "requiredContext": [
-              "projectId"
-            ],
-            "cause": "확인할 입력·상태: asset.referenceFile, asset.seedanceInput.",
-            "evidenceRequired": [
-              "original_error_code",
-              "failing_tool",
-              "existing_run_job_request",
-              "current_state_or_receipt"
-            ],
-            "automaticRetry": false,
-            "maxAutomaticAttempts": 0,
-            "createNewRequest": false,
-            "executionAuthorized": false,
-            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
-            "resumeCondition": [
-              "얼굴 없는 실제 입력·역할·해시가 현재 모델 스키마와 맞고 기존 승인 선택이 유지된다."
-            ],
-            "preserves": [
-              "approved_script",
-              "selected_voice",
-              "timing",
-              "original_assets",
-              "existing_job_request",
-              "unresolved_feedback"
-            ],
-            "verification": "not_verified",
-            "authority": "diagnostic_routing_not_repair_or_quality_proof"
-          },
-          "recoveryVerification": "not_verified",
-          "reviewStatus": "procedure_mapped",
-          "resolution": "conditional_recovery",
-          "explanation": "확인할 입력·상태: asset.referenceFile, asset.seedanceInput.",
-          "checkFields": [
-            "asset.referenceFile",
-            "asset.seedanceInput"
-          ]
-        },
-        {
           "code": "SEEDANCE_INPUT_MODE_UNSUPPORTED",
           "workflow": {
             "schema": "HiobRecoveryWorkflow.v1",
@@ -87725,6 +88299,53 @@
           "checkFields": [
             "input.policy",
             "input.mode"
+          ]
+        },
+        {
+          "code": "SEEDANCE_INPUT_MODEL_MISMATCH",
+          "workflow": {
+            "schema": "HiobRecoveryWorkflow.v1",
+            "code": "SEEDANCE_INPUT_MODEL_MISMATCH",
+            "procedure": "seedance",
+            "status": "context_required",
+            "readNext": "hiob://error-recovery/SEEDANCE_INPUT_MODEL_MISMATCH",
+            "diagnose": null,
+            "requiredContext": [
+              "projectId"
+            ],
+            "cause": "확인할 입력·상태: asset.referenceFile, asset.seedanceInput.",
+            "evidenceRequired": [
+              "original_error_code",
+              "failing_tool",
+              "existing_run_job_request",
+              "current_state_or_receipt"
+            ],
+            "automaticRetry": false,
+            "maxAutomaticAttempts": 0,
+            "createNewRequest": false,
+            "executionAuthorized": false,
+            "stopCondition": "같은 오류와 같은 입력·작업 상태가 유지되면 실패 호출을 반복하지 않습니다. 진단이 실패하거나 권한·제공사·관찰이 필요하면 사건을 보존하고 작업판의 독립 작업을 진행합니다.",
+            "resumeCondition": [
+              "얼굴 없는 실제 입력·역할·해시가 현재 모델 스키마와 맞고 기존 승인 선택이 유지된다."
+            ],
+            "preserves": [
+              "approved_script",
+              "selected_voice",
+              "timing",
+              "original_assets",
+              "existing_job_request",
+              "unresolved_feedback"
+            ],
+            "verification": "not_verified",
+            "authority": "diagnostic_routing_not_repair_or_quality_proof"
+          },
+          "recoveryVerification": "not_verified",
+          "reviewStatus": "procedure_mapped",
+          "resolution": "conditional_recovery",
+          "explanation": "확인할 입력·상태: asset.referenceFile, asset.seedanceInput.",
+          "checkFields": [
+            "asset.referenceFile",
+            "asset.seedanceInput"
           ]
         },
         {
