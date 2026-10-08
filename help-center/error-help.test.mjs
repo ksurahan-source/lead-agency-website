@@ -25,3 +25,11 @@ test('specific length and face-input errors publish conditional alternatives wit
   for(const alternative of entry.alternatives){assert.ok(html.includes(alternative.description));for(const condition of alternative.conditions)assert.ok(html.includes(condition));}
  }
 });
+test('all public code entries carry bounded recovery guidance rendered in their canonical group',async()=>{
+ const data=JSON.parse(await fs.readFile(new URL('./src/errorHelp.generated.json',import.meta.url)));
+ for(const group of data.groups){
+  const html=await fs.readFile(new URL(`./dist/help/errors/${group.id}/index.html`,import.meta.url),'utf8');
+  assert.ok(html.includes('막혔을 때 이어가는 방법'),group.id);
+  for(const entry of group.codes){assert.equal(entry.workflow.code,entry.code);assert.equal(entry.workflow.automaticRetry,false);assert.ok(html.includes(entry.workflow.stopCondition));assert.equal(entry.workflow.identity,undefined);}
+ }
+});
