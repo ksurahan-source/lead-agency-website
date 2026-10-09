@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.35",
+  "version": "1.9.36",
   "codeCount": 2115,
   "groups": [
     {
@@ -140593,7 +140593,7 @@
       "owner": "host",
       "steps": [
         "저장된 원문·기획·대본·연출·스토리보드와 오류가 지목한 필수 자료를 조회한다.",
-        "부족한 구조와 연결을 기존 승인 자료에서 채운다. 대본 전문·한 나레이터·타이밍을 유지하며 새로운 내용 변경만 고객에게 검토받는다.",
+        "부족한 구조와 연결을 기존 승인 자료에서 채운다. 대본 전문·승인 화자 구성·타이밍을 유지하며 새로운 내용 변경만 고객에게 검토받는다.",
         "현재 버전의 자료로 준비 검사와 컴파일을 다시 수행하고 해당 누락 항목이 해소됐는지 확인한다."
       ],
       "successCriteria": [
@@ -158679,7 +158679,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "발화 장면의 화자가 승인 한 나레이터와 다르다.",
+            "cause": "명시적 beat.speakerId가 비어 있거나 문자열이 아니거나 240자를 넘는다. 코드 이름은 호환 목적으로 유지하며, 승인된 복수 화자 자체는 금지하지 않는다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -158709,13 +158709,13 @@
           "recoveryVerification": "contract_tested",
           "reviewStatus": "predicate_and_transport_tested_customer_unproven",
           "resolution": "conditioned_source_recovery",
-          "explanation": "발화 장면의 화자가 승인 한 나레이터와 다르다.",
+          "explanation": "명시적 beat.speakerId가 비어 있거나 문자열이 아니거나 240자를 넘는다. 코드 이름은 호환 목적으로 유지하며, 승인된 복수 화자 자체는 금지하지 않는다.",
           "checkFields": [
             "plan.beats[].speakerId"
           ],
           "sourceIndex": [
             {
-              "id": "source_aa43ce5813b5be3eae3e824d",
+              "id": "source_6b14846909ed0727b977306a",
               "checkFields": [
                 "plan.narratorScript.text.length",
                 "plan.narratorScript.speakerId",
@@ -158723,7 +158723,8 @@
                 "b.narration",
                 "plan.narratorScript.text",
                 "speech.some",
-                "b.speakerId"
+                "b.speakerId",
+                "b.speakerId.length"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/DESKTOP_PRODUCTION_SINGLE_NARRATOR_REQUIRED",
@@ -158752,7 +158753,7 @@
           ],
           "steps": [
             "호스트가 현재 프로젝트·원래 run/job/request와 error_gateway(historyOnly=true)를 조회하고 기존 전문·목소리·시간·원본을 보존한다.",
-            "현재 승인 speakerId를 모든 발화 장면에 동일하게 연결한다. 다른 프로젝트 화자를 상속하지 않는다.",
+            "호스트가 오류 beat의 기존 승인 화자 ID를 복원한다. beat.speakerId를 생략하면 narratorScript.speakerId가 기본값이며 명시한 다른 유효 화자는 허용한다. 2인 순정 요청을 하나의 화자로 합치지 않는다.",
             "같은 승인 원본을 project_sync로 연결하고 production_readiness/capability_prepare의 현재 누락을 확인한다."
           ],
           "successCriteria": [
@@ -159848,7 +159849,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "기획 저장 또는 대본 검증에서 승인 원문/전문/시간 보존이나 승인 수정 이력 연결이 다르다. amendment 실패에는 whitelist cause ID가 연결되고 EACCES/ENOENT/typed read는 원래 실패로 전달된다.",
+            "cause": "기획 저장 또는 대본 검증에서 승인 원문/전문/시간 보존이나 승인 수정 이력 연결이 다르다. amendment 실패에는 whitelist cause ID가 연결되고 EACCES/ENOENT/typed read는 원래 실패로 전달된다. speaker_mismatch는 비어 있는 화자 ID 또는 beat별 승인 배역 연결 불일치다. MiniMax 순정 2인 대화는 허용한다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -159878,20 +159879,25 @@
           "recoveryVerification": "contract_tested",
           "reviewStatus": "predicate_and_transport_tested_customer_unproven",
           "resolution": "conditioned_source_recovery",
-          "explanation": "기획 저장 또는 대본 검증에서 승인 원문/전문/시간 보존이나 승인 수정 이력 연결이 다르다. amendment 실패에는 whitelist cause ID가 연결되고 EACCES/ENOENT/typed read는 원래 실패로 전달된다.",
+          "explanation": "기획 저장 또는 대본 검증에서 승인 원문/전문/시간 보존이나 승인 수정 이력 연결이 다르다. amendment 실패에는 whitelist cause ID가 연결되고 EACCES/ENOENT/typed read는 원래 실패로 전달된다. speaker_mismatch는 비어 있는 화자 ID 또는 beat별 승인 배역 연결 불일치다. MiniMax 순정 2인 대화는 허용한다.",
           "checkFields": [
-            "sourceDecisions/narratorScript/sourceAmendments"
+            "sourceDecisions/narratorScript/sourceAmendments",
+            "beats[].speakerId/direction.speakers[].castId"
           ],
           "sourceIndex": [
             {
-              "id": "source_41c8d54c18d94a7670ff3ee9",
+              "id": "source_41647757e615efa713514f37",
               "checkFields": [
                 "plan.narratorScript",
                 "spoken.some",
                 "speaking.get",
                 "b.id",
+                "b.speakerId",
                 "plan.narratorScript.speakerId",
-                "profile.narratorDominant"
+                "beat.speakerId",
+                "narratorScript.speakerId",
+                "d.assets.map",
+                "a.id"
               ],
               "sourceKind": "registered_source",
               "readNext": "hiob://error-recovery/HIOB_SCRIPT_SOURCE_CONFLICT",
@@ -160016,7 +160022,7 @@
           ],
           "steps": [
             "호스트가 error_gateway(historyOnly=true)와 같은 run/revision/inputSha 및 실제 request/job ID를 조회한다. 접수 전 job/task는 만들지 않고 기존 원본·승인 전문·목소리·타이밍을 보존한다.",
-            "reason/fields와 원본 기획 및 causes를 대조해 실제 기존 자료를 복원한다. 새로운 고객 수정 선택은 원문 그대로 sourceRevisionApproval로 연결하고 승인 이력을 지우지 않는다.",
+            "reason/fields와 원본 기획 및 causes를 대조해 실제 기존 자료를 복원한다. 새로운 고객 수정 선택은 원문 그대로 sourceRevisionApproval로 연결하고 승인 이력을 지우지 않는다. speaker_mismatch는 beat.speakerId(생략 시 narratorScript.speakerId)와 direction.speakers.castId를 같은 승인 배역에 연결한다. 두 화자를 하나로 바꾸거나 순정을 Typecast/Kling으로 강제하지 않는다. 구 호스트는 최신 MCP 새 연결을 사용한다.",
             "같은 승인 자료가 실제 validator·현재 권한·준비 receipt를 통과하면 기존 실패 단계의 render_quote/production_readiness로 재개한다. 아직 접수되지 않은 견적은 렌더 완료가 아니며 기존 제출/불명 상태는 render_status부터 조회한다."
           ],
           "successCriteria": [
@@ -160345,7 +160351,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "발화 장면의 화자가 승인 한 나레이터와 다르다.",
+            "cause": "명시적 beat.speakerId가 비어 있거나 문자열이 아니거나 240자를 넘는다. 코드 이름은 호환 목적으로 유지하며, 승인된 복수 화자 자체는 금지하지 않는다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -160375,7 +160381,7 @@
           "recoveryVerification": "contract_tested",
           "reviewStatus": "predicate_and_transport_tested_customer_unproven",
           "resolution": "conditioned_source_recovery",
-          "explanation": "발화 장면의 화자가 승인 한 나레이터와 다르다.",
+          "explanation": "명시적 beat.speakerId가 비어 있거나 문자열이 아니거나 240자를 넘는다. 코드 이름은 호환 목적으로 유지하며, 승인된 복수 화자 자체는 금지하지 않는다.",
           "checkFields": [
             "plan.beats[].speakerId"
           ],
@@ -160419,7 +160425,7 @@
           ],
           "steps": [
             "호스트가 현재 프로젝트·원래 run/job/request와 error_gateway(historyOnly=true)를 조회하고 기존 전문·목소리·시간·원본을 보존한다.",
-            "현재 승인 speakerId를 모든 발화 장면에 동일하게 연결한다. 다른 프로젝트 화자를 상속하지 않는다.",
+            "호스트가 오류 beat의 기존 승인 화자 ID를 복원한다. beat.speakerId를 생략하면 narratorScript.speakerId가 기본값이며 명시한 다른 유효 화자는 허용한다. 2인 순정 요청을 하나의 화자로 합치지 않는다.",
             "같은 승인 원본을 project_sync로 연결하고 production_readiness/capability_prepare의 현재 누락을 확인한다."
           ],
           "successCriteria": [
@@ -166332,7 +166338,7 @@
             "requiredContext": [
               "projectId"
             ],
-            "cause": "견적에 전달한 촬영 입력과 서버 revision에 저장된 최종 콘티가 다릅니다. 준비 참조가 추가된 컴파일 결과를 저장하지 않고 이전 콘티를 전송했거나, 저장 후 아직 동기화하지 않은 경우입니다. 크레딧 부족이나 기존 성공 촬영의 품질 실패를 뜻하지 않습니다.",
+            "cause": "견적에 전달한 촬영 입력과 서버 revision에 저장된 최종 콘티가 다릅니다. 준비 참조가 추가된 컴파일 결과를 저장하지 않고 이전 콘티를 전송했거나, 저장 후 아직 동기화하지 않은 경우입니다. 크레딧 부족이나 기존 성공 촬영의 품질 실패를 뜻하지 않습니다. 승인 전문이 있는 명시적 beat 화자와 저장 direction.speakers의 유일 배역도 대조한다. legacy map-free 단일 화자 객체 컷은 유지한다.",
             "evidenceRequired": [
               "original_error_code",
               "failing_tool",
@@ -166362,11 +166368,27 @@
           "recoveryVerification": "contract_tested",
           "reviewStatus": "condition_reviewed",
           "resolution": "conditional_recovery",
-          "explanation": "견적에 전달한 촬영 입력과 서버 revision에 저장된 최종 콘티가 다릅니다. 준비 참조가 추가된 컴파일 결과를 저장하지 않고 이전 콘티를 전송했거나, 저장 후 아직 동기화하지 않은 경우입니다. 크레딧 부족이나 기존 성공 촬영의 품질 실패를 뜻하지 않습니다.",
+          "explanation": "견적에 전달한 촬영 입력과 서버 revision에 저장된 최종 콘티가 다릅니다. 준비 참조가 추가된 컴파일 결과를 저장하지 않고 이전 콘티를 전송했거나, 저장 후 아직 동기화하지 않은 경우입니다. 크레딧 부족이나 기존 성공 촬영의 품질 실패를 뜻하지 않습니다. 승인 전문이 있는 명시적 beat 화자와 저장 direction.speakers의 유일 배역도 대조한다. legacy map-free 단일 화자 객체 컷은 유지한다.",
           "checkFields": [],
           "sourceIndex": [
             {
-              "id": "source_d472d93db011966b53c43d5d",
+              "id": "source_f3e301681253756366f7040d",
+              "checkFields": [
+                "Array.isArray",
+                "directionValue.cast",
+                "directionValue.cast.filter",
+                "c?.id",
+                "assignments.length",
+                "cast.length",
+                "Object.assign"
+              ],
+              "sourceKind": "registered_source",
+              "readNext": "hiob://error-recovery/DESKTOP_PRODUCTION_DIRECTION_INPUT_CHANGED",
+              "verification": "contract_tested",
+              "selection": "match_actual_failure_not_automatic_diagnosis"
+            },
+            {
+              "id": "source_28fb0c719ae95653dafd58cb",
               "checkFields": [
                 "storyboard.shots.find",
                 "s.id",
@@ -166380,6 +166402,14 @@
               "readNext": "hiob://error-recovery/DESKTOP_PRODUCTION_DIRECTION_INPUT_CHANGED",
               "verification": "contract_tested",
               "selection": "match_actual_failure_not_automatic_diagnosis"
+            }
+          ],
+          "possibleCauses": [
+            {
+              "id": "narrator_binding_required",
+              "field": "narratorScript.speakerId/castIds/speakers",
+              "repair": "각 beat.speakerId(생략 시 narratorScript.speakerId)를 승인된 direction.speakers.castId와 연결한다. 순정 2인 요청의 화자를 하나로 합치지 않는다.",
+              "success": "대본·컷·발화 배역이 대사별 승인 화자와 일치한다."
             }
           ],
           "steps": [
