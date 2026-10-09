@@ -57,7 +57,7 @@ Code is now sGTM-ready. The first-party loader was wired in `components/Deferred
 
 ## TODO before launch
 
-- **Replace placeholder reviews** in `app/page.js` (`placeholderQuotes`) with real HI-OP
-  reviews. They are clearly marked and a visible "예시 후기" note is shown.
+- Keep customer testimonials absent until each quote has customer consent, a source record,
+  and approved public wording in the claim ledger.
 - Add performance screenshots (Meta Events Manager lift + EMQ, ROAS, before/after, store
   sales graph) — redact client names, keep the ratios.

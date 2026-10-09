@@ -27,7 +27,7 @@ test('public markdown, bundled JSON and ZIP have exactly the same 13 notes',asyn
     const bytes=await read(vault.noteBase+note.file);
     assert.equal(bytes.toString(),note.text);
     assert.equal(createHash('sha256').update(bytes).digest('hex'),note.sha256);
-    assert.equal(execFileSync('unzip',['-p',zipPath,'creative-vault-2026-09-29/'+note.file],{encoding:'utf8'}),note.text);
+    assert.equal(execFileSync('unzip',['-p',zipPath,vault.noteBase.split('/').filter(Boolean).at(-1)+'/'+note.file],{encoding:'utf8'}),note.text);
   }
 });
 test('Vault download routes serve notes and ZIP but reject unrelated paths',async()=>{

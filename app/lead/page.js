@@ -2,7 +2,6 @@ import { BarChart3, Check, Eye, ShieldCheck, Target } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import CreativeVelocityForm from '@/components/CreativeVelocityForm';
-import EventCountdown from '@/components/EventCountdown';
 import CtaButton from '@/components/home/CtaButton';
 import ReelShowcase from '@/components/home/ReelShowcase';
 import Reveal from '@/components/home/Reveal';
@@ -96,19 +95,10 @@ const reels = [
 ];
 
 const offerItems = [
-  ['영상 제작', '1편 5만원', '잠재고객만 데려오는 문제→해결 숏폼. 런칭 이벤트 한정, 최대 10편까지 제작합니다.', false],
+  ['영상 제작', '1편 5만원', '잠재고객만 데려오는 문제→해결 숏폼. 정해진 범위 안에서 최대 10편까지 제작합니다.', false],
   ['EMQ9+ 랜딩 구축', '150만원~', '전환 설계 + 픽셀·CAPI 매칭 세팅. 1회 구축으로 끝나도 남는 ‘단가를 낮추는 자산’입니다.', true],
   ['전담 운영 · 측정', '월 50만원', '셋업·광고·측정까지 2인 전담. 측정은 첫 6주 무료, 이후 트래픽 3,000당 월 $100(서버 실비). 광고비는 광고주 직접.', false],
   ['성과 인센티브', '옵션', 'CPL 목표를 하회할 때만 더하는 옵션 — 모호한 광고비 %가 아니라 ‘단가’로 정산합니다.', false],
-];
-
-const reviews = [
-  ['클릭은 많은데 상담 전화가 안 왔어요. 랜딩과 영상을 같이 고치고 나서야 ‘진짜 문의’가 들어오기 시작했습니다.', '교육·학원 원장'],
-  ['대행사는 매달 고정비가 부담이었는데, 여긴 영상·웹사이트라는 자산이 남아서 시작 문턱이 낮았어요.', '병원 마케팅 담당'],
-  ['리드 단가가 왜 오르는지 늘 깜깜이였는데, 어떤 영상이 계약을 만드는지 숫자로 보이니 예산 쓰는 게 안 무서워졌어요.', 'B2B 솔루션 대표'],
-  ['폼만 채우는 가짜 문의에 영업팀이 지쳤었는데, 측정을 붙이고 나서 계약되는 리드 비중이 분명히 올랐습니다.', '부동산 분양 마케터'],
-  ['광고비를 제 계정에서 직접 집행하니 통제권이 저한테 있어 믿음이 갔어요. 같은 숫자를 함께 보는 것도 좋았고요.', '법률·세무 사무소'],
-  ['영상 한 편 5만원이라 여러 개 테스트하고 반응 좋은 것만 키웠습니다. 작게 실험하고 이긴 것에 베팅하는 구조가 합리적이에요.', '뷰티·성형 마케터'],
 ];
 
 const faqs = [
@@ -116,7 +106,7 @@ const faqs = [
   ['EMQ9+가 뭔가요? 왜 중요한가요?', 'EMQ(Event Match Quality)는 메타가 “이 문의가 누구의 행동인지” 매칭하는 정확도(10점)입니다. 리드 이벤트는 구매보다 훨씬 드물어, 매칭이 새면 알고리즘이 ‘좋은 리드’를 학습하지 못하고 단가가 오릅니다. 히옵은 CAPI로 해시 식별자를 정확히 실어 EMQ를 9+로 만듭니다.'],
   ['광고비도 히옵에 내나요?', '아닙니다. 광고비는 광고주 계정에서 직접 집행하고 통제합니다. 히옵은 광고비를 받거나 대납하지 않습니다.'],
   ['‘성공하면 광고비 몇 %’로 진행하나요?', '리드는 매출이 아니라서 그 방식은 분쟁이 생기기 쉽습니다. 그래서 히옵은 비용을 모호한 성과 %가 아니라 자산(영상·웹사이트)+운영에 붙입니다. 원하시면 CPL 목표 하회 시 인센티브를 더합니다.'],
-  ['비용은 정확히 어떻게 되나요?', '① 영상 1편 5만원 (런칭 한정, 최대 10편) ② EMQ9+ 랜딩 구축 150만원~ (1회, 자산으로 남음) ③ 전담 운영 월 50만원 (측정 첫 6주 무료, 이후 트래픽 3,000당 월 $100 서버 실비) ④ (옵션) CPL 목표 하회 시 인센티브. 광고비는 광고주가 직접 집행·통제하며, 히옵은 광고비를 가져가지 않습니다.'],
+  ['비용은 정확히 어떻게 되나요?', '① 영상 1편 5만원 (정해진 범위 안에서 최대 10편) ② EMQ9+ 랜딩 구축 150만원~ (1회, 자산으로 남음) ③ 전담 운영 월 50만원 (측정 첫 6주 무료, 이후 트래픽 3,000당 월 $100 서버 실비) ④ (옵션) CPL 목표 하회 시 인센티브. 광고비는 광고주가 직접 집행·통제하며, 히옵은 광고비를 가져가지 않습니다.'],
   ['랜딩페이지(웹사이트)가 없어도 되나요?', '없어도 됩니다. EMQ9+ 랜딩을 새로 구축해 드리며, 그 자체가 단가를 낮추는 자산으로 남습니다. 기존 사이트가 있으면 측정·전환 구조만 보강합니다.'],
   ['측정 결과는 믿을 수 있나요?', '메타 광고 성과를 광고주도 같은 측정 화면으로 함께 봅니다. 정산 요율과 기준은 시작 전에 함께 정합니다.'],
   ['성과를 보장하나요?', '보장하지 않습니다. 대신 계약을 추적할 수 있는 구조, 빠르게 테스트하는 영상, EMQ9+ 신호로 리드 단가를 구조적으로 낮추는 길을 함께 만듭니다.'],
@@ -152,14 +142,13 @@ export default function LeadPage() {
         <style>{'.hp-reveal{opacity:1!important;transform:none!important}'}</style>
       </noscript>
 
-      {/* ── launch slot ── */}
+      {/* ── current offer ── */}
       <div className="hp-topslot">
         <div className="hp-wrap">
           <div>
-            <b>런칭 이벤트 진행 중</b>
+            <b>무료 진단 운영 중</b>
             <span>6주 무료 측정 · 영상 1편 5만원 · 광고비는 직접 집행</span>
           </div>
-          <EventCountdown variant="bar" />
         </div>
       </div>
 
@@ -360,7 +349,7 @@ export default function LeadPage() {
       <section className="hp-section" id="offer">
         <div className="hp-wrap">
           <Reveal className="hp-head">
-            <span className="hp-eyebrow">이번 런칭 이벤트 오퍼</span>
+            <span className="hp-eyebrow">측정형 시작 오퍼</span>
             <h2 className="hp-h2" style={{ fontSize: "clamp(1.5rem, 5.5vw, 2.5rem)", wordBreak: "keep-all" }}>’광고비 몇 %’가 아니라, 단가를 낮추는 자산을 드립니다.</h2>
             <p className="hp-lead">
               리드는 매출이 아니라서 성과 %는 분쟁이 생기기 쉽습니다. 그래서 비용을 자산(영상·웹사이트)+운영에
@@ -379,30 +368,11 @@ export default function LeadPage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section className="hp-section" id="voices">
-        <div className="hp-wrap">
-          <Reveal className="hp-head">
-            <span className="hp-eyebrow">광고주의 말</span>
-            <h2 className="hp-h2" style={{ fontSize: "clamp(1.5rem, 5.5vw, 2.5rem)", wordBreak: "keep-all" }}>먼저 시작해 본 광고주들의 이야기.</h2>
-          </Reveal>
-          <div className="hp-quotes">
-            {reviews.map(([quote, who]) => (
-              <figure className="hp-quote" key={quote}>
-                <div className="stars" aria-hidden="true">★★★★★</div>
-                <p>“{quote}”</p>
-                <footer>{who}</footer>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── CONTACT (the close) ── */}
       <section className="hp-section" id="contact">
         <div className="hp-wrap hp-contact-grid">
           <Reveal className="hp-contact-copy">
-            <span className="hp-eyebrow">런칭 이벤트 신청</span>
+            <span className="hp-eyebrow">무료 진단 신청</span>
             <h2 className="hp-h2" style={{ fontSize: "clamp(1.5rem, 5.5vw, 2.5rem)", wordBreak: "keep-all" }}>먼저 리드 단가를 진단해 드리고, 단가를 낮추는 자산부터 만듭니다.</h2>
             <p className="hp-lead">
               업종과 월 광고 예산만 남겨주세요. 히옵은 광고비를 가져가지 않습니다.
@@ -417,7 +387,7 @@ export default function LeadPage() {
           <Reveal delay={100}>
             <CreativeVelocityForm
               source="lead_landing"
-              eyebrow="런칭 이벤트 신청"
+              eyebrow="무료 진단 신청"
               title="무료 리드 진단 신청"
               description="업종과 월 광고 예산을 남겨주시면, 리드 단가를 더 낮출 여지부터 확인해 연락드립니다."
               submitLabel="무료로 리드 진단받기"
@@ -450,12 +420,11 @@ export default function LeadPage() {
       <section className="hp-final">
         <div className="hp-wrap">
           <div>
-            <span className="hp-eyebrow is-light">마감 전 신청</span>
+            <span className="hp-eyebrow is-light">무료 진단 신청</span>
             <h2 className="hp-h2" style={{ fontSize: "clamp(1.5rem, 5.5vw, 2.5rem)", wordBreak: "keep-all" }}>지금 무료로 리드 단가를 진단받고, 계약되는 리드를 최저 단가로 시작하세요.</h2>
             <p>업종과 월 예산만 있어도 진단을 시작할 수 있습니다. 먼저 크게 쓰지 말고, 진짜 리드 단가부터 확인하세요.</p>
           </div>
           <div className="hp-final-side">
-            <EventCountdown />
             <CtaButton location="final" variant="ondark">무료 리드 진단</CtaButton>
           </div>
         </div>

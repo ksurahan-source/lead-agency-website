@@ -1,3 +1,4 @@
+import errorHelp from './errorHelp.generated.json' with {type:'json'};
 import { HELP_ARTICLES, HELP_TOPICS } from "./helpTopics.mjs";
 
 export const ORIGIN = "https://hi-ob.com";
@@ -49,7 +50,8 @@ export const WATCH_ROUTE = {
   description:
     "HIOB가 자료·기획·장면·목소리·자막·프로젝트를 연결하는 흐름을 30초 영상과 대본으로 살펴보세요.",
 };
-export const PUBLIC_ROUTES = [PRODUCT_ROUTE, ...HELP_ROUTES, WATCH_ROUTE];
+export const ERROR_ROUTES=[{path:'/help/errors',title:'HIOB 오류 코드 사전 — 원인별 복구와 진행 방법',description:'영상 생성, 음성, 립싱크, 동기화와 편집 오류를 코드별로 찾고 원인·복구 순서·성공 확인·작업 재개 방법을 확인하세요.',errorIndex:true},...errorHelp.groups.map(g=>({path:'/help/errors/'+g.id,title:g.title+' 오류 해결 | HIOB',description:g.title+' 문제의 해결 담당, 기존 자료를 보존하는 복구 순서, 성공 확인 조건과 해당 오류 코드 목록을 안내합니다.',errorGroup:g.id}))];
+export const PUBLIC_ROUTES = [PRODUCT_ROUTE, ...HELP_ROUTES, WATCH_ROUTE,...ERROR_ROUTES];
 export const LEGACY_HASHES = {
   home: "/help",
   ...ARTICLE_PATHS,

@@ -28,8 +28,8 @@ export const HELP_TOPICS = [
 // Each article has one task category. Other articles cross-link to that source.
 export const HELP_ARTICLES = [
   {id:"creative-vault",topic:"production",title:"HIOB 제작 Vault: 장면·박자·연출 노하우",summary:"3–5초 의미 묶음, 나레이터 개입, 제품 연속성과 부분 수리를 상황별로 꺼내 읽습니다.",keywords:"vault 볼트 가로 세로 16:9 9:16 노하우 박자 장면 묶음 3초 5초 인물 소품 프롬프트"},
-  {id:"advertising",topic:"production",title:"HIOB 사용설명서: 효과적인 광고 만들기",summary:"기획서·인물카드·소품·장면·목소리·편집·검수까지 바로 따라 하는 프롬프트와 기준입니다.",keywords:"광고 제작 방법 best practice 인물카드 소품 제품 기획서 표정 육도 유튜브 프롬프트 설명서"},
-  {id:"skills",topic:"production",title:"영상 제작 스킬 설치하고 사용하기",summary:"기획·목소리·편집·검수 순서를 Codex에 연결합니다.",keywords:"스킬 skill SKILL.md 다운로드 코덱스 이미지 나레이션"},
+  {id:"advertising",topic:"production",title:"HIOB 사용설명서: 효과적인 광고 만들기",summary:"기획서·인물카드·소품·장면·목소리·편집·검수까지 바로 따라 하는 프롬프트와 기준입니다.",keywords:"한국 릴스 42초 유명인 사회적 증거 제품 원리 배속 1.05 1.2 과학 생물학 매크로 동작 광고 제작 방법 best practice 인물카드 소품 제품 기획서 표정 육도 유튜브 프롬프트 설명서"},
+  {id:"skills",topic:"production",title:"영상 제작 스킬 설치하고 사용하기",summary:"기획·목소리·편집·검수 순서를 Codex에 연결합니다.",keywords:"스킬 skill SKILL.md 다운로드 코덱스 이미지 나레이션 한국 릴스 42초 유명인 사회적 증거 제품 원리 배속 1.05 1.2 과학 생물학 매크로 동작"},
   {id:"payment",topic:"billing",title:"계좌이체로 충전하고 이메일 요청하기",summary:"요청 저장·실제 입금·운영자 확인·잔액 반영 순서입니다.",keywords:"계좌 이체 결제 입금 이메일 Gmail 크레딧 환불"},
   {id:"privacy",topic:"account",title:"내 정보와 제작 정보 수집 범위 확인하기",summary:"연락처 수정과 프로젝트 제목·키워드·완성본 활용 범위입니다.",keywords:"개인정보 전화번호 이름 업체명 이메일 콘텐츠 삭제"},
   {id:"windows-test",topic:"setup",title:"Windows에서 새 계정으로 처음부터 확인하기",summary:"다른 이메일 가입부터 충전·첫 영상·재접속까지 확인합니다.",keywords:"신규 처음 윈도우 테스트 첫 경험 가입 결제 검증"},

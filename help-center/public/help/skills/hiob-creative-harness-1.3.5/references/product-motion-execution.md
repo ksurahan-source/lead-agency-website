@@ -1,0 +1,47 @@
+# MCP 실행 지침: 제품·원리 영상과 배속
+
+버전: 2026-10-03.2. AI가 현재 HIOB 도구로 무엇을 어떤 순서로 할지 정하는 실행 문서다. 장면 선택·배속 판단·프롬프트 8개는 [제작 가이드](product-science-scenes.md)를 읽는다. 지침 전달은 생성 품질이나 새 유료 호출의 승인이 아니다.
+
+## 1. 현재 프로젝트와 지원 범위부터 읽는다
+
+1. `project_context(projectId)`의 현재 기획·음원·원본·해시·권한·전체 지침을 읽는다. 신규 생성 전 `generation_status`, 기존 접수 중에는 반환된 작업 ID의 상태를 먼저 확인한다. 성공 소재는 재사용하고 진행 중·확인 필요 작업을 중복 제출하지 않는다.
+2. `creative_harness({platform:"reels",mode:"explainer"})` 등 실제 목적에 맞는 모드를 선택한다. 반환된 실행 문서와 제작 가이드를 읽고 현재 고객의 본편 길이·표현·제품 근거를 보존한다.
+3. `model_catalog`의 HIOB 연결 상태·모델별 promptGuidance와 `creative_catalog`의 실제 입력을 확인한다. 제공사 전체 기능을 고객 도구가 지원한다고 추정하지 않는다. 실행 직전 현재 서버 견적으로 옵션·길이·가격·활성 상태를 확인한다.
+
+## 2. 제품·과학·생물학 장면을 영상으로 만든다
+
+기획표에 `장면 목적 | 실사/개념/비유/실증 | 제품 근거 | 시작→변화→끝 | 영상 프롬프트 | 참조 파일 | 원본 길이 | 사용 구간 | 실제 관찰 결과`를 쓴다. 이는 문서 열이며 새로운 API 필드가 아니다.
+
+- 실사 매크로는 표면·제형·접촉·사용 행동을 보여준다. 생물학·과학 단면은 원리 설명용 개념이다. 비용 토큰 등은 비유다. 생성된 화면을 실제 제품 시험·현미경 영상·거래·고객 성과로 기록하지 않는다.
+- 제품의 확인된 원리를 먼저 연결한다. 유막제거/발수, 보습/조직 재생, 오염 제거/살균을 서로 바꾸지 않는다. 근거가 없으면 장면을 관찰 가능한 사용 과정으로 줄이거나 자료 미확보로 남긴다.
+- 첫 프레임은 승인된 물건·표면·구도·빛과 동작 시작 상태로 준비한다. 카드 전체·글자 도식·정지 이미지 줌을 실제 변화 동영상으로 납품하지 않는다.
+- `plan_save`의 현재 `durationSec/beats/claims`에 의미와 근거를 연결한다. 비인물 컷은 `direction.assets.castIds:[]`로 구성할 수 있다. 전체 기획의 cast/speakers 계약은 보존하고 화면 인물을 억지로 추가하지 않는다.
+- `direction_save`에는 `assets.action/productAction/setting/camera/referenceFile/duration/claimIds`와 `cuts.sourceInSec/start/end`로 대응한다. `direction_save`는 새 저장에 promptVersion=2를 적용한다. action에는 주된 행동·변화·끝 상태, productAction에는 근거가 연결된 물건 접촉, setting에는 재질·빛·시작 상태, camera에는 구도·움직임을 각각 240자 이내로 나눈다. 긴 완성 프롬프트를 action 하나에 그대로 넣지 않는다. generationModel에 선택 모델의 실제 ID를 저장하고 H3 구조는 compiler가 조합한 shots[].prompt에서 확인한다. 현재 원본 길이는 5–15초다. 글 속 목표 시간과 실제 편집 in/out을 구분한다.
+- `storyboard_compile` 결과의 실제 `shots[].prompt`를 읽고 한 주된 행동·관찰할 변화·끝 상태가 전달되는지 확인한다. H3는 화면/현장음/음악 구조, Seedance는 모델별 자연어 구조를 사용한다. 단일 참조 이미지 계약을 유지하며 임의 audio_urls/multi_shot/scientific_accuracy 필드를 넣지 않는다.
+- 원리 컷 위 해설은 `external_narration`, 발화 없는 독립 컷은 `action_only`로 계획한다. 화면 인물이 실제 말할 때만 `original_dialogue`를 쓴다. 네이티브 대사와 별도 해설이 겹치지 않도록 원본 오디오와 최종 트랙을 확인한다.
+
+실행: `direction_save → storyboard_compile → project_sync → job_status(completed) → storyboard_quote(현재 기획/원본 연결) → 기존 유효한 권한·견적 범위의 generation_submit → generation_inspect → 다운로드/선택 → material_inspect와 실제 재생 검수 → 음성·자막·컷 연결 → edit_check → edit_assemble → job_status(completed) → 같은 버전 project_sync → job_status(completed) → 승인 범위의 최종 렌더 → 최종 MP4 검수`.
+
+정확한 글자·수치·출처와 ‘개념 영상’ 표시는 지원되는 편집 입력으로 넣는다. 새 효능을 만들지 않으며 과학적 정확성·물체 동일성·동작·최종 소리를 실제로 확인한 범위대로 기록한다. Seedance 2.5 멀티샷 묶음은 기존 지원 규칙을 따르고 H3에 같은 묶음 방법을 이식하지 않는다.
+
+## 3. 느린 음성을 1.05~1.2배로 조정한다
+
+권장안은 1.05 또는 1.1부터 비교하고 명료할 때 1.15~1.2까지다. 발음 자체가 뭉개지거나 틀리면 원문/원본을 먼저 수정한다. 42초 지정 본편을 일괄 가속해 35초로 납품하지 않는다.
+
+1. 기존 `production/audio.json`의 모든 트랙을 읽고 선택 음성의 파일·해시·beatId·textSha256·시작 시각을 보존한다. 외부 나레이션 위 제품 B-roll인지, 화면 인물의 원본 대사인지 확인한다.
+2. 현재 `audioTrack.playbackRate`는 0.75~1.5를 지원한다. narration/dialogue는 전체 음원을 사용하고 trimStartSec는 0, trimEndSec는 지정하지 않는다. 발화를 자르지 않고 문장·속도·beat 길이로 맞춘다. 선택한 음성만 1.05~1.2로 변경하고 같은 배속·trim·gain 설정으로 `project_sync → job_status(completed) → audio_inspect → audio_inspection_status(done)`를 거친다. 같은 파일이라도 설정이 바뀌면 이전 검사 결과를 그대로 재사용하지 않는다.
+3. `audio_set`은 **전체 tracks 교체**다. 바꾼 음성과 유지할 narration/dialogue/music/sfx를 함께 제출한다. 예를 들어 현재 트랙을 유지하며 선택한 narration의 `playbackRate`만 `1.1`로 바꾼다. 예시 파일명·해시를 실제 프로젝트 값으로 대체한다.
+4. 길이는 `(trimEndSec−trimStartSec)/playbackRate`, trimEndSec가 없으면 실제 음원 길이를 사용한다. 자막은 `트랙 시작 + (원본 시각−trimStartSec)/playbackRate`로 다시 맞춘다. 구절·끝음절을 유지하며 다음 발화·효과음·beat 종료와 겹치지 않는지 확인한다.
+5. `edit_check → edit_assemble` 뒤 실제 출력에서 한국어 받침·숫자·끝음절·자막·음색을 비교 청취한다. 기술 검사 수치로 청취를 대신하지 않는다.
+
+## 4. 영상 배속의 현재 경계
+
+**현재 MCP V1 `direction.cuts`에 영상 playbackRate/speed 입력은 없다.** 오디오의 playbackRate를 바꿨다고 영상 동작과 입 움직임까지 바뀌지 않는다. `audio_export`는 영상 보존용이며 배속 입력이 없다. 이 도구에 배속 필드를 보내지 않는다.
+
+화면 인물의 대사를 가속하면 화면과 원본 음성의 같은 비율 재타이밍이 필요하다. 이 경로가 지원되기 전에는 동시 가속 완료를 주장하지 않는다. 고객에게 미지원 범위를 설명하고 기존의 더 빠른 원본 구간·제품 B-roll+별도 해설을 선택하거나 영상 배속 연결을 별도 구현한다. 동작 템포를 바꾸는 새 생성은 새 유료 요청이며 이번 지침 적용 자체로 승인되지 않는다.
+
+## 5. 산출·재개 기록
+
+세이프존 수리에서는 현재 원본 구도와 실제 문제 시각을 먼저 확인한다. 핵심 문구·CTA의 UI 가림을 해당 자막의 지원 위치·줄바꿈·노출 시간으로 수리하고, 인물·제품·배경 전체를 좁은 중앙 영역에 넣기 위해 축소·재크롭하지 않는다. 원본에 구워진 글자는 별도 자막 입력으로 이동하지 않는다. 없는 자유 좌표·safeZone 해제 필드를 보내지 않는다. 지원 배치로 충돌을 풀 수 없으면 제목 시간을 분리하거나 적합한 기존 원본 구간을 선택하고 미지원 범위를 기록한다. `edit_check`는 실제 얼굴·제품 가림 및 자연스러운 구도 검수와 구분한다. 원본/수정본의 같은 시각과 실제 게시 미리보기를 비교하고, 새 렌더는 기존 유효한 권한과 견적 범위를 따른다.
+
+`장면 ID | 실사/개념/비유/실증 | 근거 | 선택 원본·해시 | 실제 in/out | 음성 배속 | 영상 배속 적용 여부 | 자막 재검수 | 실제 관찰/미확인`을 남긴다. 문서·원본·조립본·최종본을 구분한다. 기존 작업은 자동으로 다시 생성하거나 가속하지 않는다. 변경된 배속·기획·원본에 맞는 검수 기록을 새로 남긴다.

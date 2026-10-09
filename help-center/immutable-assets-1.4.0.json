@@ -1,0 +1,250 @@
+{
+  "schema": "HIOB.ImmutableHelpAssets.v1",
+  "version": "1.4.0",
+  "assets": [
+    {
+      "path": "/help/skills/asset-library-guide-1.4.0.md",
+      "sha256": "34168960974bc1e81de63911df90cd1f8b5c204af8c0b2bb37943210c14dfe9c"
+    },
+    {
+      "path": "/help/skills/hiob-creative-edit-1.4.0/SKILL.md",
+      "sha256": "3926e9dfd2e80c513a6d7ce1597be237cc897f905fb95bb6ac94a8947130db73"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/SKILL.md",
+      "sha256": "97f137d6171125b87ca26bbe669803898ba7902fc83e3b712c3fc4e03272c33b"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/42s-persuasion-example.md",
+      "sha256": "faafd3387adfb7136578e7c3ddbadb444b0e1ec7a33c4ccd450848cffd8c6d4c"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/customer-primary-pain.md",
+      "sha256": "a36ac76aa940a782a144b2b9c4af8a37b5c27134618e7e9e01f91b183410ade4"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/initial-plan.md",
+      "sha256": "76df3f4d4af075df65e8deb0832da555fc82d44b624d7a4e84b19d284b9d9371"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/korean-reels-grammar.md",
+      "sha256": "4e022ca88bd0164d7f0d2ccf5ff04fcb435a829e7da8fd216b48e5444d755f25"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-absurd.md",
+      "sha256": "3469922b7aaf8eba0e2161b1f8ab9c80115a3bac2ee1c9a78270fb017998c6fd"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-comparison.md",
+      "sha256": "674584d278f337a72735e932f447f7198d79b6b16a77f6f7478383f06878e4c0"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-drama.md",
+      "sha256": "b01bc49404a34004c1b63958823716f85abc0a3bd2f3d9263b15532e4d24e952"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-explainer.md",
+      "sha256": "93a4922d9927ae3431b0db30dba0e325d4e31a2ac1f27b333d67fa6e24b8061b"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-game.md",
+      "sha256": "ff4160e2f726a12d8855125f1365336e453b9c5eb80da9926ca84b1b2de155ae"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-review.md",
+      "sha256": "215ea7aa1b9950c1a7175899158c453b6f6e9f67a116cacc59c57571c1fe80fb"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/mode-ugc.md",
+      "sha256": "21461cfd7dcf50358d4cc991c94e3596c934f5563e67500dee8aa566eca0ed1b"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/platform-reels.md",
+      "sha256": "84559b1673f3f4cd94c3fe1a794ffe9c5c0072144171947c8c4a141c1df9e4ef"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/platform-youtube-shorts.md",
+      "sha256": "b14a4b2893a83aa631307249007b597293af733e5904961cb1ad0cc10417320c"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/platform-youtube.md",
+      "sha256": "1da904cc67710f2433765b2a4be1770a3962166119138027f14671c533511ec0"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/product-motion-execution.md",
+      "sha256": "f3014bbedc68be0dac2b22d6e4c1e93bb548826e11481b23783e8e7f510023f2"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/product-science-scenes.md",
+      "sha256": "74d41e7f40d6b20647e7a9f4f40d85155493aa700b0bc310404b2e2eb3f433de"
+    },
+    {
+      "path": "/help/skills/hiob-creative-harness-1.4.0/references/research-foundation.md",
+      "sha256": "663edf661950fcfba1f4be944927437c99f469315cdbdfd5c4451e6c842c06ae"
+    },
+    {
+      "path": "/help/skills/hiob-creative-refine-1.4.0/SKILL.md",
+      "sha256": "a7f089f21ea7e7bb97975459eded2f7a746489d09b6c4f7b028205952a3d16f9"
+    },
+    {
+      "path": "/help/skills/hiob-creative-refine-1.4.0/references/diagnose.md",
+      "sha256": "2f85bc1c59d8583216088d4d7f3d1d2d271dcc5ba5aa3768886253077b05304f"
+    },
+    {
+      "path": "/help/skills/hiob-reference-cards-1.4.0/SKILL.md",
+      "sha256": "4a25b9d27b5e1950b85555878efc1626b9d43978e80285e76fca92fbbd70d98f"
+    },
+    {
+      "path": "/help/skills/hiob-reference-cards-1.4.0/references/card-template.md",
+      "sha256": "d030fc39eab2e2872d0bffc89ffbad1469ea5a81977379afb4cd4182fd4bc2f4"
+    },
+    {
+      "path": "/help/skills/hiob-reference-cards-1.4.0/references/wow-master-card.md",
+      "sha256": "7ee1a75e1bc96ef1584b537727a60183728581fb4a630c02074397c0db49db39"
+    },
+    {
+      "path": "/help/skills/hiob-scene-planning-1.4.0/SKILL.md",
+      "sha256": "35ae2f8c0ae5a3cf64c7ab2696c31f600b32455e17ddfebc58f719af1c59b161"
+    },
+    {
+      "path": "/help/skills/hiob-scene-planning-1.4.0/references/treatment-template.md",
+      "sha256": "56eba891fd7d7312445b6cd350ddb0b337d1bd5f48328af1c5f4fce6e1cf4483"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/AGENTS.md",
+      "sha256": "146238f708e8726689d1abad818eac6b87cdfb90d4f81c49eaf9d86db21a2da6"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/SKILL.md",
+      "sha256": "81cbffdfdbe1a9db2ee7d56b6707037cee5da508ba794a6b17434793125b9b3d"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/42s-persuasion-example.md",
+      "sha256": "faafd3387adfb7136578e7c3ddbadb444b0e1ec7a33c4ccd450848cffd8c6d4c"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/asset-library-guide.md",
+      "sha256": "34168960974bc1e81de63911df90cd1f8b5c204af8c0b2bb37943210c14dfe9c"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/capability-access.md",
+      "sha256": "97526e75d51ded6b9e2027667f951351519331ebe17eb50c5f05450276398e8c"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/card-template.md",
+      "sha256": "d030fc39eab2e2872d0bffc89ffbad1469ea5a81977379afb4cd4182fd4bc2f4"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/customer-primary-pain.md",
+      "sha256": "a36ac76aa940a782a144b2b9c4af8a37b5c27134618e7e9e01f91b183410ade4"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/diagnose.md",
+      "sha256": "2f85bc1c59d8583216088d4d7f3d1d2d271dcc5ba5aa3768886253077b05304f"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/initial-plan.md",
+      "sha256": "76df3f4d4af075df65e8deb0832da555fc82d44b624d7a4e84b19d284b9d9371"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/inspection-guide.md",
+      "sha256": "b28d6c59a37d236b6434ccac88052d254eff2815007f3d2ae8f41928ebf716f3"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/korean-reels-grammar.md",
+      "sha256": "4e022ca88bd0164d7f0d2ccf5ff04fcb435a829e7da8fd216b48e5444d755f25"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/material-and-fantasy.md",
+      "sha256": "c13c9feeeb40954295f7f94d8d57e7e2ab0c72dde7a3e9bde2ddef4ffd545bbe"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-absurd.md",
+      "sha256": "3469922b7aaf8eba0e2161b1f8ab9c80115a3bac2ee1c9a78270fb017998c6fd"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-comparison.md",
+      "sha256": "674584d278f337a72735e932f447f7198d79b6b16a77f6f7478383f06878e4c0"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-drama.md",
+      "sha256": "b01bc49404a34004c1b63958823716f85abc0a3bd2f3d9263b15532e4d24e952"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-explainer.md",
+      "sha256": "93a4922d9927ae3431b0db30dba0e325d4e31a2ac1f27b333d67fa6e24b8061b"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-game.md",
+      "sha256": "ff4160e2f726a12d8855125f1365336e453b9c5eb80da9926ca84b1b2de155ae"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-review.md",
+      "sha256": "215ea7aa1b9950c1a7175899158c453b6f6e9f67a116cacc59c57571c1fe80fb"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/mode-ugc.md",
+      "sha256": "21461cfd7dcf50358d4cc991c94e3596c934f5563e67500dee8aa566eca0ed1b"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/platform-reels.md",
+      "sha256": "84559b1673f3f4cd94c3fe1a794ffe9c5c0072144171947c8c4a141c1df9e4ef"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/platform-youtube-shorts.md",
+      "sha256": "b14a4b2893a83aa631307249007b597293af733e5904961cb1ad0cc10417320c"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/platform-youtube.md",
+      "sha256": "1da904cc67710f2433765b2a4be1770a3962166119138027f14671c533511ec0"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/product-motion-execution.md",
+      "sha256": "f3014bbedc68be0dac2b22d6e4c1e93bb548826e11481b23783e8e7f510023f2"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/product-science-scenes.md",
+      "sha256": "74d41e7f40d6b20647e7a9f4f40d85155493aa700b0bc310404b2e2eb3f433de"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/production-workflow.md",
+      "sha256": "5fb6ccc045a26775263e583cb4def0168fb5efbba49d3b0de1ad91468c14c8b4"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/research-foundation.md",
+      "sha256": "663edf661950fcfba1f4be944927437c99f469315cdbdfd5c4451e6c842c06ae"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/treatment-template.md",
+      "sha256": "56eba891fd7d7312445b6cd350ddb0b337d1bd5f48328af1c5f4fce6e1cf4483"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/workflow.md",
+      "sha256": "f0705f4df1719707598081d4fca3eeebfadfc388fee11724b109a73d34db1756"
+    },
+    {
+      "path": "/help/skills/hiob-video-1.4.0/references/wow-master-card.md",
+      "sha256": "7ee1a75e1bc96ef1584b537727a60183728581fb4a630c02074397c0db49db39"
+    },
+    {
+      "path": "/help/skills/hiob-visual-direction-1.4.0/SKILL.md",
+      "sha256": "be458f12a2b16c552173ada55cd209d938e35ccea9697e9cdab51bcb1a553247"
+    },
+    {
+      "path": "/help/skills/hiob-visual-direction-1.4.0/references/material-and-fantasy.md",
+      "sha256": "c13c9feeeb40954295f7f94d8d57e7e2ab0c72dde7a3e9bde2ddef4ffd545bbe"
+    },
+    {
+      "path": "/help/skills/inspection-guide-1.4.0.md",
+      "sha256": "b28d6c59a37d236b6434ccac88052d254eff2815007f3d2ae8f41928ebf716f3"
+    },
+    {
+      "path": "/help/skills/production-guide-1.4.0.md",
+      "sha256": "5fb6ccc045a26775263e583cb4def0168fb5efbba49d3b0de1ad91468c14c8b4"
+    },
+    {
+      "path": "/help/hiob-video-skill-1.4.0.zip",
+      "sha256": "1ce6dd2f6eadeb963eac5c76b7ee54d04c944c7643974da210de79e59deb14c0"
+    }
+  ]
+}

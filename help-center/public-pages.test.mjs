@@ -198,7 +198,7 @@ test("update help explains diagnosis without claiming account or creative succes
   const update = documents.get("/help/troubleshooting/update");
   assert.ok(update, "update route must exist");
   for (const term of ["release_check", "current", "update_available", "candidate", "unavailable", "무결성", "품질"]) assert.ok(update.includes(term), term);
-  assert.ok(documents.get("/help/skills").includes("hiob-video-skill-1.3.2.zip"));
+  assert.ok(documents.get("/help/skills").includes(`hiob-video-skill-${MCP_RELEASE.version}.zip`));
 });
 
 test("every linked skill download and its references are served by the worker", async () => {
@@ -288,4 +288,20 @@ test("asset sharing guide distinguishes placement from editable import", () => {
   assert.ok(page.includes("현재 편집 자료에 가져오기"));
   assert.ok(page.includes("같은 작업공간"));
   assert.ok(page.includes("asset_read"));
+});
+
+test('public manual contains executable one-pain guidance and customer review',()=>{
+ assert.ok(documents.get('/help/advertising').includes('customer-primary-pain.md'));
+ assert.ok(documents.get('/help/advertising').includes('고객의 개인적 고통 하나'));
+});
+
+test('only the issued Google verification file is publicly served', async () => {
+  const response = await worker.fetch(new Request(ORIGIN + '/google93b97dd2c655106b.html'), env);
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), 'google-site-verification: google93b97dd2c655106b.html');
+  const unknown = await worker.fetch(new Request(ORIGIN + '/google-other.html'), env);
+  assert.equal(unknown.status, 404);
+  const config = await readFile(new URL('./wrangler.toml', import.meta.url), 'utf8');
+  assert.ok(config.includes('hi-ob.com/google93b97dd2c655106b.html'));
+  assert.ok(!config.includes('hi-ob.com/google*'));
 });
