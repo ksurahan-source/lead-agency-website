@@ -13,7 +13,7 @@ const version = MCP_RELEASE.version;
 const skillNames = [
   'hiob-video', 'hiob-creative-harness', 'hiob-visual-direction',
   'hiob-reference-cards', 'hiob-scene-planning', 'hiob-creative-refine',
-  'hiob-creative-edit',
+  'hiob-creative-edit', 'hiob-ad-copy-humanizer', 'hiob-motion-graphics', 'hiob-actor-performance',
 ];
 
 async function filesIn(folder) {
@@ -48,12 +48,13 @@ test(`every ${version} skill and relative Markdown reference is complete`, async
 test(`${version} video ZIP contains the exact public skill with only reviewed Markdown files`, async () => {
   const folder = path.join(root, 'public/help/skills', `hiob-video-${version}`);
   const archive = path.join(root, 'dist/help', `hiob-video-skill-${version}.zip`);
-  const files = await filesIn(folder);
+  const bundles=[['hiob-video',folder],...['hiob-ad-copy-humanizer','hiob-motion-graphics','hiob-actor-performance'].map(name=>[name,path.join(root,'public/help/skills',`${name}-${version}`)])];
+  const files=[];
+  for(const [name,dir] of bundles) for(const file of await filesIn(dir))files.push({file,entry:name+'/'+path.relative(dir,file).split(path.sep).join('/')});
   const names = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n');
-  const expected = files.map(file => 'hiob-video/' + path.relative(folder, file).split(path.sep).join('/'));
+  const expected = files.map(({entry}) => entry);
   assert.deepEqual(names.sort(), expected.sort());
-  for (const file of files) {
-    const entry = 'hiob-video/' + path.relative(folder, file).split(path.sep).join('/');
+  for (const {file,entry} of files) {
     assert.deepEqual(execFileSync('unzip', ['-p', archive, entry]), await readFile(file), entry);
     assert.match(entry, /\.md$/);
   }
@@ -89,6 +90,8 @@ test('worker serves all current skill assets and rejects executable or unreviewe
     `/help/skills/hiob-video-${version}/references/private.json`,
     '/help/skills/hiob-reference-cards-1.4.2/SKILL.md',
     '/help/skills/hiob-reference-cards-9.9.9/SKILL.md',
+    `/help/skills/hiob-actor-performance-${version}/scripts/submit.py`,
+    '/help/skills/hiob-motion-graphics-1.9.33/SKILL.md',
   ]) assert.equal((await worker.fetch(new Request('https://hi-ob.com' + asset), env)).status, 404, asset);
 });
 
