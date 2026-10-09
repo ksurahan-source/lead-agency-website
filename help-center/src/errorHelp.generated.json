@@ -1,7 +1,7 @@
 {
   "schema": "HiobPublicErrorHelp.v1",
   "reviewedAt": "2026-10-08",
-  "version": "1.9.33",
+  "version": "1.9.35",
   "codeCount": 2115,
   "groups": [
     {
@@ -149508,7 +149508,7 @@
             }
           ],
           "steps": [
-            "audio_recovery(projectId)로 현재 권한과 이전 기획·선택 음원의 체크포인트를 조회한다. 같은 프로젝트의 실제 파일 해시와 대본·목소리·시간·발화 방식·출처를 대조한다.",
+            "audio_recovery(projectId)로 현재 권한과 이전 기획·선택 음원의 체크포인트를 조회한다. needs_connection이어도 localDiagnosis의 실제 파일 해시·대본·목소리·시간·발화 방식·출처를 대조한다. 로컬 변경의 incident와 connection.incident를 보존하고 연결 복구 전에는 적용·서버 검사·새 합성을 실행하지 않는다.",
             "ready_to_rebind이면 반환된 nextAction.arguments의 전체 tracks와 planSha256/expectedAudioSha256을 그대로 audio_set에 전달한다. 실제 음원 검사와 버전 충돌 검사는 저장 시 재실행되며 음악·효과음을 누락하지 않는다.",
             "needs_review의 changes/issue 또는 needs_history의 history.issues를 읽고 해당 필드의 기존 승인·서버 revision·원본을 호스트가 복구한다. 고객에게 내부 트랙 입력을 요구하거나 새 합성·해시 덮어쓰기로 우회하지 않는다.",
             "needs_review.recoveryKind=speech_route_changed이면 routeChanges의 beatId/previous/current와 previousRevisionId를 대조하고 nextAction의 speech_preflight로 현재 경로의 실제 원본·립싱크·클로닝 의존성을 조회한다. 변경되지 않은 기획을 반복해서 읽거나 과거 발화 방식으로 되돌리지 않는다. 설정 차단은 호스트가 진단하며 고객 예산 숫자를 묻지 않는다."
