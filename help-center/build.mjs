@@ -8,7 +8,7 @@ import { MCP_RELEASE } from "./src/mcpInstall.mjs";
 
 // Product examples and human-readable support summaries were reviewed against this release.
 // Updating the installer descriptor requires re-reviewing that editorial copy too.
-if (MCP_RELEASE.version !== "1.9.36") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
+if (MCP_RELEASE.version !== "1.13.45" || MCP_RELEASE.sha256 !== "0e1bbdd9e02d8e4f5c00674ecb83a10fe38abb8cca9bb4c4db6c8b327d8cf9e5") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const destination = new URL("./dist/", import.meta.url);
@@ -184,7 +184,7 @@ await writeFile(
   JSON.stringify({
     source,
     mcp: MCP_RELEASE.version,
-    skill: MCP_RELEASE.version,
+    skill: "1.9.36",
     routes: PUBLIC_ROUTES.length,
     assets,
     media,

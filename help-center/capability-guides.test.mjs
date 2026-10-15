@@ -6,10 +6,10 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from './worker.mjs';
-import { MCP_RELEASE } from './src/mcpInstall.mjs';
 
 const root = fileURLToPath(new URL('./', import.meta.url));
-const version = MCP_RELEASE.version;
+// The public skill archive is immutable and is released separately from MCP.
+const version = '1.9.36';
 const skillNames = [
   'hiob-video', 'hiob-creative-harness', 'hiob-visual-direction',
   'hiob-reference-cards', 'hiob-scene-planning', 'hiob-creative-refine',

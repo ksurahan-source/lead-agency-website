@@ -1,15 +1,15 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.9.36",
+  "version": "1.13.45",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.9.36.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.13.45.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
       "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·MCP 112개 도구·10개 스킬·별도 프로세스 재진입 통과",
+      "toolsLabel": "설치·MCP/CLI·음성 중심 믹스·트랙 내보내기 검증",
       "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
     },
     {
@@ -44,10 +44,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.9.36.tgz",
-  "sha256": "bf02e7913af744fe4ff1f20f21f0ef0ba0d17106c3f6cce130bb47fa94637e0e",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.9.36.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.9.36.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.13.45.tgz",
+  "sha256": "0e1bbdd9e02d8e4f5c00674ecb83a10fe38abb8cca9bb4c4db6c8b327d8cf9e5",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.13.45.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.13.45.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
