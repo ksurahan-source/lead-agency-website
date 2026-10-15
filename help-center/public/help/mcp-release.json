@@ -1,10 +1,10 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.13.45",
+  "version": "1.13.46",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.13.45.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.13.46.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
@@ -44,10 +44,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.13.45.tgz",
-  "sha256": "0e1bbdd9e02d8e4f5c00674ecb83a10fe38abb8cca9bb4c4db6c8b327d8cf9e5",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.13.45.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.13.45.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.13.46.tgz",
+  "sha256": "9191d4da6c6e67cf589b912818a3d437bd5c15a6a0f78916d15b74784d0c0e3c",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.13.46.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.13.46.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
