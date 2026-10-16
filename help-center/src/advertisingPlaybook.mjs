@@ -202,7 +202,7 @@ CHAR_01 + PROP_PRODUCT_01 + [같은 장소/시간대] + [한 행동의 시작 �
 표: [실제 시작·끝 | 화자/원본 파일 | 문장 | 발화 강도·속도 의도 | 음악 구간·감쇠 | 효과음과 화면 사건 | 의도한 쉼].
 recording이면 원본을 보존하고 실제 발화와 전사 문구를 대조해. Typecast를 대신 호출하지 마. typecast 또는 mixed일 때만 허용된 문장을 합성하고 기존 음원과 비교해.
 말이 길면 차이를 표시하고 문장·속도·장면 길이 중 무엇을 바꿀지 제안해. 끝 음절을 잘라 길이를 맞추지 마. 음악이 작으면 원본·클립·트랙·감쇠를 분리 점검하고 실제 믹스를 들어서 조정해.`,
-      action: 'sound_library로 HIOB 음악·효과음을 검색하고 sound_import로 선택 파일을 가져옵니다. audio_set은 전체 tracks 교체이므로 기존 발화를 보존합니다. 현재 MCP V1에는 fade/ducking envelope 입력이 없으며 임의 필드를 추가하지 않습니다. 지원되는 audio_inspect·audio_inspection_status로 음원 검사를 조회하고 audio_set으로 필요한 트랙을 연결합니다. 검사 수치만으로 발음·감정이 좋다고 판단하지 않습니다. 원본 대사 사용 컷은 원본 소리를 명시적으로 연결합니다.',
+      action: '영상 제작에는 배경음악을 기본 포함합니다. AI가 sound_library로 실제 곡을 선정하고 곡명·분위기·선택 이유·사용 구간을 안내합니다. 추가 여부를 다시 묻지 않습니다. sound_import의 selection에 title/mood/reason을 기록하고 project_sync → audio_inspect·audio_inspection_status(done) → audio_patch로 기존 발화·음악·효과음을 보존해 연결합니다. 음악/SFX의 fadeInSec/fadeOutSec/gainEnvelope는 현재 스키마를 따릅니다. audio_preview와 최종 MP4에서 음악 존재·발화 명료도·종결을 청취합니다. 검색·가져오기·트랙 존재·검사 수치만으로 삽입 완료나 품질 pass를 기록하지 않습니다. 원본 대사도 실제 음원으로 연결합니다.',
       output: '검수된 음원·실제 문장별 시간 + 오디오 큐시트 + 원본과 수정본.',
       pass: '모바일에서도 말을 알아듣고, 음악은 느껴지며 말을 덮지 않는다. 나레이션 끝이 잘리지 않고 설명과 화면 사건이 맞는다.',
       repair: '전부 다시 합성하지 말고 문제 문장·음원·믹스만 고칩니다. 음원 검사나 전사가 불확실한 구간은 미검수로 남깁니다.', sources: ['korean-process']

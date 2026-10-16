@@ -213,6 +213,8 @@ test("every linked skill download and its references are served by the worker", 
   paths.add('/help/skills/production-guide-1.13.46.md');
   paths.add('/help/skills/production-guide-1.13.47.md');
   paths.add('/help/skills/production-guide-1.13.48.md');
+  paths.add('/help/skills/production-guide-1.14.1.md');
+  paths.add('/help/skills/guided-production-guide-1.14.1.md');
   assert.ok(paths.size >= 4);
   for (const path of paths) {
     const response = await worker.fetch(new Request(ORIGIN + path), env);
@@ -222,6 +224,13 @@ test("every linked skill download and its references are served by the worker", 
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/hiob-video-skill-9.9.9.zip'), env)).status, 404);
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/skills/production-guide-9.9.9.md'), env)).status, 404);
   assert.equal((await worker.fetch(new Request(ORIGIN + '/help/skills/production-guide-1.13.49.md'), env)).status, 404);
+});
+test('public production guidance makes music selection and customer notice mandatory',async()=>{
+ for(const path of ['/help/skills/production-guide-1.14.1.md','/help/skills/guided-production-guide-1.14.1.md']) {
+  const response=await worker.fetch(new Request(ORIGIN+path),env);
+  assert.equal(response.status,200);
+  const text=await response.text();assert.match(text,/배경음악.*필수/);assert.match(text,/곡명·분위기·선택 이유/);assert.match(text,/audio_patch/);
+ }
 });
 
 test("new-customer entries return to the welcome hub and explain setup before Codex approval", () => {
