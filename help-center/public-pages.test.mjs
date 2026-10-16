@@ -215,6 +215,8 @@ test("every linked skill download and its references are served by the worker", 
   paths.add('/help/skills/production-guide-1.13.48.md');
   paths.add('/help/skills/production-guide-1.14.1.md');
   paths.add('/help/skills/guided-production-guide-1.14.1.md');
+  paths.add('/help/skills/production-guide-1.15.0.md');
+  paths.add('/help/skills/guided-production-guide-1.15.0.md');
   assert.ok(paths.size >= 4);
   for (const path of paths) {
     const response = await worker.fetch(new Request(ORIGIN + path), env);
@@ -231,6 +233,17 @@ test('public production guidance makes music selection and customer notice manda
   assert.equal(response.status,200);
   const text=await response.text();assert.match(text,/배경음악.*필수/);assert.match(text,/곡명·분위기·선택 이유/);assert.match(text,/audio_patch/);
  }
+});
+test('organic text guides are public and keep source preservation and actual media review explicit',async()=>{
+ for(const path of ['/help/skills/production-guide-1.15.0.md','/help/skills/guided-production-guide-1.15.0.md']) {
+  const response=await worker.fetch(new Request(ORIGIN+path),env);
+  assert.equal(response.status,200);
+  const text=await response.text();assert.match(text,/prepare_text/);assert.match(text,/organicTreatment/);
+  assert.match(text,/배경음악.*필수/);assert.match(text,/최종 MP4/);
+ }
+ const create=documents.get('/help/create');
+ assert.ok(create.includes('단어마다 튀는 자막은 사용하지 않습니다'));
+ assert.ok(create.includes('승인 대본·목소리·발화 시간과 기존 수동 편집을 보존'));
 });
 
 test("new-customer entries return to the welcome hub and explain setup before Codex approval", () => {
