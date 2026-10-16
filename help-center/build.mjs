@@ -8,7 +8,7 @@ import { MCP_RELEASE } from "./src/mcpInstall.mjs";
 
 // Product examples and human-readable support summaries were reviewed against this release.
 // Updating the installer descriptor requires re-reviewing that editorial copy too.
-if (MCP_RELEASE.version !== "1.13.46" || MCP_RELEASE.sha256 !== "9191d4da6c6e67cf589b912818a3d437bd5c15a6a0f78916d15b74784d0c0e3c") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
+if (MCP_RELEASE.version !== "1.13.47" || MCP_RELEASE.sha256 !== "305f6dead1bb841340ab8ff0aa56636bf795f217e827f193f79b948370602111") throw new Error("Review ProductPage and customer procedures against the new MCP release before publishing");
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const destination = new URL("./dist/", import.meta.url);
