@@ -217,6 +217,8 @@ test("every linked skill download and its references are served by the worker", 
   paths.add('/help/skills/guided-production-guide-1.14.1.md');
   paths.add('/help/skills/production-guide-1.15.0.md');
   paths.add('/help/skills/guided-production-guide-1.15.0.md');
+  paths.add('/help/skills/production-guide-1.15.1.md');
+  paths.add('/help/skills/guided-production-guide-1.15.1.md');
   assert.ok(paths.size >= 4);
   for (const path of paths) {
     const response = await worker.fetch(new Request(ORIGIN + path), env);
@@ -235,7 +237,7 @@ test('public production guidance makes music selection and customer notice manda
  }
 });
 test('organic text guides are public and keep source preservation and actual media review explicit',async()=>{
- for(const path of ['/help/skills/production-guide-1.15.0.md','/help/skills/guided-production-guide-1.15.0.md']) {
+ for(const path of ['/help/skills/production-guide-1.15.0.md','/help/skills/guided-production-guide-1.15.0.md','/help/skills/production-guide-1.15.1.md','/help/skills/guided-production-guide-1.15.1.md']) {
   const response=await worker.fetch(new Request(ORIGIN+path),env);
   assert.equal(response.status,200);
   const text=await response.text();assert.match(text,/prepare_text/);assert.match(text,/organicTreatment/);

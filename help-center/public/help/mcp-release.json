@@ -1,15 +1,15 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.15.0.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.15.1.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
       "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·제작·실측 제목·자막 배치 계약 검증",
+      "toolsLabel": "설치·업로드 자료 읽기·실측 제목·자막 계약 검증",
       "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
     },
     {
@@ -44,10 +44,10 @@
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.15.0.tgz",
-  "sha256": "07c8683f5d1e5b8022cf4d66f18216e7f05c7c6b4f912f07f417a767a3822d1c",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.15.0.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.15.0.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.15.1.tgz",
+  "sha256": "2e940152e74e8178362d9fca2a54db6742a090094ba2d48501bc5c0533914acc",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.15.1.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.15.1.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
