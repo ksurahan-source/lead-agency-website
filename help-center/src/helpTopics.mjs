@@ -71,6 +71,13 @@ export const HELP_ARTICLES = [
     keywords: "프롬프트 대본 자막 나레이션 후킹 9초 소리 MP4",
   },
   {
+    id: "record-search",
+    topic: "production",
+    title: "프로젝트·자료·제작 기록 검색하기",
+    summary: "기간·담당자·태그로 자료를 찾고 원문을 읽어 작업을 이어갑니다.",
+    keywords: "통합 검색 메타데이터 날짜 시간 필터 대본 승인 검수 원문 record_search record_read cloud local",
+  },
+  {
     id: "assets",
     topic: "production",
     title: "프로젝트 사이에서 애셋 공유·이동하기",
