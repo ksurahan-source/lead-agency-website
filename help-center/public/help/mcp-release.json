@@ -1,53 +1,53 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.15.2",
+  "version": "1.21.1",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.15.2.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.21.1.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
       "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·업로드 자료·실측 자막 오류 계약 검증",
+      "toolsLabel": "설치·초기 설정·MCP 통신 계약 검증",
       "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
     },
     {
       "platform": "darwin-x64",
       "label": "macOS · Intel (실험적)",
-      "toolsLabel": "1.7.0 실기기 검증 대기",
+      "toolsLabel": "실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-x64",
       "label": "Windows · x64",
-      "toolsLabel": "1.7.0 실기기 검증 대기",
+      "toolsLabel": "실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "win32-arm64",
       "label": "Windows · ARM64 (실험적)",
-      "toolsLabel": "1.7.0 실기기 검증 대기",
+      "toolsLabel": "실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-x64",
       "label": "Linux · x64 (실험적)",
-      "toolsLabel": "1.7.0 실기기 검증 대기",
+      "toolsLabel": "실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     },
     {
       "platform": "linux-arm64",
       "label": "Linux · ARM64 (실험적)",
-      "toolsLabel": "1.7.0 실기기 검증 대기",
+      "toolsLabel": "실기기 검증 대기",
       "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.15.2.tgz",
-  "sha256": "1c161d2e414ec7113d2b737f798f409b627e5c29388e121c9ee6be05532959d7",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.15.2.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.15.2.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.21.1.tgz",
+  "sha256": "9a3c1b50daba4b6db8efba3333462919ecfc2c85e93cb142c1da526311eb6628",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.21.1.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.21.1.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",
@@ -59,5 +59,6 @@
   "guideUrl": "https://hi-ob.com/help",
   "connectUrl": "https://studio.hi-ob.com/mcp",
   "signupUrl": "https://studio.hi-ob.com/studio/signup?next=%2Fstart",
-  "generationRequiresCredits": true
+  "generationRequiresCredits": true,
+  "initialSetupGuideUrl": "https://studio.hi-ob.com/api/mcp/setup-guide"
 }

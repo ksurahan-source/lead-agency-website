@@ -8,6 +8,7 @@ import {
   MCP_WINDOWS_INSTALL_COMMAND,
   MCP_LINUX_INSTALL_COMMAND,
   MCP_VERIFY_PROMPT,
+  MCP_FIRST_START_PROMPT,
 } from "./mcpInstall.mjs";
 import CopyButton from "./CopyButton";
 import styles from "./install.module.css";
@@ -145,10 +146,10 @@ export function InstallGuide({ os }) {
               <a href="#manual">앱만 사용하거나 수동 설정이 필요한가요?</a>
             </li>
             <li>
-              <h2>Codex에서 설치 확인하기</h2>
+              <h2>Codex에서 첫 인사 나누기</h2>
               <Command
-                text={MCP_VERIFY_PROMPT}
-                label="무료 설치 점검 요청 복사"
+                text={MCP_FIRST_START_PROMPT}
+                label="첫 대화 요청 복사"
                 prompt
               />
               <div className={styles.callout}>
