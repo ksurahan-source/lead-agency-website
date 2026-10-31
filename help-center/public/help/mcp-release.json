@@ -1,53 +1,53 @@
 {
   "schema": "HiobMcpInstall.v1",
-  "version": "1.21.2",
+  "version": "1.21.8",
   "channel": "beta",
   "transport": "stdio",
   "platforms": [],
-  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.21.2.json",
+  "verificationUrl": "https://studio.hi-ob.com/downloads/mcp/compatibility-1.21.8.json",
   "compatibility": [
     {
       "platform": "darwin-arm64",
-      "label": "macOS · Apple Silicon",
-      "toolsLabel": "설치·초기 설정·MCP 통신 계약 검증",
-      "renderLabel": "AWS 최종 렌더 경로 · 실제 결과 별도 확인"
+      "label": "macOS \u00b7 Apple Silicon",
+      "toolsLabel": "\uc124\uce58\u00b7\ucd08\uae30 \uc124\uc815\u00b7MCP \ud1b5\uc2e0 \uacc4\uc57d \uac80\uc99d",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uc81c \uacb0\uacfc \ubcc4\ub3c4 \ud655\uc778"
     },
     {
       "platform": "darwin-x64",
-      "label": "macOS · Intel (실험적)",
-      "toolsLabel": "실기기 검증 대기",
-      "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
+      "label": "macOS \u00b7 Intel (\uc2e4\ud5d8\uc801)",
+      "toolsLabel": "\uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30"
     },
     {
       "platform": "win32-x64",
-      "label": "Windows · x64",
-      "toolsLabel": "실기기 검증 대기",
-      "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
+      "label": "Windows \u00b7 x64",
+      "toolsLabel": "\uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30"
     },
     {
       "platform": "win32-arm64",
-      "label": "Windows · ARM64 (실험적)",
-      "toolsLabel": "실기기 검증 대기",
-      "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
+      "label": "Windows \u00b7 ARM64 (\uc2e4\ud5d8\uc801)",
+      "toolsLabel": "\uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30"
     },
     {
       "platform": "linux-x64",
-      "label": "Linux · x64 (실험적)",
-      "toolsLabel": "실기기 검증 대기",
-      "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
+      "label": "Linux \u00b7 x64 (\uc2e4\ud5d8\uc801)",
+      "toolsLabel": "\uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30"
     },
     {
       "platform": "linux-arm64",
-      "label": "Linux · ARM64 (실험적)",
-      "toolsLabel": "실기기 검증 대기",
-      "renderLabel": "AWS 최종 렌더 경로 · 실기기 검증 대기"
+      "label": "Linux \u00b7 ARM64 (\uc2e4\ud5d8\uc801)",
+      "toolsLabel": "\uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30",
+      "renderLabel": "AWS \ucd5c\uc885 \ub80c\ub354 \uacbd\ub85c \u00b7 \uc2e4\uae30\uae30 \uac80\uc99d \ub300\uae30"
     }
   ],
   "node": ">=22.18.0",
-  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.21.2.tgz",
-  "sha256": "e261f9e08ab34faeeb4bef43bec1c6f2f4034c99c15ae372f099843049678d2e",
-  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.21.2.sh",
-  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.21.2.mjs",
+  "packageUrl": "https://studio.hi-ob.com/downloads/mcp/hiob-mcp-1.21.8.tgz",
+  "sha256": "caa042a10de6e63de0a50825bbd9d9b76b6cea1119eca4ac44c6731ceac573bc",
+  "installerUrl": "https://studio.hi-ob.com/downloads/mcp/install-1.21.8.sh",
+  "toolsInstallerUrl": "https://studio.hi-ob.com/downloads/mcp/install-tools-1.21.8.mjs",
   "setupPlatforms": [
     "darwin-arm64",
     "darwin-x64",

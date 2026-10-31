@@ -220,6 +220,7 @@ test("every linked skill download and its references are served by the worker", 
   paths.add('/help/skills/production-guide-1.15.1.md');
   paths.add('/help/skills/guided-production-guide-1.15.1.md');
   paths.add('/help/skills/production-guide-1.15.2.md');
+  paths.add('/help/skills/production-guide-1.21.2.md');
   paths.add('/help/skills/guided-production-guide-1.15.2.md');
   assert.ok(paths.size >= 4);
   for (const path of paths) {
